@@ -1,42 +1,122 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
 
-function Signup(){
+function Signup() {
+    const customStyle = {
+        input: {
+            fontSize: '1rem',
+            padding: '0.5rem 1rem',
+        },
+        label: {
+            fontSize: '1rem',
+        },
+        button: {
+            fontSize: '1rem',
+        },
+        formGroup: {
+            marginBottom: '1rem', // Khoảng cách giữa các phần tử gần nhau
+        },
+    };
+
     return (
-        <div className='signup template d-flex justify-content-center align-items-center vh-100 bg-primary'>
-        <div className='form_container p-5 rouded bg-white'>
-            <form>
-                <h3 className='text-center'> Sign Up </h3>
-                <div className='mb-2'>
-                    <label htmlFor='fname'> Full Name </label>
-                    <input type="text" placeholder='Enter Full Name' className='form-control' />
-                </div>
-               
-                <div className='mb-2'>
-                    <label htmlFor='Email'> Email </label>
-                    <input type="email" placeholder='Enter Email' className='form-control' />
-                </div>
-                <div className='mb-2'>
-                    <label htmlFor='password'> Password </label>
-                    <input type="password" placeholder='Enter Password' className='form-control' />
-                </div>
-                <div className='mb-2'>
-                    <label htmlFor='Cpassword'> Confirm Password </label>
-                    <input type="text" placeholder='Enter Password' className='form-control' />
-                </div>
-                
+        <div>
+            <section className="vh-100 bg-light">
+                <div className="mask d-flex align-items-center h-100 gradient-custom-3">
+                    <div className="container h-30">
+                        <div className="row d-flex justify-content-center align-items-center h-100">
+                            <div className="col-12 col-md-9 col-lg-7 col-xl-6">
+                                <div className="card" style={{ borderRadius: '15px' }}>
+                                    <div className="card-body p-5">
+                                        <h2 className="text-uppercase text-center mb-4">Create an account</h2>
+                                        <form>
+                                            <div className="form-outline" style={customStyle.formGroup}>
+                                                <label className="form-label" htmlFor="form3Example1cg" style={customStyle.label}>
+                                                    Your Name
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control form-control-lg"
+                                                    id="form3Example1cg"
+                                                    style={customStyle.input}
+                                                />
+                                            </div>
 
-                <div className='d-grid mt-2'>
-                    <button className='btn btn-primary'> Sign In</button>
+                                            <div className="form-outline" style={customStyle.formGroup}>
+                                                <label className="form-label" htmlFor="form3Example3cg" style={customStyle.label}>
+                                                    Your Email
+                                                </label>
+                                                <input
+                                                    type="email"
+                                                    className="form-control form-control-lg"
+                                                    id="form3Example3cg"
+                                                    style={customStyle.input}
+                                                />
+                                            </div>
+
+                                            <div className="form-outline" style={customStyle.formGroup}>
+                                                <label className="form-label" htmlFor="form3Example4cg" style={customStyle.label}>
+                                                    Password
+                                                </label>
+                                                <input
+                                                    type="password"
+                                                    className="form-control form-control-lg"
+                                                    id="form3Example4cg"
+                                                    style={customStyle.input}
+                                                />
+                                            </div>
+
+                                            <div className="form-outline" style={customStyle.formGroup}>
+                                                <label className="form-label" htmlFor="form3Example4cdg" style={customStyle.label}>
+                                                    Repeat your password
+                                                </label>
+                                                <input
+                                                    type="password"
+                                                    className="form-control form-control-lg"
+                                                    id="form3Example4cdg"
+                                                    style={customStyle.input}
+                                                />
+                                            </div>
+
+                                            <div className="form-check d-flex justify-content-center mb-5">
+                                                <input
+                                                    className="form-check-input me-2"
+                                                    type="checkbox"
+                                                    value=""
+                                                    id="form2Example3cg"
+                                                />
+                                                <label className="form-check-label" htmlFor="form2Example3g" style={customStyle.label}>
+                                                    I agree all statements in{' '}
+                                                    <a href="#!" className="text-body">
+                                                        <u>Terms of service</u>
+                                                    </a>
+                                                </label>
+                                            </div>
+
+                                            <div className="d-flex justify-content-center">
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body w-100"
+                                                    style={customStyle.button}
+                                                >
+                                                    Register
+                                                </button>
+                                            </div>
+
+                                            <p className="text-center text-muted mt-5 mb-0">
+                                                Have already an account?{' '}
+                                                <a href="./Login" className="fw-bold text-body">
+                                                    <u>Login here</u>
+                                                </a>
+                                            </p>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p className='text-end mt-2 '>
-                   Already Register < Link to="/Login" className=" = 'ms-2"> Sign in</Link>
-                </p>
-            </form>
+            </section>
         </div>
-    </div>
-
-    )
+    );
 }
 
 export default Signup;

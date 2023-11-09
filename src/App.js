@@ -1,14 +1,21 @@
+import React from "react";
+import { BrowserRouter,Routes,Route } from "react-router-dom";
+import Login from './components/SecurePage/Login'
+import Signup from './components/SecurePage/Signup'
+import SecurePage from './components/SecurePage/SecurePage'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import List from "./pages/list/List";
 
-import './App.css';
-import Footer from './components/footer/Footer';
-import Email from './components/email/Email';
-function App() {
+function App(){
   return (
-    <div className="App">
-      <Email />
-      <Footer />
-    </div>
-    
+   <BrowserRouter>
+      <Routes>
+        <Route path ='/' element={<SecurePage />} ></Route>  
+        <Route path ='/Login' element={<Login />} ></Route>
+        <Route path ='/signup' element={<Signup />} ></Route> 
+        <Route path ='/list' element = {<List />}></Route>
+      </Routes>
+   </BrowserRouter>
   );
 }
 

@@ -1,0 +1,39 @@
+.mail {
+  width: 100%;
+  margin-top: 50px;
+  background-color: #003580;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 50px;
+}
+.mailInputContainer {
+  display: flex;
+  align-items: center;
+  height: 50px; /* Đặt chiều cao cố định cho container */
+}
+
+.mailInputContainer > input {
+  flex: 20; /* Để input tự mở rộng theo tỷ lệ so với button */ 
+  height: 100%; /* Sử dụng chiều cao 100% để kế thừa chiều cao của container */
+  width: 400px;
+  padding: 10px;
+  border: none;
+  margin-right: 10px;
+  border-radius: 5px;
+  box-sizing: border-box; /* Để tính cả padding và border vào kích thước */
+}
+
+.mailInputContainer > button {
+  flex: 1; /* Để button mở rộng theo tỷ lệ so với input */
+  height: 100%; /* Sử dụng chiều cao 100% để kế thừa chiều cao của container */
+  width: 150px; /* Để button mở rộng để bằng với input */
+  background-color: #0071c2;
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

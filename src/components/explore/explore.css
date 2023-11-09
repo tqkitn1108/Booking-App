@@ -1,0 +1,26 @@
+.explore {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    margin: 0px 96px;
+}
+.explore-item {
+    flex: 1;
+    overflow: hidden;
+    cursor: pointer;
+}
+.explore-img {
+    border-radius: 10px;
+    width: 156px;
+    height: 136px;
+    object-fit: cover;
+}
+.explore-desrcibe {
+    color: #474747;
+    font-weight: 400;
+    margin-top: 4px;
+    font-size: 14px;
+}

@@ -1,17 +1,20 @@
 package com.cnpm.bookingbackend.services;
 
 import com.cnpm.bookingbackend.models.Hotel;
+import com.cnpm.bookingbackend.models.Room;
 import com.cnpm.bookingbackend.repo.HotelRepository;
+import com.cnpm.bookingbackend.validate.CheckAvailableRoom;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class HotelService {
-    private HotelRepository hotelRepository;
+    private final HotelRepository hotelRepository;
     private MongoTemplate mongoTemplate;
 
     public HotelService(HotelRepository hotelRepository, MongoTemplate mongoTemplate) {
@@ -19,12 +22,27 @@ public class HotelService {
         this.mongoTemplate = mongoTemplate;
     }
 
+    public Hotel singleHotel(ObjectId id) {
+        return hotelRepository.findById(id).orElse(null);
+    }
+
     public List<Hotel> allHotels() {
         return hotelRepository.findAll();
     }
 
-    public Hotel singleHotel(ObjectId id) {
-        return hotelRepository.findById(id).orElse(null);
+    public List<Hotel> availableHotels(String locality, LocalDate checkIn, LocalDate checkOut,
+                                       Integer adults, Integer children, Integer roomQuantity) {
+        List<Hotel> hotelList = hotelRepository.findAllByLocality(locality);
+        return hotelList.stream().filter(hotel -> {
+            int maxPeople = 0, numOfRooms = 0;
+            for (Room room : hotel.getRooms()) {
+                if (CheckAvailableRoom.checkAvailable(room, checkIn, checkOut)) {
+                    maxPeople += room.getCapacity();
+                    numOfRooms++;
+                }
+            }
+            return maxPeople >= adults || numOfRooms >= roomQuantity - 1;
+        }).toList();
     }
 
     public void newHotel(Hotel hotel) {

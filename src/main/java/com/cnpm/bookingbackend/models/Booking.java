@@ -9,25 +9,22 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
-@Document(collection = "rooms")
+@Document(collection = "bookings")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Room {
+public class Booking {
     @Id
     private ObjectId id;
-    private String title;
-    private String type;
-    private Float price;
-    private Integer capacity;
-    private List<String> amenities;
-    private String description;
-    private List<String> images;
-    private Boolean availableNow;
-    private List<LocalDate> unavailableDates = new ArrayList<>();
     @DBRef
-    private List<Booking> bookings;
+    private User bookingPerson;
+    @DBRef
+    private List<Room> rooms;
+    private Integer adults;
+    private Integer children;
+    private LocalDate checkInDate;
+    private LocalDate checkOutDate;
+    private EBookingStatus bookingStatus;
 }

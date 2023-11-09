@@ -18,13 +18,15 @@ public class Hotel {
     @Id
     private ObjectId id;
     private String name;
-    private int star;
+    private String phoneNumber;
+    private String email;
+    private Integer star;
     private String type;
-    private String city;
+    private String locality;
     private String address;
-    private String distance;
     private String title;
     private List<String> photos;
+    private List<String> facilities;
     private String description;
     private Float rating;
     @DocumentReference

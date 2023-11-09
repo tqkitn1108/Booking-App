@@ -1,0 +1,51 @@
+.trending {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    max-width: 1024px;
+    margin: 0px 96px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    z-index: 1;
+}
+.trending-top {
+    position: relative;
+    overflow: hidden;
+    color: white;
+    height: 270px;
+    width: 502px;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+.trending-bottom {
+    position: relative;
+    overflow: hidden;
+    color: white;
+    width: 328px;
+    height: 266px;
+    cursor: pointer;
+}
+.trending-img {
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid white;
+}
+.trending-img:hover {
+    opacity: 0.9;
+    border: 1px solid orange;
+}
+.trending-title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+}
+.trending-title-img {
+    width: 24px;
+    height: 24px;
+    margin-left: 8px;
+}

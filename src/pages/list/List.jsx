@@ -1,4 +1,4 @@
-// import { Navbar } from "react-bootstrap"
+
 import { FormCheck } from "react-bootstrap";
 import "./list.css"
 import SearchItem from "./SearchItem"

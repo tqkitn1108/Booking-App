@@ -1,0 +1,47 @@
+.listContainer{
+    /* display: grid;
+    grid-column: 1fr 1fr; */
+    /* max-width: 400px; */
+    float: left;
+    width: 430px 1024px;
+    margin-left: 16px;
+}
+
+.listWrapper{
+    width: 200px;
+    /* max-width: 900px; */
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+    font-size: smaller;
+    left: 213px;
+    margin-left: 213px;
+    /* position: sticky; */
+}
+
+.listSearch{
+    /* left: 213px; */
+    flex: 1;
+    padding: 10px;
+    /* border-radius: 10px; */
+    background-color: rgb(255, 255, 255);
+    position: sticky;
+    top: 10px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: #d7d4d4;
+    width: 100%;
+}
+.lsTitle{
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+.listResult{
+    flex: 3;
+    display: flexbox;
+}
+.pagi {
+    margin-left: 10px;
+    /* display: block; */
+}

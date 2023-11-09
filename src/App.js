@@ -3,7 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './components/SecurePage/Login'
 import Signup from './components/SecurePage/Signup'
 import SecurePage from './components/SecurePage/SecurePage'
-import List from './components/SecurePage/List';
+import Footer from './components/footer/Footer'
+import Email from './components/email/Email'
+import List from './pages/list/List';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {

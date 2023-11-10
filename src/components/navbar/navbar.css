@@ -1,13 +1,12 @@
-.navbar {
-    padding-top: 8px;
-    height: 50px;
+.home-navbar {
+    height: 66px;
     background-color: #003580;
     display: flex;
     justify-content: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.nav-container {
+.home-nav-container {
     width: 100%;
     max-width: 1024px;
     color: white;

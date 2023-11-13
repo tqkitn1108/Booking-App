@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Email from './components/email/Email';
 import Footer from './components/footer/Footer';
 import List from './pages/list/List';
+import Header from './components/header/Header';
+import Navbar from './components/navbar/Navbar';
 import './App.css';
 
 function App() {
@@ -16,8 +18,8 @@ function App() {
         <Route path='/' element={<ReservationPge />} ></Route>
         <Route path='/Login' element={<Login />} ></Route>
         <Route path='/signup' element={<Signup />} ></Route>
-        {/* <Route path='/footer' element={<Footer />} ></Route>
-        <Route path='/email' element={<Email />} ></Route> */}
+         <Route path='/footer' element={<Footer />} ></Route>
+        <Route path='/email' element={<Email />} ></Route> 
         <Route path='/list' element={<List />} ></Route>
         <Route path='/header' element={<Header />} ></Route>
         <Route path='/navbar' element={<Navbar />} ></Route>

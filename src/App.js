@@ -3,10 +3,11 @@ import { BrowserRouter,Routes,Route } from "react-router-dom";
 import Login from './components/reservation-page/Login';
 import Signup from './components/reservation-page/Signup';
 import ReservationPge from './components/reservation-page/ReservationPage';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Email from './components/email/Email';
 import Footer from './components/footer/Footer';
 import List from './pages/list/List';
+import Home from './pages/home/Home';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
@@ -19,8 +20,7 @@ function App() {
          <Route path='/footer' element={<Footer />} ></Route>
         <Route path='/email' element={<Email />} ></Route> 
         <Route path='/list' element={<List />} ></Route>
-        {/* <Route path='/header' element={<Header />} ></Route>
-        <Route path='/navbar' element={<Navbar />} ></Route> */}
+        <Route path='/home' element={<Home />} ></Route>
       </Routes>
     </BrowserRouter>
   )

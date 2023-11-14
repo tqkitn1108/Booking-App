@@ -5,8 +5,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Navbar = () => {
     return (
-        <div className="navbar">
-            <div className="nav-container">
+        <div className="home-navbar">
+            <div className="home-nav-container">
                 <span className="logo">Booking.com</span>
                 <div className="nav-items">
                     <div className="nav-icon">VND</div>

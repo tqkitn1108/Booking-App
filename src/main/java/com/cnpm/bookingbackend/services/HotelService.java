@@ -3,7 +3,6 @@ package com.cnpm.bookingbackend.services;
 import com.cnpm.bookingbackend.models.Hotel;
 import com.cnpm.bookingbackend.models.Room;
 import com.cnpm.bookingbackend.repo.HotelRepository;
-import com.cnpm.bookingbackend.validate.CheckAvailableRoom;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -36,7 +35,7 @@ public class HotelService {
         return hotelList.stream().filter(hotel -> {
             int maxPeople = 0, numOfRooms = 0;
             for (Room room : hotel.getRooms()) {
-                if (CheckAvailableRoom.checkAvailable(room, checkIn, checkOut)) {
+                if (room.isAvailableBetween(checkIn, checkOut)) {
                     maxPeople += room.getCapacity();
                     numOfRooms++;
                 }

@@ -35,6 +35,8 @@ public class User implements UserDetails {
     private String password;
     @DBRef
     private Role role;
+    @DBRef
+    private List<Booking> bookings;
 
     public User(String fullName, String email, String password) {
         this.email = email;

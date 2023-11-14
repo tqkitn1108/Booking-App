@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "rooms")
@@ -21,13 +20,28 @@ public class Room {
     private ObjectId id;
     private String title;
     private String type;
-    private Float price;
+    private Float pricePerNight;
     private Integer capacity;
     private List<String> amenities;
     private String description;
     private List<String> images;
     private Boolean availableNow;
-    private List<LocalDate> unavailableDates = new ArrayList<>();
+    private List<LocalDate> unavailableDates;
     @DBRef
     private List<Booking> bookings;
+    public Boolean isAvailableBetween(LocalDate checkIn, LocalDate checkOut) {
+        LocalDate date = checkIn;
+        while (!date.isAfter(checkOut)) {
+                if (this.getUnavailableDates().contains(date)) {
+                    return false;
+                }
+                date = date.plusDays(1);
+        }
+        return true;
+    }
+
+    public void deletePastDate(){
+        LocalDate currentDate = LocalDate.now();
+        unavailableDates.removeIf(date -> date.isBefore(currentDate));
+    }
 }

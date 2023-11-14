@@ -1,5 +1,5 @@
 package com.cnpm.bookingbackend.models;
 
-public enum EBookingStatus {
+public enum BookingStatus {
     PENDING, CANCELLED, BOOKED, RESERVED
 }

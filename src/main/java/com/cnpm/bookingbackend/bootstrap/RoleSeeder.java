@@ -5,7 +5,6 @@ import com.cnpm.bookingbackend.models.Role;
 import com.cnpm.bookingbackend.repo.RoleRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -28,10 +27,10 @@ public class RoleSeeder implements ApplicationListener<ContextRefreshedEvent> {
     }
 
     private void loadRoles() {
-        ERole[] roleNames = new ERole[]{ERole.USER, ERole.CLIENT, ERole.ADMIN};
+        ERole[] roleNames = new ERole[]{ERole.USER, ERole.HOTEL, ERole.ADMIN};
         Map<ERole, String> roleDescriptionMap = Map.of(
                 ERole.USER, "Default user role",
-                ERole.CLIENT, "Client role",
+                ERole.HOTEL, "Client role",
                 ERole.ADMIN, "Administrator role"
         );
 

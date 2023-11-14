@@ -18,13 +18,32 @@ import java.util.List;
 public class Booking {
     @Id
     private ObjectId id;
+    private String fullName;
+    private String email;
+    private String phoneNumber;
     @DBRef
-    private User bookingPerson;
+    private Hotel hotel;
     @DBRef
     private List<Room> rooms;
+    private Double totalPrice;
     private Integer adults;
     private Integer children;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
-    private EBookingStatus bookingStatus;
+    private BookingStatus bookingStatus;
+
+    public Booking(String fullName, String email, String phoneNumber, Hotel hotel,
+                   List<Room> rooms, Double totalPrice, Integer adults, Integer children,
+                   LocalDate checkInDate, LocalDate checkOutDate) {
+        this.fullName = fullName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.hotel = hotel;
+        this.rooms = rooms;
+        this.totalPrice = totalPrice;
+        this.adults = adults;
+        this.children = children;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+    }
 }

@@ -4,11 +4,9 @@ import com.cnpm.bookingbackend.models.Hotel;
 import com.cnpm.bookingbackend.models.Room;
 import com.cnpm.bookingbackend.repo.HotelRepository;
 import com.cnpm.bookingbackend.repo.RoomRepository;
-import com.cnpm.bookingbackend.validate.CheckAvailableRoom;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +36,7 @@ public class RoomService {
 
     public List<Room> availableRooms(ObjectId hotelId, LocalDate checkIn, LocalDate checkOut) {
         return allRooms(hotelId).stream()
-                .filter(room -> CheckAvailableRoom.checkAvailable(room, checkIn, checkOut)).toList();
+                .filter(room -> room.isAvailableBetween(checkIn, checkOut)).toList();
     }
 
     public Room newRoom(ObjectId hotelId, Room room) {

@@ -12,6 +12,7 @@ import Home from './pages/home/Home';
 // import Explore from './components/explore/Explore';
 import Footer from './components/footer/Footer';
 import Email from './components/email/Email';
+import FavoriteDestinations from "./components/favoriteDestination/FavoriteDestination";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path='/home' element={<Trending />} ></Route>
         <Route path='/home' element={<TripPlanner />} ></Route>
         <Route path='/home' element={<Explore />} ></Route> */}
+        <Route path ='/favdes' element={<FavoriteDestinations />} ></Route> 
       </Routes>
     </BrowserRouter>
   )

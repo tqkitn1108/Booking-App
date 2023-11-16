@@ -5,7 +5,6 @@
     display: flex;
     justify-content: space-between;
     gap: 18px;
-    margin: 0px 96px;
 }
 .trip-planner-item {
     flex: 1;
@@ -27,7 +26,7 @@
     margin-top: 4px;
     font-size: 14px;
 }
-.swiper-button-prev,
+/* .swiper-button-prev,
 .swiper-button-next {
     align-items: center;
     background-color:#ffffff;
@@ -52,4 +51,4 @@
 .swiper-button-next.swiper-button-disabled {
     opacity: 0;
     cursor: none;
-}
+} */

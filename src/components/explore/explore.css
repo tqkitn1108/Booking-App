@@ -5,7 +5,6 @@
     display: flex;
     justify-content: space-between;
     gap: 18px;
-    margin: 0px 96px;
 }
 .explore-item {
     flex: 1;
@@ -27,8 +26,9 @@
     margin-top: 4px;
     font-size: 14px;
 }
-.swiper-button-prev,
+/* .swiper-button-prev,
 .swiper-button-next {
+    position: absolute;
     align-items: center;
     background-color:#ffffff;
     border-radius: 100%;
@@ -52,4 +52,4 @@
 .swiper-button-next.swiper-button-disabled {
     opacity: 0;
     cursor: none;
-}
+} */

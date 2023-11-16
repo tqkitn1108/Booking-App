@@ -1,8 +1,7 @@
 import "./hotel.css";
-import Navbar from "../../components/navbar/Navbar";
+import React, { useEffect } from 'react';
 import Header from "../../components/header/Header";
-import MailList from "../../components/mailList/MailList";
-import Footer from "../../components/footer/Footer";
+import Navbar from "../../components/navbar/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleArrowLeft,
@@ -11,8 +10,8 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+const Hotelpage = () => {
 
-const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -35,6 +34,9 @@ const Hotel = () => {
     {
       src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707389.jpg?k=52156673f9eb6d5d99d3eed9386491a0465ce6f3b995f005ac71abc192dd5827&o=&hp=1",
     },
+    {
+     src :"https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707776.jpg?k=054bb3e27c9e58d3bb1110349eb5e6e24dacd53fbb0316b9e2519b2bf3c520ae&o=&hp=1"
+    }
   ];
 
   const handleOpen = (i) => {
@@ -55,9 +57,11 @@ const Hotel = () => {
   };
 
   return (
-    <div>
-      <Navbar />
-      <Header type="list" />
+    
+      
+   <div>
+    <Navbar />
+    <Header type="list" />
       <div className="hotelContainer">
         {open && (
           <div className="slider">
@@ -86,13 +90,13 @@ const Hotel = () => {
           <h1 className="hotelTitle">Tower Street Apartments</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
-            <span>Elton St 125 New york</span>
+            <span>Số 2 Đại Cồ Việt, quận Hai Bà Trưng, Hà Nội</span>
           </div>
           <span className="hotelDistance">
-            Excellent location – 500m from center
+            Vị trí xuất sắc - Nằm ngay trên bản đồ
           </span>
           <span className="hotelPriceHighlight">
-            Book a stay over $114 at this property and get a free airport taxi
+            Chúng tôi luôn tận tâm
           </span>
           <div className="hotelImages">
             {photos.map((photo, i) => (
@@ -110,37 +114,33 @@ const Hotel = () => {
             <div className="hotelDetailsTexts">
               <h1 className="hotelTitle">Stay in the heart of City</h1>
               <p className="hotelDesc">
-                Located a 5-minute walk from St. Florian's Gate in Krakow, Tower
-                Street Apartments has accommodations with air conditioning and
-                free WiFi. The units come with hardwood floors and feature a
-                fully equipped kitchenette with a microwave, a flat-screen TV,
-                and a private bathroom with shower and a hairdryer. A fridge is
-                also offered, as well as an electric tea pot and a coffee
-                machine. Popular points of interest near the apartment include
-                Cloth Hall, Main Market Square and Town Hall Tower. The nearest
-                airport is John Paul II International Kraków–Balice, 16.1 km
-                from Tower Street Apartments, and the property offers a paid
-                airport shuttle service.
+              <p style={{marginBottom: 0.5 + 'em'} }>Bạn đủ điều kiện nhận giảm giá Genius tại La Passion Premium Cau Go! Để tiết kiệm tại chỗ nghỉ này, bạn chỉ cần đăng nhập.
+            Thông tin chi tiết:</p>
+            <p style={{marginLeft: 1 + 'em'} }>Giảm giá 20% cho tất cả các đêm nghỉ</p>
+            <p style={{marginLeft: 1 + 'em'}}>Áp dụng cho tất cả các loại phòng và suite</p>
+            <p style={{marginLeft: 1 + 'em'}}>Không có hạn sử dụng</p>
+            <p>Để nhận giảm giá, hãy đăng nhập vào tài khoản Genius của bạn trên trang web của chúng tôi.</p>
+            <p>Để biết thêm thông tin, vui lòng liên hệ với bộ phận đặt phòng của chúng tôi theo số 024 3945 1234.</p>
               </p>
             </div>
             <div className="hotelDetailsPrice">
-              <h1>Perfect for a 9-night stay!</h1>
+              <h1>Điểm nổi bật của chỗ nghỉ</h1>
               <span>
-                Located in the real heart of Krakow, this property has an
-                excellent location score of 9.8!
+                Nằm ngay ở trung tâm Hà Nội, khách sạn này có vị trí tuyệt vời
               </span>
-              <h2>
-                <b>$945</b> (9 nights)
-              </h2>
-              <button>Reserve or Book Now!</button>
+              <h1>Thông tin về bữa sáng</h1>
+              <div className="hotelAddress1">
+                 <FontAwesomeIcon icon={faLocationDot} />
+              <span>Tự chọn, bữa sáng mang đi</span>
+              </div>
+              <button>Đặt ngay</button>
             </div>
           </div>
         </div>
-        <MailList />
-        <Footer />
+
       </div>
     </div>
   );
 };
 
-export default Hotel;
+export default Hotelpage;

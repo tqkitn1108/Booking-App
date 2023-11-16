@@ -1,4 +1,4 @@
-import "./hotel.css";
+import "./hotelpage.css";
 import React, { useEffect } from 'react';
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";

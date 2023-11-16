@@ -13,6 +13,7 @@ import Home from './pages/home/Home';
 import Footer from './components/footer/Footer';
 import Email from './components/email/Email';
 import FavoriteDestinations from "./components/favoriteDestination/FavoriteDestination";
+import Hotelpage from "./pages/hotel/Hotelpage.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path='/home' element={<TripPlanner />} ></Route>
         <Route path='/home' element={<Explore />} ></Route> */}
         <Route path ='/favdes' element={<FavoriteDestinations />} ></Route> 
+        <Route path ='/hotel' element={<Hotelpage />} ></Route> 
       </Routes>
     </BrowserRouter>
   )

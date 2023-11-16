@@ -3,16 +3,42 @@ import { FormCheck } from "react-bootstrap";
 import "./list.css"
 import SearchItem from "./SearchItem"
 import {useState} from 'react';
-import Pagination from 'react-bootstrap/Pagination';
+// import Pagination from 'react-bootstrap/Pagination';
+import Pagination from './Pagination';
 // import Sliders from './Slider'
 // import Slider from 'bootstrap-slider'
 const List = () => {
-    <script src="https://code.jquery.com/jquery-latest.js"></script>
-    
+    // filter range
+    const [rangeValue, setRangeValue] = useState(50); // Giá trị mặc định của thanh trượt
+
+    const handleRangeChange = (event) => {
+      setRangeValue(event.target.value);
+    };
+// Phan trang
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalItems = 120; // Tổng số item
+    const itemsPerPage = 10; // Số item trên mỗi trang
+
+    const handlePageChange = (page) => {
+    setCurrentPage(page);
+    }
     return (
         <div>
             <div className="listContainer">
-                
+            <div className="listWrapper">
+                    <div className="listSearch">
+                <h2 class="lsT">Chọn lọc theo:</h2>
+                </div>
+                </div>
+                <div className="listWrapper">
+                    <div className="listSearch">
+                       <h3 className="lsTitle">Ngân sách tối đa của bạn (mỗi đêm)</h3>
+                    <div>
+                        <label htmlFor="filterRange">VND {(rangeValue).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</label>
+                        <input type="range" id="filterRange" name="filterRange" min="0" max="4000000" value={rangeValue} onChange={handleRangeChange}/>
+                    </div> 
+                </div>
+            </div>
                 <div className="listWrapper">
                     <div className="listSearch">
                         <h3 className="lsTitle">Xếp hạng chỗ nghỉ</h3>
@@ -127,33 +153,27 @@ const List = () => {
                 </div>
             </div>
             <div className="listContainer">
-                        <SearchItem/>
-                        <SearchItem/>
-                        <SearchItem/>
-                        <SearchItem/>
-                        <SearchItem/>
-                <div className="pagi">
-                    <Pagination>
-                        <Pagination.First />
-                        <Pagination.Prev />
-                        <Pagination.Item>{1}</Pagination.Item>
-                        <Pagination.Ellipsis />
+            <div>
+      <div>
+        {Array.from({ length: itemsPerPage }, (_, index) => (
+          <div key={index + (currentPage - 1) * itemsPerPage}>
+            <div className="listContainer"></div>
+            <SearchItem />
+          </div>
+        ))}
+      </div>
 
-                        <Pagination.Item>{10}</Pagination.Item>
-                        <Pagination.Item>{11}</Pagination.Item>
-                        <Pagination.Item>{12}</Pagination.Item>
-                        <Pagination.Item>{13}</Pagination.Item>
-                        <Pagination.Item>{14}</Pagination.Item>
-
-                        <Pagination.Ellipsis />
-                        <Pagination.Item>{20}</Pagination.Item>
-                        <Pagination.Next />
-                        <Pagination.Last />
-                    </Pagination>
-                </div>
+      <div className="pagi">
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+      />
+      </div>
+    </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default List;

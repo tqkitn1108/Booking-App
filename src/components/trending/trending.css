@@ -2,7 +2,6 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 100%;
     max-width: 1024px;
-    margin: 0px 96px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;

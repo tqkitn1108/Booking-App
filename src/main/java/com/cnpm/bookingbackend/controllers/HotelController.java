@@ -3,6 +3,7 @@ package com.cnpm.bookingbackend.controllers;
 import com.cnpm.bookingbackend.models.Hotel;
 import com.cnpm.bookingbackend.services.HotelService;
 import org.bson.types.ObjectId;
+import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/hotels")
@@ -23,22 +25,24 @@ public class HotelController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Hotel>> getAllHotels() {
-        return new ResponseEntity<>(hotelService.allHotels(), HttpStatus.OK);
+    public ResponseEntity<Page<Hotel>> getAllHotels(
+            @RequestParam(required = false) String location,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size) {
+        return new ResponseEntity<>(hotelService.allHotels(location, page, size), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Hotel> getSingleHotel(@PathVariable ObjectId id) {
+    public ResponseEntity<Hotel> getSingleHotel(@PathVariable String id) {
         return new ResponseEntity<>(hotelService.singleHotel(id), HttpStatus.OK);
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Hotel>> getAvailableHotels(
-            @RequestParam String dest,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout,
-            @RequestParam Integer adults, @RequestParam Integer children, @RequestParam Integer roomQuantity) {
-        return ResponseEntity.ok(hotelService.availableHotels(dest, checkin, checkout, adults, children, roomQuantity));
+    public ResponseEntity<Page<Hotel>> getAvailableHotels(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam Map<String, String> filters) {
+        return ResponseEntity.ok(hotelService.availableHotels(page, size, filters));
     }
 
     @PostMapping()
@@ -53,12 +57,12 @@ public class HotelController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Hotel> updateHotel(@RequestBody Hotel hotel, @PathVariable ObjectId id) {
+    public ResponseEntity<Hotel> updateHotel(@RequestBody Hotel hotel, @PathVariable String id) {
         return new ResponseEntity<>(hotelService.updatedHotel(id, hotel), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteHotel(@PathVariable ObjectId id) {
+    public ResponseEntity<String> deleteHotel(@PathVariable String id) {
         hotelService.deletedHotel(id);
         return ResponseEntity.ok("Hotel has been deleted");
     }

@@ -17,7 +17,7 @@ public class BookingDto {
     private String email;
     @NotBlank
     private String phoneNumber;
-    private List<ObjectId> roomIds;
+    private List<String> roomIds;
     private Double totalPrice;
     private Integer adults;
     private Integer children;

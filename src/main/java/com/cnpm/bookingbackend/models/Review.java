@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Review {
     @Id
-    private ObjectId id;
+    private String id;
     private String content;
     private LocalDate reviewDate;
     private int rating;

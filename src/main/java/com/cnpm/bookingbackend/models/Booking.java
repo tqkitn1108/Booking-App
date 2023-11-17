@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Booking {
     @Id
-    private ObjectId id;
+    private String id;
     private String fullName;
     private String email;
     private String phoneNumber;

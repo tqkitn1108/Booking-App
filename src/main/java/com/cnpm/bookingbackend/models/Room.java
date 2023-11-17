@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Room {
     @Id
-    private ObjectId id;
+    private String id;
     private String title;
     private String type;
     private Float pricePerNight;
@@ -25,7 +25,6 @@ public class Room {
     private List<String> amenities;
     private String description;
     private List<String> images;
-    private Boolean availableNow;
     private List<LocalDate> unavailableDates;
     @DBRef
     private List<Booking> bookings;

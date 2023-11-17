@@ -17,7 +17,7 @@ public class RegisterUserDto {
     @Email
     private String email;
 
-    private Set<String> roles;
+    private String role;
     @NotBlank
     @Size(min = 8, max = 40)
     private String password;

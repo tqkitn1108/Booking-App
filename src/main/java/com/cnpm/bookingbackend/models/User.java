@@ -22,7 +22,7 @@ import java.util.*;
 @NoArgsConstructor
 public class User implements UserDetails {
     @Id
-    private ObjectId id;
+    private String id;
     @NotBlank
     @Size(min = 10, max = 20)
     private String fullName;

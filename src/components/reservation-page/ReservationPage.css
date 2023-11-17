@@ -99,6 +99,19 @@
 
 
 
+.op, .lp, .tp {
+  text-align: left; /* Align the text within the paragraphs and heading to the left */
+  margin: 0; /* Remove default margin */
+}
 
+.O-price, .L-price, .total-price, .tax, .check-in,.check-out, .totalStays {
+  float: right; /* Align the prices to the right */
+}
 
+.total-price {
+  font-weight: bold; /* Make the total price bold if needed */
+}
 
+.tp {
+  margin-top: 10px; /* Add some top margin to the total heading for separation */
+}

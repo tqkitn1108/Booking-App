@@ -6,6 +6,7 @@
     justify-content: space-between;
     gap: 20px;
     margin-bottom: 20px;
+    width: 100%;
   }
   
   .siImg {
@@ -28,8 +29,15 @@
   
   .siDistance {
     font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    font-weight: 600;
   }
-  
+  #diachi{
+    margin-right: 20px;
+    margin-left: 5px;
+  }
   .siTaxiOp {
     font-size: 12px;
     background-color: #008009;
@@ -68,18 +76,28 @@
   
   .siRating{
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
+    margin-right: 7px;
+    margin-left: 60px;
   }
-  
+  .Title{
+    display:inline-flex;
+  }
+  .star{
+    margin-left: 15px;
+  }
   .siRating>span{
     font-weight: 500;
   }
   .siRating>button{
-   background-color: #003580;
+   background-color: #0a4fb0;
    color: white;
    padding: 5px;
    font-weight: bold;
    border: none;
+   border-radius: 7px;
+   border-bottom-left-radius: 0px;
+   box-shadow: 2px 2px 5px #000b80;
   }
   
   .siDetailTexts{

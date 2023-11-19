@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Tab, Tabs, Row, Col } from 'react-bootstrap';
 import "./FavoriteDestinations.css";
+import {Link} from 'react-router-dom';
 
 function FavoriteDestinations() {
     const tabsData = {
@@ -96,7 +97,7 @@ function FavoriteDestinations() {
                             .slice(i * numRows, i * numRows + numRows)
                             .map((item, index) => (
                             <div key={index}>
-                                <strong>{item.name}</strong>
+                                 <Link to="/signup"> <strong>{item.name}</strong> </Link>
                                 <div>{`${item.rooms} chỗ nghỉ`}</div>
                             </div>
                             ))}

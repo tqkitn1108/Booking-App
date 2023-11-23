@@ -7,7 +7,7 @@ const TripPlanner = () => {
     return (
         <div className="trip-planner">
         <>
-        <Swiper navigation={true} modules={[Navigation]} slidesPerView={6} className="mySwiper">
+        <Swiper navigation={true} modules={[Navigation]} slidesPerView={6} spaceBetween={15} className="mySwiper">
             <SwiperSlide>
                 <div className="trip-planner-item">
                     <img src="https://r-xx.bstatic.com/xdata/images/city/170x136/688893.jpg?k=d32ef7ff94e5d02b90908214fb2476185b62339549a1bd7544612bdac51fda31&o=" alt="" className="trip-planner-img" />

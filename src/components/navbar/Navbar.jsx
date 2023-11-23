@@ -1,4 +1,4 @@
-import "./navbar.css";
+import "./navbar.css"; 
 import {
     faCircleQuestion,
 } from "@fortawesome/free-solid-svg-icons";

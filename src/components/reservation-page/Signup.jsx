@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 function Signup() {
     const customStyle = {
         input: {
@@ -94,7 +95,7 @@ function Signup() {
                                             <div className="d-flex justify-content-center">
                                                 <button
                                                     type="button"
-                                                    className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body w-100"
+                                                    className="btn btn-primary btn-block btn-lg gradient-custom-4 w-100 text-white"
                                                     style={customStyle.button}
                                                 >
                                                     Register

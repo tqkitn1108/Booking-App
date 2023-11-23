@@ -1,8 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from './components/SecurePage/Login'
-import Signup from './components/SecurePage/Signup'
-import SecurePage from './components/SecurePage/SecurePage'
+import Login from './components/reservation-page/Login'
+import Signup from './components/reservation-page/Signup'
 import List from './pages/list/List';
 import Home from './pages/home/Home';
 // import Navbar from './components/navbar/Navbar';
@@ -13,13 +12,14 @@ import Home from './pages/home/Home';
 // import Explore from './components/explore/Explore';
 import Footer from './components/footer/Footer';
 import Email from './components/email/Email';
+import FavoriteDestinations from "./components/favoriteDestination/FavoriteDestination";
+import Hotelpage from "./pages/hotel/Hotelpage.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<SecurePage />} ></Route>
         <Route path='/Login' element={<Login />} ></Route>
         <Route path='/signup' element={<Signup />} ></Route>
         <Route path='/footer' element={<Footer />} ></Route>
@@ -32,6 +32,8 @@ function App() {
         <Route path='/home' element={<Trending />} ></Route>
         <Route path='/home' element={<TripPlanner />} ></Route>
         <Route path='/home' element={<Explore />} ></Route> */}
+        <Route path ='/favdes' element={<FavoriteDestinations />} ></Route> 
+        <Route path ='/hotel' element={<Hotelpage />} ></Route> 
       </Routes>
     </BrowserRouter>
   )

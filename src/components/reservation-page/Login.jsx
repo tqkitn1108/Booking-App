@@ -22,18 +22,15 @@ function Login() {
             <MDBCardBody className='p-5 w-100 d-flex flex-column'>
               <h2 className="fw-bold mb-2 text-center">Sign in</h2>
 
-              <label className="mb-1">Email address</label>
-              <MDBInput wrapperClass='mb-4 w-100' id='formControlLg' type='email' size="lg" />
+              <label className="mb-1"  htmlFor="enterEmail">Email address</label>
+              <MDBInput  wrapperClass='mb-4 w-100' id='enterEmail' type='email' size="lg" />
               
-              <label className="mb-1">Password</label>
-              <MDBInput wrapperClass='mb-4 w-100' id='formControlLg' type='password' size="lg" />
-
+              <label className="mb-1" htmlFor='enterPassword'>Password</label>
+              <MDBInput wrapperClass='mb-4 w-100' id='enterPassword' type='password' size="lg" />
               <MDBCheckbox name='flexCheck' id='flexCheckDefault' className='mb-4' label='Remember password' />
-
               <MDBBtn size='lg'>
                 Login
               </MDBBtn>
-
               <hr className="my-4" />
 
               <MDBBtn className="mb-2 w-100" size="lg" style={{ backgroundColor: '#dd4b39' }}>

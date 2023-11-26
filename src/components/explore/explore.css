@@ -14,8 +14,8 @@
 }
 .explore-img {
     border-radius: 10px;
-    width: 156px;
     height: 136px;
+    width: 100%;
     object-fit: cover;
 }
 .explore-titles {

@@ -5,7 +5,6 @@
     max-width: 1024px;
     display: flex;
     justify-content: space-between;
-    gap: 18px;
 }
 .trip-planner-item {
     flex: 1;
@@ -14,8 +13,8 @@
 }
 .trip-planner-img {
     border-radius: 10px;
-    width: 156px;
     height: 136px;
+    width: 100%;
     object-fit: cover;
 }
 .trip-planner-titles {

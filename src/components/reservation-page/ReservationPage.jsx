@@ -377,7 +377,7 @@ const ReservationPage = () => {
         <div>
 
 
-            <Check1 />
+            
             <div className="content-container">
                 <div className="reservation-container">
                     <div>

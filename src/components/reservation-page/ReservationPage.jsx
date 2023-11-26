@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWifi, faShuttleVan, faParking, faCheckCircle, faLock, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import cvcCodeImage from './cvccode-img.png';
 import { Link } from 'react-router-dom';
-
+import Check1 from './Navbar';
 const Details = () => {
     return (
         <div className="hotel-detail-border" >
@@ -375,6 +375,9 @@ const ReservationPage = () => {
     };
     return (
         <div>
+
+
+            <Check1 />
             <div className="content-container">
                 <div className="reservation-container">
                     <div>
@@ -385,25 +388,44 @@ const ReservationPage = () => {
                     </div>
                     <div className=''>
                         <form onSubmit={handleSubmit} className="form-container text-left ">
-                            <div className='Login template d-flex flex-column w-75 bg-white mt'>
+                            <div className='Login template d-flex flex-column  bg-white mt'>
                                 <div className='form_container p-9 rounded bg-white'>
 
                                     <h3 className='text-right'> Enter your details </h3>
                                     <div className='mb-3'>
-                                        <div className='form-group'>
-                                            <label htmlFor='Firstname' className='mb-1'>
-                                                Full Name <span className="required text-danger">*</span>
-                                            </label>
-                                            <input
-                                                id='Firstname'
-                                                type='text'
-                                                placeholder=''
-                                                className='form-control'
-                                                onChange={handleInputChange}
-                                            />
-                                            <span className='form-message' style={{ color: 'red' }}>{errors.firstName}</span>
+                                        <div className='form-group d-flex w-100 '>
+                                            <div className='m-right' style={{ width: '300px' }}>
+                                                <label htmlFor='Firstname' className='mb-1'>
+                                                    First Name <span className="required text-danger">*</span>
+                                                </label>
+                                                <input
+                                                    id='Firstname'
+                                                    type='text'
+                                                    placeholder=''
+                                                    className='form-control'
+                                                    onChange={handleInputChange}
+                                                />
+                                                <span className='form-message' style={{ color: 'red' }}>{errors.firstName}</span>
+                                            </div>
+
+                                            {/* Add margin-right to create space between the two div elements */}
+                                            <div className='m-left' style={{ marginLeft: '2rem', width: '270px' }}>
+                                                <label htmlFor='Lastname' className='mb-1'>
+                                                    Last Name <span className="required text-danger">*</span>
+                                                </label>
+                                                <input
+                                                    id='Lastname'
+                                                    type='text'
+                                                    placeholder=''
+                                                    className='form-control'
+                                                    onChange={handleInputChange}
+
+                                                />
+                                                <span className='form-message' style={{ color: 'red' }}>{errors.lastName}</span>
+                                            </div>
                                         </div>
-                                        <div className='form-group'>
+
+                                        <div className='form-group w-50 '>
                                             <label htmlFor='Email' className='mb-1'>
                                                 Email <span className="required text-danger">*</span>
                                             </label>
@@ -416,7 +438,7 @@ const ReservationPage = () => {
                                             />
                                             <span className='form-message' style={{ color: 'red' }}>{errors.email}</span>
                                         </div>
-                                        <div className='form-group'>
+                                        <div className='form-group w-50'>
                                             <label htmlFor='country' className='mb-1'>
                                                 Country/Region <span className="required text-danger">*</span>
                                             </label>
@@ -429,7 +451,7 @@ const ReservationPage = () => {
                                             />
                                             <span className='form-message' style={{ color: 'red' }}>{errors.country}</span>
                                         </div>
-                                        <div className='form-group'>
+                                        <div className='form-group w-50'>
                                             <label htmlFor='telephone' className='mb-1'>
                                                 Telephone (mobile number preferred) <span className="required text-danger">*</span>
                                             </label>

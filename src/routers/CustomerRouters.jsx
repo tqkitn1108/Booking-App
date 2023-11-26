@@ -19,7 +19,6 @@ function CustomerRouters() {
           <Route path="/reservation" element={<ReservationPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/fav" element={<FavoriteDestination />} />
         </Routes>
       {/* </BrowserRouter> */}
     </div>

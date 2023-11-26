@@ -31,7 +31,7 @@ function Signup() {
                                         <form>
                                             <div className="form-outline" style={customStyle.formGroup}>
                                                 <label className="form-label" htmlFor="form3Example1cg" style={customStyle.label}>
-                                                    Your Name
+                                                    Your Name  <span className="required text-danger">*</span>
                                                 </label>
                                                 <input
                                                     type="text"
@@ -43,7 +43,7 @@ function Signup() {
 
                                             <div className="form-outline" style={customStyle.formGroup}>
                                                 <label className="form-label" htmlFor="form3Example3cg" style={customStyle.label}>
-                                                    Your Email
+                                                    Your Email  <span className="required text-danger">*</span>
                                                 </label>
                                                 <input
                                                     type="email"
@@ -55,7 +55,7 @@ function Signup() {
 
                                             <div className="form-outline" style={customStyle.formGroup}>
                                                 <label className="form-label" htmlFor="form3Example4cg" style={customStyle.label}>
-                                                    Password
+                                                    Password  <span className="required text-danger">*</span>
                                                 </label>
                                                 <input
                                                     type="password"
@@ -67,7 +67,7 @@ function Signup() {
 
                                             <div className="form-outline" style={customStyle.formGroup}>
                                                 <label className="form-label" htmlFor="form3Example4cdg" style={customStyle.label}>
-                                                    Repeat your password
+                                                    Repeat your password  <span className="required text-danger">*</span>
                                                 </label>
                                                 <input
                                                     type="password"

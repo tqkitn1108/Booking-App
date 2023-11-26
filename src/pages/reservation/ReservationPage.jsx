@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import Check1 from './Navbar';
 import './ReservationPage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWifi, faShuttleVan, faParking, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-
+import { faWifi, faShuttleVan, faParking, faCheckCircle, faLock, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
+import cvcCodeImage from './cvccode-img.png';
+import { Link } from 'react-router-dom';
+import Check1 from './Navbar';
 const Details = () => {
     return (
         <div className="hotel-detail-border" >
             <h5>Your booking details</h5>
-            <p> Check-in: Mon 8 Jan 2024</p>
-            <p> Check-out: Fri 12 Jan 2024</p>
-            <p> Total length of stay: 4 nights </p>
+            <p> Check-in: <span className='check-in'> Mon 8 Jan 2024 </span> </p>
+            <p> Check-out: <span className='check-out'> Fri 12 Jan 2024 </span></p>
+            <p> Total length of stay: <span className='totalStays'> 4 nights </span> </p>
             <span className="text-success"> Change your selection </span>
         </div>
     )
@@ -23,19 +24,36 @@ const PaymentSchedule = () => {
         </div>
     )
 }
-
 const PriceSummary = () => {
     return (
         <div className='total-summary'>
-            <h4> Your price summary </h4>
-            <p> Original price</p>
-            <p> Last-minute price price</p>
-            <h2> Total </h2>
+            <h4>Your price summary <span className='unit'> (VND)</span></h4>
+            <p className='op'>
+                Original price: <span className="O-price">13.122.000</span>
+            </p>
+            <p className='lp'>
+                Last-minute price: <span className="L-price"> -9.579.060</span>
+            </p>
 
+            <div className=' p-3 mb-3' style={{ backgroundColor: '#ADD8E6' }}>
+                <h2 className='tp'>
+                    Total: <span className="total-price">3.542.940</span>
+                </h2>
+            </div>
+
+            <div className="priceInfor bg-light p-3">
+                <h5>Price Information</h5>
+                <p>
+                    <FontAwesomeIcon icon={faMoneyBill} className="mr-3" />
+                    Include VND <span className='vat'>322.085</span> in taxes <br /> and charges
+                </p>
+                <p>
+                    10% VAT <span className='tax'>VND 322.085</span>
+                </p>
+            </div>
         </div>
-    )
-}
-
+    );
+};
 
 
 const GoodToKnow = () => {
@@ -44,7 +62,7 @@ const GoodToKnow = () => {
             <h4> Good to know </h4>
             <div className='no credit'>
                 <p><FontAwesomeIcon icon={faCheckCircle} /> No credit card needed! </p>
-                <p><FontAwesomeIcon icon={faCheckCircle} /> Stay flexible: You can cancel for free at any time, so lock in <br />      this great price today .</p>
+                <p><FontAwesomeIcon icon={faCheckCircle} /> Stay flexible: You can cancel for free at any time, so lock in   this great price today .</p>
                 <p><FontAwesomeIcon icon={faCheckCircle} /> No payment needed today. You'll pay when you stay. </p>
             </div>
         </div>
@@ -56,7 +74,7 @@ const HotelInformation = () => {
             <div className="hotel-info-border">
                 <h5>Hotel Name</h5>
                 <p>Address: 123 Main Street, Cityville</p>
-                <p>Rating: ⭐⭐⭐⭐</p>
+                <p>Rating: 9/10</p>
                 <div className="amenities">
                     <div className="wifi">
 
@@ -76,7 +94,17 @@ const HotelInformation = () => {
         </div>
     );
 };
-
+const CompleteBooking = () => {
+    return (
+        <div className="Complete ">
+            <Link to="/Login">
+                <button className="btn btn-primary">
+                    <i className="fas fa-lock"></i> Complete booking
+                </button>
+            </Link>
+        </div>
+    )
+}
 
 
 const SecurePage = () => {
@@ -153,77 +181,93 @@ const SecurePage = () => {
         <div>
             <div className='dad'>
                 <div className='Login template'>
-                    <div className='form_container p-9 rounded bg-white'>
-                        <form className='form-secure text-left'>
-                            <h3 className='text-right'>How do you want to pay</h3>
-                            <div className='mb-2 d-flex'>
-                                <div style={{ flex: '1', marginRight: '10px' }}>
-                                    <label htmlFor='cardName'>Cardholder's name</label>
-                                    <input
-                                        type="text"
-                                        name="cardName"
-                                        placeholder=''
-                                        className='form-control'
-                                        onChange={handleInputChange}
-                                    />
-                                    <span className='form-message' style={{ color: 'red' }}>{errors.cardName}</span>
+                    <div className='form_container p-9 rounded bg-white  '>
+                        <form className='form-secure  '>
+                            <div className='Login template d-flex flex-column w-75 bg-white mt'>
+                                <h3 className='text-right'>How do you want to pay</h3>
+                                <div className='mb-2 d-grid '>
+                                    <div className='mb-2'>
+                                        <label htmlFor='cardName' className='form-label'>
+                                            Cardholder's name <span className="required text-danger">*</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="cardName"
+                                            placeholder=''
+                                            className='form-control'
+                                            onChange={handleInputChange}
+                                        />
+                                        <span className='form-message' style={{ color: 'red' }}>{errors.cardName}</span>
+                                    </div>
+                                    <div className='mb-2'>
+                                        <label htmlFor='cardType' className='form-label'>
+                                            Card type <span className="required text-danger">*</span>
+                                        </label>
+                                        <select
+                                            name="cardType"
+                                            className='form-select'
+                                            onChange={handleInputChange}
+                                        >
+                                            <option value=''>Select Card Type</option>
+                                            {cardTypes.map((type, index) => (
+                                                <option key={index} value={type}>{type}</option>
+                                            ))}
+                                        </select>
+                                        <span className='form-message' style={{ color: 'red' }}>{errors.cardType}</span>
+                                    </div>
+                                    <div className='mb-2'>
+                                        <label htmlFor='cardNumber' className='form-label'>
+                                            Card Number <span className="required text-danger">*</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="cardNumber"
+                                            placeholder=''
+                                            className='form-control'
+                                            onChange={handleInputChange}
+                                        />
+                                        <span className='form-message' style={{ color: 'red' }}>{errors.cardNumber}</span>
+                                    </div>
+                                    <div className='mb-2'>
+                                        <label htmlFor='cvcCode' className='form-label'>
+                                            CVC Code <span className="required text-danger">*</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="cvcCode"
+                                            placeholder=''
+                                            className='form-control'
+                                            onChange={handleInputChange}
+                                        />
+                                        <span className='form-message' style={{ color: 'red' }}>{errors.cvcCode}</span>
+                                    </div>
+                                    <div className='mb-2'>
+                                        <label className='form-label'></label>
+                                        <img src={cvcCodeImage} alt='CVC Code Image' style={{ maxWidth: '100%', height: 'auto' }} />
+                                    </div>
+                                    <div className='mb-2'>
+                                        <label htmlFor='expirationDate' className='form-label'>
+                                            Expiration Date <span className="required text-danger">*</span>
+                                        </label>
+                                        <input
+                                            type="date"
+                                            name="expirationDate"
+                                            className='form-control'
+                                            onChange={handleInputChange}
+                                        />
+                                        <span className='form-message' style={{ color: 'red' }}>{errors.expirationDate}</span>
+                                    </div>
+                                    {/* Add a submit button here if needed */}
                                 </div>
                             </div>
-                            <div className='mb-2'>
-                                <label htmlFor='cardType'>Card type</label>
-                                <select
-                                    name="cardType"
-                                    className='form-control'
-                                    onChange={handleInputChange}
-                                >
-                                    <option value=''>Select Card Type</option>
-                                    {cardTypes.map((type, index) => (
-                                        <option key={index} value={type}>{type}</option>
-                                    ))}
-                                </select>
-                                <span className='form-message' style={{ color: 'red' }}>{errors.cardType}</span>
-                            </div>
-                            <div className='mb-2'>
-                                <label htmlFor='cardNumber'>Card Number</label>
-                                <input
-                                    type="text"
-                                    name="cardNumber"
-                                    placeholder=''
-                                    className='form-control'
-                                    onChange={handleInputChange}
-                                />
-                                <span className='form-message' style={{ color: 'red' }}>{errors.cardNumber}</span>
-                            </div>
-                            <div className='mb-2'>
-                                <label htmlFor='cvcCode'>CVC Code</label>
-                                <input
-                                    type="text"
-                                    name="cvcCode"
-                                    placeholder=''
-                                    className='form-control'
-                                    onChange={handleInputChange}
-                                />
-                                <span className='form-message' style={{ color: 'red' }}>{errors.cvcCode}</span>
-                            </div>
-                            <div className='mb-2'>
-                                <label htmlFor='expirationDate'>Expiration Date</label>
-                                <input
-                                    type="date"
-                                    name="expirationDate"
-                                    className='form-control'
-                                    onChange={handleInputChange}
-                                />
-                                <span className='form-message' style={{ color: 'red' }}>{errors.expirationDate}</span>
-                            </div>
-                            {/* Add a submit button here if needed */}
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     );
-};
 
+};
 const ReservationPage = () => {
     const [agreeTerms, setAgreeTerms] = useState(false);
 
@@ -330,58 +374,74 @@ const ReservationPage = () => {
         }
     };
     return (
-        <div  >
+        <div>
+
+
+            
             <div className="content-container">
-                <div className="reservation-container" >
+                <div className="reservation-container">
                     <div>
                         <HotelInformation />
                         <Details />
                         <PriceSummary />
                         <PaymentSchedule />
                     </div>
-                    <div>
-                        <form onSubmit={handleSubmit} className="form-container  text-left "  >
-                            <div className='Login template d-flex flex-column align-items-center  w-100 bg-white mt ' >
+                    <div className=''>
+                        <form onSubmit={handleSubmit} className="form-container text-left ">
+                            <div className='Login template d-flex flex-column  bg-white mt'>
                                 <div className='form_container p-9 rounded bg-white'>
-                                    <form>
-                                        <h3 className='text-right'> Enter your details </h3>
-                                        <div className='mb-1 d-flex'>
-                                            <div className='form-group ' style={{ flex: '1', marginRight: '10px' }}>
-                                                <label htmlFor='Firstname'>First Name</label>
+
+                                    <h3 className='text-right'> Enter your details </h3>
+                                    <div className='mb-3'>
+                                        <div className='form-group d-flex w-100 '>
+                                            <div className='m-right' style={{ width: '300px' }}>
+                                                <label htmlFor='Firstname' className='mb-1'>
+                                                    First Name <span className="required text-danger">*</span>
+                                                </label>
                                                 <input
                                                     id='Firstname'
                                                     type='text'
                                                     placeholder=''
-                                                    className='form-control '  // Added margin-bottom here
+                                                    className='form-control'
                                                     onChange={handleInputChange}
                                                 />
                                                 <span className='form-message' style={{ color: 'red' }}>{errors.firstName}</span>
                                             </div>
-                                            <div className='form-group'>
-                                                <label htmlFor='Lastname'>Last Name</label>
+
+                                            {/* Add margin-right to create space between the two div elements */}
+                                            <div className='m-left' style={{ marginLeft: '2rem', width: '270px' }}>
+                                                <label htmlFor='Lastname' className='mb-1'>
+                                                    Last Name <span className="required text-danger">*</span>
+                                                </label>
                                                 <input
                                                     id='Lastname'
                                                     type='text'
                                                     placeholder=''
-                                                    className='form-control '  // Added margin-top here
+                                                    className='form-control'
                                                     onChange={handleInputChange}
+
                                                 />
                                                 <span className='form-message' style={{ color: 'red' }}>{errors.lastName}</span>
                                             </div>
                                         </div>
-                                        <div className='form-group'>
-                                            <label htmlFor='Email'>Email</label>
+
+                                        <div className='form-group w-50 '>
+                                            <label htmlFor='Email' className='mb-1'>
+                                                Email <span className="required text-danger">*</span>
+                                            </label>
                                             <input
                                                 id='Email'
                                                 type='email'
                                                 placeholder='Enter Email'
-                                                className='form-control col-12'
+                                                className='form-control'
                                                 onChange={handleInputChange}
                                             />
                                             <span className='form-message' style={{ color: 'red' }}>{errors.email}</span>
                                         </div>
-                                        <div className='form-group'>
-                                            <label htmlFor='country'>Country/Region</label>
+                                        <div className='form-group w-50'>
+                                            <label htmlFor='country' className='mb-1'>
+                                                Country/Region <span className="required text-danger">*</span>
+                                            </label>
                                             <input
                                                 id='country'
                                                 type='text'
@@ -389,10 +449,13 @@ const ReservationPage = () => {
                                                 className='form-control'
                                                 onChange={handleInputChange}
                                             />
-                                            <span className='form-message' style={{ color: 'red' }} >{errors.country}</span>
+                                            <span className='form-message' style={{ color: 'red' }}>{errors.country}</span>
                                         </div>
-                                        <div className='form-group'>
-                                            <label htmlFor='telephone'>Telephone (mobile number preferred)</label>
+                                        <div className='form-group w-50'>
+                                            <label htmlFor='telephone' className='mb-1'>
+                                                Telephone (mobile number preferred) <span className="required text-danger">*</span>
+                                            </label>
+
                                             <input
                                                 type='text'
                                                 id='telephone'
@@ -400,9 +463,9 @@ const ReservationPage = () => {
                                                 className='form-control'
                                                 onChange={handleInputChange}
                                             />
-                                            <span className='form-message' style={{ color: 'red' }} >{errors.telephone}</span>
+                                            <span className='form-message' style={{ color: 'red' }}>{errors.telephone}</span>
                                         </div>
-                                        <div className="booking-for-section mt-4">
+                                        <div className="booking-for-section mt-3">
                                             <p className="mb-2">Who are you booking for?</p>
                                             <div className="form-check mb-2">
                                                 <input type="radio" id="mainGuest" name="bookingFor" className="form-check-input" />
@@ -413,8 +476,8 @@ const ReservationPage = () => {
                                                 <label htmlFor="someoneElse" className="form-check-label">I'm booking for someone else</label>
                                             </div>
                                         </div>
-                                        <div className="traveling-for-work">
-                                            <p className="mb-2  ">Are you traveling for work?</p>
+                                        <div className="traveling-for-work mt-3">
+                                            <p className="mb-2">Are you traveling for work?</p>
                                             <div className="form-check form-check-inline mb-2">
                                                 <input type="radio" id="yes" name="travelingForWork" className="form-check-input" />
                                                 <label htmlFor="Ayes" className="form-check-label">Yes</label>
@@ -424,19 +487,20 @@ const ReservationPage = () => {
                                                 <label htmlFor="Ano" className="form-check-label">No</label>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
+
                                 </div>
-
                             </div>
-
                         </form>
                         <GoodToKnow />
-                        <SecurePage />                      
+                        <SecurePage />
+                        <CompleteBooking />
                     </div>
                 </div>
             </div>
         </div>
     );
+
 };
 
 export default ReservationPage;

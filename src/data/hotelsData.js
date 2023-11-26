@@ -3,7 +3,7 @@ export const hotels = [
     "id": 1,
     "name": "MIA HOTEL",
     "phoneNumber": "0123456789",
-    "email": `hotel${id}@gmail.com`,
+    "email": `hotel122@gmail.com`,
     "star": 4,
     "type": "Khách sạn",
     "dest": "Hà Nội",
@@ -34,7 +34,7 @@ export const hotels = [
     "rating": 8.7,
     "rooms": [
       {
-        "id": `${id}1`,
+        "id": `1221`,
         "title": "Deluxe Double Room",
         "type": "room",
         "roomTypeQuantity": 2,
@@ -65,7 +65,7 @@ export const hotels = [
         "bookings": []
       },
       {
-        "id": `${id}2`,
+        "id": `1222`,
         "title": "Deluxe Twin Room",
         "type": "room",
         "roomTypeQuantity": 2,
@@ -96,7 +96,7 @@ export const hotels = [
         "bookings": []
       },
       {
-        "id": `${id}3`,
+        "id": `1223`,
         "title": "King Room",
         "type": "room",
         "roomTypeQuantity": 3,
@@ -165,7 +165,7 @@ export const hotels = [
     "id": 2,
     "name": "Emerald Boutique Hotel",
     "phoneNumber": "0123456789",
-    "email": `hotel${id}@gmail.com`,
+    "email": `hotel122@gmail.com`,
     "star": 4,
     "type": "Khách sạn",
     "dest": "Hà Nội",
@@ -194,7 +194,7 @@ export const hotels = [
     "rating": 9.4,
     "rooms": [
       {
-        "id": `${id}1`,
+        "id": `1221`,
         "title": "Deluxe Double Room",
         "type": "room",
         "roomTypeQuantity": 2,
@@ -225,7 +225,7 @@ export const hotels = [
         "bookings": []
       },
       {
-        "id": `${id}2`,
+        "id": `1222`,
         "title": "Deluxe Double or Twin Room",
         "type": "room",
         "roomTypeQuantity": 4,
@@ -250,7 +250,7 @@ export const hotels = [
         "bookings": []
       },
       {
-        "id": `${id}3`,
+        "id": `1223`,
         "title": "Deluxe Twin Room",
         "type": "room",
         "roomTypeQuantity": 3,
@@ -318,7 +318,7 @@ export const hotels = [
     "id": 3,
     "name": "Genius Apartment Millennium Free Pool",
     "phoneNumber": "0123456789",
-    "email": `hotel${id}@gmail.com`,
+    "email": `hotel122@gmail.com`,
     "star": 4,
     "type": "Căn hộ",
     "dest": "TP. Hồ Chí Minh",
@@ -349,7 +349,7 @@ export const hotels = [
     "rating": 8.8,
     "rooms": [
       {
-        "id": `${id}1`,
+        "id": `1221`,
         "title": "Căn Hộ 2 Phòng Ngủ",
         "type": "apartment",
         "roomTypeQuantity": 10,
@@ -382,7 +382,7 @@ export const hotels = [
         "bookings": []
       },
       {
-        "id": `${id}2`,
+        "id": `1222`,
         "title": "Căn Hộ 3 Phòng Ngủ",
         "type": "apartment",
         "roomTypeQuantity": 4,
@@ -459,7 +459,7 @@ export const hotels = [
     "id": 4,
     "name": "Sapa Catcat Hills Resort & Spa",
     "phoneNumber": "0123456789",
-    "email": `hotel${id}@gmail.com`,
+    "email": `hotel122@gmail.com`,
     "star": 4,
     "type": "Resort",
     "dest": "Sa Pa",
@@ -488,7 +488,7 @@ export const hotels = [
     "rating": 8.2,
     "rooms": [
       {
-        "id": `${id}1`,
+        "id": `1221`,
         "title": "Standard Queen Room",
         "type": "room",
         "roomTypeQuantity": 6,
@@ -554,7 +554,7 @@ export const hotels = [
     "id": 5,
     "name": "Tam Coc Holiday Hotel & Villa",
     "phoneNumber": "0123456789",
-    "email": `hotel${id}@gmail.com`,
+    "email": `hotel122@gmail.com`,
     "star": 3,
     "type": "Biệt thự",
     "dest": "Ninh Bình",
@@ -585,7 +585,7 @@ export const hotels = [
     "rating": 8.2,
     "rooms": [
       {
-        "id": `${id}1`,
+        "id": `1221`,
         "title": "Biệt Thự Nhìn Ra Vườn",
         "type": "room",
         "roomTypeQuantity": 1,
@@ -656,7 +656,7 @@ export const hotels = [
     "id": 6,
     "name": "MIA HOTEL 2",
     "phoneNumber": "0123456789",
-    "email": `hotel${id}@gmail.com`,
+    "email": `hotel122@gmail.com`,
     "star": 4,
     "type": "Khách sạn",
     "dest": "Đà Nẵng",
@@ -687,7 +687,7 @@ export const hotels = [
     "rating": 8.7,
     "rooms": [
       {
-        "id": `${id}1`,
+        "id": `1221`,
         "title": "Deluxe Double Room",
         "type": "room",
         "roomTypeQuantity": 2,
@@ -718,7 +718,7 @@ export const hotels = [
         "bookings": []
       },
       {
-        "id": `${id}2`,
+        "id": `1222`,
         "title": "Deluxe Twin Room",
         "type": "room",
         "roomTypeQuantity": 2,
@@ -749,7 +749,7 @@ export const hotels = [
         "bookings": []
       },
       {
-        "id": `${id}3`,
+        "id": `1223`,
         "title": "King Room",
         "type": "room",
         "roomTypeQuantity": 3,
@@ -818,7 +818,7 @@ export const hotels = [
     "id": 7,
     "name": "Emerald Boutique Hotel 2",
     "phoneNumber": "0123456789",
-    "email": `hotel${id}@gmail.com`,
+    "email": `hotel122@gmail.com`,
     "star": 4,
     "type": "Khách sạn",
     "dest": "Nha Trang",
@@ -847,7 +847,7 @@ export const hotels = [
     "rating": 9.4,
     "rooms": [
       {
-        "id": `${id}1`,
+        "id": `1221`,
         "title": "Deluxe Double Room",
         "type": "room",
         "roomTypeQuantity": 2,
@@ -878,7 +878,7 @@ export const hotels = [
         "bookings": []
       },
       {
-        "id": `${id}2`,
+        "id": `1222`,
         "title": "Deluxe Double or Twin Room",
         "type": "room",
         "roomTypeQuantity": 4,
@@ -903,7 +903,7 @@ export const hotels = [
         "bookings": []
       },
       {
-        "id": `${id}3`,
+        "id": `1223`,
         "title": "Deluxe Twin Room",
         "type": "room",
         "roomTypeQuantity": 3,
@@ -971,7 +971,7 @@ export const hotels = [
     "id": 8,
     "name": "Genius Apartment Millennium Free Pool 2",
     "phoneNumber": "0123456789",
-    "email": `hotel${id}@gmail.com`,
+    "email": `hotel122@gmail.com`,
     "star": 4,
     "type": "Căn hộ",
     "dest": "Phú Quốc",
@@ -1002,7 +1002,7 @@ export const hotels = [
     "rating": 8.8,
     "rooms": [
       {
-        "id": `${id}1`,
+        "id": `1221`,
         "title": "Căn Hộ 2 Phòng Ngủ",
         "type": "apartment",
         "roomTypeQuantity": 10,
@@ -1035,7 +1035,7 @@ export const hotels = [
         "bookings": []
       },
       {
-        "id": `${id}2`,
+        "id": `1222`,
         "title": "Căn Hộ 3 Phòng Ngủ",
         "type": "apartment",
         "roomTypeQuantity": 4,
@@ -1112,7 +1112,7 @@ export const hotels = [
     "id": 9,
     "name": "Sapa Catcat Hills Resort & Spa 2",
     "phoneNumber": "0123456789",
-    "email": `hotel${id}@gmail.com`,
+    "email": `hotel122@gmail.com`,
     "star": 4,
     "type": "Resort",
     "dest": "Hạ Long",
@@ -1141,7 +1141,7 @@ export const hotels = [
     "rating": 8.2,
     "rooms": [
       {
-        "id": `${id}1`,
+        "id": `1221`,
         "title": "Standard Queen Room",
         "type": "room",
         "roomTypeQuantity": 6,
@@ -1207,7 +1207,7 @@ export const hotels = [
     "id": 10,
     "name": "Tam Coc Holiday Hotel & Villa 2",
     "phoneNumber": "0123456789",
-    "email": `hotel${id}@gmail.com`,
+    "email": `hotel122@gmail.com`,
     "star": 3,
     "type": "Biệt thự",
     "dest": "Đà Nẵng",
@@ -1238,7 +1238,7 @@ export const hotels = [
     "rating": 8.2,
     "rooms": [
       {
-        "id": `${id}1`,
+        "id": `1221`,
         "title": "Biệt Thự Nhìn Ra Vườn",
         "type": "room",
         "roomTypeQuantity": 1,

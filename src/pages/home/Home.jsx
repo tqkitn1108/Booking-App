@@ -4,6 +4,7 @@ import Explore from "../../components/explore/Explore";
 import PropertyType from "../../components/property-type/PropertyType";
 import Trending from "../../components/trending/Trending";
 import TripPlanner from "../../components/trip-planner/TripPlanner";
+import FeaturedHome from "../../components/featuredHome/FeaturedHome";
 import "./home.css"
 import {
     faUmbrellaBeach,
@@ -43,6 +44,7 @@ const Home = () => {
                         </div>
                     </div>
                     <TripPlanner />
+                    <FeaturedHome />
                 </div>
             </div>
         </div>

@@ -6,6 +6,7 @@ import Hotelpage from "../pages/hotel/Hotelpage";
 import ReservationPage from "../pages/reservation/ReservationPage";
 import FavoriteDestination from "../components/favoriteDestination/FavoriteDestination";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Test from "../pages/list/Test";
 
 
 function CustomerRouters() {
@@ -19,6 +20,7 @@ function CustomerRouters() {
           <Route path="/reservation" element={<ReservationPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/test" element={<Test />} />
         </Routes>
       {/* </BrowserRouter> */}
     </div>

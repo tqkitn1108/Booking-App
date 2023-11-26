@@ -3,7 +3,7 @@
     grid-column: 1fr 1fr; */
     /* max-width: 400px; */
     float: left;
-    width: 430px 1024px;
+    /* width: 130px 1024px; */
     margin-left: 16px;
 }
 
@@ -14,7 +14,7 @@
     justify-content: center;
     margin-top: 0px;
     font-size: smaller;
-    left: 213px;
+    /* left: 213px; */
     margin-left: 213px;
     /* position: sticky; */
 }
@@ -31,6 +31,9 @@
     border-width: 0.5px;
     border-color: #d7d4d4;
     width: 100%;
+}
+.sitem{
+    width: 800px;
 }
 .lsTitle{
     font-size: 16px;

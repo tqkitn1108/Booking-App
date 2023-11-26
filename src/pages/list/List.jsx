@@ -154,7 +154,7 @@ const List = () => {
             </div>
             <div className="listContainer">
             <div>
-      <div>
+      <div className="sitem">
         {Array.from({ length: itemsPerPage }, (_, index) => (
           <div key={index + (currentPage - 1) * itemsPerPage}>
             <div className="listContainer"></div>

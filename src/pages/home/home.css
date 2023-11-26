@@ -44,3 +44,42 @@
     color: #0089ff;
     background-color: #e8edef;
 }
+
+.swiper {
+    position: static;
+}
+
+.swiper-button-prev {
+    left: -17px;
+}
+.swiper-button-next {
+    right: -17px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    position: absolute;
+    height: 34px;
+    width: 34px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #fff;
+    color: #1a1a1a;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+.swiper-button-prev:hover, 
+.swiper-button-next:hover {
+    background-color: #dee2e6;
+}
+.swiper-button-prev:after, 
+.swiper-button-next:after {
+    font-size: 12px;
+    font-weight: 700;
+}
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+    opacity: 0;
+    cursor: none;
+}

@@ -13,6 +13,7 @@ import Home from './pages/home/Home';
 import Footer from './components/footer/Footer';
 import Email from './components/email/Email';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Hotel from "./pages/hotel/Hotel";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path='/home' element={<Trending />} ></Route>
         <Route path='/home' element={<TripPlanner />} ></Route>
         <Route path='/home' element={<Explore />} ></Route> */}
+        <Route path='/Hotel' element={<Hotel />} ></Route>
       </Routes>
     </BrowserRouter>
   )

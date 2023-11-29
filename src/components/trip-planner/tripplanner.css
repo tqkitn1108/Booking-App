@@ -1,10 +1,9 @@
-.trip-planner {
+.trip-planner-container {
     position: relative;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 100%;
-    max-width: 1024px;
-    display: flex;
-    justify-content: space-between;
+    /* display: flex;
+    justify-content: space-between; */
 }
 .trip-planner-item {
     flex: 1;
@@ -25,4 +24,30 @@
     font-weight: 400;
     margin-top: 4px;
     font-size: 14px;
+}
+.choices {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+}
+.choice-item {
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid transparent;
+    border-radius: 22px;
+}
+.choice-item:hover {
+    background-color: #e8edef;
+    cursor: pointer;
+}
+.choice-item-active {
+    color: #0089ff;
+    background-color: #e8edef;
+    cursor: pointer;
+    border: 1px solid #0089ff;
+}
+.choice-item-text {
+    display: inline;
+    margin-left: 10px;
 }

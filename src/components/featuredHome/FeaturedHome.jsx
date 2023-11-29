@@ -42,26 +42,40 @@ const FeaturedProperties = () => {
         price: 'Starting from $105',
         rating: { value: '8.9', label: 'Excellent' },
       },
+      {
+        imgSrc:
+        'https://cf2.bstatic.com/xdata/images/hotel/square600/87375132.webp?k=a3eff4ea2475f3a4de01f017463acd719bddada5e63f87f6c0952f8590498865&o=',
+        name: 'Hilton Garden Inn',
+        city: 'Berlin',
+        price: 'Starting from $105',
+        rating: { value: '8.9', label: 'Excellent' },
+      },
   ];
 
   return (
     <div className="fp">
-      <Swiper navigation={true} modules={[Navigation]} slidesPerView={3} className="mySwiper">
-        {properties.map((property, index) => (
-          <SwiperSlide key={index}>
-            <div className="fpItem">
-              <img src={property.imgSrc} alt="" className="fpImg" />
-              <span className="fpName">{property.name}</span>
-              <span className="fpCity">{property.city}</span>
-              <span className="fpPrice">{property.price}</span>
-              <div className="fpRating">
-                <button>{property.rating.value}</button>
-                <span>{property.rating.label}</span>
+      <>
+        <Swiper navigation={true} modules={[Navigation]} slidesPerView={4} spaceBetween={16}>
+          {properties.map((property, index) => (
+            <SwiperSlide key={index}>
+              <div className="fpItem">
+                <img src={property.imgSrc} alt="" className="fpImg" />
+                <div className="fpTitles">
+                  <div className="fpDes">
+                    <span className="fpName">{property.name}</span>
+                    <span className="fpCity">{property.city}</span>
+                    <div className="fpRating">
+                      <button>{property.rating.value}</button>
+                      <span>{property.rating.label}</span>
+                    </div>
+                  </div>
+                  <span className="fpPrice">{property.price}</span>
+                </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </>
     </div>
   );
 };

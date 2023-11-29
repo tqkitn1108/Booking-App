@@ -9,8 +9,8 @@ const Explore = () => {
     return (
         <div className="explore">
             <>
-                <Swiper navigation={true} modules={[Navigation]} slidesPerView={6} className="mySwiper">
-                    {destinations.map((destination, index) => {
+                <Swiper navigation={true} modules={[Navigation]} slidesPerView={6} spaceBetween={16}>
+                    {destinations.map((destination) => {
                         return (<SwiperSlide>
                             <div className="explore-item">
                                 <img src={destination.image} alt="" className="explore-img" />

@@ -26,12 +26,12 @@ public class RoomController {
         return new ResponseEntity<>(roomService.allRooms(hotelId), HttpStatus.OK);
     }
 
-    @GetMapping("/{hotelId}/rooms/{id}")
+    @GetMapping("/rooms/{id}")
     public ResponseEntity<Room> getSingleRoom(@PathVariable String id) {
         return new ResponseEntity<>(roomService.singleRoom(id), HttpStatus.OK);
     }
 
-    @GetMapping("/{hotelId}/available")
+    @GetMapping("/{hotelId}/availableRooms")
     public ResponseEntity<List<Room>> getAvailableRooms(
             @PathVariable String hotelId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
@@ -39,24 +39,18 @@ public class RoomController {
         return ResponseEntity.ok(roomService.availableRooms(hotelId, checkin, checkout));
     }
 
-    @PostMapping("/{hotelId}/rooms")
-    public ResponseEntity<Room> addNewRoom(@PathVariable String hotelId, @RequestBody Room room) {
+    @PostMapping("/rooms")
+    public ResponseEntity<Room> addNewRoom(@RequestBody Room room) {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(room.getId())
                 .toUri();
-        return ResponseEntity.created(location).body(roomService.newRoom(hotelId, room));
+        return ResponseEntity.created(location).body(roomService.newRoom(room));
     }
 
-    @PutMapping("/{hotelId}/rooms/{id}")
-    public ResponseEntity<Room> updateRoom(@PathVariable String id, @RequestBody Room room) {
-        return ResponseEntity.ok(roomService.updateRoom(id, room));
-    }
-
-    @DeleteMapping("/{hotelId}/rooms/{id}")
-    public ResponseEntity<String> deleteRoom(@PathVariable String hotelId, @PathVariable String id) {
-        roomService.deleteRoom(hotelId, id);
-        return ResponseEntity.ok("Room has been deleted");
+    @DeleteMapping("/rooms/{id}")
+    public ResponseEntity<String> deleteRoom(@PathVariable String id) {
+        return ResponseEntity.ok(roomService.deleteRoom(id));
     }
 }

@@ -3,6 +3,7 @@ package com.cnpm.bookingbackend.controllers;
 import com.cnpm.bookingbackend.dtos.request.BookingDto;
 import com.cnpm.bookingbackend.models.Booking;
 import com.cnpm.bookingbackend.services.BookingService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +19,9 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    @GetMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<Booking>> getAllBookings() {
-        return ResponseEntity.ok(bookingService.allBookings());
-    }
-
-    @GetMapping()
+    @GetMapping("/{userId}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<Booking>> getAllUserBookings(String userId) {
+    public ResponseEntity<List<Booking>> getAllUserBookings(@PathVariable String userId) {
         return ResponseEntity.ok(bookingService.allUserBookings(userId));
     }
 
@@ -37,7 +32,7 @@ public class BookingController {
     }
 
     @PostMapping("/{hotelId}")
-    public ResponseEntity<Booking> createBooking(@PathVariable String hotelId, @RequestBody BookingDto bookingDto) {
+    public ResponseEntity<Booking> createBooking(@PathVariable String hotelId, @Valid @RequestBody BookingDto bookingDto) {
         return ResponseEntity.ok(bookingService.reservation(hotelId, bookingDto));
     }
 

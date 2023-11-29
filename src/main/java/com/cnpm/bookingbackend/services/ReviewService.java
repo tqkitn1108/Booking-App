@@ -1,8 +1,8 @@
 package com.cnpm.bookingbackend.services;
 
+import com.cnpm.bookingbackend.dtos.request.ReviewDto;
 import com.cnpm.bookingbackend.models.Hotel;
 import com.cnpm.bookingbackend.models.Review;
-import com.cnpm.bookingbackend.models.Room;
 import com.cnpm.bookingbackend.repo.HotelRepository;
 import com.cnpm.bookingbackend.repo.ReviewRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,12 +39,11 @@ public class ReviewService {
         return reviewList.subList(0, 5);
     }
 
-    public Review newReview(String content, int rating, String hotelId) {
+    public Review newReview(ReviewDto input, String hotelId) {
         Hotel hotel = hotelRepository.findById(hotelId).orElseThrow();
-        int numberOfReviews = hotel.getReviews().size();
-        hotel.setRating((hotel.getRating() * numberOfReviews + rating) / (numberOfReviews + 1));
+        hotel.updateRating(input.getRating());
 
-        Review review = new Review(content, rating);
+        Review review = new Review(input.getBookingId(), input.getFullName(), input.getRating(), input.getContent());
         review.setReviewDate(LocalDate.now());
         reviewRepository.insert(review);
         mongoTemplate.update(Hotel.class)

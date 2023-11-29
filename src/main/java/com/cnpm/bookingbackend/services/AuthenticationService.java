@@ -44,7 +44,8 @@ public class AuthenticationService {
 
     public User authenticate(LoginUserDto input) {
         String email = input.getEmail().toLowerCase();
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, input.getPassword()));
+        String password = input.getPassword();
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
         return userRepository.findByEmail(email).orElseThrow();
     }
 }

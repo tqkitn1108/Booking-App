@@ -1,17 +1,16 @@
 package com.cnpm.bookingbackend.controllers;
 
+import com.cnpm.bookingbackend.dtos.request.HotelDto;
 import com.cnpm.bookingbackend.models.Hotel;
 import com.cnpm.bookingbackend.services.HotelService;
-import org.bson.types.ObjectId;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -26,10 +25,10 @@ public class HotelController {
 
     @GetMapping()
     public ResponseEntity<Page<Hotel>> getAllHotels(
-            @RequestParam(required = false) String location,
+            @RequestParam(required = false) String dest,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size) {
-        return new ResponseEntity<>(hotelService.allHotels(location, page, size), HttpStatus.OK);
+        return new ResponseEntity<>(hotelService.allHotels(dest, page, size), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -46,14 +45,15 @@ public class HotelController {
     }
 
     @PostMapping()
-    public ResponseEntity<Hotel> createHotel(@RequestBody Hotel hotel) {
-        hotelService.newHotel(hotel);
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(hotel.getId())
-                .toUri();
-        return ResponseEntity.created(location).build();
+    public ResponseEntity<Hotel> createHotel(@Valid @RequestBody HotelDto hotelDto) {
+        Hotel createdHotel = hotelService.newHotel(hotelDto);
+//        URI location = ServletUriComponentsBuilder
+//                .fromCurrentRequest()
+//                .path("/{id}")
+//                .buildAndExpand(hotel.getId())
+//                .toUri();
+//        return ResponseEntity.created(location).build();
+        return new ResponseEntity<>(createdHotel, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -65,5 +65,10 @@ public class HotelController {
     public ResponseEntity<String> deleteHotel(@PathVariable String id) {
         hotelService.deletedHotel(id);
         return ResponseEntity.ok("Hotel has been deleted");
+    }
+
+    @GetMapping("/countByDest")
+    public ResponseEntity<Map<String, Integer>> countByDest(@RequestParam List<String> destinations) {
+        return new ResponseEntity<>(hotelService.countByDest(destinations), HttpStatus.OK);
     }
 }

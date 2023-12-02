@@ -1,8 +1,11 @@
 package com.cnpm.bookingbackend.models;
 
+import lombok.Data;
+
 import java.time.LocalDate;
 
-public class PaymentInfo {
+@Data
+public class PaymentDetails {
     private String cardholderName;
     private String cardNumber;
     private LocalDate expirationDate;

@@ -54,7 +54,7 @@ public class HotelService {
                 maxPeople += numAvailableRooms * roomType.getCapacity();
                 numOfRooms += numAvailableRooms;
             }
-            return maxPeople >= adults || numOfRooms >= noRooms - 1;
+            return maxPeople >= adults + children / 4 || numOfRooms >= noRooms - 1;
         }).toList();
         return new PageImpl<>(hotelList,
                 PageRequest.of(page, size, Sort.by("rating").descending()), hotelList.size());
@@ -89,15 +89,18 @@ public class HotelService {
 
     public Map<String, Integer> countByDest(List<String> destinations) {
         Map<String, Integer> map = new HashMap<>();
-        destinations.forEach(dest -> {
-            System.out.println(dest);
-            map.put(dest, hotelRepository.findByDest(dest).size());
-        });
+        destinations.forEach(dest -> map.put(dest, hotelRepository.findByDest(dest).size()));
+        return map;
+    }
+
+    public Map<String, Integer> countByType(List<String> types) {
+        Map<String, Integer> map = new HashMap<>();
+        types.forEach(type -> map.put(type, hotelRepository.findByType(type).size()));
         return map;
     }
 
     public Page<Hotel> filterHotels(String dest, List<String> star, List<String> types, List<String> rating,
-                                    List<String> facilities, List<String> amenities, Integer minPrice, Integer maxPrice,
+                                    List<String> facilities, List<String> amenities,
                                     Integer pageNumber, Integer pageSize) {
         return null;
     }

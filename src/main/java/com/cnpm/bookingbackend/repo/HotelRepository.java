@@ -11,13 +11,14 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 public interface HotelRepository extends MongoRepository<Hotel, String> {
     Optional<Hotel> findByName(String name);
 
     List<Hotel> findByDest(String dest);
 
     Page<Hotel> findByDest(String dest, Pageable pageable);
+
+    List<Hotel> findByType(String type);
 
     Page<Hotel> findByStar(Integer star, Pageable pageable);
 

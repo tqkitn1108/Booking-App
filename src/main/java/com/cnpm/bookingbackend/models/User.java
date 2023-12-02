@@ -1,12 +1,10 @@
 package com.cnpm.bookingbackend.models;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
@@ -23,16 +21,11 @@ import java.util.*;
 public class User implements UserDetails {
     @Id
     private String id;
-    @NotBlank
-    @Size(min = 10, max = 20)
     private String fullName;
-    @NotBlank
-    @Size(max = 50)
-    @Email
+    @Indexed(unique = true)
     private String email;
-    @NotBlank
-    @Size(min = 10)
     private String password;
+    private boolean isVerified;
     @DBRef
     private Role role;
     @DocumentReference(lazy = true)
@@ -72,7 +65,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.isVerified;
     }
 
     @Override

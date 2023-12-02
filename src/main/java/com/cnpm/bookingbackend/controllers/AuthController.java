@@ -1,13 +1,15 @@
 package com.cnpm.bookingbackend.controllers;
 
 import com.cnpm.bookingbackend.dtos.response.LoginResponse;
+import com.cnpm.bookingbackend.event.RegistrationCompleteEvent;
 import com.cnpm.bookingbackend.models.User;
 import com.cnpm.bookingbackend.dtos.request.LoginUserDto;
 import com.cnpm.bookingbackend.dtos.request.RegisterUserDto;
 import com.cnpm.bookingbackend.security.jwt.JwtService;
 import com.cnpm.bookingbackend.services.AuthenticationService;
-import com.cnpm.bookingbackend.services.EmailService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,21 +19,35 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final AuthenticationService authenticationService;
     private final JwtService jwtService;
-    private final EmailService emailService;
+    private final ApplicationEventPublisher publisher;
 
-    public AuthController(AuthenticationService authenticationService, JwtService jwtService, EmailService emailService) {
+    public AuthController(AuthenticationService authenticationService, JwtService jwtService,
+                          ApplicationEventPublisher publisher) {
         this.authenticationService = authenticationService;
         this.jwtService = jwtService;
-        this.emailService = emailService;
+        this.publisher = publisher;
     }
 
+//    @PostMapping("/signup")
+//    public ResponseEntity<User> register(@RequestBody @Valid RegisterUserDto registerUserDto) throws Exception {
+//        User registeredUser = authenticationService.signup(registerUserDto);
+//        String subject = "Confirm your account";
+//        String body = "Your account has been created on our platform";
+//        emailService.sendEmail(registerUserDto.getEmail(), subject, body);
+//        return ResponseEntity.ok(registeredUser);
+//    }
+
     @PostMapping("/signup")
-    public ResponseEntity<User> register(@RequestBody @Valid RegisterUserDto registerUserDto) throws Exception {
+    public ResponseEntity<String> register(@RequestBody @Valid RegisterUserDto registerUserDto,
+                                           final HttpServletRequest request) throws Exception {
         User registeredUser = authenticationService.signup(registerUserDto);
-        String subject = "Confirm your account";
-        String body = "Your account has been created on our platform";
-        emailService.sendEmail(registerUserDto.getEmail(), subject, body);
-        return ResponseEntity.ok(registeredUser);
+        publisher.publishEvent(new RegistrationCompleteEvent(registeredUser, applicationUrl(request)));
+        return ResponseEntity.ok("Success! Please check your email to complete your registration");
+    }
+
+    @GetMapping("/verifyEmail")
+    public ResponseEntity<String> verifyEmail(@RequestParam("token") String token) {
+        return ResponseEntity.ok(authenticationService.verifyEmail(token));
     }
 
     @PostMapping("/login")
@@ -42,5 +58,9 @@ public class AuthController {
 
         LoginResponse loginResponse = new LoginResponse(jwtToken, jwtService.getExpirationTime());
         return ResponseEntity.ok(loginResponse);
+    }
+
+    private String applicationUrl(HttpServletRequest request) {
+        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
     }
 }

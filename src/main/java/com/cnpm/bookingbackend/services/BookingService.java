@@ -3,44 +3,39 @@ package com.cnpm.bookingbackend.services;
 import com.cnpm.bookingbackend.dtos.request.BookingDto;
 import com.cnpm.bookingbackend.models.*;
 import com.cnpm.bookingbackend.repo.BookingRepository;
-import com.cnpm.bookingbackend.repo.HotelRepository;
-import com.cnpm.bookingbackend.repo.RoomRepository;
-import com.cnpm.bookingbackend.repo.UserRepository;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class BookingService {
     private final BookingRepository bookingRepository;
-    private final UserRepository userRepository;
-    private final HotelRepository hotelRepository;
-    private final RoomRepository roomRepository;
+    private final MongoTemplate mongoTemplate;
 
-    public BookingService(BookingRepository bookingRepository, UserRepository userRepository,
-                          HotelRepository hotelRepository, RoomRepository roomRepository) {
+    public BookingService(BookingRepository bookingRepository, MongoTemplate mongoTemplate) {
         this.bookingRepository = bookingRepository;
-        this.userRepository = userRepository;
-        this.hotelRepository = hotelRepository;
-        this.roomRepository = roomRepository;
+        this.mongoTemplate = mongoTemplate;
     }
 
     public List<Booking> allUserBookings(String userId) {
-        return userRepository.findById(userId).orElseThrow().getBookings();
+        return Objects.requireNonNull(mongoTemplate.findById(userId, User.class)).getBookings();
     }
 
     public List<Booking> allHotelBookings(String hotelId) {
-        return hotelRepository.findById(hotelId).orElseThrow().getBookings();
+        return Objects.requireNonNull(mongoTemplate.findById(hotelId, Hotel.class)).getBookings();
     }
 
-    public Booking reservation(String hotelId, BookingDto bookingDto) {
+    public Booking createReservation(String hotelId, BookingDto bookingDto) {
         Booking booking = bookingDto.toBooking();
-        Hotel hotel = hotelRepository.findById(hotelId).orElseThrow();
         List<Room> roomList = bookingDto.getRoomIds().stream().map(roomId ->
-                roomRepository.findById(roomId).orElseThrow()).toList();
-        booking.setHotel(hotel);
+                mongoTemplate.findById(roomId, Room.class)).toList();
+        booking.setHotelId(hotelId);
         booking.setRooms(roomList);
         booking.setBookingStatus(BookingStatus.PENDING);
 
@@ -55,13 +50,19 @@ public class BookingService {
             room.getUnavailableDates().addAll(stayDateList);
         });
 
-        return bookingRepository.save(booking);
+        bookingRepository.save(booking);
+        mongoTemplate.update(User.class)
+                .matching(Criteria.where("id").is(bookingDto.getBookingPersonId()))
+                .apply(new Update().push("bookings", booking))
+                .first();
+
+        return booking;
     }
 
-    public Booking confirmBooking(String bookingId, BookingStatus status) {
+    public void confirmBooking(String bookingId, BookingStatus status) {
         Booking booking = bookingRepository.findById(bookingId).orElseThrow();
         booking.setBookingStatus(status);
-        return bookingRepository.save(booking);
+        bookingRepository.save(booking);
     }
 
     public void deleteBooking(String bookingId) {

@@ -1,6 +1,7 @@
 package com.cnpm.bookingbackend.dtos.request;
 
 import com.cnpm.bookingbackend.models.Booking;
+import com.cnpm.bookingbackend.models.PaymentDetails;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Data
 public class BookingDto {
+    private String bookingPersonId;
     @NotBlank
     private String fullName;
     @NotBlank
@@ -27,6 +29,7 @@ public class BookingDto {
     private Integer children;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
+    private PaymentDetails paymentDetails;
 
     public Booking toBooking(){
         return new Booking()
@@ -37,7 +40,7 @@ public class BookingDto {
                 .setAdults(adults)
                 .setChildren(children)
                 .setCheckInDate(checkInDate)
-                .setCheckOutDate(checkOutDate);
-
+                .setCheckOutDate(checkOutDate)
+                .setPaymentDetails(paymentDetails);
     }
 }

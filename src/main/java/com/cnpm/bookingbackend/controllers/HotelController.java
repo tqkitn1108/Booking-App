@@ -71,4 +71,9 @@ public class HotelController {
     public ResponseEntity<Map<String, Integer>> countByDest(@RequestParam List<String> destinations) {
         return new ResponseEntity<>(hotelService.countByDest(destinations), HttpStatus.OK);
     }
+
+    @GetMapping("/countByType")
+    public ResponseEntity<Map<String, Integer>> countByType(@RequestParam List<String> types) {
+        return new ResponseEntity<>(hotelService.countByType(types), HttpStatus.OK);
+    }
 }

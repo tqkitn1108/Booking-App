@@ -21,8 +21,7 @@ public class Booking {
     private String fullName;
     private String email;
     private String phoneNumber;
-    @DocumentReference(lazy = true)
-    private Hotel hotel;
+    private String hotelId;
     @DocumentReference(lazy = true)
     private List<Room> rooms;
     private Double totalPrice;
@@ -30,21 +29,7 @@ public class Booking {
     private Integer children;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
+    private PaymentDetails paymentDetails;
     @Field(targetType = FieldType.STRING)
     private BookingStatus bookingStatus;
-
-    public Booking(String fullName, String email, String phoneNumber, Hotel hotel,
-                   List<Room> rooms, Double totalPrice, Integer adults, Integer children,
-                   LocalDate checkInDate, LocalDate checkOutDate) {
-        this.fullName = fullName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.hotel = hotel;
-        this.rooms = rooms;
-        this.totalPrice = totalPrice;
-        this.adults = adults;
-        this.children = children;
-        this.checkInDate = checkInDate;
-        this.checkOutDate = checkOutDate;
-    }
 }

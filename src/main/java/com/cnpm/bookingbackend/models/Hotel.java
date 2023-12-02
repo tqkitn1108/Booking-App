@@ -36,13 +36,6 @@ public class Hotel {
     private List<Review> reviews;
     @DocumentReference(lazy = true)
     private List<Booking> bookings;
-    private Integer minPrice;
-    private Integer maxPrice;
-
-    public void updatePrice(Integer pricePerNight) {
-        minPrice = pricePerNight < minPrice ? pricePerNight : minPrice;
-        maxPrice = pricePerNight > maxPrice ? pricePerNight : maxPrice;
-    }
 
     public void updateRating(Integer reviewRating) {
         int numberOfReviews = reviews.size();

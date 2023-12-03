@@ -1,3 +1,19 @@
+f {
+  text-align: left; 
+}
+.HotelRoom > h3{
+  color:#212529;
+font-family:system-ui;
+font-size:28px;
+font-weight:500;
+line-height:33.6px;
+margin:0px 0px 8px;
+position: initial;
+}
+.review{
+  font-size: 24px;
+  color: rgba(0, 0, 100, 0.613);
+}
 .hotelContainer {
     display: flex;
     flex-direction: column;
@@ -7,7 +23,7 @@
   
   .hotelWrapper {
     width: 100%;
-    max-width: 1024px;
+    max-width: 1100px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -157,3 +173,7 @@
     color: lightgray;
     cursor: pointer;
   }
+
+
+
+  

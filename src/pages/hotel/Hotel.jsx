@@ -9,8 +9,9 @@ import {
   faCircleXmark,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-import Table from "./Table"
 import { useState } from "react";
+import Table from "./Table";
+import CardReview from "./Card";
 const Hotel = () => {
 
   const [slideNumber, setSlideNumber] = useState(0);
@@ -56,36 +57,33 @@ const Hotel = () => {
 
     setSlideNumber(newSlideNumber)
   };
+  
 
   return (
-
-   <div>
-     
+    
+      <div>
       <div className="hotelContainer">
         {open && (
           <div className="slider">
             <FontAwesomeIcon
               icon={faCircleXmark}
               className="close"
-              onClick={() => setOpen(false)}
-            />
+              onClick={() => setOpen(false)} />
             <FontAwesomeIcon
               icon={faCircleArrowLeft}
               className="arrow"
-              onClick={() => handleMove("l")}
-            />
+              onClick={() => handleMove("l")} />
             <div className="sliderWrapper">
               <img src={photos[slideNumber].src} alt="" className="sliderImg" />
             </div>
             <FontAwesomeIcon
               icon={faCircleArrowRight}
               className="arrow"
-              onClick={() => handleMove("r")}
-            />
+              onClick={() => handleMove("r")} />
           </div>
         )}
         <div className="hotelWrapper">
-          <button className="bookNow">Reserve or Book Now!</button>
+          <button className="bookNow">Đặt ngay!</button>
           <h1 className="hotelTitle">Tower Street Apartments</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
@@ -104,8 +102,7 @@ const Hotel = () => {
                   onClick={() => handleOpen(i)}
                   src={photo.src}
                   alt=""
-                  className="hotelImg"
-                />
+                  className="hotelImg" />
               </div>
             ))}
           </div>
@@ -113,13 +110,13 @@ const Hotel = () => {
             <div className="hotelDetailsTexts">
               <h1 className="hotelTitle">Stay in the heart of City</h1>
               <p className="hotelDesc">
-              <p style={{marginBottom: 0.5 + 'em'} }>Bạn đủ điều kiện nhận giảm giá Genius tại La Passion Premium Cau Go! Để tiết kiệm tại chỗ nghỉ này, bạn chỉ cần đăng nhập.
-            Thông tin chi tiết:</p>
-            <p style={{marginLeft: 1 + 'em'} }>Giảm giá 20% cho tất cả các đêm nghỉ</p>
-            <p style={{marginLeft: 1 + 'em'}}>Áp dụng cho tất cả các loại phòng và suite</p>
-            <p style={{marginLeft: 1 + 'em'}}>Không có hạn sử dụng</p>
-            <p>Để nhận giảm giá, hãy đăng nhập vào tài khoản Genius của bạn trên trang web của chúng tôi.</p>
-            <p>Để biết thêm thông tin, vui lòng liên hệ với bộ phận đặt phòng của chúng tôi theo số 024 3945 1234.</p>
+                <p style={{ marginBottom: 0.5 + 'em' }}>Bạn đủ điều kiện nhận giảm giá Genius tại La Passion Premium Cau Go! Để tiết kiệm tại chỗ nghỉ này, bạn chỉ cần đăng nhập.
+                  Thông tin chi tiết:</p>
+                <p style={{ marginLeft: 1 + 'em' }}>Giảm giá 20% cho tất cả các đêm nghỉ</p>
+                <p style={{ marginLeft: 1 + 'em' }}>Áp dụng cho tất cả các loại phòng và suite</p>
+                <p style={{ marginLeft: 1 + 'em' }}>Không có hạn sử dụng</p>
+                <p>Để nhận giảm giá, hãy đăng nhập vào tài khoản Genius của bạn trên trang web của chúng tôi.</p>
+                <p>Để biết thêm thông tin, vui lòng liên hệ với bộ phận đặt phòng của chúng tôi theo số 024 3945 1234.</p>
               </p>
             </div>
             <div className="hotelDetailsPrice">
@@ -129,17 +126,24 @@ const Hotel = () => {
               </span>
               <h1>Thông tin về bữa sáng</h1>
               <div className="hotelAddress1">
-                 <FontAwesomeIcon icon={faLocationDot} />
-              <span>Tự chọn, bữa sáng mang đi</span>
+                <FontAwesomeIcon icon={faLocationDot} />
+                <span>Tự chọn, bữa sáng mang đi</span>
               </div>
               <button>Đặt ngay</button>
             </div>
           </div>
         </div>
+        <div className="HotelRoom">
+        <h3 style={{ marginRight: 41.0 + 'em' }}>Phòng trống</h3>
+        </div>
+          <Table />
+          <div className="HotelRoom">
+        <h3 style={{ marginRight: 38.0 + 'em' }} >Đánh giá của khách</h3>
+        </div>
+          <CardReview/>
       </div>
-            <Table />
+        
     </div>
-   
   );
 };
 

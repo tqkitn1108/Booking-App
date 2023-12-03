@@ -8,12 +8,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "rooms")
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Room {
     @Id
     private String id;
@@ -22,6 +22,10 @@ public class Room {
     private List<Booking> bookings;
     @DocumentReference(lazy = true)
     private RoomType roomType;
+    public Room() {
+        unavailableDates = new ArrayList<>();
+        bookings = new ArrayList<>();
+    }
     public Boolean isAvailableBetween(LocalDate checkIn, LocalDate checkOut) {
         LocalDate date = checkIn;
         while (!date.isAfter(checkOut)) {

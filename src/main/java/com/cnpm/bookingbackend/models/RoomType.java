@@ -26,7 +26,6 @@ public class RoomType {
     private List<String> amenities;
     private String description;
     private List<String> images;
-    private Boolean prepayment;
 
     public Integer countAvailableRooms(LocalDate checkIn, LocalDate checkOut) {
         return rooms.stream().filter(room -> room.isAvailableBetween(checkIn, checkOut)).toList().size();

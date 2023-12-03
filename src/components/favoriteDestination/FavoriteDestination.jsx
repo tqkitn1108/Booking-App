@@ -81,7 +81,7 @@ function FavoriteDestinations() {
 
     return (
         <div className="favorite-destinations">
-            <h2 className="d-index__header-section">Địa điểm yêu thích</h2>
+            {/* <h2 className="d-index__header-section">Địa điểm yêu thích</h2> */}
             <Tabs activeKey={activeTab} onSelect={handleTabSelect} id="favorite-destinations-tabs">
                 <Tab eventKey="regions" title={<div className={`tab ${activeTab === 'regions' ? 'active' : ''}`}>
                     <span className="tab-indicator"></span>

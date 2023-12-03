@@ -5,7 +5,6 @@
     justify-content: space-between;
     gap: 20px;
     position: relative;
-    /* z-index: 1; */
 }
 .ptype-item {
     overflow: hidden;

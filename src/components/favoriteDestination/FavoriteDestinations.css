@@ -3,17 +3,17 @@
 .favorite-destinations {
     background-color: #fff;
     width: 100%;
-    max-width: 1200px;
+    /* max-width: 1200px; */
     font-size: 12px;
-    margin: 50px auto;
-    padding: 20px;
+    /* margin: 50px auto;
+    padding: 20px; */
 }
 
-.d-index__header-section {
+/* .d-index__header-section {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
-}
+} */
 
 .tab {
     display: inline-block;

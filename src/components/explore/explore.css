@@ -1,7 +1,6 @@
 .explore {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 100%;
-    max-width: 1024px;
     display: flex;
     justify-content: space-between;
     position: relative;

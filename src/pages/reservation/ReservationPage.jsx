@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWifi, faShuttleVan, faParking, faCheckCircle, faLock, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import cvcCodeImage from './cvccode-img.png';
 import { Link } from 'react-router-dom';
-import Check1 from './Navbar';
 const Details = () => {
     return (
         <div className="hotel-detail-border" >

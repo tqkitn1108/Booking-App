@@ -17,7 +17,7 @@
 
 .header-container {
     width: 100%;
-    max-width: 1024px;
+    max-width: 1100px;
     margin: 20px 0px 100px 0px;
 }
 
@@ -79,7 +79,7 @@
     position: absolute;
     bottom: -29px;
     width: 100%;
-    max-width: 1024px;
+    max-width: 1100px;
     gap: 2px;
 }
 .header-icon {
@@ -108,7 +108,7 @@
     display: flex;
     align-items: center;
     /* gap: 10px; */
-    font-size: 15px;
+    font-size: 14px;
     line-height: 20px;
     margin-top: 5px;
     justify-content: space-between;
@@ -116,8 +116,9 @@
 .header-search-input {
     border: none;
     outline: none;
-    width: 230px;
-    font-size: 18px;
+    width: 268px;
+    font-size: 14px;
+    font-weight: 600;
     height: 24px;
 }
 
@@ -132,17 +133,17 @@
 .date {
     position: absolute;
     top: 58px;
-    left: 306px;
+    left: 335px;
     z-index: 2;
 }
 
 .options {
     font-weight: 600;
     padding: 20px;
-    width: 340px;
+    width: 334px;
     position: absolute;
     top: 58px;
-    left: 612px;
+    left: 667px;
     background-color: white;
     color: black;
     border-radius: 5px;
@@ -275,4 +276,10 @@
 .header-option-text {
     padding: 3px 0 0;
     cursor: pointer;
+}
+input::placeholder {
+    color: black;
+}
+input:focus::placeholder {
+    color: #747373;
 }

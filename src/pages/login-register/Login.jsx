@@ -39,6 +39,11 @@ function Login() {
     },
   };
 
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+  });
+
   return (
     <MDBContainer fluid>
 

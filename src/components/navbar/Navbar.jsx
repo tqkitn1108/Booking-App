@@ -1,9 +1,12 @@
-import "./navbar.css"; 
+import "./navbar.css";
 import {
     faCircleQuestion,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
+
 const Navbar = () => {
+    const navigate = useNavigate();
     return (
         <div className="home-navbar">
             <div className="home-nav-container">
@@ -15,8 +18,8 @@ const Navbar = () => {
                         <FontAwesomeIcon icon={faCircleQuestion} />
                     </div>
                     <div className="nav-icon">Đăng chỗ nghỉ của quý vị</div>
-                    <button className="nav-button">Đăng ký</button>
-                    <button className="nav-button">Đăng nhập</button>
+                    <button className="nav-button" onClick={() => navigate("/signup")}>Đăng ký</button>
+                    <button className="nav-button" onClick={() => navigate("/login")}>Đăng nhập</button>
                 </div>
             </div>
         </div>

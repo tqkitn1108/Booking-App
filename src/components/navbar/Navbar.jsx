@@ -13,12 +13,12 @@ const getInitials = (name) => {
     return firstWord ? firstWord[0].toUpperCase() : '';
 };
 const getRandomColor = () => {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+    // Mảng chứa 10 màu cố định
+    const predefinedColors = ["#b16e4b", "#f24444", "#f39c12", "#1abc9c", "#f35ea3"];
+    
+    // Lựa chọn một màu ngẫu nhiên từ mảng
+    const randomColorIndex = Math.floor(Math.random() * predefinedColors.length);
+    return predefinedColors[randomColorIndex];
 };
 const Navbar = () => {
     const userName = "Thùy Đinh";

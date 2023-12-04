@@ -88,6 +88,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 25px;
+    text-shadow: 1px 1px black;
 }
 .nav-user-account {
     font-weight: 600;

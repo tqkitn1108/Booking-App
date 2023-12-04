@@ -239,9 +239,11 @@
     background-color: white;
     box-shadow: 0 2px 16px 0 rgba(26,26,26,0.24);
     border-radius: 10px;
-    top: -2px;
-    left: -156px;
-    max-height: min((100vh - 96px) - 60px, 734px);
+    top: -6px;
+    left: -168px;
+    /* max-height: min((100vh - 96px) - 60px, 297px); */
+    max-height: 297px;
+    overflow: hidden;
 }
 .search-result-text {
     color: black;
@@ -267,15 +269,18 @@
 }
 .search-result-icon {
     height: 26px;
-    width: 20px;
+    width: 24px;
 }
 .search-result-title {
-    font-weight: 600;
-    font-size: 16px;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
 }
 .header-option-text {
     padding: 3px 0 0;
     cursor: pointer;
+    width: 270px;
 }
 input::placeholder {
     color: black;

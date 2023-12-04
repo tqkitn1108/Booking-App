@@ -4,8 +4,11 @@ import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .matches(/^[a-zA-Z\s]*$/, 'Name must contain only letters')
-      .required('Name is required'),
+        .matches(/^[a-zA-Z\sÀ-ỹ]*$/, 'Name must contain only letters')
+        .required('Name must contain only letters'),
+    // name: Yup.string()
+    //   .matches(/^[a-zA-Z\s]*$/, 'Name must contain only letters')
+    //   .required('Name must contain only letters'),
     email: Yup.string().email('Invalid email address').required('Email is required'),
     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
     confirmPassword: Yup.string()
@@ -50,6 +53,8 @@ const Signup = () => {
     };
 
     return (
+        <div> 
+            <div className="bg-light " style={{ height: '20px' }}></div>
         <Formik
             initialValues={{
                 name: '',
@@ -192,6 +197,7 @@ const Signup = () => {
                 </section >
             </div >
         </Formik >
+        </div>
     );
 }
 

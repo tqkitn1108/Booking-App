@@ -258,8 +258,8 @@ const SecurePage = () => {
 
 
 const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required('First name is required').matches(/^[a-zA-Z]+$/, 'First name should only contain letters'),
-    lastName: Yup.string().required('Last name is required').matches(/^[a-zA-Z]+$/, 'Last name should only contain letters'),
+    firstName: Yup.string().required('First name is required').matches(/^[a-zA-Z\sÀ-ỹ]*$/, 'First name should only contain letters'),
+    lastName: Yup.string().required('Last name is required').matches(/^[a-zA-Z\sÀ-ỹ]*$/, 'Last name should only contain letters'),
     email: Yup.string().required('Email is required').email('Invalid email address'),
     country: Yup.string().required('Country is required'),
     telephone: Yup.string().required('Telephone is required').matches(/^\d+$/, 'Invalid phone number'),

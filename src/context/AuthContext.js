@@ -1,55 +1,42 @@
-import { createContext, useContext, useState } from "react";
-import { executeJwtAuthentication } from "../api/ApiFunctions";
 import api from "../api/AxiosConfig";
+import React, { createContext, useState, useContext } from "react"
 
-// Create a context
-export const AuthContext = createContext();
+export const AuthContext = createContext({
+  user: JSON.parse(localStorage.getItem("user")) || null,
+  handleLogin: (token) => { },
+  handleLogout: () => { }
+})
 
 export const useAuth = () => useContext(AuthContext);
 
 // Shared the created context with other components
 function AuthProvider({ children }) {
-  // Put some state in the context
-  const [isAuthenticated, setAuthentication] = useState(false);
-  const [username, setUsername] = useState(null);
-  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
 
-  async function login(username, password) {
-    try {
-      const response = await executeJwtAuthentication(username, password);
-
-      if (response.status === 200) {
-        const token = 'Bearer ' + response.data.token;
-        setAuthentication(true);
-        setUsername(username);
-        setToken(token);
-
-        // Adding the authorization header automatically
-        api.interceptors.request.use(
-          (config) => {
-            config.headers.Authorization = token;
-            return config;
-          }
-        )
-        return true;
-      } else {
-        logout();
-        return false;
-      }
-    } catch (error) {
-      logout();
-      return false;
-    }
+  function handleLogin(token, user) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
   }
 
-  function logout() {
-    setAuthentication(false);
-    setToken(null);
-    setUsername(null);
+  function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+  }
+
+  function addAuthorizationHeader() {
+    // Adding the authorization header automatically
+    api.interceptors.request.use(
+      (config) => {
+        config.headers.Authorization = 'Bearer ' + localStorage.getItem("token");
+        return config;
+      }
+    )
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, username, token }}>
+    <AuthContext.Provider value={{ user, handleLogin, handleLogout, addAuthorizationHeader }}>
       {children}
     </AuthContext.Provider>
   )

@@ -1,17 +1,8 @@
 import api, { getHeader } from "../api/AxiosConfig";
 
 /* This function register a new user */
-export async function registerUser(registration) {
-  try {
-    const response = await api.post("/auth/signup", registration);
-    return response.data;
-  } catch (error) {
-    if (error.response?.data) {
-      throw new Error(error.response.data)
-    } else {
-      throw new Error(`User registration error : ${error.message}`)
-    }
-  }
+export function registerUser(registration) {
+  return api.post("/auth/signup", registration);
 }
 
 /* This function login a registered user */
@@ -32,11 +23,9 @@ export async function loginUser(credentials) {
 /*  This is function to get the user profile */
 export async function getUserProfile() {
   try {
-    const response = await api.get('/users/me', {
-      headers: getHeader()
-    })
+    const response = await api.get('/users/me')
     return response.data;
   } catch (error) {
-    throw error
+    throw new Error(`${error.message}`)
   }
 }

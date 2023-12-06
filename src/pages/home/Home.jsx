@@ -8,8 +8,16 @@ import FeaturedHome from "../../components/featuredHome/FeaturedHome";
 import FavoriteDestination from "../../components/favoriteDestination/FavoriteDestination";
 import Email from "../../components/email/Email";
 import Footer from "../../components/footer/Footer";
+import { useAuth } from '../../context/AuthContext';
 import "./home.css"
+import { useEffect } from "react";
 const Home = () => {
+
+    const authContext = useAuth();
+    useEffect(() => {
+        authContext.addAuthorizationHeader();
+    }, []);
+
     return (
         <div>
             <Navbar />

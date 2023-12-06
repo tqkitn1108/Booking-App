@@ -1,42 +1,37 @@
+import { loginUser } from "../api/ApiAuthService";
 import api from "../api/AxiosConfig";
-import React, { createContext, useState, useContext } from "react"
+import React, { createContext, useState, useContext, useEffect } from "react"
 
-export const AuthContext = createContext({
-  user: JSON.parse(localStorage.getItem("user")) || null,
-  handleLogin: (token) => { },
-  handleLogout: () => { }
-})
+export const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 // Shared the created context with other components
 function AuthProvider({ children }) {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
 
-  function handleLogin(token, user) {
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(user));
-    setUser(user);
+  async function handleLogin(credentials) {
+    try {
+      const response = await loginUser(credentials);
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.userInfo));
+      // Adding the authorization header automatically
+      setUser(user);
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 
   function handleLogout() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
-  }
-
-  function addAuthorizationHeader() {
-    // Adding the authorization header automatically
-    api.interceptors.request.use(
-      (config) => {
-        config.headers.Authorization = 'Bearer ' + localStorage.getItem("token");
-        return config;
-      }
-    )
+    window.location.reload();
   }
 
   return (
-    <AuthContext.Provider value={{ user, handleLogin, handleLogout, addAuthorizationHeader }}>
+    <AuthContext.Provider value={{ user, handleLogin, handleLogout }}>
       {children}
     </AuthContext.Provider>
   )

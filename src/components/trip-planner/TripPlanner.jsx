@@ -23,7 +23,7 @@ const TripPlanner = () => {
     };
     return (
         <div className="trip-planner">
-                <div className="choices">
+                <div className="trip-planner-choices">
                     <CustomTab 
                         label={<div>
                             <FontAwesomeIcon icon={faUmbrellaBeach} />

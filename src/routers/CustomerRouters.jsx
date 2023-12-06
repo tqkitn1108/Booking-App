@@ -6,6 +6,7 @@ import Hotel from "../pages/hotel/Hotel";
 import ReservationPage from "../pages/reservation/ReservationPage";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Test from "../pages/list/Test";
+import Bookings from "../components/bookings/Bookings";
 import { useAuth } from "../context/AuthContext";
 import AuthProvider from "../context/AuthContext";
 
@@ -26,6 +27,7 @@ function CustomerRouters() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/hotels" element={<List />} />
+            <Route path="/bookings/:userId" element={<Bookings />} />
             <Route path="/hotels/:hotelId" element={<Hotel />} />
             <Route path="/reservation" element={<ReservationPage />} />
             <Route path="/login" element={<Login />} />

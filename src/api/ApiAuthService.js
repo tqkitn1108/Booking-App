@@ -6,18 +6,8 @@ export function registerUser(registration) {
 }
 
 /* This function login a registered user */
-export async function loginUser(credentials) {
-  try {
-    const response = await api.post("/auth/login", credentials);
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      return null;
-    }
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+export function loginUser(credentials) {
+  return api.post("/auth/login", credentials);
 }
 
 /*  This is function to get the user profile */

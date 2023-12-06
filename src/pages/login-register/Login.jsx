@@ -17,7 +17,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup'; // Import Yup for validation
-import { loginUser } from '../../api/ApiAuthService';
 import { useAuth } from '../../context/AuthContext';
 import LoadingSpinner from '../../components/loading-spinner/LoadingSpinner';
 
@@ -64,12 +63,8 @@ function Login() {
 
   async function handleSubmit(values) {
     setLoading(true);
-    const response = await loginUser(values);
-    if (response) {
+    if (await authContext.handleLogin(values)) {
       setErrorMessage("");
-      const token = response.token;
-      const user = response.user;
-      authContext.handleLogin(token, user);
       navigate(redirectUrl, { replace: true })
     } else {
       setErrorMessage("Invalid username or password. Please try again.");

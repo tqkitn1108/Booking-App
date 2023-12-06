@@ -14,9 +14,9 @@ import { useEffect } from "react";
 const Home = () => {
 
     const authContext = useAuth();
-    useEffect(() => {
-        authContext.addAuthorizationHeader();
-    }, []);
+    // useEffect(() => {
+    //     authContext.addAuthorizationHeader();
+    // }, []);
 
     return (
         <div>

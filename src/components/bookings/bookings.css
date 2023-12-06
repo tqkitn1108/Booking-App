@@ -1,0 +1,72 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+.bks-fnw {
+    font-weight: 700;
+}
+.bookings {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0ffff87;
+}
+.bookings-container {
+    width: 100%;
+    max-width: 1100px;
+}
+.bookings-titles {
+    margin: 30px 0 ;
+}
+.bookings-ttl-text {
+    font-size: 22px;
+    font-weight: 600;
+}
+.bookings-ttl-des {
+    font-size: 10px;
+}
+.bookings-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.bookings-item {
+    width: calc((1100px - 50px) / 3);
+    border: 1px solid white;
+    padding: 12px;
+    margin-bottom: 25px;
+    background-color: white;
+    box-shadow: 2px 2px 10px 0px #1b2025c2;
+    font-size: 14px;
+}
+.bks-item-type {
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+.bks-item-price {
+    margin-bottom: 15px;
+}
+.bks-item-cntn {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.bks-item-status {
+    color: white;
+    background-color: #017840;
+    padding: 3px 8px;
+    border: 1px solid #017840;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+.btn-bottom {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin-right: 10px;
+    padding: 3px 8px;
+}

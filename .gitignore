@@ -1,8 +1,8 @@
 HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+#target/
+#!.mvn/wrapper/maven-wrapper.jar
+#!**/src/main/**/target/
+#!**/src/test/**/target/
 
 ### STS ###
 .apt_generated
@@ -37,3 +37,4 @@ build/
 
 ### firebase JSON file
 src/main/resources/booking-project-eea45-firebase-adminsdk-9lvr1-3f91af4204.json
+target/classes/booking-project-eea45-firebase-adminsdk-9lvr1-3f91af4204.json

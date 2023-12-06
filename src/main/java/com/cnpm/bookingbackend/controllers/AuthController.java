@@ -1,6 +1,7 @@
 package com.cnpm.bookingbackend.controllers;
 
 import com.cnpm.bookingbackend.dtos.response.LoginResponse;
+import com.cnpm.bookingbackend.dtos.response.UserInfoResponse;
 import com.cnpm.bookingbackend.event.RegistrationCompleteEvent;
 import com.cnpm.bookingbackend.models.User;
 import com.cnpm.bookingbackend.dtos.request.LoginUserDto;
@@ -28,15 +29,6 @@ public class AuthController {
         this.publisher = publisher;
     }
 
-//    @PostMapping("/signup")
-//    public ResponseEntity<User> register(@RequestBody @Valid RegisterUserDto registerUserDto) throws Exception {
-//        User registeredUser = authenticationService.signup(registerUserDto);
-//        String subject = "Confirm your account";
-//        String body = "Your account has been created on our platform";
-//        emailService.sendEmail(registerUserDto.getEmail(), subject, body);
-//        return ResponseEntity.ok(registeredUser);
-//    }
-
     @PostMapping("/signup")
     public ResponseEntity<String> register(@RequestBody @Valid RegisterUserDto registerUserDto,
                                            final HttpServletRequest request) throws Exception {
@@ -56,11 +48,13 @@ public class AuthController {
 
         String jwtToken = jwtService.generateToken(authenticatedUser);
 
-        LoginResponse loginResponse = new LoginResponse(jwtToken, jwtService.getExpirationTime());
+        UserInfoResponse userInfoResponse = new UserInfoResponse(authenticatedUser);
+        LoginResponse loginResponse = new LoginResponse(jwtToken, jwtService.getExpirationTime(), userInfoResponse);
         return ResponseEntity.ok(loginResponse);
     }
 
     private String applicationUrl(HttpServletRequest request) {
-        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+        String protocol = request.getServerName().equals("localhost") ? "http://" : "https://";
+        return protocol + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
     }
 }

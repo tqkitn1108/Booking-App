@@ -3,6 +3,7 @@ package com.cnpm.bookingbackend.security;
 import com.cnpm.bookingbackend.security.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,6 +37,7 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Permit Preflight Request
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
@@ -44,21 +46,21 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        var config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost:3000"));
-//        config.setAllowedMethods(List.of("GET","POST","PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"));
-//        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
-        config.setAllowedMethods(Collections.singletonList("*"));
-        config.setAllowedHeaders(Collections.singletonList("*"));
-        config.setMaxAge(3600L);
-//        config.setAllowCredentials(true);
-//        config.setAllowedHeaders(Arrays.asList("Authorization", "Requestor-Type"));
-//        config.setExposedHeaders(Arrays.asList("X-Get-Header"));
-
-        var source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        var config = new CorsConfiguration();
+//        config.setAllowedOrigins(List.of("http://localhost:8080", "http://localhost:3000"));
+////        config.setAllowedMethods(List.of("GET","POST","PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"));
+////        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+//        config.setAllowedMethods(Collections.singletonList("*"));
+//        config.setAllowedHeaders(Collections.singletonList("*"));
+//        config.setMaxAge(3600L);
+////        config.setAllowCredentials(true);
+////        config.setAllowedHeaders(Arrays.asList("Authorization", "Requestor-Type"));
+////        config.setExposedHeaders(Arrays.asList("X-Get-Header"));
+//
+//        var source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", config);
+//        return source;
+//    }
 }

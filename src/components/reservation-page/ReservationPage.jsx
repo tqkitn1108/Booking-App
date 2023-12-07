@@ -97,6 +97,7 @@ const SecurePage = () => {
 
     const formik = useFormikContext();
 
+    
     const onSubmit = (values) => {
         // Create an object with the form values
         const formData = {
@@ -245,6 +246,11 @@ const SecurePage = () => {
                                             />
                                             <ErrorMessage name="expirationDate" component="span" className='form-message' style={{ color: 'red' }} />
                                         </div>
+                                        <div className="submit-button mt-3">
+                                            <button type="submit" className="btn btn-primary">
+                                                Submit
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </Form>
@@ -255,8 +261,6 @@ const SecurePage = () => {
         </div>
     );
 };
-
-
 const validationSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required').matches(/^[a-zA-Z\sÀ-ỹ]*$/, 'First name should only contain letters'),
     lastName: Yup.string().required('Last name is required').matches(/^[a-zA-Z\sÀ-ỹ]*$/, 'Last name should only contain letters'),
@@ -296,7 +300,7 @@ const R_page = () => {
                             <h3 className='text-right'> Enter your details </h3>
                             <div className='mb-3'>
                                 <div className='name form-group d-flex w-100 mb-3 '>
-                                    <div className='m-right' style={{ width: '350px' }}>
+                                    <div className='m-right' style={{ width: '342px' }}>
                                         <label htmlFor='firstName' className='mb-1 ' style = {{ fontWeight: 'bold' }}>
                                             First Name <span className="required text-danger">*</span>
                                         </label>
@@ -310,7 +314,7 @@ const R_page = () => {
                                         <ErrorMessage name='firstName' component='span' className='form-message' style={{ color: 'red' }} />
                                     </div>
 
-                                    <div className='m-left' style={{ marginLeft: '2rem', width: '315px' }}>
+                                    <div className='m-left' style={{ marginLeft: '2rem', width: '312px' }}>
                                         <label htmlFor='lastName' className='mb-1' style = {{ fontWeight: 'bold' }} >
                                             Last Name <span className="required text-danger">*</span>
                                         </label>
@@ -394,7 +398,38 @@ const R_page = () => {
         </div>
     );
 };
-
+// const CompleteBooking = () => {
+//     const formik = useFormikContext();
+  
+//     const handleCompleteBooking = () => {
+//         console.log('Formik:', formik); // In ra thông tin formik để kiểm tra xem có giá trị hay không
+//         if (formik && formik.values) {
+//           console.log('Form values:', formik.values); // In ra giá trị của formik để kiểm tra xem có giá trị hay không
+//           const bookingInfo = {
+//             Fullname: `${formik.values.firstName} ${formik.values.lastName}`,
+//             email: formik.values.email,
+//             telephone: formik.values.telephone,
+//             "Cardholder's name": formik.values.cardName,
+//             "Card type": formik.values.cardType,
+//             "Card Number": formik.values.cardNumber,
+//             "CVC Code": formik.values.cvcCode,
+//             "Expiration Date": formik.values.expirationDate,
+//           };
+      
+//           console.log('Booking Information:', bookingInfo);
+//         } else {
+//           console.log('formik or formik.values is undefined');
+//         }
+//       };
+  
+//     return (
+//       <div className="Complete ">
+//         <button className="btn btn-primary" onClick={handleCompleteBooking}>
+//           <i className="fas fa-lock"></i> Complete booking
+//         </button>
+//       </div>
+//     );
+//   };
 const CompleteBooking = () => {
     const formik = useFormikContext();
   
@@ -427,17 +462,21 @@ const CompleteBooking = () => {
       </div>
     );
   };
+  
 const ReservationPage = () => {
+    const handleLogFormValues = (formik) => {
+        console.log('Form values from SecurePage:', formik.values);
+      };
     return (
       <div>
         <div className="content-container align-items-center">
-          <div className="reservation-container">
-          <div>
-                     <HotelInformation />                      
-                        <Details />
-                       <PriceSummary />
-                       <PaymentSchedule />
-                    </div>
+          <div className="reservation-container" >
+            <div>
+              <HotelInformation />
+              <Details />
+              <PriceSummary />
+              <PaymentSchedule />
+            </div>
             <Formik
               initialValues={{
                 firstName: '',
@@ -457,11 +496,10 @@ const ReservationPage = () => {
               }}
             >
               {formik => (
-                
                 <div>
                   <R_page />
                   <SecurePage />
-                  <CompleteBooking />
+                   <CompleteBooking /> 
                   <div style={{ height: '200px' }}></div>
                 </div>
               )}
@@ -471,8 +509,53 @@ const ReservationPage = () => {
       </div>
     );
   };
-
 export default ReservationPage;
+
+
+// const ReservationPage = () => {
+//     return (
+//       <div>
+//         <div className="content-container align-items-center">
+//           <div className="reservation-container">
+//           <div>
+//                      <HotelInformation />                      
+//                         <Details />
+//                        <PriceSummary />
+//                        <PaymentSchedule />
+//                     </div>
+//             <Formik
+//               initialValues={{
+//                 firstName: '',
+//                 lastName: '',
+//                 email: '',
+//                 country: '',
+//                 telephone: '',
+//                 cardName: '',
+//                 cardType: '',
+//                 cardNumber: '',
+//                 cvcCode: '',
+//                 expirationDate: '',
+//               }}
+//               validationSchema={validationSchema}
+//               onSubmit={(values) => {
+//                 console.log('Form values submitted:', values);
+//               }}
+//             >
+//               {formik => (
+                
+//                 <div>
+//                   <R_page />
+//                   <SecurePage />
+//                   <CompleteBooking />
+//                   <div style={{ height: '200px' }}></div>
+//                 </div>
+//               )}
+//             </Formik>
+//           </div>
+//         </div>
+//       </div>
+//     );
+//   };
 // const ReservationPage = () => {
 //     return (
 //         <div>

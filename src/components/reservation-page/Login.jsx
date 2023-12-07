@@ -16,6 +16,8 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 import * as Yup from 'yup'; // Import Yup for validation
 
 const validationSchema = Yup.object().shape({
@@ -25,6 +27,7 @@ const validationSchema = Yup.object().shape({
 
 
 function Login() {
+  const [showPassword, setShowPassword] = useState(false);
   const customStyle = {
     input: {
       fontSize: '1rem',
@@ -56,14 +59,24 @@ function Login() {
   //   console.log('Form values:', values);
   //   resetForm();
   // };
-  const handleSubmit = (values, { resetForm }) => {
-    const formData = {
-      Email: values.enterEmail,
-      Password: values.enterPassword,
-    };
-    console.log('Form values:', formData);
-    resetForm();
-  }
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      // Validate the form using Yup schema
+      await validationSchema.validate(values, { abortEarly: false });
+
+      // If validation passes, proceed with form submission
+      const formData = {
+        Email: values.enterEmail,
+        Password: values.enterPassword,
+      };
+
+      console.log('Form values:', formData);
+      resetForm();
+    } catch (error) {
+      // If validation fails, handle the error (e.g., display error messages)
+      console.error('Form validation error:', error);
+    }
+  };
   return (
     <Formik
       initialValues={{
@@ -73,6 +86,7 @@ function Login() {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
+      {({ isValid }) => (
       <Form>
         <MDBContainer fluid>
           <MDBRow className='d-flex justify-content-center align-items-center h-100'>
@@ -99,15 +113,24 @@ function Login() {
                     <label className="mb-1" htmlFor='enterPassword'>
                       Password <span className="required text-danger">*</span>{' '}
                     </label>
-                    <Field
-                      wrapperClass='mb-4 w-100'
-                      id='enterPassword'
-                      type='password'
-                      name='enterPassword'
-                      size="lg"
-                      className='form-control rounded border-1'
-                      style={customInputStyle}
-                    />
+                    <div className='position-relative'>
+                      <Field
+                        wrapperClass='mb-4 w-100' // Loại bỏ pr-5 từ đây
+                        id='enterPassword'
+                        type={showPassword ? 'text' : 'password'}
+                        name='enterPassword'
+                        size="lg"
+                        className='form-control rounded border-1'
+                        style={customInputStyle}
+                      />
+                      <span
+                        className='position-absolute end-0 top-50 translate-middle-y cursor-pointer'
+                        style={{ paddingRight: '15px' }} // Thêm lề phải trực tiếp ở đây
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+                      </span>
+                    </div>
                     <ErrorMessage name='enterPassword' component='div' className='form-message text-danger' />
                   </div>
                   <MDBCheckbox
@@ -118,9 +141,10 @@ function Login() {
                   />
                   <div className="d-flex justify-content-center">
                     <button
-                      type="submit" // Đổi từ "button" sang "submit"
+                      type="submit"
                       className="btn btn-primary btn-block btn-lg gradient-custom-4 w-100 text-white"
                       style={customStyle.button}
+                      disabled={!isValid}  // Disable the button when the form is not valid
                     >
                       Login
                     </button>
@@ -161,7 +185,7 @@ function Login() {
           </MDBRow>
 
         </MDBContainer>
-      </ Form>
+      </ Form>)}
     </ Formik>
   );
 }

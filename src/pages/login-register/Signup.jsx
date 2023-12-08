@@ -2,22 +2,31 @@ import React from 'react';
 import { Formik, Field, Form, ErrorMessage, useFormik } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { registerUser } from '../../api/ApiAuthService';
 import { Link, useNavigate } from 'react-router-dom';
-import LoadingSpinner  from '../../components/loading-spinner/LoadingSpinner';
+import LoadingSpinner from '../../components/loading-spinner/LoadingSpinner';
 
 const validationSchema = Yup.object().shape({
     fullName: Yup.string()
-        //   .matches(/^[a-zA-Z\s]*$/, 'Name must contain only letters')
+        .matches(/^[a-zA-Z\sÀ-ỹ]+$/, 'Name must contain only letters and spaces')
+        .matches(/^(?!.*\s{2})/, 'Name must not contain consecutive spaces')
         .required('Name is required'),
     email: Yup.string().email('Invalid email address').required('Email is required'),
-    password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
+    password: Yup.string()
+        .min(6, 'Password must be at least 6 characters')
+        .test('no-full-spaces', 'Password must not contain only spaces', value => value.trim() !== '')
+        .required('Password is required'),
     confirmPassword: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Passwords must match')
         .required('Confirm Password is required'),
     agreement: Yup.boolean().oneOf([true], 'You must agree to the Terms of Service'),
 });
 const Signup = () => {
+    const [showPassword, setShowPassword] = React.useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+
     const customStyle = {
         input: {
             fontSize: '1rem',
@@ -32,6 +41,7 @@ const Signup = () => {
         formGroup: {
             marginBottom: '1rem',
         },
+
     };
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -39,22 +49,25 @@ const Signup = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const handleSubmit = async (values) => {
-        setLoading(true);
-        try {
-            const response = await registerUser(values);
-            setSuccessMessage(response.data);
-            setErrorMessage("");
-        } catch (error) {
-            setSuccessMessage("");
-            setErrorMessage(`${error.response.data.detail}`);
+        if (formik.isValid) {
+            setLoading(true);
+            try {
+                const response = await registerUser(values);
+                setSuccessMessage(response.data);
+                setErrorMessage("");
+            } catch (error) {
+                setSuccessMessage("");
+                setErrorMessage(`${error.response.data.detail}`);
+            }
+            setLoading(false);
         }
-        setLoading(false);
     };
     const formik = useFormik({
         initialValues: {
             fullName: '',
             email: '',
             password: '',
+            confirmPassword: ''
         },
         validationSchema: validationSchema,
         onSubmit: handleSubmit,
@@ -95,7 +108,7 @@ const Signup = () => {
                                                     </div>
                                                 </>}
                                             {!successMessage && <form onSubmit={formik.handleSubmit}>
-                                                <div className="form-outline mb-3" style={customStyle.formGroup}>
+                                                <div className="form-outline mb-4" style={customStyle.formGroup}>
                                                     <label className="form-label" htmlFor="fullName" style={{ ...customStyle.label, fontWeight: 'bold' }}>
                                                         Full Name <span className="required text-danger">*</span>
                                                     </label>
@@ -115,7 +128,7 @@ const Signup = () => {
                                                 </div>
 
                                                 {/* Your Email Input */}
-                                                <div className="form-outline mb-3" style={{ ...customStyle.label, fontWeight: 'bold' }}>
+                                                <div className="form-outline mb-4" style={{ ...customStyle.label, fontWeight: 'bold' }}>
                                                     <label className="form-label" htmlFor="email" style={customStyle.label}>
                                                         Your Email <span className="required text-danger">*</span>
                                                     </label>
@@ -123,7 +136,7 @@ const Signup = () => {
                                                         type="email"
                                                         id="email"
                                                         name="email"
-                                                        className={`form-control form-control-lg ${formik.touched.email && formik.errors.email ? 'is-invalid' : ''}`}
+                                                        className={`form-control  ${formik.touched.email && formik.errors.email ? 'is-invalid' : ''}`}
                                                         onChange={formik.handleChange}
                                                         onBlur={formik.handleBlur}
                                                         value={formik.values.email}
@@ -135,12 +148,12 @@ const Signup = () => {
                                                 </div>
 
                                                 {/* Your Password Input */}
-                                                <div className="form-outline mb-3" style={{ ...customStyle.label, fontWeight: 'bold' }}>
+                                                <div className="form-outline mb-4" style={{ ...customStyle.label, fontWeight: 'bold', position: 'relative' }}>
                                                     <label className="form-label" htmlFor="password" style={customStyle.label}>
                                                         Password <span className="required text-danger">*</span>
                                                     </label>
                                                     <input
-                                                        type="password"
+                                                        type={showPassword ? 'text' : 'password'}  // Toggle between 'text' and 'password' based on showPassword state
                                                         id="password"
                                                         name="password"
                                                         className={`form-control form-control-lg ${formik.touched.password && formik.errors.password ? 'is-invalid' : ''}`}
@@ -149,20 +162,32 @@ const Signup = () => {
                                                         value={formik.values.password}
                                                         style={customStyle.input}
                                                     />
+                                                    <div className=''>
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-light"
+                                                            onClick={() => setShowPassword(!showPassword)}
+                                                            style={{ position: 'absolute', right: '-2px', transform: 'translateY(-110%)', border: 'none', background: 'transparent', }}
+                                                        >
+                                                            <box className='lmao'> </box>
+                                                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye}
+                                                                className='eye ' />
+                                                        </button>
+                                                    </div>
+
                                                     {formik.touched.password && formik.errors.password && (
                                                         <div className="invalid-feedback">{formik.errors.password}</div>
                                                     )}
                                                 </div>
 
-
                                                 {/* Your Password Input */}
                                                 {/* Repeat Password Input */}
-                                                <div className="form-outline mb-3" style={{ ...customStyle.label, fontWeight: 'bold' }}>
+                                                <div className="form-outline mb-4" style={{ ...customStyle.label, fontWeight: 'bold', position: 'relative' }}>
                                                     <label className="form-label" htmlFor="confirmPassword" style={customStyle.label}>
                                                         Repeat Password <span className="required text-danger">*</span>
                                                     </label>
                                                     <input
-                                                        type="password"  // Set the type attribute to "password"
+                                                        type={showConfirmPassword ? 'text' : 'password'}  // Toggle between 'text' and 'password' based on showConfirmPassword state
                                                         id="confirmPassword"
                                                         name="confirmPassword"
                                                         className={`form-control form-control-lg ${formik.touched.confirmPassword && formik.errors.confirmPassword ? 'is-invalid' : ''}`}
@@ -171,6 +196,16 @@ const Signup = () => {
                                                         value={formik.values.confirmPassword}
                                                         style={customStyle.input}
                                                     />
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-light"
+                                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                                        style={{ position: 'absolute', right: '-2px', transform: 'translateY(-110%)', border: 'none', background: 'transparent' }}
+                                                    >
+                                                        <box className='lmao'> </box>
+                                                        <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
+                                                    </button>
+
                                                     {formik.touched.confirmPassword && formik.errors.confirmPassword && (
                                                         <div className="invalid-feedback">{formik.errors.confirmPassword}</div>
                                                     )}
@@ -197,13 +232,14 @@ const Signup = () => {
                                                         type="submit"
                                                         className="btn btn-primary btn-block btn-lg gradient-custom-4 w-100 text-white"
                                                         style={customStyle.button}
+                                                        disabled={!formik.isValid} // Disable the button if the form is not valid
                                                     >
                                                         Register
                                                     </button>
                                                 </div>
                                                 <p className="text-center text-muted mt-5 mb-0">
                                                     Have already an account?{' '}
-                                                    <Link href="./Login" className="fw-bold text-body">
+                                                    <Link to="./login" className="fw-bold text-body">
                                                         <u>Login here</u>
                                                     </Link>
                                                 </p>

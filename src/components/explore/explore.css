@@ -1,11 +1,9 @@
 .explore {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 100%;
-    max-width: 1024px;
     display: flex;
     justify-content: space-between;
+    position: relative;
     gap: 18px;
-    margin: 0px 96px;
 }
 .explore-item {
     flex: 1;
@@ -14,9 +12,12 @@
 }
 .explore-img {
     border-radius: 10px;
-    width: 156px;
     height: 136px;
+    width: 100%;
     object-fit: cover;
+}
+.explore-titles {
+    font-size: 18px;
 }
 .explore-desrcibe {
     color: #474747;

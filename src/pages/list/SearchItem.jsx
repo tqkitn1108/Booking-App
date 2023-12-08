@@ -3,6 +3,19 @@ import "./searchItem.css"
 import "./searchItem.css";
 
 const SearchItem = () => {
+  // danh gia sao
+  var value = 5;
+  const renderStars = () => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <span key={i} style={{ color: i <= value ? '#FFD700' : '#C0C0C0' }}>
+          &#9733; {/* Dấu sao */}
+        </span>
+      );
+    }
+    return stars;
+  };
   return (
     <div className="searchItem">
       <img
@@ -11,8 +24,16 @@ const SearchItem = () => {
         className="siImg"
       />
       <div className="siDesc">
+        <div className="Title">
         <h1 className="siTitle">Tower Street Apartments</h1>
-        <span className="siDistance">500m from center</span>
+        <div className="star">
+          {renderStars()}
+        </div>
+        </div>
+        <div className="siDistance">
+        <a id="diachi" href="">Dia chi </a>
+        <a href="">Xem tren ban do</a>
+        </div>
         <span className="siTaxiOp">Free airport taxi</span>
         <span className="siSubtitle">
           Studio Apartment with Air conditioning

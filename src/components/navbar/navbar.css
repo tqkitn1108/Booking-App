@@ -1,34 +1,33 @@
-.navbar {
-    padding-top: 8px;
-    height: 50px;
+.home-navbar {
+    height: 66px;
     background-color: #003580;
     display: flex;
     justify-content: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.nav-container {
+.home-nav-container {
     width: 100%;
-    max-width: 1024px;
+    max-width: 1100px;
     color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.logo {
+.home-navbar .home-nav-logo {
     font-size: 26px;
     font-weight: 700;
     line-height: 20px;
     cursor: pointer;
 }
 
-.nav-items {
+.home-navbar .nav-items {
     display: flex;
     justify-content: space-around;
     gap: 8px;
 }
-.nav-icon {
+.home-navbar .nav-icon {
     background-color: #003580;
     color: white;
     padding: 8px 12px;
@@ -40,13 +39,13 @@
     line-height: 24px;
 }
 
-.nav-icon:hover {
+.home-navbar .nav-icon:hover {
     cursor: pointer;
     background-color: #0c50b0;
     border-radius: 4px;
 }
 
-.nav-button {
+.home-navbar .nav-button {
     cursor: pointer;
     align-items: center;
     background-color: #ffffff;
@@ -61,8 +60,67 @@
     margin: 8px 0px 0px 0px;
     padding: 4px 12px;
 }
-.nav-icon-img {
+.home-navbar .nav-icon-img {
     height: 10px;
     width: 10px;
     border-radius: 50%;
+}
+.nav-user-button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0px 0px 0px;
+    padding: 4px 12px;
+    font-size: 14px;
+}
+.home-navbar .nav-user-button:hover {
+    cursor: pointer;
+    background-color: #0c50b0;
+    border-radius: 4px;
+}
+.nav-user-img {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    text-shadow: 1px 1px black;
+}
+.nav-user-account {
+    font-weight: 600;
+}
+.nav-menu-logout {
+    position: absolute;
+    top: -1px;
+    left: -70px;
+    background-color: white;
+    color: black;
+    padding: 4px 0px;
+    width: 170px;
+    border-radius: 6px;
+}
+.nav-user-logout {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    padding: 10px;
+}
+.nav-user-logout:hover {
+    background-color: #80808042;
+    cursor: pointer;
+}
+.nav-user-logout .user-logout-text {
+    font-weight: 300;
+    font-size: 14px;
+}
+.user-logout-icon {
+    display: flex;
+    align-items: center;
+    width: 18px;
+    height: 18px;
 }

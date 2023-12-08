@@ -1,0 +1,61 @@
+/* favoriteDestinations.css */
+
+.favorite-destinations {
+    background-color: #fff;
+    width: 100%;
+    /* max-width: 1200px; */
+    font-size: 12px;
+    /* margin: 50px auto;
+    padding: 20px; */
+}
+
+/* .d-index__header-section {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+} */
+
+.tab {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s;
+    border-radius: 4px 4px 0 0;
+}
+
+.tab.active {
+    background-color: #fff; /* Màu nền khi tab được chọn */
+}
+
+.tab-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: #4c7caf; /* Màu thanh chỉ báo dưới tab khi được chọn */
+    transition: width 0.3s;
+}
+
+.tab.active .tab-indicator {
+    width: 100%;
+}
+
+.tab-label {
+    font-size: medium;
+    color: #333;
+}
+
+.tab:hover {
+    background-color: #f0f0f0; /* Màu nền khi di chuột qua */
+}
+
+.tab-content {
+    border: none;
+    border-top: 1px solid #ddd;
+    border-radius: 0 0 4px 4px;
+    padding: 20px;
+    background-color: #fff;
+}

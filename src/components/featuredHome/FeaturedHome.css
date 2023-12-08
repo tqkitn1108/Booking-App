@@ -1,0 +1,86 @@
+/* FeaturedHome.css */
+  
+  .fp {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    /* max-width: 1024px; */
+    margin: 0 auto; /* Để canh giữa nếu chiều rộng nhỏ hơn 1024px */
+  }
+  
+  .fpItem {
+    /* flex: 1; */
+    /* gap: 10px;
+    display: flex;
+    flex-direction: column; */
+    border: 1px solid #e0e0e0; /* Thêm viền cho từng phần tử */
+    padding-bottom: 10px; /* Thêm padding để tạo khoảng cách với viền */
+    border-radius: 8px; /* Bo tròn góc */
+    overflow: hidden; /* Tránh việc hình ảnh vượt quá phần border-radius */
+  }
+  
+  .fpImg {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+  .fpTitles {
+    padding: 0px 5px;
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    height: 156px;
+    justify-content: space-between;
+  }
+  .fpDes {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .fpName {
+    color: #333;
+    font-weight: bold;
+    font-size: 15px; /* Tăng kích thước chữ */
+    /* margin-bottom: 5px; Tạo khoảng cách giữa tên và thành phố */
+    font-weight: 700;
+    line-height: 24px;
+  }
+  
+  .fpCity {
+    font-weight: 300;
+    line-height: 18px;
+  }
+  
+  .fpPrice {
+    display: flex;
+    justify-content: flex-end;
+    font-weight: 500;
+  }
+  
+  .fpRating {
+    display: flex;
+    align-items: center; /* Canh giữa theo chiều dọc */
+    gap: 10px;
+  }
+  
+  .fpRating > button {
+    background-color: #003580;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    /* margin-right: 10px; */
+    font-weight: bold;
+    border-radius: 5px; /* Bo tròn góc */
+    cursor: pointer; /* Đổi con trỏ khi di chuột qua */
+  }
+  
+  .fpRating > span {
+    font-size: 14px;
+    color: #777; /* Màu chữ xám */
+  }
+  
+  

@@ -70,8 +70,9 @@ const HotelInformation = () => {
         <div className="hotel-information">
             <div className="hotel-info-border">
                 <h5>Hotel Name</h5>
-                <p>Address: 123 Main Street, Cityville</p>
-                <div className='d-flex'  > Rating: <div className="siRating"> 
+                <p className=''>Address: 123 Main Street, Cityville</p>
+                <div className='d-flex'  > Rating: 
+                           <div className="siRating"> 
                              <button>8.9</button>
                            </div> 
                 </div>

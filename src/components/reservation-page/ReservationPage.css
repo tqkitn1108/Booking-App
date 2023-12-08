@@ -115,3 +115,25 @@
 .tp {
   margin-top: 10px; /* Add some top margin to the total heading for separation */
 }
+.lmao{
+  background-color: rgb(250, 250, 250);
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin-right: -25px;
+  margin-top: -5px;
+}
+.siRating {
+  margin-top: -3px;
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+.siRating>button{
+  
+  background-color: #003580;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+ }

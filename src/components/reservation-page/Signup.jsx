@@ -141,14 +141,18 @@ const Signup = () => {
                                                             value={formik.values.password}
                                                             style={customStyle.input}
                                                         />
-                                                        <button
+                                                        <div className=''> 
+                                                        <button 
                                                             type="button"
                                                             className="btn btn-light"
                                                             onClick={() => setShowPassword(!showPassword)}
-                                                            style={{ position: 'absolute', right: '15px', transform: 'translateY(-110%)', border: 'none', background: 'transparent' }}
-                                                        >
-                                                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
-                                                        </button>
+                                                            style={{ position: 'absolute', right: '-2px', transform: 'translateY(-110%)', border: 'none', background: 'transparent',  }}
+                                                        >    
+                                                            <box className='lmao'> </box>
+                                                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye}
+                                                            className='eye '/>
+                                                        </button> 
+                                                        </div>
 
                                                         {formik.touched.password && formik.errors.password && (
                                                             <div className="invalid-feedback">{formik.errors.password}</div>
@@ -175,8 +179,9 @@ const Signup = () => {
                                                             type="button"
                                                             className="btn btn-light"
                                                             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                                            style={{ position: 'absolute', right: '15px', transform: 'translateY(-110%)', border: 'none', background: 'transparent' }}
+                                                            style={{ position: 'absolute', right: '-2px', transform: 'translateY(-110%)', border: 'none', background: 'transparent' }}
                                                         >
+                                                            <box className='lmao'> </box>
                                                             <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
                                                         </button>
 

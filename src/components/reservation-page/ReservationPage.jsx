@@ -71,7 +71,10 @@ const HotelInformation = () => {
             <div className="hotel-info-border">
                 <h5>Hotel Name</h5>
                 <p>Address: 123 Main Street, Cityville</p>
-                <p>Rating: 9/10</p>
+                <div className='d-flex'  > Rating: <div className="siRating"> 
+                             <button>8.9</button>
+                           </div> 
+                </div>
                 <div className="amenities">
                     <div className="wifi">
 
@@ -91,6 +94,7 @@ const HotelInformation = () => {
         </div>
     );
 };
+
 
 
 const SecurePage = () => {
@@ -262,11 +266,26 @@ const SecurePage = () => {
     );
 };
 const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required('First name is required').matches(/^[a-zA-Z\sÀ-ỹ]*$/, 'First name should only contain letters'),
-    lastName: Yup.string().required('Last name is required').matches(/^[a-zA-Z\sÀ-ỹ]*$/, 'Last name should only contain letters'),
-    email: Yup.string().required('Email is required').email('Invalid email address'),
-    country: Yup.string().required('Country is required'),
-    telephone: Yup.string().required('Telephone is required').matches(/^\d+$/, 'Invalid phone number'),
+    firstName: Yup.string()
+        .required('First name is required')
+        .matches(/^[a-zA-Z\sÀ-ỹ]*$/, 'First name should only contain letters')
+        .test('no-consecutive-spaces', 'First name must not contain consecutive spaces', value => !/\s{2}/.test(value)),
+    
+    lastName: Yup.string()
+        .required('Last name is required')
+        .matches(/^[a-zA-Z\sÀ-ỹ]*$/, 'Last name should only contain letters')
+        .test('no-consecutive-spaces', 'Last name must not contain consecutive spaces', value => !/\s{2}/.test(value)),
+
+    email: Yup.string()
+        .required('Email is required')
+        .email('Invalid email address'),
+
+    country: Yup.string()
+        .required('Country is required'),
+
+    telephone: Yup.string()
+        .required('Telephone is required')
+        .matches(/^\d+$/, 'Invalid phone number'),
 });
 
 const R_page = () => {
@@ -498,7 +517,9 @@ const ReservationPage = () => {
               {formik => (
                 <div>
                   <R_page />
+                  <GoodToKnow />
                   <SecurePage />
+                 
                    <CompleteBooking /> 
                   <div style={{ height: '200px' }}></div>
                 </div>
@@ -511,136 +532,3 @@ const ReservationPage = () => {
   };
 export default ReservationPage;
 
-
-// const ReservationPage = () => {
-//     return (
-//       <div>
-//         <div className="content-container align-items-center">
-//           <div className="reservation-container">
-//           <div>
-//                      <HotelInformation />                      
-//                         <Details />
-//                        <PriceSummary />
-//                        <PaymentSchedule />
-//                     </div>
-//             <Formik
-//               initialValues={{
-//                 firstName: '',
-//                 lastName: '',
-//                 email: '',
-//                 country: '',
-//                 telephone: '',
-//                 cardName: '',
-//                 cardType: '',
-//                 cardNumber: '',
-//                 cvcCode: '',
-//                 expirationDate: '',
-//               }}
-//               validationSchema={validationSchema}
-//               onSubmit={(values) => {
-//                 console.log('Form values submitted:', values);
-//               }}
-//             >
-//               {formik => (
-                
-//                 <div>
-//                   <R_page />
-//                   <SecurePage />
-//                   <CompleteBooking />
-//                   <div style={{ height: '200px' }}></div>
-//                 </div>
-//               )}
-//             </Formik>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   };
-// const ReservationPage = () => {
-//     return (
-//         <div>
-//             <div className="content-container align-items-center">
-//                 <div className="reservation-container ">
-//                     <div>
-//                         <HotelInformation />
-//                         <Details />
-//                         <PriceSummary />
-//                         <PaymentSchedule />
-//                     </div>
-//                     <div className=''>
-//                         <R_page />
-//                         <GoodToKnow />
-//                         <SecurePage />
-//                         <CompleteBooking />
-//                         <div style={{ height: '200px' }}></div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-
-// };
-// const CompleteBooking = () => {
-//     const formik = useFormikContext();
-
-//     const handleCompleteBooking = () => {
-//         // Check if formik context and values are available
-//         if (formik && formik.values) {
-//             // Create an object with the required information
-//             const bookingInfo = {
-//                 Fullname: `${formik.values.firstName} ${formik.values.lastName}`,
-//                 email: formik.values.email,
-//                 telephone: formik.values.telephone,
-//                 "Cardholder's name": formik.values.cardName,
-//                 "Card type": formik.values.cardType,
-//                 "Card Number": formik.values.cardNumber,
-//                 "CVC Code": formik.values.cvcCode,
-//                 "Expiration Date": formik.values.expirationDate,
-//             };
-
-//             // Log the object to the console
-//             console.log('Booking Information:', bookingInfo);
-
-//             // Handle the rest of the booking logic here
-//         }
-//     };
-
-//     return (
-//         <div className="Complete ">
-//             {/* Trigger the handleCompleteBooking function when the button is clicked */}
-//             <button className="btn btn-primary" onClick={handleCompleteBooking}>
-//                 <i className="fas fa-lock"></i> Complete booking
-//             </button>
-//         </div>
-//     );
-// };
-// const CompleteBooking = () => {
-//     const formik = useFormikContext();
-  
-//     const handleCompleteBooking = () => {
-//       if (formik && formik.values) {
-//         const bookingInfo = {
-//           Fullname: `${formik.values.firstName} ${formik.values.lastName}`,
-//           email: formik.values.email,
-//           telephone: formik.values.telephone,
-//           "Cardholder's name": formik.values.cardName,
-//           "Card type": formik.values.cardType,
-//           "Card Number": formik.values.cardNumber,
-//           "CVC Code": formik.values.cvcCode,
-//           "Expiration Date": formik.values.expirationDate,
-//         };
-  
-//         console.log('Booking Information:', bookingInfo);
-  
-//         // Handle the rest of the booking logic here
-//       }
-//     };
-  
-//     return (
-//       <div className="Complete ">
-//         <button className="btn btn-primary" onClick={handleCompleteBooking}>
-//           <i className="fas fa-lock"></i> Complete booking
-//         </button>
-//       </div>
-//     );
-//   };

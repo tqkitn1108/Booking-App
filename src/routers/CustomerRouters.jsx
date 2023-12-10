@@ -33,6 +33,7 @@ function CustomerRouters() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/test" element={<Test />} />
+            <Route path="/list" element={<List />} />
           </Routes>
         {/* </BrowserRouter> */}
       </AuthProvider>

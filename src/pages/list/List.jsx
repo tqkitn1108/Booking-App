@@ -2,175 +2,113 @@
 import { FormCheck } from "react-bootstrap";
 import "./list.css"
 import SearchItem from "./SearchItem"
-import {useState} from 'react';
-// import Pagination from 'react-bootstrap/Pagination';
+import { useState } from 'react';
 import Pagination from './Pagination';
-// import Sliders from './Slider'
-// import Slider from 'bootstrap-slider'
+import { hotels } from "../../data/hotelsData.js"
+import "./searchItem.css";
+import Filter from '../../components/filter/Filter.jsx'
+// import Navbar from '../../components/navbar/Navbar.jsx'
 const List = () => {
-    // filter range
-    const [rangeValue, setRangeValue] = useState(50); // Giá trị mặc định của thanh trượt
-
-    const handleRangeChange = (event) => {
-      setRangeValue(event.target.value);
+    // rating
+    function RatingComponent({ rating }) {
+        let textToShow;
+      
+        if (rating >= 9.0) {
+          textToShow = "Tuyệt hảo";
+        } else if (rating >= 8.0) {
+          textToShow = "Rất tốt";
+        } else if(rating >= 7.0){
+          textToShow = "Tốt";
+        } else if(rating >= 6.0){
+            textToShow = "Dễ chịu";
+        }   else textToShow = "Bình thường"
+      
+        return textToShow;
+      }
+    // star
+    const renderStars = (value) => {
+        const stars = [];
+        for (let i = 0; i < 5; i++) {
+            stars.push(
+                <span key={i} style={{ color: i < value ? '#FFD700' : '#C0C0C0' }}>
+                    &#9733; {/* Dấu sao */}
+                </span>
+            );
+        }
+        return stars;
     };
-// Phan trang
+    // Phan trang
     const [currentPage, setCurrentPage] = useState(1);
-    const totalItems = 120; // Tổng số item
+    const totalItems = 40; // Tổng số item
     const itemsPerPage = 10; // Số item trên mỗi trang
 
     const handlePageChange = (page) => {
-    setCurrentPage(page);
+        setCurrentPage(page);
     }
     return (
         <div>
+            {/* <Navbar /> */}
+            <div className="listFilter">
+           <Filter />
+           </div>
             <div className="listContainer">
-            <div className="listWrapper">
-                    <div className="listSearch">
-                <h2 class="lsT">Chọn lọc theo:</h2>
-                </div>
-                </div>
-                <div className="listWrapper">
-                    <div className="listSearch">
-                       <h3 className="lsTitle">Ngân sách tối đa của bạn (mỗi đêm)</h3>
-                    <div>
-                        <label htmlFor="filterRange">VND {(rangeValue).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</label>
-                        <input type="range" id="filterRange" name="filterRange" min="0" max="4000000" value={rangeValue} onChange={handleRangeChange}/>
-                    </div> 
-                </div>
-            </div>
-                <div className="listWrapper">
-                    <div className="listSearch">
-                        <h3 className="lsTitle">Xếp hạng chỗ nghỉ</h3>
-                        <div className="lsItem">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    1 sao
-                                </label>
+                <div>
+                    <div className="sitem">
+                        {hotels.map(hotel =>
+                        (<div className="searchItem">
+                            <img
+                                src={hotel.photos[2]}
+                                alt=""
+                                className="siImg"
+                            />
+                            <div className="siDesc">
+                                <div className="Title">
+                                    <h1 className="siTitle">{hotel.name}</h1>
+                                    <div className="star">
+                                        {renderStars(hotel.star)}
+                                    </div>
+                                </div>
+                                <div className="siDistance">
+                                    <a id="diachi" href="">{hotel.address}</a>
+                                    <a href="">Xem tren ban do</a>
+                                </div>
+                                <span className="siTaxiOp">Free airport taxi</span>
+                                <span className="siSubtitle">
+                                    Studio Apartment with Air conditioning
+                                </span>
+                                <span className="siFeatures">
+                                    Entire studio • 1 bathroom • 21m² 1 full bed
+                                </span>
+                                <span className="siCancelOp">Free cancellation </span>
+                                <span className="siCancelOpSubtitle">
+                                    You can cancel later, so lock in this great price today!
+                                </span>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="2sao"/>
-                                <label class="form-check-label" for="2sao">
-                                    2 sao
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="3sao"/>
-                                <label class="form-check-label" for="3sao">
-                                    3 sao
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="4sao"/>
-                                <label class="form-check-label" for="4sao">
-                                    4 sao
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="5sao"/>
-                                <label class="form-check-label" for="5sao">
-                                    5 sao
-                                </label>
+                            <div className="siDetails">
+                                <div className="siRating">
+                                    <RatingComponent className="nhanXet" rating = {hotel.rating}></RatingComponent>
+                                    <button>{hotel.rating}</button>
+                                </div>
+                                <div className="siDetailTexts">
+                                    <span className="siPrice">Liên hệ</span>
+                                    <span className="siTaxOp">Includes taxes and fees</span>
+                                    <button className="siCheckButton">See availability</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                
-                <div className="listWrapper">
-                    <div className="listSearch">
-                        <h3 className="lsTitle">Tiện nghi</h3>
-                        <div className="lsItem">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="GiaDinh"/>
-                                <label class="form-check-label" for="GiaDinh">
-                                    Phòng gia đình
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="HutThuoc"/>
-                                <label class="form-check-label" for="HutThuoc">
-                                    Phòng hút thuốc
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="DoXe"/>
-                                <label class="form-check-label" for="DoXe">
-                                    Chỗ đỗ xe
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="Wifi"/>
-                                <label class="form-check-label" for="Wifi">
-                                    Wifi miễn phí
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="vatNuoi"/>
-                                <label class="form-check-label" for="vatNuoi">
-                                    Cho phép mang theo vật nuôi
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="listWrapper">
-                    <div className="listSearch">
-                        <h3 className="lsTitle">Tiện nghi phòng</h3>
-                        <div className="lsItem">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="nhinBien"/>
-                                <label class="form-check-label" for="nhinBien">
-                                    Nhìn ra biển
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="tamRieng"/>
-                                <label class="form-check-label" for="tamRieng">
-                                    Phòng tắm riêng
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="HoBoi"/>
-                                <label class="form-check-label" for="HoBoi">
-                                    Hồ bơi riêng
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="BanCong"/>
-                                <label class="form-check-label" for="BanCong">
-                                    Ban công
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="DieuHoa"/>
-                                <label class="form-check-label" for="DieuHoa">
-                                    Điều hòa không khí
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="listContainer">
-            <div>
-      <div className="sitem">
-        {Array.from({ length: itemsPerPage }, (_, index) => (
-          <div key={index + (currentPage - 1) * itemsPerPage}>
-            <div className="listContainer"></div>
-            <SearchItem />
-          </div>
-        ))}
-      </div>
+                        )
+                        )}
 
-      <div className="pagi">
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
-      />
-      </div>
-    </div>
+                    </div>
+
+                    <div className="pagi">
+                        <Pagination
+                            totalItems={totalItems}
+                            itemsPerPage={itemsPerPage}
+                            onPageChange={handlePageChange}
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -71,7 +71,10 @@ const HotelInformation = () => {
             <div className="hotel-info-border">
                 <h5>Hotel Name</h5>
                 <p>Address: 123 Main Street, Cityville</p>
-                <p>Rating: 9/10</p>
+                <div className='d-flex'  > Rating: <div className="siRating"> 
+                             <button>8.9</button>
+                           </div> 
+                </div>
                 <div className="amenities">
                     <div className="wifi">
 
@@ -93,10 +96,12 @@ const HotelInformation = () => {
 };
 
 
+
 const SecurePage = () => {
 
     const formik = useFormikContext();
 
+    
     const onSubmit = (values) => {
         // Create an object with the form values
         const formData = {
@@ -245,6 +250,11 @@ const SecurePage = () => {
                                             />
                                             <ErrorMessage name="expirationDate" component="span" className='form-message' style={{ color: 'red' }} />
                                         </div>
+                                        <div className="submit-button mt-3">
+                                            <button type="submit" className="btn btn-primary">
+                                                Submit
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </Form>
@@ -255,14 +265,27 @@ const SecurePage = () => {
         </div>
     );
 };
-
-
 const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required('First name is required').matches(/^[a-zA-Z]+$/, 'First name should only contain letters'),
-    lastName: Yup.string().required('Last name is required').matches(/^[a-zA-Z]+$/, 'Last name should only contain letters'),
-    email: Yup.string().required('Email is required').email('Invalid email address'),
-    country: Yup.string().required('Country is required'),
-    telephone: Yup.string().required('Telephone is required').matches(/^\d+$/, 'Invalid phone number'),
+    firstName: Yup.string()
+        .required('First name is required')
+        .matches(/^[a-zA-Z\sÀ-ỹ]*$/, 'First name should only contain letters')
+        .test('no-consecutive-spaces', 'First name must not contain consecutive spaces', value => !/\s{2}/.test(value)),
+    
+    lastName: Yup.string()
+        .required('Last name is required')
+        .matches(/^[a-zA-Z\sÀ-ỹ]*$/, 'Last name should only contain letters')
+        .test('no-consecutive-spaces', 'Last name must not contain consecutive spaces', value => !/\s{2}/.test(value)),
+
+    email: Yup.string()
+        .required('Email is required')
+        .email('Invalid email address'),
+
+    country: Yup.string()
+        .required('Country is required'),
+
+    telephone: Yup.string()
+        .required('Telephone is required')
+        .matches(/^\d+$/, 'Invalid phone number'),
 });
 
 const R_page = () => {
@@ -296,7 +319,7 @@ const R_page = () => {
                             <h3 className='text-right'> Enter your details </h3>
                             <div className='mb-3'>
                                 <div className='name form-group d-flex w-100 mb-3 '>
-                                    <div className='m-right' style={{ width: '350px' }}>
+                                    <div className='m-right' style={{ width: '342px' }}>
                                         <label htmlFor='firstName' className='mb-1 ' style = {{ fontWeight: 'bold' }}>
                                             First Name <span className="required text-danger">*</span>
                                         </label>
@@ -310,7 +333,7 @@ const R_page = () => {
                                         <ErrorMessage name='firstName' component='span' className='form-message' style={{ color: 'red' }} />
                                     </div>
 
-                                    <div className='m-left' style={{ marginLeft: '2rem', width: '315px' }}>
+                                    <div className='m-left' style={{ marginLeft: '2rem', width: '312px' }}>
                                         <label htmlFor='lastName' className='mb-1' style = {{ fontWeight: 'bold' }} >
                                             Last Name <span className="required text-danger">*</span>
                                         </label>
@@ -394,7 +417,38 @@ const R_page = () => {
         </div>
     );
 };
-
+// const CompleteBooking = () => {
+//     const formik = useFormikContext();
+  
+//     const handleCompleteBooking = () => {
+//         console.log('Formik:', formik); // In ra thông tin formik để kiểm tra xem có giá trị hay không
+//         if (formik && formik.values) {
+//           console.log('Form values:', formik.values); // In ra giá trị của formik để kiểm tra xem có giá trị hay không
+//           const bookingInfo = {
+//             Fullname: `${formik.values.firstName} ${formik.values.lastName}`,
+//             email: formik.values.email,
+//             telephone: formik.values.telephone,
+//             "Cardholder's name": formik.values.cardName,
+//             "Card type": formik.values.cardType,
+//             "Card Number": formik.values.cardNumber,
+//             "CVC Code": formik.values.cvcCode,
+//             "Expiration Date": formik.values.expirationDate,
+//           };
+      
+//           console.log('Booking Information:', bookingInfo);
+//         } else {
+//           console.log('formik or formik.values is undefined');
+//         }
+//       };
+  
+//     return (
+//       <div className="Complete ">
+//         <button className="btn btn-primary" onClick={handleCompleteBooking}>
+//           <i className="fas fa-lock"></i> Complete booking
+//         </button>
+//       </div>
+//     );
+//   };
 const CompleteBooking = () => {
     const formik = useFormikContext();
   
@@ -427,17 +481,21 @@ const CompleteBooking = () => {
       </div>
     );
   };
+  
 const ReservationPage = () => {
+    const handleLogFormValues = (formik) => {
+        console.log('Form values from SecurePage:', formik.values);
+      };
     return (
       <div>
         <div className="content-container align-items-center">
-          <div className="reservation-container">
-          <div>
-                     <HotelInformation />                      
-                        <Details />
-                       <PriceSummary />
-                       <PaymentSchedule />
-                    </div>
+          <div className="reservation-container" >
+            <div>
+              <HotelInformation />
+              <Details />
+              <PriceSummary />
+              <PaymentSchedule />
+            </div>
             <Formik
               initialValues={{
                 firstName: '',
@@ -457,11 +515,12 @@ const ReservationPage = () => {
               }}
             >
               {formik => (
-                
                 <div>
                   <R_page />
+                  <GoodToKnow />
                   <SecurePage />
-                  <CompleteBooking />
+                 
+                   <CompleteBooking /> 
                   <div style={{ height: '200px' }}></div>
                 </div>
               )}
@@ -471,93 +530,5 @@ const ReservationPage = () => {
       </div>
     );
   };
-
 export default ReservationPage;
-// const ReservationPage = () => {
-//     return (
-//         <div>
-//             <div className="content-container align-items-center">
-//                 <div className="reservation-container ">
-//                     <div>
-//                         <HotelInformation />
-//                         <Details />
-//                         <PriceSummary />
-//                         <PaymentSchedule />
-//                     </div>
-//                     <div className=''>
-//                         <R_page />
-//                         <GoodToKnow />
-//                         <SecurePage />
-//                         <CompleteBooking />
-//                         <div style={{ height: '200px' }}></div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
 
-// };
-// const CompleteBooking = () => {
-//     const formik = useFormikContext();
-
-//     const handleCompleteBooking = () => {
-//         // Check if formik context and values are available
-//         if (formik && formik.values) {
-//             // Create an object with the required information
-//             const bookingInfo = {
-//                 Fullname: `${formik.values.firstName} ${formik.values.lastName}`,
-//                 email: formik.values.email,
-//                 telephone: formik.values.telephone,
-//                 "Cardholder's name": formik.values.cardName,
-//                 "Card type": formik.values.cardType,
-//                 "Card Number": formik.values.cardNumber,
-//                 "CVC Code": formik.values.cvcCode,
-//                 "Expiration Date": formik.values.expirationDate,
-//             };
-
-//             // Log the object to the console
-//             console.log('Booking Information:', bookingInfo);
-
-//             // Handle the rest of the booking logic here
-//         }
-//     };
-
-//     return (
-//         <div className="Complete ">
-//             {/* Trigger the handleCompleteBooking function when the button is clicked */}
-//             <button className="btn btn-primary" onClick={handleCompleteBooking}>
-//                 <i className="fas fa-lock"></i> Complete booking
-//             </button>
-//         </div>
-//     );
-// };
-// const CompleteBooking = () => {
-//     const formik = useFormikContext();
-  
-//     const handleCompleteBooking = () => {
-//       if (formik && formik.values) {
-//         const bookingInfo = {
-//           Fullname: `${formik.values.firstName} ${formik.values.lastName}`,
-//           email: formik.values.email,
-//           telephone: formik.values.telephone,
-//           "Cardholder's name": formik.values.cardName,
-//           "Card type": formik.values.cardType,
-//           "Card Number": formik.values.cardNumber,
-//           "CVC Code": formik.values.cvcCode,
-//           "Expiration Date": formik.values.expirationDate,
-//         };
-  
-//         console.log('Booking Information:', bookingInfo);
-  
-//         // Handle the rest of the booking logic here
-//       }
-//     };
-  
-//     return (
-//       <div className="Complete ">
-//         <button className="btn btn-primary" onClick={handleCompleteBooking}>
-//           <i className="fas fa-lock"></i> Complete booking
-//         </button>
-//       </div>
-//     );
-//   };

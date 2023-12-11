@@ -19,6 +19,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import * as Yup from 'yup'; // Import Yup for validation
+import { Nav } from 'react-bootstrap';
 
 const validationSchema = Yup.object().shape({
   enterEmail: Yup.string().email('Invalid email address').required('Email is required'),
@@ -78,6 +79,8 @@ function Login() {
     }
   };
   return (
+    <div> 
+    <Navbar/>
     <Formik
       initialValues={{
         enterEmail: '',
@@ -187,6 +190,7 @@ function Login() {
         </MDBContainer>
       </ Form>)}
     </ Formik>
+   </div>
   );
 }
 export default Login;

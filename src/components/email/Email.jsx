@@ -7,7 +7,7 @@ const MailList = () => {
       <span className="mailDesc system-font">Sign up and we'll send the best deals to you</span>
       <div className="mailInputContainer system-font">
         <input type="text" placeholder="Your Email" />
-        <button>Subscribe</button>
+        <button onClick>Subscribe</button>
       </div>
     </div>
   )

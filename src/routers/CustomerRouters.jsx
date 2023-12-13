@@ -26,7 +26,7 @@ function CustomerRouters() {
         {/* <BrowserRouter> */}
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/hotels" element={<List />} />
+            <Route path="/search" element={<List />} />
             <Route path="/bookings/:userId" element={<Bookings />} />
             <Route path="/hotels/:hotelId" element={<Hotel />} />
             <Route path="/reservation" element={<ReservationPage />} />

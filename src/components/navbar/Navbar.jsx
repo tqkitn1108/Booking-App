@@ -2,7 +2,7 @@ import "./navbar.css";
 import "./navbar-responsive.css";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import HeadlessTippy from '@tippyjs/react/headless';
-import 'tippy.js/dist/tippy.css'; // optional
+// import 'tippy.js/dist/tippy.css'; // optional
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

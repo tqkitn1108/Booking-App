@@ -2,7 +2,18 @@ import "./list.css"
 import { hotels } from "../../data/hotelsData.js"
 
 const Test = () => {
-
+  // var value = 3;
+  const renderStars = (value) => {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      stars.push(
+        <span key={i} style={{ color: i < value ? '#FFD700' : '#C0C0C0' }}>
+          &#9733; {/* Dấu sao */}
+        </span>
+      );
+    }
+    return stars;
+  };
   return (
     <>
       {hotels.map(hotel =>
@@ -16,7 +27,7 @@ const Test = () => {
           <div className="Title">
             <h1 className="siTitle">{hotel.name}</h1>
             <div className="star">
-              {hotel.star}
+            {renderStars(hotel.star)}
             </div>
           </div>
           <div className="siDistance">

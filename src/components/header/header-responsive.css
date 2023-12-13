@@ -1,0 +1,74 @@
+@media (min-width:  46.1875em) and (max-width: 63.9375em) {
+    .header-container {
+        width: 100%;
+        max-width: 700px;
+    }
+    .header-search {
+        max-width: 700px;
+    }
+    .header-list {
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+    .header-list::-webkit-scrollbar {
+        display: none;
+    }
+    .search-result {
+        right: -318px;
+    }
+    .date {
+        left: 135px;
+    }
+    .header-option-text {
+        max-width: 100px;
+    }
+}
+@media (max-width: 46.1875em) {
+    .header {
+        margin-bottom: 130px;
+    }
+    .header-container {
+        width: 100%;
+        max-width: 350px;
+    }
+    .header-list {
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+    .header-list::-webkit-scrollbar {
+        display: none;
+    }
+    .header-title {
+        line-height: 50px;
+        font-size: 40px;
+    }
+    .header-describe {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .header-search {
+        flex-direction: column;
+        z-index: 5;
+        height: 229px;
+        max-width: 350px;
+        bottom: -176px;
+    }
+    .header-search-item-box {
+        width: 100%;
+    }
+    .header-btn {
+        width: 100%;
+    }
+    .search-result {
+        right: -215px;
+        top: -7px;
+    }
+    .date {
+        left: 4px;
+        top: 117px;
+    }
+    .options {
+        left: 4px;
+        top: 174px;
+    }
+}

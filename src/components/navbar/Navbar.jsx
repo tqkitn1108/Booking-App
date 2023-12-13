@@ -1,8 +1,10 @@
 import "./navbar.css";
+import "./navbar-responsive.css";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import HeadlessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css'; // optional
 import { faBell } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -49,15 +51,17 @@ const Navbar = () => {
         <span className="home-nav-logo" onClick={handleLogoClick}>Booking.com</span>
         {userFullName ? (
           <div className="nav-items">
-            <div className="nav-icon">VND</div>
-            <div className="nav-icon">VN</div>
-            <div className="nav-icon">
-              <FontAwesomeIcon icon={faCircleQuestion} />
+            <div className="nav-items-icon">
+              <div className="nav-icon">VND</div>
+              <div className="nav-icon">VN</div>
+              <div className="nav-icon">
+                <FontAwesomeIcon icon={faCircleQuestion} />
+              </div>
+              <div className="nav-icon">
+                <FontAwesomeIcon icon={faBell} />
+              </div>
+              <div className="nav-icon">Đăng chỗ nghỉ của quý vị</div>
             </div>
-            <div className="nav-icon">
-              <FontAwesomeIcon icon={faBell} />
-            </div>
-            <div className="nav-icon">Đăng chỗ nghỉ của quý vị</div>
             <HeadlessTippy
               placement="bottom"
               trigger="click"
@@ -91,15 +95,20 @@ const Navbar = () => {
         ) :
           (
             <div className="nav-items">
-              <div className="nav-icon">VND</div>
-              <div className="nav-icon">VN</div>
-              <div className="nav-icon">
-                <FontAwesomeIcon icon={faCircleQuestion} />
+              <div className="nav-items-icon">
+                <div className="nav-icon">VND</div>
+                <div className="nav-icon">VN</div>
+                <div className="nav-icon">
+                  <FontAwesomeIcon icon={faCircleQuestion} />
+                </div>
+                <div className="nav-icon">Đăng chỗ nghỉ của quý vị</div>
               </div>
-              <div className="nav-icon">Đăng chỗ nghỉ của quý vị</div>
-              <div className="nav-items">
+              <div className="nav-items-btn">
                 <button className="nav-button" onClick={() => navigate("/signup")}>Đăng ký</button>
                 <button className="nav-button" onClick={() => navigate("/login")}>Đăng nhập</button>
+                <button className="nav-button" onClick={() => navigate("/login")}>
+                <FontAwesomeIcon icon={faUser} />
+                </button>
               </div>
             </div>
           )

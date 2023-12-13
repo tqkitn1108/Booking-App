@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.css";
+import "./header-responsive.css";
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
@@ -158,27 +159,27 @@ const Header = () => {
                 <div className="header-list">
                     <div className="header-list-item active">
                         <FontAwesomeIcon icon={faBed} />
-                        <span>Lưu trú</span>
+                        <span className="header-list-text">Lưu trú</span>
                     </div>
                     <div className="header-list-item">
                         <FontAwesomeIcon icon={faPlane} />
-                        <span>Chuyến bay</span>
+                        <span className="header-list-text">Chuyến bay</span>
                     </div>
                     <div className="header-list-item">
                         <FontAwesomeIcon icon={faSuitcaseRolling} />
-                        <span>Chuyến bay + Khách sạn</span>
+                        <span className="header-list-text">Chuyến bay + Khách sạn</span>
                     </div>
                     <div className="header-list-item">
                         <FontAwesomeIcon icon={faCar} />
-                        <span>Thuê xe</span>
+                        <span className="header-list-text">Thuê xe</span>
                     </div>
                     <div className="header-list-item">
                         <FontAwesomeIcon icon={faLandmark} />
-                        <span>Địa điểm tham quan</span>
+                        <span className="header-list-text">Địa điểm tham quan</span>
                     </div>
                     <div className="header-list-item">
                         <FontAwesomeIcon icon={faTaxi} />
-                        <span>Taxi sân bay</span>
+                        <span className="header-list-text">Taxi sân bay</span>
                     </div>
                 </div>
                 <h1 className="header-title">Tìm chỗ nghỉ tiếp theo</h1>

@@ -21,8 +21,11 @@
     line-height: 20px;
     cursor: pointer;
 }
-
-.home-navbar .nav-items {
+.nav-items {
+    display: flex;
+    gap: 10px;
+}
+.home-navbar .nav-items-icon {
     display: flex;
     justify-content: space-around;
     gap: 8px;
@@ -44,7 +47,10 @@
     background-color: #0c50b0;
     border-radius: 4px;
 }
-
+.nav-items-btn {
+    display: flex;
+    gap: 8px;
+}
 .home-navbar .nav-button {
     cursor: pointer;
     align-items: center;
@@ -59,6 +65,16 @@
     line-height: 20px;
     margin: 8px 0px 0px 0px;
     padding: 4px 12px;
+}
+.home-navbar .nav-button:last-child {
+    display: none;
+    border-radius: 50%;
+    background-color: #003580;
+    color: white;
+    border: 1px solid white;
+    padding: 4px 8px;
+    font-size: 16px;
+    width: 40px;
 }
 .home-navbar .nav-icon-img {
     height: 10px;
@@ -81,13 +97,12 @@
     border-radius: 4px;
 }
 .nav-user-img {
-    width: 35px;
-    height: 35px;
+    width: 36px;
+    height: 36px;
+    line-height: 33px;
+    text-align: center;
     object-fit: cover;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 25px;
     text-shadow: 1px 1px black;
 }
@@ -96,13 +111,14 @@
 }
 .nav-menu-logout {
     position: absolute;
-    top: -1px;
-    left: -70px;
+    top: -2px;
+    right: -88px;
     background-color: white;
     color: black;
     padding: 4px 0px;
     width: 170px;
     border-radius: 6px;
+    box-shadow: 3px 3px 5px 0px black;
 }
 .nav-user-logout {
     display: flex;

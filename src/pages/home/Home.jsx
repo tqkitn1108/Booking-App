@@ -9,7 +9,8 @@ import FavoriteDestination from "../../components/favoriteDestination/FavoriteDe
 import Email from "../../components/email/Email";
 import Footer from "../../components/footer/Footer";
 import { useAuth } from '../../context/AuthContext';
-import "./home.css"
+import "./home.css";
+import "./home-responsive.css";
 import { useEffect } from "react";
 const Home = () => {
 
@@ -35,14 +36,14 @@ const Home = () => {
                     <h1 className="home-title">Lên kế hoạch dễ dàng và nhanh chóng</h1>
                     <h3 className="home-describe">Khám phá các điểm đến hàng đầu theo cách bạn thích ở Việt Nam</h3>
                     <TripPlanner />
-                    <h1 className="home-title">Nhà ở mà khách yêu thích</h1>
+                    {/* <h1 className="home-title">Nhà ở mà khách yêu thích</h1>
                     <FeaturedHome />
                     <h1 className="home-title">Địa điểm yêu thích</h1>
-                    <FavoriteDestination />
+                    <FavoriteDestination /> */}
                 </div>
             </div>
-            <Email />
-            <Footer />
+            {/* <Email />
+            <Footer /> */}
         </div>
     )
 }

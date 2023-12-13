@@ -1,8 +1,7 @@
 import "./trending.css";
-
+import "./trending-responsive.css";
 const Trending = () => {
     return (
-        <div>
             <div className="trending">
                 <div className="trending-top">
                     <img src="https://cf.bstatic.com/xdata/images/city/600x600/688853.jpg?k=f6427c8fccdf777e4bbc75fcd245e7c66204280181bea23350388c76c57348d1&o=" alt="" className="trending-img" />
@@ -51,7 +50,6 @@ const Trending = () => {
                     </div>
                 </div>
             </div>
-        </div>
     )
 }
 

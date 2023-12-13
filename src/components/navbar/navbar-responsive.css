@@ -1,0 +1,42 @@
+@media (min-width:  46.1875em) and (max-width: 63.9375em) {
+    .home-nav-container {
+        max-width: 700px;
+    }
+    .nav-user-account {
+        display: none;
+    }
+    .nav-menu-logout {
+        right: -32px;
+    }
+    .home-navbar .nav-button {
+        display: none !important;
+    }
+    .home-navbar .nav-button:last-child {
+        display: block !important;
+    }
+}
+@media (max-width: 46.1875em) {
+    .home-nav-container {
+        overflow: hidden;
+        width: 100%;
+        max-width: 350px !important;
+    }
+    .nav-items-icon {
+        display: none !important;
+    }
+    .home-navbar .nav-button {
+        display: none !important;
+    }
+    .home-navbar .nav-button:last-child {
+        display: block !important;
+    }
+    .nav-user-account {
+        display: none;
+    }
+    .nav-user-button {
+        margin: 0px;
+    }
+    .nav-menu-logout {
+        right: -32px;
+    }
+}

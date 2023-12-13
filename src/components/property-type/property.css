@@ -25,3 +25,8 @@
     margin-top: 4px;
     font-size: 13px;
 }
+@media (max-width: 46.1875em) {
+    .property-type {
+        overflow-y: scroll;
+    }
+}

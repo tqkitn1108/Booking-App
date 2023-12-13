@@ -11,7 +11,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.css";
-import "./header-responsive.css";
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
@@ -140,7 +139,8 @@ const Header = () => {
             document.removeEventListener('mousedown', handleOutsideClick);
         };
     }, []);
-    const handleOption = (name, operation) => {
+    const handleOption = (event, name, operation) => {
+        event.preventDefault();
         setOptions((prev) => {
             return {
                 ...prev,
@@ -159,27 +159,27 @@ const Header = () => {
                 <div className="header-list">
                     <div className="header-list-item active">
                         <FontAwesomeIcon icon={faBed} />
-                        <span className="header-list-text">Lưu trú</span>
+                        <span>Lưu trú</span>
                     </div>
                     <div className="header-list-item">
                         <FontAwesomeIcon icon={faPlane} />
-                        <span className="header-list-text">Chuyến bay</span>
+                        <span>Chuyến bay</span>
                     </div>
                     <div className="header-list-item">
                         <FontAwesomeIcon icon={faSuitcaseRolling} />
-                        <span className="header-list-text">Chuyến bay + Khách sạn</span>
+                        <span>Chuyến bay + Khách sạn</span>
                     </div>
                     <div className="header-list-item">
                         <FontAwesomeIcon icon={faCar} />
-                        <span className="header-list-text">Thuê xe</span>
+                        <span>Thuê xe</span>
                     </div>
                     <div className="header-list-item">
                         <FontAwesomeIcon icon={faLandmark} />
-                        <span className="header-list-text">Địa điểm tham quan</span>
+                        <span>Địa điểm tham quan</span>
                     </div>
                     <div className="header-list-item">
                         <FontAwesomeIcon icon={faTaxi} />
-                        <span className="header-list-text">Taxi sân bay</span>
+                        <span>Taxi sân bay</span>
                     </div>
                 </div>
                 <h1 className="header-title">Tìm chỗ nghỉ tiếp theo</h1>
@@ -269,25 +269,25 @@ const Header = () => {
                                         <div className="option-item">
                                             <span className="option-text">Người lớn</span>
                                             <div className="option-counter">
-                                                <button disabled={options.adult <= 1} className="option-counter-btn" onClick={() => handleOption("adult", "d")}>-</button>
+                                                <button disabled={options.adult <= 1} className="option-counter-btn" onClick={(event) => handleOption(event, "adult", "d")}>-</button>
                                                 <span className="option-counter-number">{options.adult}</span>
-                                                <button className="option-counter-btn" onClick={() => handleOption("adult", "i")}>+</button>
+                                                <button className="option-counter-btn" onClick={(event) => handleOption(event, "adult", "i")}>+</button>
                                             </div>
                                         </div>
                                         <div className="option-item">
                                             <span className="option-text">Trẻ em</span>
                                             <div className="option-counter">
-                                                <button disabled={options.children <= 0} className="option-counter-btn" onClick={() => handleOption("children", "d")}>-</button>
+                                                <button disabled={options.children <= 0} className="option-counter-btn" onClick={(event) => handleOption(event, "children", "d")}>-</button>
                                                 <span className="option-counter-number">{options.children}</span>
-                                                <button className="option-counter-btn" onClick={() => handleOption("children", "i")}>+</button>
+                                                <button className="option-counter-btn" onClick={(event) => handleOption(event, "children", "i")}>+</button>
                                             </div>
                                         </div>
                                         <div className="option-item">
                                             <span className="option-text">Phòng</span>
                                             <div className="option-counter">
-                                                <button disabled={options.room <= 1} className="option-counter-btn" onClick={() => handleOption("room", "d")}>-</button>
+                                                <button disabled={options.room <= 1} className="option-counter-btn" onClick={(event) => handleOption(event, "room", "d")}>-</button>
                                                 <span className="option-counter-number">{options.room}</span>
-                                                <button className="option-counter-btn" onClick={() => handleOption("room", "i")}>+</button>
+                                                <button className="option-counter-btn" onClick={(event) => handleOption(event, "room", "i")}>+</button>
                                             </div>
                                         </div>
                                         <button className="option-end" onClick={() => setOpenOptions(!openOptions)}>Xong</button>

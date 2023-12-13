@@ -6,7 +6,6 @@ import { Navigation } from 'swiper/modules';
 import { propertyTypes } from '../../data/propertyTypeData';
 import { useEffect, useState } from 'react';
 import { countByType } from '../../api/ApiFunctions';
-import { destinations } from '../../data/destinationData';
 
 const PropertyType = () => {
     const [numProperties, setNumProperties] = useState({});

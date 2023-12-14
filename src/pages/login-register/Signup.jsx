@@ -74,6 +74,8 @@ const Signup = () => {
     });
 
     return (
+         <div>
+            <div className="bg-light " style={{ height: '30px' }}></div>
         <Formik
             initialValues={{
                 fullName: '',
@@ -253,6 +255,8 @@ const Signup = () => {
                 </section >
             </div >
         </Formik >
+            </div >
+        
     );
 }
 

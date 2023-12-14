@@ -5,7 +5,7 @@ import CustomerRouters from "./routers/CustomerRouters.jsx";
 import './App.css';
 import Login from "./pages/login-register/Login.jsx"
 import Signup from "./pages/login-register/Signup.jsx"
-
+import MailList from "./components/email/Email.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -13,7 +13,7 @@ function App() {
         <Route path ='/*' element={<CustomerRouters />} ></Route> 
         <Route path ='/Login' element={<Login />} ></Route>
         <Route path ='/signup' element={<Signup />} ></Route> 
-
+        <Route path ='/Email' element={<MailList />} ></Route> 
       </Routes>
     </BrowserRouter>
   )

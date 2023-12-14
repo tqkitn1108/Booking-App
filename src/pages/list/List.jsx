@@ -9,6 +9,10 @@ import "./searchItem.css";
 import Filter from '../../components/filter/Filter.jsx'
 // import Navbar from '../../components/navbar/Navbar.jsx'
 const List = () => {
+    // xử lý chuỗi đưa vào gg map
+    function mapSearchString(str) {
+        return "https://www.google.com/maps/place/" + str.split(' ').join('+');
+      }
     // rating
     function RatingComponent({ rating }) {
         let textToShow;
@@ -69,8 +73,8 @@ const List = () => {
                                     </div>
                                 </div>
                                 <div className="siDistance">
-                                    <a id="diachi" href="">{hotel.address}</a>
-                                    <a href="">Xem tren ban do</a>
+                                    <a id="diachi" href={mapSearchString(hotel.address)} target="_blank" rel="noopener noreferrer">{hotel.address}</a>
+                                    <a href={mapSearchString(hotel.address)} target="_blank" rel="noopener noreferrer">Xem tren ban do</a>
                                 </div>
                                 <span className="siTaxiOp">Free airport taxi</span>
                                 <span className="siSubtitle">

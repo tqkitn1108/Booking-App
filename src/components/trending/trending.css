@@ -10,7 +10,7 @@
     overflow: hidden;
     color: white;
     height: 270px;
-    width: 542px;
+    width: calc((100% - 16px) / 2);
     margin-bottom: 16px;
     cursor: pointer;
 }
@@ -18,7 +18,7 @@
     position: relative;
     overflow: hidden;
     color: white;
-    width: 356px;
+    width: calc((100% - 32px) / 3);
     height: 266px;
     cursor: pointer;
 }

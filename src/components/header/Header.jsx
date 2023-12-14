@@ -20,30 +20,34 @@ import { useState, useEffect, useRef } from "react";
 import HeadlessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css'; // optional
 import { destinations } from '../../data/destinationData';
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
     const [defaultText, setDefaultText] = useState(true);
-    const [searchResult, setSearchResult] = useState([]);
+    const [searchSuggestions, setsearchSuggestions] = useState([]);
     const [showResult, setShowResult] = useState(true);
     useEffect(() => {
         setTimeout(() => {
-            setSearchResult([1, 2, 3]);
+            setsearchSuggestions([1, 2, 3]);
         }, 0);
     }, []);
-    const [inputValue, setInputValue] = useState('');
+    const [destInput, setDestInput] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [buttonClicked, setButtonClicked] = useState(false);
     const headerBtnRef = useRef(null);
-    const handleSubmit = (event) => {
+    const navigate = useNavigate();
+    const handleSearch = (event) => {
         event.preventDefault();
-        if (inputValue.trim() === '') {
+        if (destInput.trim() === '') {
             setErrorMessage('Vui lòng nhập điểm đến để bắt đầu tìm kiếm.');
         } else {
             setErrorMessage('');
         }
-    };
-    const handleButtonClick = () => {
         setButtonClicked(true);
+        const location = destInput.replaceAll(' ', '%20');
+        const checkIn = format(date[0].startDate, 'yyyy-MM-dd');
+        const checkOut = format(date[0].endDate, 'yyyy-MM-dd');
+        navigate(`/search?location=${location}&page=0&size=3&checkin=${checkIn}&checkout=${checkOut}&adults=${options.adult}&children=${options.children}&no_rooms=${options.room}`)
     };
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -82,15 +86,15 @@ const Header = () => {
 
     const inputRef = useRef()
     const handleClear = () => {
-        setInputValue('');
-        setSearchResult([]);
+        setDestInput('');
+        setsearchSuggestions([]);
         inputRef.current.focus();
     }
 
     const [openDate, setOpenDate] = useState(false)
     const [date, setDate] = useState(
         [
-            {   
+            {
                 startDate: new Date(),
                 endDate: new Date(),
                 key: 'selection'
@@ -135,13 +139,19 @@ const Header = () => {
             document.removeEventListener('mousedown', handleOutsideClick);
         };
     }, []);
-    const handleOption = (name, operation) => {
+    const handleOption = (event, name, operation) => {
+        event.preventDefault();
         setOptions((prev) => {
             return {
                 ...prev,
                 [name]: operation === "i" ? options[name] + 1 : options[name] - 1
             };
         });
+        // setOptions({
+        //         ...options,
+        //         [name]: operation === "i" ? options[name] + 1 : options[name] - 1
+        //     }
+        // );
     };
     return (
         <div className="header">
@@ -177,24 +187,25 @@ const Header = () => {
                     Tìm ưu đãi khách sạn, chỗ nghỉ dạng nhà và nhiều hơn nữa...
                 </p>
                 <div>
-                    <form className="header-search" action="" onSubmit={handleSubmit}>
+                    <form className="header-search" action="" onSubmit={handleSearch}>
                         <HeadlessTippy
                             placement="bottom"
                             interactive="true"
                             appendTo={() => document.body}
-                            visible={showResult && searchResult.length > 0}
+                            visible={showResult && searchSuggestions.length > 0}
                             render={attrs => (
                                 <div className="search-result" tabIndex="-1" {...attrs}>
                                     <div className="search-result-text">Điểm đến được ưa thích gần đây</div>
                                     {destinations.map((destination, index) => {
-                                            return (
-                                                <div className="search-result-place">
-                                                    <div className="search-result-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 8.25a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm1.5 0a4.5 4.5 0 1 0-9 0 4.5 4.5 0 0 0 9 0zM12 1.5a6.75 6.75 0 0 1 6.75 6.75c0 2.537-3.537 9.406-6.75 14.25-3.214-4.844-6.75-11.713-6.75-14.25A6.75 6.75 0 0 1 12 1.5zM12 0a8.25 8.25 0 0 0-8.25 8.25c0 2.965 3.594 9.945 7 15.08a1.5 1.5 0 0 0 2.5 0c3.406-5.135 7-12.115 7-15.08A8.25 8.25 0 0 0 12 0z"></path></svg>
-                                                    </div>
+                                        return (
+                                            <div className="search-result-place">
+                                                <div className="search-result-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 8.25a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm1.5 0a4.5 4.5 0 1 0-9 0 4.5 4.5 0 0 0 9 0zM12 1.5a6.75 6.75 0 0 1 6.75 6.75c0 2.537-3.537 9.406-6.75 14.25-3.214-4.844-6.75-11.713-6.75-14.25A6.75 6.75 0 0 1 12 1.5zM12 0a8.25 8.25 0 0 0-8.25 8.25c0 2.965 3.594 9.945 7 15.08a1.5 1.5 0 0 0 2.5 0c3.406-5.135 7-12.115 7-15.08A8.25 8.25 0 0 0 12 0z"></path></svg>
+                                                </div>
                                                 <div className="search-result-title">{destination.dest}</div>
                                             </div>
-                                    )})}
+                                        )
+                                    })}
                                 </div>
                             )}
                             onClickOutside={handleHideResult}
@@ -203,21 +214,21 @@ const Header = () => {
                                 <div className="header-search-item">
                                     <div className="header-search-text">
                                         <span className="header-icon">
-                                            <svg onChange={(event) => setInputValue(event.target.value)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.75 12h18.5c.69 0 1.25.56 1.25 1.25V18l.75-.75H.75l.75.75v-4.75c0-.69.56-1.25 1.25-1.25zm0-1.5A2.75 2.75 0 0 0 0 13.25V18c0 .414.336.75.75.75h22.5A.75.75 0 0 0 24 18v-4.75a2.75 2.75 0 0 0-2.75-2.75H2.75zM0 18v3a.75.75 0 0 0 1.5 0v-3A.75.75 0 0 0 0 18zm22.5 0v3a.75.75 0 0 0 1.5 0v-3a.75.75 0 0 0-1.5 0zm-.75-6.75V4.5a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 2.25 4.5v6.75a.75.75 0 0 0 1.5 0V4.5a.75.75 0 0 1 .75-.75h15a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 0 1.5 0zm-13.25-3h7a.25.25 0 0 1 .25.25v2.75l.75-.75h-9l.75.75V8.5a.25.25 0 0 1 .25-.25zm0-1.5A1.75 1.75 0 0 0 6.75 8.5v2.75c0 .414.336.75.75.75h9a.75.75 0 0 0 .75-.75V8.5a1.75 1.75 0 0 0-1.75-1.75h-7z"></path></svg>
+                                            <svg onChange={(event) => setDestInput(event.target.value)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.75 12h18.5c.69 0 1.25.56 1.25 1.25V18l.75-.75H.75l.75.75v-4.75c0-.69.56-1.25 1.25-1.25zm0-1.5A2.75 2.75 0 0 0 0 13.25V18c0 .414.336.75.75.75h22.5A.75.75 0 0 0 24 18v-4.75a2.75 2.75 0 0 0-2.75-2.75H2.75zM0 18v3a.75.75 0 0 0 1.5 0v-3A.75.75 0 0 0 0 18zm22.5 0v3a.75.75 0 0 0 1.5 0v-3a.75.75 0 0 0-1.5 0zm-.75-6.75V4.5a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 2.25 4.5v6.75a.75.75 0 0 0 1.5 0V4.5a.75.75 0 0 1 .75-.75h15a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 0 1.5 0zm-13.25-3h7a.25.25 0 0 1 .25.25v2.75l.75-.75h-9l.75.75V8.5a.25.25 0 0 1 .25-.25zm0-1.5A1.75 1.75 0 0 0 6.75 8.5v2.75c0 .414.336.75.75.75h9a.75.75 0 0 0 .75-.75V8.5a1.75 1.75 0 0 0-1.75-1.75h-7z"></path></svg>
                                         </span>
                                         <input
                                             ref={inputRef}
-                                            value={inputValue}
+                                            value={destInput}
                                             type="text"
                                             placeholder="Bạn muốn đến đâu?"
                                             spellCheck={false}
-                                            onChange={(event) => setInputValue(event.target.value)}
+                                            onChange={(event) => setDestInput(event.target.value)}
                                             onFocus={() => setShowResult(true)}
                                             className="header-search-input"
                                         />
                                         {errorMessage && buttonClicked && <div className="error-message" ref={componentRef3}><div className="icon-up"><FontAwesomeIcon icon={faCaretUp} /></div>{errorMessage}</div>}
                                     </div>
-                                    {!!inputValue && (
+                                    {!!destInput && (
                                         <FontAwesomeIcon
                                             icon={faXmark}
                                             onClick={() => handleClear()}
@@ -234,10 +245,10 @@ const Header = () => {
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.5 13.5v8.25a.75.75 0 0 1-.75.75H2.25a.75.75 0 0 1-.75-.75V5.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v8.25zm1.5 0V5.25A2.25 2.25 0 0 0 21.75 3H2.25A2.25 2.25 0 0 0 0 5.25v16.5A2.25 2.25 0 0 0 2.25 24h19.5A2.25 2.25 0 0 0 24 21.75V13.5zm-23.25-3h22.5a.75.75 0 0 0 0-1.5H.75a.75.75 0 0 0 0 1.5zM7.5 6V.75a.75.75 0 0 0-1.5 0V6a.75.75 0 0 0 1.5 0zM18 6V.75a.75.75 0 0 0-1.5 0V6A.75.75 0 0 0 18 6zM5.095 14.03a.75.75 0 1 0 1.06-1.06.75.75 0 0 0-1.06 1.06zm.53-1.28a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25.75.75 0 0 0 0 1.5.375.375 0 1 1 0-.75.375.375 0 0 1 0 .75.75.75 0 0 0 0-1.5zm-.53 6.53a.75.75 0 1 0 1.06-1.06.75.75 0 0 0-1.06 1.06zm.53-1.28a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25.75.75 0 0 0 0 1.5.375.375 0 1 1 0-.75.375.375 0 0 1 0 .75.75.75 0 0 0 0-1.5zm5.845-3.97a.75.75 0 1 0 1.06-1.06.75.75 0 0 0-1.06 1.06zm.53-1.28A1.125 1.125 0 1 0 12 15a1.125 1.125 0 0 0 0-2.25.75.75 0 0 0 0 1.5.375.375 0 1 1 0-.75.375.375 0 0 1 0 .75.75.75 0 0 0 0-1.5zm-.53 6.53a.75.75 0 1 0 1.06-1.06.75.75 0 0 0-1.06 1.06zM12 18a1.125 1.125 0 1 0 0 2.25A1.125 1.125 0 0 0 12 18a.75.75 0 0 0 0 1.5.375.375 0 1 1 0-.75.375.375 0 0 1 0 .75.75.75 0 0 0 0-1.5zm5.845-3.97a.75.75 0 1 0 1.06-1.06.75.75 0 0 0-1.06 1.06zm.53-1.28a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25.75.75 0 0 0 0 1.5.375.375 0 1 1 0-.75.375.375 0 0 1 0 .75.75.75 0 0 0 0-1.5zm-.53 6.53a.75.75 0 1 0 1.06-1.06.75.75 0 0 0-1.06 1.06zm.53-1.28a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25.75.75 0 0 0 0 1.5.375.375 0 1 1 0-.75.375.375 0 0 1 0 .75.75.75 0 0 0 0-1.5z"></path></svg>
                                     </span>
 
-                                    <span className="header-option-text" onClick={() => setOpenDate(!openDate)}>{defaultText?`Ngày nhận phòng - Ngày trả phòng` :`${format(date[0].startDate, "EEE, dd/MM/yyyy", { locale: vi })} - ${format(date[0].endDate, "EEE, dd/MM/yyyy", { locale: vi })}`}</span>
+                                    <span className="header-option-text" onClick={() => setOpenDate(!openDate)}>{defaultText ? `Ngày nhận phòng - Ngày trả phòng` : `${format(date[0].startDate, "EEE, dd/MM/yyyy", { locale: vi })} - ${format(date[0].endDate, "EEE, dd/MM/yyyy", { locale: vi })}`}</span>
                                     {openDate && <DateRange
                                         editableDateInputs={true}
-                                        onChange={item => {setDate([item.selection]); setDefaultText(false);}}
+                                        onChange={item => { setDate([item.selection]); setDefaultText(false); }}
                                         moveRangeOnFirstSelection={false}
                                         ranges={date}
                                         className="date"
@@ -258,25 +269,25 @@ const Header = () => {
                                         <div className="option-item">
                                             <span className="option-text">Người lớn</span>
                                             <div className="option-counter">
-                                                <button disabled={options.adult <= 1} className="option-counter-btn" onClick={() => handleOption("adult", "d")}>-</button>
+                                                <button disabled={options.adult <= 1} className="option-counter-btn" onClick={(event) => handleOption(event, "adult", "d")}>-</button>
                                                 <span className="option-counter-number">{options.adult}</span>
-                                                <button className="option-counter-btn" onClick={() => handleOption("adult", "i")}>+</button>
+                                                <button className="option-counter-btn" onClick={(event) => handleOption(event, "adult", "i")}>+</button>
                                             </div>
                                         </div>
                                         <div className="option-item">
                                             <span className="option-text">Trẻ em</span>
                                             <div className="option-counter">
-                                                <button disabled={options.children <= 0} className="option-counter-btn" onClick={() => handleOption("children", "d")}>-</button>
+                                                <button disabled={options.children <= 0} className="option-counter-btn" onClick={(event) => handleOption(event, "children", "d")}>-</button>
                                                 <span className="option-counter-number">{options.children}</span>
-                                                <button className="option-counter-btn" onClick={() => handleOption("children", "i")}>+</button>
+                                                <button className="option-counter-btn" onClick={(event) => handleOption(event, "children", "i")}>+</button>
                                             </div>
                                         </div>
                                         <div className="option-item">
                                             <span className="option-text">Phòng</span>
                                             <div className="option-counter">
-                                                <button disabled={options.room <= 1} className="option-counter-btn" onClick={() => handleOption("room", "d")}>-</button>
+                                                <button disabled={options.room <= 1} className="option-counter-btn" onClick={(event) => handleOption(event, "room", "d")}>-</button>
                                                 <span className="option-counter-number">{options.room}</span>
-                                                <button className="option-counter-btn" onClick={() => handleOption("room", "i")}>+</button>
+                                                <button className="option-counter-btn" onClick={(event) => handleOption(event, "room", "i")}>+</button>
                                             </div>
                                         </div>
                                         <button className="option-end" onClick={() => setOpenOptions(!openOptions)}>Xong</button>
@@ -287,7 +298,7 @@ const Header = () => {
                                 </div>
                             </div>
                         </div>
-                        <button className="header-btn" onClick={handleButtonClick} ref={headerBtnRef}>Tìm kiếm</button>
+                        <button className="header-btn" ref={headerBtnRef}>Tìm kiếm</button>
                     </form>
                 </div>
             </div>

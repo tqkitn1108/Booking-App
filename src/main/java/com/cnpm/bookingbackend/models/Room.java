@@ -17,6 +17,7 @@ import java.util.List;
 public class Room {
     @Id
     private String id;
+    private String roomNumber;
     private List<LocalDate> unavailableDates;
     @DocumentReference(lazy = true)
     private List<Booking> bookings;

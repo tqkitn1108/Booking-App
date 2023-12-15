@@ -1,6 +1,8 @@
 package com.cnpm.bookingbackend.services;
 
+import com.cnpm.bookingbackend.dtos.request.FilterHotelDto;
 import com.cnpm.bookingbackend.dtos.request.HotelDto;
+import com.cnpm.bookingbackend.dtos.request.SearchHotelDto;
 import com.cnpm.bookingbackend.models.Hotel;
 import com.cnpm.bookingbackend.models.Room;
 import com.cnpm.bookingbackend.models.RoomType;
@@ -11,9 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class HotelService {
@@ -39,13 +39,13 @@ public class HotelService {
         return hotelsPage;
     }
 
-    public Page<Hotel> availableHotels(int page, int size, Map<String, String> filters) {
-        String dest = filters.get("dest");
-        LocalDate checkIn = LocalDate.parse(filters.get("checkin"));
-        LocalDate checkOut = LocalDate.parse(filters.get("checkout"));
-        int adults = Integer.parseInt(filters.get("adults"));
-        int children = Integer.parseInt(filters.get("children"));
-        int noRooms = Integer.parseInt(filters.get("no_rooms"));
+    public Page<Hotel> searchHotels(int page, int size, SearchHotelDto searchHotelDto, FilterHotelDto filter) {
+        String dest = searchHotelDto.getLocation();
+        LocalDate checkIn = searchHotelDto.getCheckIn();
+        LocalDate checkOut = searchHotelDto.getCheckOut();
+        int adults = searchHotelDto.getAdults();
+        int children = searchHotelDto.getChildren();
+        int noRooms = searchHotelDto.getNoRooms();
 
         List<Hotel> hotelList = hotelRepository.findByDest(dest).stream().filter(hotel -> {
             int maxPeople = 0, numOfRooms = 0;
@@ -56,6 +56,7 @@ public class HotelService {
             }
             return maxPeople >= adults + children / 4 || numOfRooms >= noRooms - 1;
         }).toList();
+        hotelList = filterHotels(hotelList, filter);
         return new PageImpl<>(hotelList,
                 PageRequest.of(page, size, Sort.by("rating").descending()), hotelList.size());
     }
@@ -99,9 +100,30 @@ public class HotelService {
         return map;
     }
 
-    public Page<Hotel> filterHotels(String dest, List<String> star, List<String> types, List<String> rating,
-                                    List<String> facilities, List<String> amenities,
-                                    Integer pageNumber, Integer pageSize) {
-        return null;
+    public List<Hotel> filterHotels(List<Hotel> hotels, FilterHotelDto filter) {
+        List<Hotel> filteredHotel = hotels;
+        if(filter.getStar()!= null){
+            filteredHotel = filteredHotel.stream().filter(hotel -> filter.getStar()
+                    .stream().anyMatch(star -> Objects.equals(star, hotel.getStar()))).toList();
+        }
+        if(filter.getType()!= null){
+            filteredHotel = filteredHotel.stream().filter(hotel -> filter.getType()
+                    .stream().anyMatch(type -> Objects.equals(type, hotel.getType()))).toList();
+        }
+        if(filter.getRating()!= null){
+            List<Float> ratingInFloat = filter.getRating().stream().map(rating -> {
+                if(rating.equals("wonderful")) return 9F;
+                if(rating.equals("excellent")) return 8F;
+                if(rating.equals("good")) return 7F;
+                return 6F;
+            }).toList();
+            filteredHotel = filteredHotel.stream().filter(hotel -> ratingInFloat
+                    .stream().anyMatch(rating -> hotel.getRating() >= rating)).toList();
+        }
+        if(filter.getFacilities()!= null){
+            filteredHotel = filteredHotel.stream().filter(hotel -> filter.getFacilities()
+                    .stream().anyMatch(facility -> hotel.getFacilities().contains(facility))).toList();
+        }
+        return filteredHotel;
     }
 }

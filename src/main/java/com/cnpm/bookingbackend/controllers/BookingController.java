@@ -23,13 +23,13 @@ public class BookingController {
 
     @GetMapping("/{userId}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<Booking>> getAllUserBookings(@PathVariable String userId) {
+    public ResponseEntity<List<Booking>> getBookingsOfUser(@PathVariable String userId) {
         return ResponseEntity.ok(bookingService.allUserBookings(userId));
     }
 
     @GetMapping("/{hotelId}")
     @PreAuthorize("hasRole('HOTEL')")
-    public ResponseEntity<List<Booking>> getAllHotelBookings(@PathVariable String hotelId) {
+    public ResponseEntity<List<Booking>> getBookingsOfHotel(@PathVariable String hotelId) {
         return ResponseEntity.ok(bookingService.allHotelBookings(hotelId));
     }
 

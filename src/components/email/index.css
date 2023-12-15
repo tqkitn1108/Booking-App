@@ -38,3 +38,21 @@
   cursor: pointer;
   padding: 0px 15px;
 }
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+.error {
+  border: 2px solid red;
+}
+
+.errorInput {
+  border: 2px solid red;
+}
+.errorText {
+  color: red; /* Change to the desired shade of red */
+  font-size: 18px; /* Adjust the font size as needed */
+
+  margin-top: 0px; /* Adjust the top margin as needed */
+}

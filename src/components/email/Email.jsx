@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
+import { ErrorMessage } from "formik";
 import "./index.css";
 
 const MailList = () => {
@@ -10,7 +10,9 @@ const MailList = () => {
       email: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email("Invalid email address").required("Required"),
+      email: Yup.string()
+      .email("⚠️ Invalid email address")
+      .required("⚠️ Required"),
     }),
     onSubmit: (values) => {
       console.log(values);
@@ -20,9 +22,11 @@ const MailList = () => {
   return (
     <div className="mail system-font">
       <h1 className="mailTitle system-font">Save time, save money!</h1>
-      <span className="mailDesc system-font">Sign up and we'll send the best deals to you</span>
+      <span className="mailDesc system-font">
+        Sign up and we'll send the best deals to you
+      </span>
       <form onSubmit={formik.handleSubmit}>
-        <div className="mailInputContainer system-font">
+        <div className="mailInputContainer system-font mb-2">
           <input
             type="text"
             placeholder="Your Email"
@@ -31,10 +35,12 @@ const MailList = () => {
             onChange={formik.handleChange}
             value={formik.values.email}
           />
-          
           <button type="submit">Subscribe</button>
-         
+          
         </div>
+        {formik.touched.email && formik.errors.email && (
+          <div className="errorText">{formik.errors.email}</div>
+        )}
       </form>
     </div>
   );

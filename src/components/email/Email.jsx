@@ -12,7 +12,7 @@ const MailList = () => {
     validationSchema: Yup.object({
       email: Yup.string()
       .email("⚠️ Invalid email address")
-      .required("⚠️ Required"),
+      .required(""),
     }),
     onSubmit: (values) => {
       console.log(values);

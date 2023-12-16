@@ -282,6 +282,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    width: 270px;
 }
 input::placeholder {
     color: black;

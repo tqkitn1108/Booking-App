@@ -40,21 +40,33 @@ const Header = () => {
     const navigate = useNavigate();
     const handleSearch = (event) => {
         event.preventDefault();
+    
         if (destInput.trim() === '') {
             setErrorMessage('Vui lòng nhập điểm đến để bắt đầu tìm kiếm.');
         } else {
             setErrorMessage('');
         }
-        setButtonClicked(true);
+    
         if (!dateSelected) {
-            setOpenDate(true);
+            // Nếu chưa chọn ngày
+            setButtonClicked(true); // Đánh dấu rằng người dùng đã nhấn nút
+            setOpenDate(true); // Hiển thị DateRanger
         } else {
-        const location = destInput.replaceAll(' ', '%20');
-        const checkIn = format(date[0].startDate, 'yyyy-MM-dd');
-        const checkOut = format(date[0].endDate, 'yyyy-MM-dd');
-        navigate(`/search?location=${location}&page=0&size=3&checkin=${checkIn}&checkout=${checkOut}&adults=${options.adult}&children=${options.children}&no_rooms=${options.room}`)
+            // Nếu đã chọn ngày
+            if (destInput.trim() === '') {
+                // Nếu chưa nhập địa chỉ
+                setErrorMessage('Vui lòng nhập điểm đến để bắt đầu tìm kiếm.');
+                setButtonClicked(true); // Đánh dấu rằng người dùng đã nhấn nút
+            } else {
+                // Xử lý tìm kiếm khi có đủ điều kiện
+                const location = destInput.replaceAll(' ', '%20');
+                const checkIn = format(date[0].startDate, 'yyyy-MM-dd');
+                const checkOut = format(date[0].endDate, 'yyyy-MM-dd');
+                navigate(`/search?location=${location}&page=0&size=3&checkin=${checkIn}&checkout=${checkOut}&adults=${options.adult}&children=${options.children}&no_rooms=${options.room}`);
+            }
         }
-    };
+    };       
+    
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (buttonClicked && !event.target.closest('.header-btn')) {

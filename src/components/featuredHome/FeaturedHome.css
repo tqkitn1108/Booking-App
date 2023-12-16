@@ -82,5 +82,14 @@
     font-size: 14px;
     color: #777; /* Màu chữ xám */
   }
+
+  @media (max-width: 46.1875em) {
+    .fpImg {
+      height: 130px;
+    }
+    .fpTitles {
+      height: 118px;
+    }
+}
   
   

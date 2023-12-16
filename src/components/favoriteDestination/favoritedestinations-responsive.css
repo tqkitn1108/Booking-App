@@ -1,0 +1,14 @@
+@media (max-width: 46.1875em) {
+    .nav-tabs {
+        overflow-x: scroll !important;
+    }
+    .nav-tabs::-webkit-scrollbar {
+        display: none;
+    }
+    .nav {
+        flex-wrap: nowrap !important;
+    }
+    .tab-label {
+        white-space: nowrap !important;
+    }
+}

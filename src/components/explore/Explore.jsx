@@ -8,9 +8,24 @@ import { countByDest } from '../../api/ApiFunctions';
 import { useEffect, useState } from "react";
 
 const Explore = () => {
-
+    const [slidesPerView, setSlidesPerView] = useState(6);
     const [numProperties, setNumProperties] = useState({});
+    useEffect(() => {
+        const updateSlidesPerView = () => {
+            if (window.innerWidth <= 46.1875 * 16) {  // Chuyển đổi từ em sang px
+                setSlidesPerView(4);
+            } else {
+                setSlidesPerView(6);
+            }
+        };
 
+        window.addEventListener('resize', updateSlidesPerView);
+        updateSlidesPerView();  // Đặt giá trị ban đầu khi trang được tải
+
+        return () => {
+            window.removeEventListener('resize', updateSlidesPerView);
+        };
+    }, []);
     useEffect(() => {
         async function countExploreProperties() {
             const destParams = destinations.reduce((list, destination) => list + `,${destination.dest}`, "");
@@ -27,7 +42,7 @@ const Explore = () => {
     return (
         <div className="explore">
             <>
-                <Swiper navigation={true} modules={[Navigation]} slidesPerView={6} spaceBetween={16}>
+                <Swiper navigation={true} modules={[Navigation]} slidesPerView={slidesPerView} spaceBetween={16}>
                     {destinations.map((destination, i) => {
                         return (<SwiperSlide key={i}>
                             <div className="explore-item">

@@ -9,6 +9,23 @@ import { countByType } from '../../api/ApiFunctions';
 
 const PropertyType = () => {
     const [numProperties, setNumProperties] = useState({});
+    const [slidesPerView, setSlidesPerView] = useState(4);
+    useEffect(() => {
+        const updateSlidesPerView = () => {
+            if (window.innerWidth <= 46.1875 * 16) {  // Chuyển đổi từ em sang px
+                setSlidesPerView(3);
+            } else {
+                setSlidesPerView(4);
+            }
+        };
+
+        window.addEventListener('resize', updateSlidesPerView);
+        updateSlidesPerView();  // Đặt giá trị ban đầu khi trang được tải
+
+        return () => {
+            window.removeEventListener('resize', updateSlidesPerView);
+        };
+    }, []);
 
     useEffect(() => {
         async function countProperties() {
@@ -26,7 +43,7 @@ const PropertyType = () => {
     return (
         <div className="property-type">
             <>
-                <Swiper navigation={true} modules={[Navigation]} slidesPerView={4} spaceBetween={16}>
+                <Swiper navigation={true} modules={[Navigation]} slidesPerView={slidesPerView} spaceBetween={16}>
                     {propertyTypes.map((propertyType, i) => {
                         return (<SwiperSlide key={i}>
                             <div className="ptype-item">

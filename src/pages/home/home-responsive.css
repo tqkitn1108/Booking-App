@@ -1,7 +1,7 @@
-@media (min-width:  46.1875em) and (max-width: 63.9375em) {
+@media (min-width:  46.1875em) and (max-width: 68.74em) {
     .home-container {
         width: 100%;
-        max-width: 600px;
+        max-width: 700px;
     }
 }
 @media (max-width: 46.1875em) {
@@ -9,10 +9,4 @@
         width: 100%;
         max-width: 350px;
     }
-    .swiper-button-prev,
-    .swiper-button-next {
-        position: static;
-        display: none;
-    }
-    
 }

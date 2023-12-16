@@ -34,6 +34,7 @@
     align-items: center;
     gap: 10px;
     padding: 10px;
+    white-space: nowrap;
 }
 .header-list-item:hover {
     cursor: pointer;
@@ -45,9 +46,7 @@
     border-radius: 20px;
     background-color: #0c50b0;
 }
-.header-list-item .header-list-text  {
-    white-space: nowrap;
-}
+
 .header-title {
     margin: 76px 0px 4px;
     font-size: 48px;

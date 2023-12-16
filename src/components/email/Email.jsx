@@ -1,4 +1,5 @@
 import "./index.css";
+import "./email-responsive.css";
 
 const MailList = () => {
   return (

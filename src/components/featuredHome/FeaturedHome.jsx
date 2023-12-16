@@ -1,13 +1,30 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-
+import { useEffect, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
 import './FeaturedHome.css'; 
 
 const FeaturedProperties = () => {
+  const [slidesPerView, setSlidesPerView] = useState(4);
+    useEffect(() => {
+        const updateSlidesPerView = () => {
+            if (window.innerWidth <= 46.1875 * 16) {  // Chuyển đổi từ em sang px
+                setSlidesPerView(2);
+            } else {
+                setSlidesPerView(4);
+            }
+        };
+
+        window.addEventListener('resize', updateSlidesPerView);
+        updateSlidesPerView();  // Đặt giá trị ban đầu khi trang được tải
+
+        return () => {
+            window.removeEventListener('resize', updateSlidesPerView);
+        };
+    }, []);
   const properties = [
     {
       imgSrc:
@@ -55,7 +72,7 @@ const FeaturedProperties = () => {
   return (
     <div className="fp">
       <>
-        <Swiper navigation={true} modules={[Navigation]} slidesPerView={4} spaceBetween={16}>
+        <Swiper navigation={true} modules={[Navigation]} slidesPerView={slidesPerView} spaceBetween={16}>
           {properties.map((property, index) => (
             <SwiperSlide key={index}>
               <div className="fpItem">

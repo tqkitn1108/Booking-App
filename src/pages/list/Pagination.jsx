@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './Pagi.css'
 import '@fortawesome/fontawesome-free/css/all.css';
-const Pagination = ({ totalItems, itemsPerPage, onPageChange }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+import { useNavigate } from 'react-router-dom';
 
+const Pagination = ({ currentPage, totalPages, onPageChange, searchParams }) => {
+  const navigate = useNavigate();
   useEffect(() => {
     onPageChange(currentPage);
-    // Do something when currentPage changes, like fetching new data
-  }, [currentPage, onPageChange]);
+  }, [currentPage]);
 
   const handlePageChange = (page) => {
-    setCurrentPage(page);
+    searchParams.set('page', page - 1);
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` });
+    onPageChange(page);
   };
 
   const renderPagination = () => {
@@ -32,7 +34,7 @@ const Pagination = ({ totalItems, itemsPerPage, onPageChange }) => {
             width: '30px',
             borderRadius: '100%',
             fontSize: '14px',
-            
+
           }}
         >
           {i}
@@ -43,23 +45,23 @@ const Pagination = ({ totalItems, itemsPerPage, onPageChange }) => {
   };
   const goToPrevPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      handlePageChange(currentPage - 1);
     }
   };
 
   const goToNextPage = () => {
     if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
+      handlePageChange(currentPage + 1);
     }
   };
   return (
     <div className="pagination-container">
       <button onClick={goToPrevPage} disabled={currentPage === 1} className="pagination-button">
-      <i className="fas fa-arrow-left"></i>
+        <i className="fas fa-arrow-left"></i>
       </button >
-      {renderPagination() }
+      {renderPagination()}
       <button onClick={goToNextPage} disabled={currentPage === totalPages} className="pagination-button">
-      <i className="fas fa-arrow-right"></i>
+        <i className="fas fa-arrow-right"></i>
       </button>
     </div>
   );

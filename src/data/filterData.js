@@ -1,14 +1,14 @@
-export const filter = [
+export const filters = [
   {
     id: "star",
     name: "Xếp hạng chỗ nghỉ",
     options: [
-      {value: "1_star", label: "1 sao"},
-      {value: "2_star", label: "2 sao"},
-      {value: "3_star", label: "3 sao"},
-      {value: "4_star", label: "4 sao"},
-      {value: "5_star", label: "5 sao"},
-      {value: "no_star", label: "Không xếp hạng"}
+      {value: '1', label: "1 sao"},
+      {value: '2', label: "2 sao"},
+      {value: '3', label: "3 sao"},
+      {value: '4', label: "4 sao"},
+      {value: '5', label: "5 sao"},
+      {value: '0', label: "Không xếp hạng"}
     ]
   },
   {
@@ -42,16 +42,16 @@ export const filter = [
       {value: "parking", label: "Chỗ đỗ xe"},
       {value: "pool", label: "Hồ bơi"}
     ]
-  },
-  {
-    id: "amenities",
-    name: "Tiện nghi phòng",
-    options: [
-      {value: "ocean_view", label: "Nhìn ra biển"},
-      {value: "private_bathroom", label: "Phòng tắm riêng"},
-      {value: "private_pool", label: "Hồ bơi riêng"},
-      {value: "balcony", label: "Ban công"},
-      {value: "bathtub", label: "Bồn tắm"}
-    ]
   }
+  // {
+  //   id: "amenities",
+  //   name: "Tiện nghi phòng",
+  //   options: [
+  //     {value: "ocean_view", label: "Nhìn ra biển"},
+  //     {value: "private_bathroom", label: "Phòng tắm riêng"},
+  //     {value: "private_pool", label: "Hồ bơi riêng"},
+  //     {value: "balcony", label: "Ban công"},
+  //     {value: "bathtub", label: "Bồn tắm"}
+  //   ]
+  // }
 ]

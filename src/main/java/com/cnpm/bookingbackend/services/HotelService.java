@@ -4,9 +4,11 @@ import com.cnpm.bookingbackend.dtos.request.FilterHotelDto;
 import com.cnpm.bookingbackend.dtos.request.HotelDto;
 import com.cnpm.bookingbackend.dtos.request.SearchHotelDto;
 import com.cnpm.bookingbackend.models.Hotel;
-import com.cnpm.bookingbackend.models.Room;
 import com.cnpm.bookingbackend.models.RoomType;
+import com.cnpm.bookingbackend.repo.FacilityRepository;
 import com.cnpm.bookingbackend.repo.HotelRepository;
+import com.cnpm.bookingbackend.repo.PropertyTypeRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -16,14 +18,12 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class HotelService {
     private final HotelRepository hotelRepository;
+    private final PropertyTypeRepository typeRepository;
+    private final FacilityRepository facilityRepository;
     private MongoTemplate mongoTemplate;
-
-    public HotelService(HotelRepository hotelRepository, MongoTemplate mongoTemplate) {
-        this.hotelRepository = hotelRepository;
-        this.mongoTemplate = mongoTemplate;
-    }
 
     public Hotel singleHotel(String id) {
         return hotelRepository.findById(id).orElse(null);
@@ -63,6 +63,9 @@ public class HotelService {
 
     public Hotel newHotel(HotelDto hotelDto) {
         Hotel hotel = hotelDto.toHotel();
+        hotel.setType(typeRepository.findByLabel(hotelDto.getType()).orElse(null));
+        hotel.setFacilities(hotelDto.getFacilities().stream().map(facility ->
+                facilityRepository.findByLabel(facility).orElse(null)).toList());
         hotel.setRating(0F);
         return hotelRepository.save(hotel);
     }
@@ -96,33 +99,34 @@ public class HotelService {
 
     public Map<String, Integer> countByType(List<String> types) {
         Map<String, Integer> map = new HashMap<>();
-        types.forEach(type -> map.put(type, hotelRepository.findByType(type).size()));
+        types.forEach(type -> map.put(type, hotelRepository.findByType(typeRepository.findByLabel(type).orElse(null)).size()));
         return map;
     }
 
     public List<Hotel> filterHotels(List<Hotel> hotels, FilterHotelDto filter) {
         List<Hotel> filteredHotel = hotels;
-        if(filter.getStar()!= null){
+        if (filter.getStar() != null) {
             filteredHotel = filteredHotel.stream().filter(hotel -> filter.getStar()
                     .stream().anyMatch(star -> Objects.equals(star, hotel.getStar()))).toList();
         }
-        if(filter.getType()!= null){
+        if (filter.getType() != null) {
             filteredHotel = filteredHotel.stream().filter(hotel -> filter.getType()
-                    .stream().anyMatch(type -> Objects.equals(type, hotel.getType()))).toList();
+                    .stream().anyMatch(type -> Objects.equals(type, hotel.getType().getName()))).toList();
         }
-        if(filter.getRating()!= null){
+        if (filter.getRating() != null) {
             List<Float> ratingInFloat = filter.getRating().stream().map(rating -> {
-                if(rating.equals("wonderful")) return 9F;
-                if(rating.equals("excellent")) return 8F;
-                if(rating.equals("good")) return 7F;
+                if (rating.equals("wonderful")) return 9F;
+                if (rating.equals("excellent")) return 8F;
+                if (rating.equals("good")) return 7F;
                 return 6F;
             }).toList();
             filteredHotel = filteredHotel.stream().filter(hotel -> ratingInFloat
                     .stream().anyMatch(rating -> hotel.getRating() >= rating)).toList();
         }
-        if(filter.getFacilities()!= null){
+        if (filter.getFacilities() != null) {
             filteredHotel = filteredHotel.stream().filter(hotel -> filter.getFacilities()
-                    .stream().anyMatch(facility -> hotel.getFacilities().contains(facility))).toList();
+                    .stream().anyMatch(facility ->
+                            hotel.getFacilities().contains(facilityRepository.findByName(facility).orElse(null)))).toList();
         }
         return filteredHotel;
     }

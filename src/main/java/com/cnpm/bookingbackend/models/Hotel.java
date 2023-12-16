@@ -1,5 +1,7 @@
 package com.cnpm.bookingbackend.models;
 
+import com.cnpm.bookingbackend.models.hotelattributemodels.Facility;
+import com.cnpm.bookingbackend.models.hotelattributemodels.PropertyType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,11 +25,13 @@ public class Hotel {
     private String phoneNumber;
     private String email;
     private Integer star;
-    private String type;
+    @DocumentReference(lazy = true)
+    private PropertyType type;
     private String dest;
     private String address;
     private List<String> photos;
-    private List<String> facilities;
+    @DocumentReference(lazy = true)
+    private List<Facility> facilities;
     private String description;
     private Float rating;
     @DocumentReference

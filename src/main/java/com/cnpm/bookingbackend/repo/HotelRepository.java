@@ -1,6 +1,7 @@
 package com.cnpm.bookingbackend.repo;
 
 import com.cnpm.bookingbackend.models.Hotel;
+import com.cnpm.bookingbackend.models.hotelattributemodels.PropertyType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -18,7 +19,7 @@ public interface HotelRepository extends MongoRepository<Hotel, String> {
 
     Page<Hotel> findByDest(String dest, Pageable pageable);
 
-    List<Hotel> findByType(String type);
+    List<Hotel> findByType(PropertyType type);
 
     Page<Hotel> findByStar(Integer star, Pageable pageable);
 

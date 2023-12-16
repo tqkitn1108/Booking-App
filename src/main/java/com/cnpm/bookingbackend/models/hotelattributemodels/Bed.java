@@ -1,4 +1,4 @@
-package com.cnpm.bookingbackend.models;
+package com.cnpm.bookingbackend.models.hotelattributemodels;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

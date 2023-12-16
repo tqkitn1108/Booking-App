@@ -38,11 +38,9 @@ public class HotelDto {
                 .setPhoneNumber(phoneNumber)
                 .setEmail(email)
                 .setStar(star)
-                .setType(type)
                 .setDest(dest)
                 .setAddress(address)
                 .setPhotos(photos)
-                .setFacilities(facilities)
                 .setDescription(description);
     }
 }

@@ -21,8 +21,7 @@ public class Room {
     private List<LocalDate> unavailableDates;
     @DocumentReference(lazy = true)
     private List<Booking> bookings;
-    @DocumentReference(lazy = true)
-    private RoomType roomType;
+    private String roomTypeId;
     public Room() {
         unavailableDates = new ArrayList<>();
         bookings = new ArrayList<>();

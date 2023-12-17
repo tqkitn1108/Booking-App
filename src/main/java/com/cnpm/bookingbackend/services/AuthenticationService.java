@@ -38,7 +38,7 @@ public class AuthenticationService {
         if (userRepository.findByEmail(email).isPresent()) {
             throw new Exception("User with email " + input.getEmail() + " already exists");
         }
-        Optional<Role> optionalRole = roleRepository.findByName(ERole.USER);
+        Optional<Role> optionalRole = roleRepository.findByName(input.getRole() == null ? ERole.USER : input.getRole());
         if (optionalRole.isEmpty()) return null;
 
         User user = new User(input.getFullName(), email, passwordEncoder.encode(input.getPassword()));
@@ -58,7 +58,7 @@ public class AuthenticationService {
         if (theToken.isEmpty()) return "Invalid verification token";
         User user = theToken.get().getUser();
         if (user.isVerified()) return "This account has been verified, please login.";
-        if(theToken.get().getExpirationTime().getTime() < System.currentTimeMillis()){
+        if (theToken.get().getExpirationTime().getTime() < System.currentTimeMillis()) {
             tokenRepository.delete(theToken.get());
             return "Token already expired";
         }

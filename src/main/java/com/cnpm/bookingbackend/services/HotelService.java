@@ -57,8 +57,11 @@ public class HotelService {
             return maxPeople >= adults + children / 4 || numOfRooms >= noRooms - 1;
         }).toList();
         hotelList = filterHotels(hotelList, filter);
-        return new PageImpl<>(hotelList,
-                PageRequest.of(page, size, Sort.by("rating").descending()), hotelList.size());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("rating").descending());
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), hotelList.size());
+        List<Hotel> hotels = hotelList.subList(start, end);
+        return new PageImpl<>(hotels,pageable, hotelList.size());
     }
 
     public Hotel newHotel(HotelDto hotelDto) {

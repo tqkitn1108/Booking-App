@@ -110,8 +110,8 @@ const Signup = () => {
                                                     </div>
                                                 </>}
                                             {!successMessage && <form onSubmit={formik.handleSubmit}>
-                                                <div className="form-outline mb-4" style={customStyle.formGroup}>
-                                                    <label className="form-label" htmlFor="fullName" style={{ ...customStyle.label, fontWeight: 'bold' }}>
+                                                <div className="form-outline mb-3" style={{ ...customStyle.label, fontWeight: 'bold' }}>
+                                                    <label className="form-label" htmlFor="fullName" style={customStyle.label}>
                                                         Full Name <span className="required text-danger">*</span>
                                                     </label>
                                                     <input
@@ -130,7 +130,7 @@ const Signup = () => {
                                                 </div>
 
                                                 {/* Your Email Input */}
-                                                <div className="form-outline mb-4" style={{ ...customStyle.label, fontWeight: 'bold' }}>
+                                                <div className="form-outline mb-3" style={{ ...customStyle.label, fontWeight: 'bold' }}>
                                                     <label className="form-label" htmlFor="email" style={customStyle.label}>
                                                         Your Email <span className="required text-danger">*</span>
                                                     </label>
@@ -150,7 +150,7 @@ const Signup = () => {
                                                 </div>
 
                                                 {/* Your Password Input */}
-                                                <div className="form-outline mb-4" style={{ ...customStyle.label, fontWeight: 'bold', position: 'relative' }}>
+                                                <div className="form-outline mb-3" style={{ ...customStyle.label, fontWeight: 'bold', position: 'relative' }}>
                                                     <label className="form-label" htmlFor="password" style={customStyle.label}>
                                                         Password <span className="required text-danger">*</span>
                                                     </label>
@@ -241,7 +241,7 @@ const Signup = () => {
                                                 </div>
                                                 <p className="text-center text-muted mt-5 mb-0">
                                                     Have already an account?{' '}
-                                                    <Link to="./login" className="fw-bold text-body">
+                                                    <Link to="/Login" className="fw-bold text-body">
                                                         <u>Login here</u>
                                                     </Link>
                                                 </p>

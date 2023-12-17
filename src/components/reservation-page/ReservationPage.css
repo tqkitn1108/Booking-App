@@ -18,13 +18,7 @@ padding: 20px; /* Optional: Add padding for better visual appearance */
 margin-bottom: 20px; /* Adjust the margin as needed to create space between HotelInformation and the form */
 margin-right: 40px; /* Add a right margin to shift the hotel information to the left */
 }
-.form-secure {
-border: 1px solid #ddd; /* Border style and color */
-border-radius: 8px; /* Optional: Add border-radius for rounded corners */
-padding: 20px; /* Optional: Add padding for better visual appearance */
-margin-bottom: 20px; /* Adjust the margin as needed to create space between HotelInformation and the form */
-margin-right: 40px; /* Add a right margin to shift the hotel information to the left */
-}
+
 
 .hotel-detail-border {
 border: 1px solid #ddd; /* Border style and color */
@@ -70,7 +64,7 @@ border: 1px solid #ddd; /* Border style and color */
 border-radius: 8px; /* Optional: Add border-radius for rounded corners */
 padding: 20px; /* Optional: Add padding for better visual appearance */
 margin-bottom: 20px; /* Adjust the margin as needed to create space between HotelInformation and the form */
-margin-right: 40px; /* Add a right margin to shift the hotel information to the left */
+/* Add a right margin to shift the hotel information to the left */
 
 }
 .hotel-information {
@@ -129,4 +123,11 @@ padding: 5px;
 font-weight: bold;
 border: none;
 border-radius: 5px;
+}
+
+.ad1,
+.ad2 {
+border: 1px solid #ccc;  /* Màu sắc của đường viền */
+border-radius: 10px;    /* Bán kính của đường viền bo góc */
+padding: 15px;          /* Khoảng cách nội dung từ đường viền */
 }

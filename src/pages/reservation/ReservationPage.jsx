@@ -7,7 +7,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Formik, Field, Form, ErrorMessage, useFormikContext } from 'formik';
 import * as Yup from 'yup';
 import cvcCodeImage from './cvcCodeImage.png';
-
+import Navbar from '../login-register/Navbar';
 const Details = () => {
     return (
         <div className="hotel-detail-border" >
@@ -394,6 +394,7 @@ const ReservationPage = () => {
 
     return (
         <div>
+            <Navbar />
             <div className="content-container align-items-center">
                 <div className="reservation-container" >
                     <div className='check'>

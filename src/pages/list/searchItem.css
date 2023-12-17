@@ -13,7 +13,7 @@
   
   .siImg {
     width: 200px;
-    /* height: ; */
+    height: 200px;
     object-fit: cover;
   }
   
@@ -84,9 +84,11 @@
     margin-right: 7px;
     max-width: 110px;
     margin-left: 15px;
+    font-weight: 500;
   }
   .nhanXet{
     float: right;
+    font-weight: bolder;
   }
   .Title{
     display:inline-flex;

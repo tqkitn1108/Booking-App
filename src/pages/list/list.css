@@ -1,17 +1,52 @@
 .listContainer {
-    float: left;
-    max-width: 800px;
+    /* float: left; */
+    display: flex;
+    max-width: 1100px;
+    margin-top: 60px;
+    
 }
-/* .star {
-    width: 120px;
+.listFilter {
+    padding-left: 209px;
 }
-.Title{
-    max-width: 700px;
+.listContainer .leftP {
+    max-width: 25%px;
 }
-.siTitle {
-    max-width: 580px;
+.listContainer .rightP {
+    display: flex;
+    width: 80%;
+    justify-content: center; 
+  margin-left: 15px;
+}
+.pagiContainer {
+    display: flex;
+  justify-content: center;
+  align-items: center; 
 
 }
-.siDetails {
-    max-width: 170px;
-} */
+.pagiContainer .pagi {
+    display: flex;
+}
+
+.rightP .notFoundPage{
+    display: flex;
+    justify-content: center;
+}
+.notFoundPage .notFound1 {
+    font-weight: bold;
+    font-size: 25px;
+    margin-left: 100px;
+}
+.notFoundPage .notFound2 {
+    margin-left: 30px;
+}
+.notFoundPage .notFound3 {
+    background-color: rgb(45, 45, 191);
+    color: #FFF;
+    padding: 9px 13px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 160px;
+}
+.notFoundPage .notFoundIcon {
+    margin-left: 200px;
+}

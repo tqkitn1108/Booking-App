@@ -1,6 +1,6 @@
 import './filter.css'
 import { useState } from 'react';
-import { filter } from '../../data/filterData';
+import { filters } from '../../data/filterData';
 const Filter = () => {
     // filter range
     const [rangeValue, setRangeValue] = useState(2000000); // Giá trị mặc định của thanh trượt
@@ -25,7 +25,7 @@ const Filter = () => {
                         </div>
                     </div>
                 </div>
-                        {filter.map(filter => (
+                        {filters.map(filter => (
                             <div className="listWrapper">
                             <div className="listSearch">
                                 <h3 className="lsTitle">{filter.name} </h3>

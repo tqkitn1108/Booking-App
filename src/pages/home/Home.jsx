@@ -9,7 +9,8 @@ import FavoriteDestination from "../../components/favoriteDestination/FavoriteDe
 import Email from "../../components/email/Email";
 import Footer from "../../components/footer/Footer";
 import { useAuth } from '../../context/AuthContext';
-import "./home.css"
+import "./home.css";
+import "./home-responsive.css";
 import { useEffect } from "react";
 const Home = () => {
 

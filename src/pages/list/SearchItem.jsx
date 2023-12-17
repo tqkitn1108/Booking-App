@@ -4,12 +4,12 @@ import "./searchItem.css";
 
 const SearchItem = () => {
   // danh gia sao
-  var value = 5;
+  var value = 3;
   const renderStars = () => {
     const stars = [];
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 0; i < 5; i++) {
       stars.push(
-        <span key={i} style={{ color: i <= value ? '#FFD700' : '#C0C0C0' }}>
+        <span key={i} style={{ color: i < value ? '#FFD700' : '#C0C0C0' }}>
           &#9733; {/* Dấu sao */}
         </span>
       );

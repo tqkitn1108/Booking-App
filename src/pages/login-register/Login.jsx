@@ -19,16 +19,14 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup'; // Import Yup for validation
 import { useAuth } from '../../context/AuthContext';
 import LoadingSpinner from '../../components/loading-spinner/LoadingSpinner';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import Navbar from './Navbar';
-import './Login.css' 
+import Navbar from './Navbar'
+
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address').required('Email is required'),
   password: Yup.string().required('Password is required'),
 });
 
 function Login() {
-  const [showPassword, setShowPassword] = useState(false);
   const customStyle = {
     input: {
       fontSize: '1rem',
@@ -112,26 +110,18 @@ function Login() {
                       <label className="mb-1" htmlFor='password'>
                         Password <span className="required text-danger">*</span>{' '}
                       </label>
-                      <div className='position-relative'>
-                        <Field
-                          wrapperClass='mb-4 w-100'
-                          id='enterPassword'
-                          type={showPassword ? 'text' : 'password'}
-                          name='password' // Corrected to match the validation schema
-                          size="lg"
-                          className='form-control rounded border-1'
-                          style={customInputStyle}
-                        />
-                        <span
-                          className='position-absolute end-0 top-50 translate-middle-y cursor-pointer'
-                          style={{ paddingRight: '15px' }}
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
-                        </span>
-                      </div>
+                      <Field
+                        wrapperClass='mb-4 w-100'
+                        id='password'
+                        type='password'
+                        name='password'
+                        size="lg"
+                        className='form-control rounded border-1'
+                        style={customInputStyle}
+                      />
                       <ErrorMessage name='password' component='div' className='form-message text-danger' />
                     </div>
+                    {errorMessage && <div component='div' className='form-message text-danger mb-2' >{errorMessage}</div>}
                     <MDBCheckbox
                       name='flexCheck'
                       id='flexCheckDefault'

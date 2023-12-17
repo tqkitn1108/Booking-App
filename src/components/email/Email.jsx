@@ -22,6 +22,7 @@ const MailList = () => {
   return (
     <div className="mail system-font">
       <h1 className="mailTitle system-font">Save time, save money!</h1>
+
       <span className="mailDesc system-font">
         Sign up and we'll send the best deals to you
       </span>
@@ -42,6 +43,7 @@ const MailList = () => {
           <div className="errorText">{formik.errors.email}</div>
         )}
       </form>
+
     </div>
   );
 };

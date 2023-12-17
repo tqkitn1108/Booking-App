@@ -26,13 +26,14 @@ function CustomerRouters() {
         {/* <BrowserRouter> */}
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/hotels" element={<List />} />
+            <Route path="hotels/search" element={<List />} />
             <Route path="/bookings/:userId" element={<Bookings />} />
             <Route path="/hotels/:hotelId" element={<Hotel />} />
             <Route path="/reservation" element={<ReservationPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/test" element={<Test />} />
+            <Route path="/list" element={<List />} />
           </Routes>
         {/* </BrowserRouter> */}
       </AuthProvider>

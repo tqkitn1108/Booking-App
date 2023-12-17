@@ -10,9 +10,7 @@
   align-items: flex-start; /* Adjust as needed based on your design */
   margin-top: 20px; /* Add spacing between Hotel Information and the form */
 }
-.reservation-container > * {
-  margin-left: -20px; /* Có thể điều chỉnh giá trị này theo thiết kế của bạn */
-}
+
 
 .form-container {
 
@@ -23,7 +21,7 @@ margin-right: 40px; /* Add a right margin to shift the hotel information to the 
 
 .form-secure{
   border: none;
-  margin-top: 0px;
+  margin-top: 20px;
 }
 .check{
   margin-top: 20px;

@@ -1,6 +1,7 @@
 * {
     margin: 0px;
     padding: 0px;
+    box-sizing: border-box;
 }
 .curpter {
     cursor: pointer;
@@ -43,6 +44,9 @@
     border: 1px solid white;
     border-radius: 20px;
     background-color: #0c50b0;
+}
+.header-list-item .header-list-text  {
+    white-space: nowrap;
 }
 .header-title {
     margin: 76px 0px 4px;
@@ -116,7 +120,7 @@
 .header-search-input {
     border: none;
     outline: none;
-    width: 268px;
+    max-width: 268px;
     font-size: 14px;
     font-weight: 600;
     height: 24px;
@@ -134,7 +138,7 @@
     position: absolute;
     top: 58px;
     left: 335px;
-    z-index: 2;
+    z-index: 6;
 }
 
 .options {
@@ -143,13 +147,13 @@
     width: 334px;
     position: absolute;
     top: 58px;
-    left: 667px;
+    right: 96px;
     background-color: white;
     color: black;
     border-radius: 5px;
     -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
     box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
-    z-index: 3;
+    z-index: 6;
 }
 .option-item {
     display: flex;
@@ -178,9 +182,6 @@
     background-color: white;
     color: #006ce4;
     font-size: 20px;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
 }
 .option-counter-btn:hover {
     cursor: pointer;
@@ -240,8 +241,7 @@
     box-shadow: 0 2px 16px 0 rgba(26,26,26,0.24);
     border-radius: 10px;
     top: -6px;
-    left: -168px;
-    /* max-height: min((100vh - 96px) - 60px, 297px); */
+    right: -262px;
     max-height: 297px;
     overflow: hidden;
 }
@@ -280,7 +280,9 @@
 .header-option-text {
     padding: 3px 0 0;
     cursor: pointer;
-    width: 270px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 input::placeholder {
     color: black;

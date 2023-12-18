@@ -1,22 +1,21 @@
-.list_hotels .listContainer{
+/* .list_hotels .listContainer{ */
     /* display: grid;
     grid-column: 1fr 1fr; */
     /* max-width: 400px; */
-    float: left;
+    /* float: left; */
     /* width: 130px 1024px; */
-    margin-left: 16px;
+    /* margin-left: 16px; */
     
-}
+/* } */
 
 .list_hotels .listWrapper{
-    width: 200px;
+    width: 221px;
     /* max-width: 900px; */
     display: flex;
     justify-content: right;
     margin-top: -0.8px;
     font-size: smaller;
     /* left: 213px; */
-    margin-left: 213px;
     /* position: sticky; */
 }
 
@@ -57,13 +56,19 @@
     height: 5px;
     width: 100%;
 }
-
+.lsItem .form-check-label {
+    cursor: pointer;
+}
+.lsItem .form-check-input {
+    cursor: pointer;
+    padding: 7px;
+}
 input[type="range"] {
     -webkit-appearance: none; /* Loại bỏ kiểu mặc định */
     width: 100%;
     height: 10px;
     border-radius: 5px;
-    background: linear-gradient(to right, rgb(3, 124, 161), #caf2ef); /* Gradient màu nền */
+    background: linear-gradient(to right,#c9d2ed, rgb(12, 72, 161)); /* Gradient màu nền */
   }
   
   input[type="range"]::-webkit-slider-thumb {
@@ -71,7 +76,7 @@ input[type="range"] {
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background: rgb(89, 217, 234); /* Màu nền của nút trượt */
+    background: rgb(55, 108, 224); /* Màu nền của nút trượt */
     cursor: pointer;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Đổ bóng */
   }

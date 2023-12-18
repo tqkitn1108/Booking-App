@@ -7,7 +7,7 @@ export const hotels = [
     "star": 4,
     "type": "Khách sạn",
     "dest": "Hà Nội",
-    "address": "Số 90 ngõ 116 Phố Nhân Hòa, Phường Nhân Chính, Quận Thanh Xuân, Hà Nội (Đối diện ngõ 9 Hoàng Đạo Thúy Kéo dài)",
+    "address": "Số 90 ngõ 116 Phố Nhân Hòa, Phường Nhân Chính, Quận Thanh Xuân, Hà Nội",
     "photos": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/266723048.jpg?k=363a3dea135fcde5e1baeb58feb8a92b4d0f925cae27700cde6bd13859e050d0&o=&hp=1",
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/266723050.jpg?k=04ddc33d66e4367855fb2ce25fcb357675825c8efdfe7dc2dc19ba5b89529aba&o=&hp=1",
@@ -660,7 +660,7 @@ export const hotels = [
     "star": 4,
     "type": "Khách sạn",
     "dest": "Đà Nẵng",
-    "address": "Số 90 ngõ 116 Phố Nhân Hòa, Phường Nhân Chính, Quận Thanh Xuân, Hà Nội (Đối diện ngõ 9 Hoàng Đạo Thúy Kéo dài), Quận Thanh Xuân, Hà Nội, Việt Nam",
+    "address": "Số 90 ngõ 116 Phố Nhân Hòa, Phường Nhân Chính, Quận Thanh Xuân, Hà Nội",
     "photos": [
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/266723048.jpg?k=363a3dea135fcde5e1baeb58feb8a92b4d0f925cae27700cde6bd13859e050d0&o=&hp=1",
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/266723050.jpg?k=04ddc33d66e4367855fb2ce25fcb357675825c8efdfe7dc2dc19ba5b89529aba&o=&hp=1",

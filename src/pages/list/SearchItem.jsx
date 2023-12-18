@@ -1,38 +1,54 @@
-import "./searchItem.css" 
-
 import "./searchItem.css";
 
-const SearchItem = () => {
-  // danh gia sao
-  var value = 3;
-  const renderStars = () => {
+const SearchItem = ({name, photos, address, rating, star}) => {
+  const renderStars = (value) => {
     const stars = [];
-    for (let i = 0; i < 5; i++) {
-      stars.push(
-        <span key={i} style={{ color: i < value ? '#FFD700' : '#C0C0C0' }}>
-          &#9733; {/* Dấu sao */}
-        </span>
-      );
+    if (value > 0) {
+      for (let i = 0; i < 5; i++) {
+        stars.push(
+          <span key={i} style={{ color: i < value ? '#FFD700' : '#C0C0C0' }}>
+            &#9733;
+          </span>
+        );
+      }
     }
     return stars;
   };
+  function RatingComponent({ rating }) {
+    let textToShow;
+
+    if (rating >= 9.0) {
+      textToShow = "Tuyệt hảo";
+    } else if (rating >= 8.0) {
+      textToShow = "Rất tốt";
+    } else if (rating >= 7.0) {
+      textToShow = "Tốt";
+    } else if (rating >= 6.0) {
+      textToShow = "Dễ chịu";
+    } else textToShow = "Bình thường"
+
+    return textToShow;
+  }
+  function mapSearchString(str) {
+    return "https://www.google.com/maps/place/" + str.split(' ').join('+');
+  }
   return (
     <div className="searchItem">
       <img
-        src="https://cf.bstatic.com/xdata/images/hotel/square600/261707778.webp?k=fa6b6128468ec15e81f7d076b6f2473fa3a80c255582f155cae35f9edbffdd78&o=&s=1"
+        src={photos}
         alt=""
         className="siImg"
       />
       <div className="siDesc">
         <div className="Title">
-        <h1 className="siTitle">Tower Street Apartments</h1>
-        <div className="star">
-          {renderStars()}
-        </div>
+          <h1 className="siTitle">{name}</h1>
+          <div className="star">
+            {renderStars(star)}
+          </div>
         </div>
         <div className="siDistance">
-        <a id="diachi" href="">Dia chi </a>
-        <a href="">Xem tren ban do</a>
+          <a id="diachi" href={mapSearchString(address)} target="_blank" rel="noopener noreferrer">{address}</a>
+          <a href={mapSearchString(address)} target="_blank" rel="noopener noreferrer">Xem tren ban do</a>
         </div>
         <span className="siTaxiOp">Free airport taxi</span>
         <span className="siSubtitle">
@@ -48,11 +64,11 @@ const SearchItem = () => {
       </div>
       <div className="siDetails">
         <div className="siRating">
-          <span>Excellent</span>
-          <button>8.9</button>
+          <RatingComponent className="nhanXet" rating={rating}></RatingComponent>
+          <button>{rating}</button>
         </div>
         <div className="siDetailTexts">
-          <span className="siPrice">$112</span>
+          <span className="siPrice">Liên hệ</span>
           <span className="siTaxOp">Includes taxes and fees</span>
           <button className="siCheckButton">See availability</button>
         </div>

@@ -1,4 +1,4 @@
-.listContainer{
+.list_hotels .listContainer{
     /* display: grid;
     grid-column: 1fr 1fr; */
     /* max-width: 400px; */
@@ -8,7 +8,7 @@
     
 }
 
-.listWrapper{
+.list_hotels .listWrapper{
     width: 200px;
     /* max-width: 900px; */
     display: flex;
@@ -20,7 +20,7 @@
     /* position: sticky; */
 }
 
-.listSearch{
+.list_hotels .listSearch{
     /* left: 213px; */
     flex: 1;
     padding: 10px;

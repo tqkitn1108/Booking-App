@@ -10,7 +10,7 @@ import {
   MDBIcon,
   MDBCheckbox
 } from 'mdb-react-ui-kit';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -59,12 +59,14 @@ function Login() {
   const location = useLocation();
 
   const navigate = useNavigate();
-  const redirectUrl = location.state?.path || "/";
+  let redirectUrl = location.state?.path || "/";
 
   async function handleSubmit(values) {
     setLoading(true);
     if (await authContext.handleLogin(values)) {
       setErrorMessage("");
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user?.userRole.name === "HOTEL") redirectUrl = "/business/hotels";
       navigate(redirectUrl, { replace: true })
     } else {
       setErrorMessage("Invalid username or password. Please try again.");

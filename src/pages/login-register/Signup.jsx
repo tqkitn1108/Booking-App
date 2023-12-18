@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { registerUser } from '../../api/ApiAuthService';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../../components/loading-spinner/LoadingSpinner';
 
 const validationSchema = Yup.object().shape({
@@ -26,7 +26,7 @@ const validationSchema = Yup.object().shape({
 const Signup = () => {
     const [showPassword, setShowPassword] = React.useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
-
+    console.log("haha");
     const customStyle = {
         input: {
             fontSize: '1rem',
@@ -241,7 +241,7 @@ const Signup = () => {
                                                     </div>
                                                     <p className="text-center text-muted mt-5 mb-0">
                                                         Have already an account?{' '}
-                                                        <Link to="./login" className="fw-bold text-body">
+                                                        <Link to="/login" className="fw-bold text-body">
                                                             <u>Login here</u>
                                                         </Link>
                                                     </p>

@@ -98,7 +98,7 @@ const List = () => {
     };
 
     return (
-        <div>
+        <div className="list_hotels">
             {loading && <LoadingSpinner />}
             {/* <Navbar /> */}
             <div className="listFilter">

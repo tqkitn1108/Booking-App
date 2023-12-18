@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import './index.css'
+import './ReservationPage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWifi, faShuttleVan, faParking, faCheckCircle, faLock, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { Formik, Field, Form, ErrorMessage, useFormikContext } from 'formik';
 import * as Yup from 'yup';
-import cvcCodeImage from './cvcCodeImage.png';
-import Navbar from '../../components/navbar/Navbar';
+
 const Details = () => {
     return (
         <div className="hotel-detail-border" >
@@ -189,6 +188,7 @@ const SecurePage = () => {
         }
 
         return errors;
+        return errors;
     };
 
     const cardTypes = ['Visa', 'MasterCard', 'American Express', 'Discover'];
@@ -263,7 +263,7 @@ const SecurePage = () => {
                                         </div>
                                         <div className='country form-group w-50 mb-3'>
                                             <label htmlFor='country' className='mb-1' style={{ fontWeight: 'bold' }} >
-                                                Country/Region
+                                                Country/Region 
                                             </label>
                                             <Field
                                                 type='text'
@@ -272,7 +272,7 @@ const SecurePage = () => {
                                                 placeholder='Country'
                                                 className='form-control'
                                             />
-
+        
                                         </div>
                                         <div className="booking-for-section mt-3">
                                             <p className="mb-2" style={{ fontWeight: 'bold' }}>Who are you booking for?</p>
@@ -356,7 +356,6 @@ const SecurePage = () => {
                                             <label className='form-label'></label>
                                             <div className='mb-2'>
                                                 <label className='form-label'></label>
-                                                <img src={cvcCodeImage} alt="CVC Code Image" />
                                             </div>
                                         </div>
                                         <div className='mb-2 w-75'>
@@ -373,7 +372,7 @@ const SecurePage = () => {
                                     </div>
                                     <div className="submit-button mt-3">
                                         <button type="submit" className="btn btn-primary">
-                                           Complete Booking
+                                            Submit
                                         </button>
                                     </div>
                                 </div>
@@ -389,28 +388,35 @@ const SecurePage = () => {
 
 
 
-const ReservationPage = () => {
-
+const ReservationPage1 = () => {
+   
     return (
         <div>
-            <Navbar />
             <div className="content-container align-items-center">
                 <div className="reservation-container" >
-                    <div className='check'>
+                    <div>
                         <HotelInformation />
                         <Details />
                         <PriceSummary />
                         <PaymentSchedule />
                     </div>
-                    <div>
-                        <SecurePage />
-                      <div style={{ height: '200px' }}></div>
-                    </div>
+                    <Formik
 
+                    >
+                        {formik => (
+                            <div>
+
+
+                                <SecurePage />
+
+                                <div style={{ height: '200px' }}></div>
+                            </div>
+                        )}
+                    </Formik>
                 </div>
             </div>
         </div>
     );
 };
-export default ReservationPage;
+export default ReservationPage1;
 

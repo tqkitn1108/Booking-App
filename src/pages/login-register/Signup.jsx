@@ -7,6 +7,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { registerUser } from '../../api/ApiAuthService';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../../components/loading-spinner/LoadingSpinner';
+import Navbar from '../../components/navbar/Navbar';
 
 const validationSchema = Yup.object().shape({
     fullName: Yup.string()
@@ -26,7 +27,6 @@ const validationSchema = Yup.object().shape({
 const Signup = () => {
     const [showPassword, setShowPassword] = React.useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
-    console.log("haha");
     const customStyle = {
         input: {
             fontSize: '1rem',
@@ -40,8 +40,7 @@ const Signup = () => {
         },
         formGroup: {
             marginBottom: '1rem',
-        },
-
+        }
     };
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -75,7 +74,8 @@ const Signup = () => {
 
     return (
         <div>
-            <div className="bg-light " style={{ height: '30px' }}></div>
+            <div className='fixed-navbar'><Navbar /></div>
+            <div className="bg-light " style={{ height: '100px' }}></div>
             <Formik
                 initialValues={{
                     fullName: '',
@@ -94,7 +94,7 @@ const Signup = () => {
                                     <div className="col-12 col-md-8 col-lg-6 col-xl-5"> {/* Adjusted column width */}
                                         <div className="card" style={{ borderRadius: '15px' }}>
                                             <div className="card-body p-5">
-                                                <h2 className="text-uppercase text-center mb-4">Create an account</h2>
+                                                <h2 className="text-uppercase text-center mb-3">Create an account</h2>
                                                 {errorMessage && <p className="alert alert-danger">{errorMessage}</p>}
                                                 {successMessage &&
                                                     <>
@@ -110,8 +110,8 @@ const Signup = () => {
                                                         </div>
                                                     </>}
                                                 {!successMessage && <form onSubmit={formik.handleSubmit}>
-                                                    <div className="form-outline mb-4" style={customStyle.formGroup}>
-                                                        <label className="form-label" htmlFor="fullName" style={{ ...customStyle.label, fontWeight: 'bold' }}>
+                                                    <div className="form-outline mb-3" style={{ ...customStyle.label, fontWeight: 'bold' }}>
+                                                        <label className="form-label" htmlFor="fullName" style={customStyle.label}>
                                                             Full Name <span className="required text-danger">*</span>
                                                         </label>
                                                         <input
@@ -130,7 +130,7 @@ const Signup = () => {
                                                     </div>
 
                                                     {/* Your Email Input */}
-                                                    <div className="form-outline mb-4" style={{ ...customStyle.label, fontWeight: 'bold' }}>
+                                                    <div className="form-outline mb-3" style={{ ...customStyle.label, fontWeight: 'bold' }}>
                                                         <label className="form-label" htmlFor="email" style={customStyle.label}>
                                                             Your Email <span className="required text-danger">*</span>
                                                         </label>
@@ -184,7 +184,7 @@ const Signup = () => {
 
                                                     {/* Your Password Input */}
                                                     {/* Repeat Password Input */}
-                                                    <div className="form-outline mb-4" style={{ ...customStyle.label, fontWeight: 'bold', position: 'relative' }}>
+                                                    <div className="form-outline mb-3" style={{ ...customStyle.label, fontWeight: 'bold', position: 'relative' }}>
                                                         <label className="form-label" htmlFor="confirmPassword" style={customStyle.label}>
                                                             Repeat Password <span className="required text-danger">*</span>
                                                         </label>
@@ -255,6 +255,7 @@ const Signup = () => {
                     </section >
                 </div >
             </Formik >
+            <div className="bg-light " style={{ height: '100px' }}></div>
         </div>
     );
 }

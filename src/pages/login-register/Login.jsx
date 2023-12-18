@@ -1,25 +1,20 @@
 import React, { useState } from 'react';
 import {
-  MDBBtn,
   MDBContainer,
   MDBRow,
   MDBCol,
   MDBCard,
   MDBCardBody,
-  MDBInput,
-  MDBIcon,
   MDBCheckbox
 } from 'mdb-react-ui-kit';
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-brands-svg-icons';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup'; // Import Yup for validation
 import { useAuth } from '../../context/AuthContext';
 import LoadingSpinner from '../../components/loading-spinner/LoadingSpinner';
-
+import Navbar from '../../components/navbar/Navbar';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address').required('Email is required'),
@@ -86,6 +81,8 @@ function Login() {
         onSubmit={handleSubmit}
       >
         <Form>
+          <div className='fixed-navbar'><Navbar /></div>
+          <div className="bg-white " style={{ height: '50px' }}></div>
           <MDBContainer fluid>
             <MDBRow className='d-flex justify-content-center align-items-center h-100'>
               <MDBCol col='12'>
@@ -166,13 +163,10 @@ function Login() {
                         <u>Register here</u>
                       </Link>
                     </p>
-
                   </MDBCardBody>
                 </MDBCard>
-
               </MDBCol>
             </MDBRow>
-
           </MDBContainer>
         </ Form>
       </ Formik>
@@ -180,5 +174,3 @@ function Login() {
   );
 }
 export default Login;
-
-

@@ -140,3 +140,9 @@
     width: 18px;
     height: 18px;
 }
+
+.fixed-navbar .home-navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}

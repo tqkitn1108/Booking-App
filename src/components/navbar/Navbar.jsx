@@ -6,7 +6,7 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
 
@@ -60,7 +60,10 @@ const Navbar = () => {
               <div className="nav-icon">
                 <FontAwesomeIcon icon={faBell} />
               </div>
-              <div className="nav-icon">Đăng chỗ nghỉ của quý vị</div>
+              <a href="/business/register" className="nav-icon"
+                style={{ textDecoration: 'none' }} target="not_blank">
+                Đăng chỗ nghỉ của quý vị
+              </a>
             </div>
             <HeadlessTippy
               placement="bottom"
@@ -101,13 +104,16 @@ const Navbar = () => {
                 <div className="nav-icon">
                   <FontAwesomeIcon icon={faCircleQuestion} />
                 </div>
-                <div className="nav-icon">Đăng chỗ nghỉ của quý vị</div>
+                <a href="/business/register" className="nav-icon"
+                  style={{ textDecoration: 'none' }} target="not_blank">
+                  Đăng chỗ nghỉ của quý vị
+                </a>
               </div>
               <div className="nav-items-btn">
                 <button className="nav-button" onClick={() => navigate("/signup")}>Đăng ký</button>
                 <button className="nav-button" onClick={() => navigate("/login")}>Đăng nhập</button>
                 <button className="nav-button" onClick={() => navigate("/login")}>
-                <FontAwesomeIcon icon={faUser} />
+                  <FontAwesomeIcon icon={faUser} />
                 </button>
               </div>
             </div>

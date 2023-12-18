@@ -25,3 +25,14 @@
     margin-top: 4px;
     font-size: 14px;
 }
+@media (max-width: 46.1875em) {
+    .explore-img {
+        height: 100px;
+    }
+    .explore-titles {
+        font-size: 16px;
+    }
+    .explore-desrcibe {
+        font-size: 12px;
+    }
+}

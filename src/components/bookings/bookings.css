@@ -70,3 +70,19 @@
     margin-right: 10px;
     padding: 3px 8px;
 }
+@media (min-width:  46.1875em) and (max-width: 68.74em) {
+    .bookings-container {
+        max-width: 700px;
+    }
+    .bookings-item {
+        width: calc((700px - 50px) / 2);
+    }
+}
+@media (max-width: 46.1875em) {
+    .bookings-container {
+        max-width: 350px;
+    }
+    .bookings-item {
+        width: calc(350px - 8px);
+    }
+}

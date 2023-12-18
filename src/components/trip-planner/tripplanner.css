@@ -26,6 +26,11 @@
     margin-bottom: 20px;
     display: flex;
     gap: 20px;
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+.trip-planner-choices::-webkit-scrollbar {
+    display: none;
 }
 .trip-planner-choices .choice-item {
     padding: 10px;
@@ -44,6 +49,17 @@
     border: 1px solid #0089ff;
 }
 .trip-planner-choices .choice-item-text {
-    display: inline;
+    display: inline-block;
     margin-left: 10px;
+}
+@media (max-width: 46.1875em) {
+    .trip-planner-img {
+        height: 100px;
+    }
+    .trip-planner-titles {
+        font-size: 16px;
+    }
+    .trip-planner-desrcibe {
+        font-size: 12px;
+    }
 }

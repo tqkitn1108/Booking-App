@@ -1,0 +1,5 @@
+@media (max-width: 46.1875em) {
+    .mailInputContainer > input {
+        width: 139px;
+    }
+}

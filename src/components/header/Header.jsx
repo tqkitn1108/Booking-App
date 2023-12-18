@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.css";
+import "./header-responsive.css";
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
@@ -33,22 +34,38 @@ const Header = () => {
     }, []);
     const [destInput, setDestInput] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [dateSelected, setDateSelected] = useState(false);
     const [buttonClicked, setButtonClicked] = useState(false);
     const headerBtnRef = useRef(null);
     const navigate = useNavigate();
     const handleSearch = (event) => {
         event.preventDefault();
+    
         if (destInput.trim() === '') {
             setErrorMessage('Vui lòng nhập điểm đến để bắt đầu tìm kiếm.');
         } else {
             setErrorMessage('');
         }
-        setButtonClicked(true);
-        const location = destInput.replaceAll(' ', '%20');
-        const checkIn = format(date[0].startDate, 'yyyy-MM-dd');
-        const checkOut = format(date[0].endDate, 'yyyy-MM-dd');
-        navigate(`hotels/search?location=${location}&page=0&size=3&checkIn=${checkIn}&checkOut=${checkOut}&adults=${options.adult}&children=${options.children}&noRooms=${options.room}`)
-    };
+        if (!dateSelected) {
+            // Nếu chưa chọn ngày
+            setButtonClicked(true); // Đánh dấu rằng người dùng đã nhấn nút
+            setOpenDate(true); // Hiển thị DateRanger
+        } else {
+            // Nếu đã chọn ngày
+            if (destInput.trim() === '') {
+                // Nếu chưa nhập địa chỉ
+                setErrorMessage('Vui lòng nhập điểm đến để bắt đầu tìm kiếm.');
+                setButtonClicked(true); // Đánh dấu rằng người dùng đã nhấn nút
+            } else {
+                // Xử lý tìm kiếm khi có đủ điều kiện
+                const location = destInput.replaceAll(' ', '%20');
+                const checkIn = format(date[0].startDate, 'yyyy-MM-dd');
+                const checkOut = format(date[0].endDate, 'yyyy-MM-dd');
+                navigate(`hotels/search?location=${location}&page=0&size=3&checkIn=${checkIn}&checkOut=${checkOut}&adults=${options.adult}&children=${options.children}&noRooms=${options.room}`);
+            }
+        }
+    };       
+    
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (buttonClicked && !event.target.closest('.header-btn')) {
@@ -101,6 +118,11 @@ const Header = () => {
             }
         ]
     );
+    const handleDateChange = (item) => {
+        setDateSelected(true); // Đánh dấu rằng ngày đã được chọn
+        setDate([item.selection]);
+        setDefaultText(false);
+    };
     const componentRef = useRef(null);
 
     useEffect(() => {
@@ -248,7 +270,7 @@ const Header = () => {
                                     <span className="header-option-text" onClick={() => setOpenDate(!openDate)}>{defaultText ? `Ngày nhận phòng - Ngày trả phòng` : `${format(date[0].startDate, "EEE, dd/MM/yyyy", { locale: vi })} - ${format(date[0].endDate, "EEE, dd/MM/yyyy", { locale: vi })}`}</span>
                                     {openDate && <DateRange
                                         editableDateInputs={true}
-                                        onChange={item => { setDate([item.selection]); setDefaultText(false); }}
+                                        onChange={handleDateChange}
                                         moveRangeOnFirstSelection={false}
                                         ranges={date}
                                         className="date"
@@ -298,7 +320,7 @@ const Header = () => {
                                 </div>
                             </div>
                         </div>
-                        <button className="header-btn" ref={headerBtnRef}>Tìm kiếm</button>
+                        <button className="header-btn" ref={headerBtnRef} onClick={handleSearch}>Tìm kiếm</button>
                     </form>
                 </div>
             </div>

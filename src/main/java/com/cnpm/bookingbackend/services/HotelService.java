@@ -64,32 +64,6 @@ public class HotelService {
         return new PageImpl<>(hotels,pageable, hotelList.size());
     }
 
-    public Hotel newHotel(HotelDto hotelDto) {
-        Hotel hotel = hotelDto.toHotel();
-        hotel.setType(typeRepository.findByLabel(hotelDto.getType()).orElse(null));
-        hotel.setFacilities(hotelDto.getFacilities().stream().map(facility ->
-                facilityRepository.findByLabel(facility).orElse(null)).toList());
-        hotel.setRating(0F);
-        return hotelRepository.save(hotel);
-    }
-
-    public Hotel updatedHotel(String id, Hotel hotel) {
-        Hotel existingHotel = hotelRepository.findById(id).orElse(hotel);
-        Class<? extends Hotel> hotelClass = hotel.getClass();
-        for (Field field : hotelClass.getDeclaredFields()) {
-            try {
-                field.setAccessible(true);
-                Object value = field.get(hotel);
-                if (value != null) {
-                    field.set(existingHotel, value);
-                }
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-        return hotelRepository.save(existingHotel);
-    }
-
     public void deletedHotel(String id) {
         hotelRepository.deleteById(id);
     }

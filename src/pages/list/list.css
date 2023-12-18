@@ -4,7 +4,8 @@
     margin-top: 60px;
 }
 .listFilter {
-    padding-left: 209px;
+    display: flex;
+    justify-content: center;
 }
 .listContainer .leftP {
     max-width: 25%px;

@@ -14,44 +14,9 @@ import Navbar from "../../components/navbar/Navbar.jsx";
 import Header from "../../components/header/Header.jsx";
 
 const List = () => {
-    // xử lý chuỗi đưa vào gg map
-    function mapSearchString(str) {
-        return "https://www.google.com/maps/place/" + str.split(' ').join('+');
-    }
     const navigate = useNavigate();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-
-    // rating
-    function RatingComponent({ rating }) {
-        let textToShow;
-
-        if (rating >= 9.0) {
-            textToShow = "Tuyệt hảo";
-        } else if (rating >= 8.0) {
-            textToShow = "Rất tốt";
-        } else if (rating >= 7.0) {
-            textToShow = "Tốt";
-        } else if (rating >= 6.0) {
-            textToShow = "Dễ chịu";
-        } else textToShow = "Bình thường"
-
-        return textToShow;
-    }
-    // star
-    const renderStars = (value) => {
-        const stars = [];
-        if (value > 0) {
-            for (let i = 0; i < 5; i++) {
-                stars.push(
-                    <span key={i} style={{ color: i < value ? '#FFD700' : '#C0C0C0' }}>
-                        &#9733;
-                    </span>
-                );
-            }
-        }
-        return stars;
-    };
 
     const [loading, setLoading] = useState(false);
     const [hotels, setHotels] = useState([]);

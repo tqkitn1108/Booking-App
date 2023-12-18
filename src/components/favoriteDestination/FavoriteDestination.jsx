@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Tab, Tabs, Row, Col } from 'react-bootstrap';
 import "./FavoriteDestinations.css";
+import "./favoritedestinations-responsive.css"
 import {Link} from 'react-router-dom';
 
 function FavoriteDestinations() {

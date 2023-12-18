@@ -10,7 +10,7 @@ import {
     faCity,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 const CustomTab = ({ label, isActive, onClick }) => (
     <div className={`choice-item ${isActive ? 'choice-item-active' : ''}`} onClick={onClick}>
         {label}
@@ -18,9 +18,26 @@ const CustomTab = ({ label, isActive, onClick }) => (
 );
 const TripPlanner = () => {
     const [activeTab, setActiveTab] = useState('Beach');
+    const [slidesPerView, setSlidesPerView] = useState(6);
     const handleTabSelect = (key) => {
         setActiveTab(key);
     };
+    useEffect(() => {
+        const updateSlidesPerView = () => {
+            if (window.innerWidth <= 46.1875 * 16) {  // Chuyển đổi từ em sang px
+                setSlidesPerView(4);
+            } else {
+                setSlidesPerView(6);
+            }
+        };
+
+        window.addEventListener('resize', updateSlidesPerView);
+        updateSlidesPerView();  // Đặt giá trị ban đầu khi trang được tải
+
+        return () => {
+            window.removeEventListener('resize', updateSlidesPerView);
+        };
+    }, []);
     return (
         <div className="trip-planner">
                 <div className="trip-planner-choices">
@@ -51,7 +68,7 @@ const TripPlanner = () => {
                 </div>
             <div className="trip-planner-container" style={{ display: activeTab === 'Beach' ? 'block' : 'none' }}>
             <>
-                <Swiper navigation={true} modules={[Navigation]} slidesPerView={6} spaceBetween={16}>
+                <Swiper navigation={true} modules={[Navigation]} slidesPerView={slidesPerView} spaceBetween={16}>
                     {destinations.map((destination, index) => {
                         if (destination.type === 'Beach')
                             return (<SwiperSlide>

@@ -61,7 +61,7 @@ const Header = () => {
                 const location = destInput.replaceAll(' ', '%20');
                 const checkIn = format(date[0].startDate, 'yyyy-MM-dd');
                 const checkOut = format(date[0].endDate, 'yyyy-MM-dd');
-                navigate(`hotels/search?location=${location}&page=0&size=3&checkIn=${checkIn}&checkOut=${checkOut}&adults=${options.adult}&children=${options.children}&noRooms=${options.room}`);
+                navigate(`/hotels/search?location=${location}&page=0&size=3&checkIn=${checkIn}&checkOut=${checkOut}&adults=${options.adult}&children=${options.children}&noRooms=${options.room}`);
             }
         }
     };       

@@ -1,6 +1,6 @@
 import "./searchItem.css";
 
-const SearchItem = ({name, photos, address, rating, star}) => {
+const SearchItem = ({hotel}) => {
   const renderStars = (value) => {
     const stars = [];
     if (value > 0) {
@@ -16,7 +16,7 @@ const SearchItem = ({name, photos, address, rating, star}) => {
   };
   function RatingComponent({ rating }) {
     let textToShow;
-
+    if (rating != null) {
     if (rating >= 9.0) {
       textToShow = "Tuyệt hảo";
     } else if (rating >= 8.0) {
@@ -26,6 +26,7 @@ const SearchItem = ({name, photos, address, rating, star}) => {
     } else if (rating >= 6.0) {
       textToShow = "Dễ chịu";
     } else textToShow = "Bình thường"
+  }
 
     return textToShow;
   }
@@ -35,20 +36,20 @@ const SearchItem = ({name, photos, address, rating, star}) => {
   return (
     <div className="searchItem">
       <img
-        src={photos}
+        src={hotel.photos}
         alt=""
         className="siImg"
       />
       <div className="siDesc">
         <div className="Title">
-          <h1 className="siTitle">{name}</h1>
+          <h1 className="siTitle">{hotel.name}</h1>
           <div className="star">
-            {renderStars(star)}
+            {renderStars(hotel.star)}
           </div>
         </div>
         <div className="siDistance">
-          <a id="diachi" href={mapSearchString(address)} target="_blank" rel="noopener noreferrer">{address}</a>
-          <a href={mapSearchString(address)} target="_blank" rel="noopener noreferrer">Xem tren ban do</a>
+          <a id="diachi" href={mapSearchString(hotel.address)} target="_blank" rel="noopener noreferrer">{hotel.address}</a>
+          <a href={mapSearchString(hotel.address)} target="_blank" rel="noopener noreferrer">Xem tren ban do</a>
         </div>
         <span className="siTaxiOp">Free airport taxi</span>
         <span className="siSubtitle">
@@ -64,8 +65,8 @@ const SearchItem = ({name, photos, address, rating, star}) => {
       </div>
       <div className="siDetails">
         <div className="siRating">
-          <RatingComponent className="nhanXet" rating={rating}></RatingComponent>
-          <button>{rating}</button>
+          <span className="nhanXet"><RatingComponent  rating={hotel.rating}></RatingComponent></span>
+          <button>{hotel.rating}</button>
         </div>
         <div className="siDetailTexts">
           <span className="siPrice">Liên hệ</span>

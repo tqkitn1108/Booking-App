@@ -17,7 +17,7 @@ const List = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-
+    console.log(searchParams.get('location'));
     const [loading, setLoading] = useState(false);
     const [hotels, setHotels] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -141,11 +141,7 @@ const List = () => {
                                 {hotels.map(hotel =>
                                 (
                                     <SearchItem
-                                        name={hotel.name}
-                                        photos={hotel.photos[0]}
-                                        address={hotel.address}
-                                        star={hotel.star}
-                                        rating={hotel.rating}
+                                        hotel = {hotel}
                                     />
 
                                 )
@@ -165,9 +161,6 @@ const List = () => {
 
                     </div>
                 </div>
-
-            </div>
-            <div className="listContainer">
 
             </div>
         </div>

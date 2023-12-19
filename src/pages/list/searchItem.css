@@ -80,15 +80,19 @@
   
   .siRating{
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     margin-right: 7px;
     max-width: 110px;
     margin-left: 15px;
     font-weight: 500;
   }
-  .nhanXet{
+  .siRating .nhanXet{
     float: right;
-    font-weight: bolder;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+  .siRating button {
+    cursor: default;
   }
   .Title{
     display:inline-flex;

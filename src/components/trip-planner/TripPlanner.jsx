@@ -71,7 +71,7 @@ const TripPlanner = () => {
                 <Swiper navigation={true} modules={[Navigation]} slidesPerView={slidesPerView} spaceBetween={16}>
                     {destinations.map((destination, index) => {
                         if (destination.type === 'Beach')
-                            return (<SwiperSlide>
+                            return (<SwiperSlide key={index}>
                                 <div className="trip-planner-item">
                                     <img src={destination.image} alt="" className="trip-planner-img" />
                                     <div>

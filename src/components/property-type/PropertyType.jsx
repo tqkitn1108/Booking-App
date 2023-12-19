@@ -6,8 +6,10 @@ import { Navigation } from 'swiper/modules';
 import { propertyTypes } from '../../data/propertyTypeData';
 import { useEffect, useState } from 'react';
 import { countByType } from '../../api/ApiFunctions';
+import { useNavigate } from 'react-router-dom';
 
 const PropertyType = () => {
+    const navigate = useNavigate();
     const [numProperties, setNumProperties] = useState({});
     const [slidesPerView, setSlidesPerView] = useState(4);
     useEffect(() => {
@@ -31,7 +33,7 @@ const PropertyType = () => {
         async function countProperties() {
             const destParams = propertyTypes.reduce((list, propertyType) => list + `,${propertyType.type}`, "");
             try {
-                const response = await countByType(destParams.slice(1).replaceAll(" ", "%20"));
+                const response = await countByType(destParams.slice(1));
                 setNumProperties(response.data)
             } catch (e) {
                 console.error(e);
@@ -40,16 +42,20 @@ const PropertyType = () => {
         countProperties()
     }, []);
 
+    function handleSearch(typeName) {
+        navigate(`/hotels/search?type=${typeName}&page=0`);
+    }
+
     return (
         <div className="property-type">
             <>
                 <Swiper navigation={true} modules={[Navigation]} slidesPerView={slidesPerView} spaceBetween={16}>
                     {propertyTypes.map((propertyType, i) => {
                         return (<SwiperSlide key={i}>
-                            <div className="ptype-item">
+                            <div className="ptype-item" onClick={() => handleSearch(propertyType.type)}>
                                 <img src={propertyType.image} alt="" className="ptype-img" />
                                 <div>
-                                    <h5 className="ptype-titles">{propertyType.type}</h5>
+                                    <h5 className="ptype-titles">{propertyType.label}</h5>
                                     <h5 className="ptype-add">{numProperties[propertyType.type]} chỗ nghỉ</h5>
                                 </div>
                             </div>

@@ -196,6 +196,7 @@ const HotelInput = () => {
                 <select id="facilities" multiple onChange={handleSelectChange} className="multi-select">
                   <option value={"non_smoking"}>Phòng không hút thuốc</option>
                   <option value={"family_room"}>Phòng gia đình</option>
+                  <option value={"free_wifi"}>Wifi miễn phí</option>
                 </select>
               </div>
               <div className="formInput desc">

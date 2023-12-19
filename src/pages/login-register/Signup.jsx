@@ -7,6 +7,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { registerUser } from '../../api/ApiAuthService';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../../components/loading-spinner/LoadingSpinner';
+import Navbar from '../../components/navbar/Navbar';
 
 const validationSchema = Yup.object().shape({
     fullName: Yup.string()
@@ -26,7 +27,6 @@ const validationSchema = Yup.object().shape({
 const Signup = () => {
     const [showPassword, setShowPassword] = React.useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
-    console.log("haha");
     const customStyle = {
         input: {
             fontSize: '1rem',
@@ -40,8 +40,7 @@ const Signup = () => {
         },
         formGroup: {
             marginBottom: '1rem',
-        },
-
+        }
     };
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -75,7 +74,8 @@ const Signup = () => {
 
     return (
         <div>
-            <div className="bg-light " style={{ height: '30px' }}></div>
+            <div className='fixed-navbar'><Navbar /></div>
+            <div className="bg-light " style={{ height: '100px' }}></div>
             <Formik
                 initialValues={{
                     fullName: '',
@@ -255,6 +255,7 @@ const Signup = () => {
                     </section >
                 </div >
             </Formik >
+            <div className="bg-light " style={{ height: '100px' }}></div>
         </div>
     );
 }

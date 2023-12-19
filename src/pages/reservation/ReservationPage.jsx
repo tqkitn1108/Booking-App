@@ -7,7 +7,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Formik, Field, Form, ErrorMessage, useFormikContext } from 'formik';
 import * as Yup from 'yup';
 import cvcCodeImage from './cvcCodeImage.png';
-import Navbar from '../login-register/Navbar';
+import Navbar from '../../components/navbar/Navbar';
 const Details = () => {
     return (
         <div className="hotel-detail-border" >
@@ -188,7 +188,6 @@ const SecurePage = () => {
             errors.email = 'Invalid email address';
         }
 
-        return errors;
         return errors;
     };
 

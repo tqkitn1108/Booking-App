@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { hotelInputs } from "../../formSource";
 import api from "../../../api/AxiosConfig";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 const HotelInput = () => {
   const navigate = useNavigate();
@@ -52,10 +54,26 @@ const HotelInput = () => {
     }
   };
 
+  // const renderPhotos = (source) => {
+  //   return source.map((file, index) => {
+  //     return <img src={typeof file === 'string' ? file : URL.createObjectURL(file)} alt="" key={index} />;
+  //   });
+  // };
   const renderPhotos = (source) => {
     return source.map((file, index) => {
-      return <img src={typeof file === 'string' ? file : URL.createObjectURL(file)} alt="" key={index} />;
+      return (
+        <div key={index} className="imageContainer">
+          <img src={typeof file === 'string' ? file : URL.createObjectURL(file)} alt="" />
+          <button onClick={() => handleRemoveImage(index)} className="removeButton">X</button>
+        </div>
+      );
     });
+  };
+  
+  const handleRemoveImage = (index) => {
+    const newImages = [...images];
+    newImages.splice(index, 1);
+    setImages(newImages);
   };
 
   const handleClick = async (e) => {
@@ -79,7 +97,7 @@ const HotelInput = () => {
         photos: list,
         email: JSON.parse(localStorage.getItem("user")).userEmail
       };
-      if(!newhotel.facilities) newhotel.facilities = facilities;
+      if (!newhotel.facilities) newhotel.facilities = facilities;
 
       console.log(newhotel);
 
@@ -99,7 +117,19 @@ const HotelInput = () => {
     setShowModal(false);
     navigate("/business/hotels");
   };
-
+  const vietnamProvinces = [
+    "An Giang", "Bà Rịa - Vũng Tàu", "Bắc Giang", "Bắc Kạn", "Bạc Liêu",
+    "Bắc Ninh", "Bến Tre", "Bình Định", "Bình Dương", "Bình Phước",
+    "Bình Thuận", "Cà Mau", "Cao Bằng", "Đắk Lắk", "Đắk Nông", "Điện Biên",
+    "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang", "Hà Nam", "Hà Tĩnh",
+    "Hải Dương", "Hậu Giang", "Hòa Bình", "Hưng Yên", "Khánh Hòa", "Kiên Giang",
+    "Kon Tum", "Lai Châu", "Lâm Đồng", "Lạng Sơn", "Lào Cai", "Long An",
+    "Nam Định", "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Quảng Bình",
+    "Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị", "Sóc Trăng",
+    "Sơn La", "Tây Ninh", "Thái Bình", "Thái Nguyên", "Thanh Hóa", "Thừa Thiên Huế",
+    "Tiền Giang", "Trà Vinh", "Tuyên Quang", "Vĩnh Long", "Vĩnh Phúc", "Yên Bái",
+    "Phú Yên", "Cần Thơ", "Đà Nẵng", "Hải Phòng", "Hà Nội", "Hồ Chí Minh"
+  ];
   return (
     <div className="new">
       <Modal show={showModal} onHide={handleCloseModal}>
@@ -118,7 +148,7 @@ const HotelInput = () => {
       <div className="newContainer">
         <Navbar />
         <div className="top">
-          <h1>Add New Product</h1>
+          <h1>Thêm khách sạn</h1>
         </div>
         <div className="bottom">
           <div className="left">
@@ -133,8 +163,8 @@ const HotelInput = () => {
             /> */}
           </div>
           <div className="right">
-            <form>
-              <div className="formInput">
+            <form  >
+              <div className="formInput image">
                 <label htmlFor="file">
                   Image: <DriveFolderUploadOutlinedIcon className="icon" />
                 </label>
@@ -165,17 +195,42 @@ const HotelInput = () => {
                   onChange={handleChange}>
                   <option selected disabled> -- Chọn kiểu chỗ nghỉ --</option>
                   <option value={"hotel"}>Khách sạn</option>
+                  <option value={"apartment"}>Căn hộ</option>
+                  <option value={"resort"}>Resort</option>
                   <option value={"villa"}>Biệt thự</option>
+                  <option value={"guest_house"}>Nhà khách</option>
+                  <option value={"Homestays"}>Homestays</option>
+                  <option value={"glamping"}>Glamping</option>
+                  <option value={"other"}>Khác </option>
+
+
                 </select>
               </div>
-              <div className="formInput">
-                <label>Tỉnh/Thành Phố</label>
+              {/* <div className="formInput">
+                <label>Địa điểm</label>
                 <select id="dest" className="form-select" aria-label="Default select example" value={info?.dest}
                   onChange={handleChange}>
                   <option selected disabled> -- Chọn tỉnh/thành --</option>
                   <option value={"Thái Nguyên"}>Thái Nguyên</option>
                   <option value={"Hà Nội"}>Hà Nội</option>
                   <option value={"Sa Pa"}>Sa Pa</option>
+                </select>
+              </div> */}
+              <div className="formInput">
+                <label>Địa điểm</label>
+                <select
+                  id="dest"
+                  className="form-select"
+                  aria-label="Default select example"
+                  value={info?.dest}
+                  onChange={handleChange}
+                >
+                  <option selected disabled>-- Chọn địa điểm --</option>
+                  {vietnamProvinces.map((province, index) => (
+                    <option key={index} value={province}>
+                      {province}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="formInput">
@@ -196,6 +251,11 @@ const HotelInput = () => {
                 <select id="facilities" multiple onChange={handleSelectChange} className="multi-select">
                   <option value={"non_smoking"}>Phòng không hút thuốc</option>
                   <option value={"family_room"}>Phòng gia đình</option>
+                  <option value={"free_wifi"}>Free wifi</option>
+                  <option value={"private_parking"}>Chỗ để xe </option>
+                  <option value={"elevator"}>Thang máy </option>
+                  <option value={"air_conditioning"}>Điều hòa  </option>
+
                 </select>
               </div>
               <div className="formInput desc">
@@ -206,8 +266,15 @@ const HotelInput = () => {
                   value={info["description"]}
                 />
               </div>
-              <button onClick={handleClick}>{hotelId ? "Cập nhật" : "Đăng ký khách sạn"}</button>
+
+
+              <div className=" d-flex justify-content-center">
+                <button className='dky' onClick={handleClick}>
+                  {hotelId ? "Cập nhật" : "Đăng ký khách sạn"}
+                </button>
+              </div>
             </form>
+
           </div>
         </div>
       </div>

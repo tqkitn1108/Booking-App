@@ -4,10 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import CustomerRouters from "./routers/CustomerRouters.jsx";
 import BusinessRouters from "./routers/BusinessRouters.jsx";
 import './App.css';
-import Login from "./pages/login-register/Login.jsx"
-import Signup from "./pages/login-register/Signup.jsx"
-import MailList from "./components/email/Email.jsx";
-import ReservationPage from "./pages/reservation/ReservationPage.jsx";
 
 function App() {
   return (

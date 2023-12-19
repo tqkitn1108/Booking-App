@@ -73,7 +73,8 @@ const Datatable = ({ columns }) => {
     <div className="datatable" style={{width: "100%"}}>
       {loading && <LoadingSpinner />}
       <div className="datatableTitle">
-        {path}
+        Danh sách khách sạn
+        {/* {path} */}
         <Link to={`${path}/form`} className="link">
           Add New
         </Link>

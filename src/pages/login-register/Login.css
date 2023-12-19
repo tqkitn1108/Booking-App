@@ -1,85 +1,134 @@
 .content-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .reservation-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start; /* Adjust as needed based on your design */
-    margin-top: 20px; /* Add spacing between Hotel Information and the form */
-  }
+.reservation-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  /* Adjust as needed based on your design */
+  margin-top: 20px;
+  /* Add spacing between Hotel Information and the form */
+}
 
 .form-container {
-  border: 1px solid #ddd; /* Border style and color */
-  border-radius: 8px; /* Optional: Add border-radius for rounded corners */
-  padding: 20px; /* Optional: Add padding for better visual appearance */
-  margin-bottom: 20px; /* Adjust the margin as needed to create space between HotelInformation and the form */
-  margin-right: 40px; /* Add a right margin to shift the hotel information to the left */
+  border: 1px solid #ddd;
+  /* Border style and color */
+  border-radius: 8px;
+  /* Optional: Add border-radius for rounded corners */
+  padding: 20px;
+  /* Optional: Add padding for better visual appearance */
+  margin-bottom: 20px;
+  /* Adjust the margin as needed to create space between HotelInformation and the form */
+  margin-right: 40px;
+  /* Add a right margin to shift the hotel information to the left */
 }
+
 .form-secure {
-  border: 1px solid #ddd; /* Border style and color */
-  border-radius: 8px; /* Optional: Add border-radius for rounded corners */
-  padding: 20px; /* Optional: Add padding for better visual appearance */
-  margin-bottom: 20px; /* Adjust the margin as needed to create space between HotelInformation and the form */
-  margin-right: 40px; /* Add a right margin to shift the hotel information to the left */
+  border: 1px solid #ddd;
+  /* Border style and color */
+  border-radius: 8px;
+  /* Optional: Add border-radius for rounded corners */
+  padding: 20px;
+  /* Optional: Add padding for better visual appearance */
+  margin-bottom: 20px;
+  /* Adjust the margin as needed to create space between HotelInformation and the form */
+  margin-right: 40px;
+  /* Add a right margin to shift the hotel information to the left */
 }
 
 .hotel-detail-border {
-  border: 1px solid #ddd; /* Border style and color */
-  border-radius: 8px; /* Optional: Add border-radius for rounded corners */
-  padding: 20px; /* Optional: Add padding for better visual appearance */
-  margin-bottom: 20px; /* Optional: Add margin to separate from other elements */
+  border: 1px solid #ddd;
+  /* Border style and color */
+  border-radius: 8px;
+  /* Optional: Add border-radius for rounded corners */
+  padding: 20px;
+  /* Optional: Add padding for better visual appearance */
+  margin-bottom: 20px;
+  /* Optional: Add margin to separate from other elements */
 }
 
 .hotel-info-border {
-  border: 1px solid #ddd; /* Border style and color */
-  border-radius: 8px; /* Optional: Add border-radius for rounded corners */
-  padding: 20px; /* Optional: Add padding for better visual appearance */
-  margin-bottom: 20px; /* Adjust the margin as needed to create space between HotelInformation and the form */
+  border: 1px solid #ddd;
+  /* Border style and color */
+  border-radius: 8px;
+  /* Optional: Add border-radius for rounded corners */
+  padding: 20px;
+  /* Optional: Add padding for better visual appearance */
+  margin-bottom: 20px;
+  /* Adjust the margin as needed to create space between HotelInformation and the form */
 }
 
 
 .hotel-detail-border {
-  border: 1px solid #ddd; /* Border style and color */
-  border-radius: 8px; /* Optional: Add border-radius for rounded corners */
-  padding: 20px; /* Optional: Add padding for better visual appearance */
-  margin-bottom: 20px; /* Adjust the margin as needed to create space between HotelInformation and the form */
-  margin-right: 40px; /* Add a right margin to shift the hotel information to the left */
+  border: 1px solid #ddd;
+  /* Border style and color */
+  border-radius: 8px;
+  /* Optional: Add border-radius for rounded corners */
+  padding: 20px;
+  /* Optional: Add padding for better visual appearance */
+  margin-bottom: 20px;
+  /* Adjust the margin as needed to create space between HotelInformation and the form */
+  margin-right: 40px;
+  /* Add a right margin to shift the hotel information to the left */
 
 }
+
 .total-summary {
-  border: 1px solid #ddd; /* Border style and color */
-  border-radius: 8px; /* Optional: Add border-radius for rounded corners */
-  padding: 20px; /* Optional: Add padding for better visual appearance */
-  margin-bottom: 20px; /* Adjust the margin as needed to create space between HotelInformation and the form */
-  margin-right: 40px; /* Add a right margin to shift the hotel information to the left */
+  border: 1px solid #ddd;
+  /* Border style and color */
+  border-radius: 8px;
+  /* Optional: Add border-radius for rounded corners */
+  padding: 20px;
+  /* Optional: Add padding for better visual appearance */
+  margin-bottom: 20px;
+  /* Adjust the margin as needed to create space between HotelInformation and the form */
+  margin-right: 40px;
+  /* Add a right margin to shift the hotel information to the left */
 
 }
+
 .Payment {
-  border: 1px solid #ddd; /* Border style and color */
-  border-radius: 8px; /* Optional: Add border-radius for rounded corners */
-  padding: 20px; /* Optional: Add padding for better visual appearance */
-  margin-bottom: 20px; /* Adjust the margin as needed to create space between HotelInformation and the form */
-  margin-right: 40px; /* Add a right margin to shift the hotel information to the left */
+  border: 1px solid #ddd;
+  /* Border style and color */
+  border-radius: 8px;
+  /* Optional: Add border-radius for rounded corners */
+  padding: 20px;
+  /* Optional: Add padding for better visual appearance */
+  margin-bottom: 20px;
+  /* Adjust the margin as needed to create space between HotelInformation and the form */
+  margin-right: 40px;
+  /* Add a right margin to shift the hotel information to the left */
 
 }
+
 .Good {
-  border: 1px solid #ddd; /* Border style and color */
-  border-radius: 8px; /* Optional: Add border-radius for rounded corners */
-  padding: 20px; /* Optional: Add padding for better visual appearance */
-  margin-bottom: 20px; /* Adjust the margin as needed to create space between HotelInformation and the form */
-  margin-right: 40px; /* Add a right margin to shift the hotel information to the left */
+  border: 1px solid #ddd;
+  /* Border style and color */
+  border-radius: 8px;
+  /* Optional: Add border-radius for rounded corners */
+  padding: 20px;
+  /* Optional: Add padding for better visual appearance */
+  margin-bottom: 20px;
+  /* Adjust the margin as needed to create space between HotelInformation and the form */
+  margin-right: 40px;
+  /* Add a right margin to shift the hotel information to the left */
 
 }
+
 .hotel-information {
-  margin-bottom: 20px; /* Adjust the margin as needed to create space between HotelInformation and the form */
-  margin-right: 40px; /* Add a right margin to shift the hotel information to the left */
+  margin-bottom: 20px;
+  /* Adjust the margin as needed to create space between HotelInformation and the form */
+  margin-right: 40px;
+  /* Add a right margin to shift the hotel information to the left */
 }
+
 .amenities {
   display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  flex-wrap: wrap;
+  /* Allow items to wrap to the next line */
 }
 
 .wifi,
@@ -87,33 +136,49 @@
 .parking {
   display: flex;
   align-items: center;
-  margin-right: 20px; /* Adjust the margin as needed */
-  margin-bottom: 10px; /* Adjust the margin as needed */
+  margin-right: 20px;
+  /* Adjust the margin as needed */
+  margin-bottom: 10px;
+  /* Adjust the margin as needed */
 }
 
 .wifi span,
 .shuttle span,
 .parking span {
-  margin-left: 8px; /* Adjust the margin as needed */
+  margin-left: 8px;
+  /* Adjust the margin as needed */
 }
 
 
 
-.op, .lp, .tp {
-  text-align: left; /* Align the text within the paragraphs and heading to the left */
-  margin: 0; /* Remove default margin */
+.op,
+.lp,
+.tp {
+  text-align: left;
+  /* Align the text within the paragraphs and heading to the left */
+  margin: 0;
+  /* Remove default margin */
 }
 
-.O-price, .L-price, .total-price, .tax, .check-in,.check-out, .totalStays {
-  float: right; /* Align the prices to the right */
+.O-price,
+.L-price,
+.total-price,
+.tax,
+.check-in,
+.check-out,
+.totalStays {
+  float: right;
+  /* Align the prices to the right */
 }
 
 .total-price {
-  font-weight: bold; /* Make the total price bold if needed */
+  font-weight: bold;
+  /* Make the total price bold if needed */
 }
 
 .tp {
-  margin-top: 10px; /* Add some top margin to the total heading for separation */
+  margin-top: 10px;
+  /* Add some top margin to the total heading for separation */
 }
 
 .siRating {
@@ -121,18 +186,20 @@
   margin-left: 15px;
   margin-bottom: 10px;
 }
-.siRating>button{
-  
+
+.siRating>button {
+
   background-color: #003580;
   color: white;
   padding: 5px;
   font-weight: bold;
   border: none;
   border-radius: 5px;
- }
+}
 
- /* Add this CSS to your existing styles or create a new CSS file */
+/* Add this CSS to your existing styles or create a new CSS file */
 @media (max-width: 576px) {
+
   /* Small devices (landscape phones) */
   .p-5 {
     padding: 3rem !important;
@@ -140,6 +207,7 @@
 }
 
 @media (max-width: 768px) {
+
   /* Medium devices (tablets) */
   .mx-auto {
     margin-right: auto !important;
@@ -148,6 +216,7 @@
 }
 
 @media (max-width: 992px) {
+
   /* Large devices (desktops) */
   .w-100 {
     width: 100% !important;
@@ -155,6 +224,7 @@
 }
 
 @media (max-width: 1200px) {
+
   /* Extra large devices (large desktops) */
   .max-width {
     max-width: 100% !important;

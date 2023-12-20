@@ -76,25 +76,37 @@ export const hotelColumns = [
 ];
 
 export const roomColumns = [
-  { field: "_id", headerName: "ID", width: 70 },
   {
     field: "title",
     headerName: "Title",
-    width: 230,
-  },
-  {
-    field: "desc",
-    headerName: "Description",
     width: 200,
   },
   {
-    field: "price",
-    headerName: "Price",
-    width: 100,
+    field: "beds",
+    headerName: "Beds",
+    width: 140,
   },
   {
-    field: "maxPeople",
-    headerName: "Max People",
-    width: 100,
+    field: "rooms",
+    headerName: "Rooms",
+    width: 200,
+    renderCell: (params) => (
+      <span>{params.value}</span>
+    )
   },
+  {
+    field: "pricePerNight",
+    headerName: "Price/Night(VND)",
+    width: 150,
+  },
+  {
+    field: "capacity",
+    headerName: "Max People",
+    width: 90,
+  },
+  {
+    field: "amenities",
+    headerName: "Amenities",
+    width: 280,
+  }
 ];

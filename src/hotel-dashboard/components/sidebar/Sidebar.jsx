@@ -11,7 +11,8 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { Link, useParams } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext, useEffect, useState } from "react";
 import api from "../../../api/AxiosConfig";
@@ -21,6 +22,13 @@ const Sidebar = ({ hideSideBar }) => {
   const { hotelId } = useParams();
   const [hotelImg, setHotelImg] = useState("");
   const [hotelName, setHotelName] = useState("");
+  const authContext = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogoutClick = () => {
+    navigate("/");
+    authContext.handleLogout();
+  };
 
   useEffect(() => {
     async function loadData() {
@@ -57,13 +65,13 @@ const Sidebar = ({ hideSideBar }) => {
           <Link to="/business/hotels" style={{ textDecoration: "none" }}>
             <li>
               <DashboardIcon className="icon" />
-              <span>Dashboard</span>
+              <span>Trang chủ</span>
             </li>
           </Link>
           {!hideSideBar && (
             <>
               <p className="title">LISTS</p>
-              <Link to="/business/bookings" style={{ textDecoration: "none" }}>
+              <Link to={`/business/hotels/${hotelId}/bookings`} style={{ textDecoration: "none" }}>
                 <li>
                   <PersonOutlineIcon className="icon" />
                   <span>Đặt phòng</span>
@@ -75,10 +83,10 @@ const Sidebar = ({ hideSideBar }) => {
                   <span>Hotels</span>
                 </li>
               </Link>
-              <Link to="/business/rooms" style={{ textDecoration: "none" }}>
+              <Link to={`/business/hotels/${hotelId}/rooms`} style={{ textDecoration: "none" }}>
                 <li>
                   <CreditCardIcon className="icon" />
-                  <span>Rooms</span>
+                  <span>Danh sách phòng</span>
                 </li>
               </Link>
               <li>
@@ -86,10 +94,12 @@ const Sidebar = ({ hideSideBar }) => {
                 <span>Delivery</span>
               </li>
               <p className="title">USEFUL</p>
-              <li>
-                <InsertChartIcon className="icon" />
-                <span>Stats</span>
-              </li>
+              <Link to={`/business/hotels/${hotelId}/stats`} style={{ textDecoration: "none" }}>
+                <li>
+                  <InsertChartIcon className="icon" />
+                  <span>Stats</span>
+                </li>
+              </Link>
               <li>
                 <NotificationsNoneIcon className="icon" />
                 <span>Notifications</span>
@@ -113,7 +123,7 @@ const Sidebar = ({ hideSideBar }) => {
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
-          <li>
+          <li onClick={handleLogoutClick}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>

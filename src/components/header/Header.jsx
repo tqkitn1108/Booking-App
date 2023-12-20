@@ -27,11 +27,11 @@ const Header = ({ showTitle }) => {
     const [defaultText, setDefaultText] = useState(true);
     const [searchSuggestions, setsearchSuggestions] = useState([]);
     const [showResult, setShowResult] = useState(true);
-    useEffect(() => {
-        setTimeout(() => {
-            setsearchSuggestions([1, 2, 3]);
-        }, 0);
-    }, []);
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         setsearchSuggestions([1, 2, 3]);
+    //     }, 0);
+    // }, []);
     const [destInput, setDestInput] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [dateSelected, setDateSelected] = useState(false);
@@ -40,7 +40,7 @@ const Header = ({ showTitle }) => {
     const navigate = useNavigate();
     const handleSearch = (event) => {
         event.preventDefault();
-
+        setDestInput(destInput.trim());
         if (destInput.trim() === '') {
             setErrorMessage('Vui lòng nhập điểm đến để bắt đầu tìm kiếm.');
         } else {

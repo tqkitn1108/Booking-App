@@ -1,31 +1,30 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import api from "../../../api/AxiosConfig";
-import { AuthContext } from "../../../context/AuthContext";
 import LoadingSpinner from "../../../components/loading-spinner/LoadingSpinner";
 
-const RoomsDatatable = ({ columns }) => {
+const Datatable = ({ columns }) => {
   const location = useLocation();
   const path = location.pathname;
-  const { user } = useContext(AuthContext);
+  const { hotelId } = useParams();
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
       try {
-        const response = await api.get(`/business/${user.userId}/hotels`);
-        setList(response.data.map(hotel =>
+        const response = await api.get(`/hotels/${hotelId}/roomTypes`);
+        setList(response.data.map(roomType =>
         ({
-          id: hotel.id,
-          image: hotel.photos[0],
-          name: hotel.name,
-          type: hotel.type.label,
-          address: hotel.address,
-          rating: hotel.rating,
-          reviews: hotel.reviews.length
+          id: roomType.id,
+          title: roomType.title,
+          beds: roomType.beds,
+          pricePerNight: roomType.pricePerNight,
+          capacity: roomType.capacity,
+          rooms: roomType.rooms.map(room => room.roomNumber).join(", "),
+          amenities: roomType.amenities.join(", ")
         })));
       } catch (error) {
         console.log(error);
@@ -38,7 +37,7 @@ const RoomsDatatable = ({ columns }) => {
   const handleDelete = async (id) => {
     try {
       await api.delete(`/${path}/${id}`);
-      setList(list.filter((item) => item.id !== id));
+      setList(list.filter((item) => item._id !== id));
     } catch (err) { }
   };
 
@@ -46,7 +45,7 @@ const RoomsDatatable = ({ columns }) => {
     {
       field: "action",
       headerName: "Action",
-      width: 200,
+      width: 180,
       renderCell: (params) => {
         return (
           <div className="cellAction">
@@ -71,7 +70,7 @@ const RoomsDatatable = ({ columns }) => {
       <div className="datatableTitle">
         {path}
         <Link to={`${path}/form`} className="link">
-          Add New
+          Thêm phòng mới
         </Link>
       </div>
       <DataGrid
@@ -82,10 +81,10 @@ const RoomsDatatable = ({ columns }) => {
         rowsPerPageOptions={[9]}
         // checkboxSelection
         getRowId={(row) => row.id}
-        getRowHeight={() => 100}
+        getRowHeight={() => 60}
       />
     </div>
   );
 };
 
-export default RoomsDatatable;
+export default Datatable;

@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from '../hotel-dashboard/pages/home/Home';
 import Single from '../hotel-dashboard/pages/single/Single';
-import NewRoom from '../hotel-dashboard/pages/newRoom/NewRoom';
 import New from '../hotel-dashboard/pages/new/New';
 import List from '../hotel-dashboard/pages/list/List';
 import HotelInput from '../hotel-dashboard/pages/newHotel/HotelInput';
@@ -14,6 +13,7 @@ import { AuthContext } from "../context/AuthContext";
 import AuthProvider from "../context/AuthContext";
 import { DarkModeContextProvider } from "../hotel-dashboard/context/darkModeContext";
 import "../hotel-dashboard/style/dark.scss";
+import RoomInput from "../hotel-dashboard/pages/newRoom/RoomInput";
 
 function BusinessRouters() {
   const { darkMode } = useContext(DarkModeContext);
@@ -44,14 +44,76 @@ function BusinessRouters() {
                     </ProtectedRoute>
                   }
                 />
-                <Route
-                  path=":hotelId"
-                  element={
-                    <ProtectedRoute>
-                      <Single />
-                    </ProtectedRoute>
-                  }
-                />
+                <Route path=":hotelId">
+                  <Route
+                    index
+                    element={
+                      <ProtectedRoute>
+                        <Single />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="rooms">
+                    <Route
+                      index
+                      element={
+                        <ProtectedRoute>
+                          <List columns={roomColumns} hideSideBar={false} />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path=":roomId"
+                      element={
+                        <ProtectedRoute>
+                          <Single />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="form"
+                      element={
+                        <ProtectedRoute>
+                          <RoomInput />
+                        </ProtectedRoute>
+                      }
+                    />
+                  </Route>
+                  <Route path="bookings">
+                    <Route
+                      index
+                      element={
+                        <ProtectedRoute>
+                          <List columns={userColumns} hideSideBar={false} />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path=":bookingId"
+                      element={
+                        <ProtectedRoute>
+                          <Single />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="new"
+                      element={
+                        <ProtectedRoute>
+                          <New inputs={userInputs} title="Add New User" />
+                        </ProtectedRoute>
+                      }
+                    />
+                  </Route>
+                  <Route
+                    path="stats"
+                    element={
+                      <ProtectedRoute>
+                        <Home />
+                      </ProtectedRoute>
+                    }
+                  />
+                </Route>
                 <Route
                   path="form"
                   element={
@@ -60,66 +122,6 @@ function BusinessRouters() {
                     </ProtectedRoute>
                   }
                 />
-                <Route path="rooms">
-                  <Route
-                    index
-                    element={
-                      <ProtectedRoute>
-                        <List columns={roomColumns} hideSideBar={false}/>
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route
-                    path=":roomId"
-                    element={
-                      <ProtectedRoute>
-                        <Single />
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route
-                    path="new"
-                    element={
-                      <ProtectedRoute>
-                        <NewRoom />
-                      </ProtectedRoute>
-                    }
-                  />
-                </Route>
-                <Route path="users">
-                  <Route
-                    index
-                    element={
-                      <ProtectedRoute>
-                        <List columns={userColumns} hideSideBar={false}/>
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route
-                    path=":userId"
-                    element={
-                      <ProtectedRoute>
-                        <Single />
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route
-                    path="new"
-                    element={
-                      <ProtectedRoute>
-                        <New inputs={userInputs} title="Add New User" />
-                      </ProtectedRoute>
-                    }
-                  />
-                </Route>
-                <Route
-                path="statistics"
-                element={
-                  <ProtectedRoute>
-                    <Home />
-                  </ProtectedRoute>
-                }
-              />
               </Route>
             </Route>
           </Routes>

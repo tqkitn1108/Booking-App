@@ -81,8 +81,6 @@ const HotelInput = () => {
       };
       if(!newhotel.facilities) newhotel.facilities = facilities;
 
-      console.log(newhotel);
-
       if (hotelId) {
         await api.put(`/business/hotels/${hotelId}`, newhotel);
       } else {

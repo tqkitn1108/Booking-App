@@ -44,19 +44,19 @@ public class RoomService {
 
     public Room newRoom(Room room) {
         roomRepository.save(room);
-        mongoTemplate.update(RoomType.class)
-                .matching(Criteria.where("id").is(room.getRoomTypeId()))
-                .apply(new Update().push("rooms").value(room))
-                .first();
+//        mongoTemplate.update(RoomType.class)
+//                .matching(Criteria.where("id").is(room.getRoomTypeId()))
+//                .apply(new Update().push("rooms").value(room))
+//                .first();
         return room;
     }
 
     public String deleteRoom(String roomId) {
-        Room deletedRoom = roomRepository.findById(roomId).orElseThrow();
-        mongoTemplate.update(RoomType.class)
-                .matching(Criteria.where("id").is(deletedRoom.getRoomTypeId()))
-                .apply(new Update().pull("rooms", deletedRoom))
-                .first();
+//        Room deletedRoom = roomRepository.findById(roomId).orElseThrow();
+//        mongoTemplate.update(RoomType.class)
+//                .matching(Criteria.where("id").is(deletedRoom.getRoomTypeId()))
+//                .apply(new Update().pull("rooms", deletedRoom))
+//                .first();
         roomRepository.deleteById(roomId);
         return "Room has been deleted";
     }

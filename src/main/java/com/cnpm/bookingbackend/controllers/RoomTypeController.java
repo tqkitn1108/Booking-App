@@ -1,5 +1,6 @@
 package com.cnpm.bookingbackend.controllers;
 
+import com.cnpm.bookingbackend.dtos.request.RoomTypeDto;
 import com.cnpm.bookingbackend.models.RoomType;
 import com.cnpm.bookingbackend.services.RoomTypeService;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -38,8 +39,8 @@ public class RoomTypeController {
     }
 
     @PostMapping("/{hotelId}/roomTypes")
-    public ResponseEntity<RoomType> addNewRoomType(@PathVariable String hotelId, @RequestBody RoomType roomType) {
-        return new ResponseEntity<>(roomTypeService.newRoomType(hotelId, roomType), HttpStatus.CREATED);
+    public ResponseEntity<RoomType> addNewRoomType(@PathVariable String hotelId, @RequestBody RoomTypeDto roomTypeDto) {
+        return new ResponseEntity<>(roomTypeService.newRoomType(hotelId, roomTypeDto    ), HttpStatus.CREATED);
     }
 
     @PutMapping("/roomTypes/{id}")

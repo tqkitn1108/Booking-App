@@ -4,6 +4,7 @@ import com.cnpm.bookingbackend.models.hotelattributemodels.Bed;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Document(collection = "room_types")
 @Data
+@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoomType {
@@ -21,12 +23,12 @@ public class RoomType {
     private String title;
     @DocumentReference(lazy = true)
     private List<Room> rooms;
-    private List<Bed> beds;
+    private List<String> beds;
     private Float pricePerNight;
     private Integer capacity;
     private List<String> amenities;
-    private String description;
-    private List<String> images;
+//    private String description;
+//    private List<String> images;
 
     public Integer countAvailableRooms(LocalDate checkIn, LocalDate checkOut) {
         return rooms.stream().filter(room -> room.isAvailableBetween(checkIn, checkOut)).toList().size();

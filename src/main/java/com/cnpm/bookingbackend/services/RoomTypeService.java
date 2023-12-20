@@ -1,9 +1,13 @@
 package com.cnpm.bookingbackend.services;
 
+import com.cnpm.bookingbackend.dtos.request.RoomTypeDto;
 import com.cnpm.bookingbackend.models.Hotel;
+import com.cnpm.bookingbackend.models.Room;
 import com.cnpm.bookingbackend.models.RoomType;
 import com.cnpm.bookingbackend.repo.HotelRepository;
+import com.cnpm.bookingbackend.repo.RoomRepository;
 import com.cnpm.bookingbackend.repo.RoomTypeRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
@@ -13,16 +17,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class RoomTypeService {
     private final RoomTypeRepository roomTypeRepository;
+    private final RoomRepository roomRepository;
     private final HotelRepository hotelRepository;
     private final MongoTemplate mongoTemplate;
-
-    public RoomTypeService(RoomTypeRepository roomTypeRepository, HotelRepository hotelRepository, MongoTemplate mongoTemplate) {
-        this.roomTypeRepository = roomTypeRepository;
-        this.hotelRepository = hotelRepository;
-        this.mongoTemplate = mongoTemplate;
-    }
 
     public List<RoomType> allRoomTypes(String hotelId) {
         return hotelRepository.findById(hotelId).orElseThrow().getRoomTypes();
@@ -37,12 +37,18 @@ public class RoomTypeService {
                 .filter(roomType -> roomType.countAvailableRooms(checkIn, checkOut) > 0).toList();
     }
 
-    public RoomType newRoomType(String hotelId, RoomType roomType) {
+    public RoomType newRoomType(String hotelId, RoomTypeDto roomTypeDto) {
+        System.out.println(roomTypeDto);
+        List<Room> rooms = roomTypeDto.getRoomNumbers().stream()
+                .map(roomNumber -> roomRepository.save(new Room(roomNumber))).toList();
+        RoomType roomType = roomTypeDto.toRoomType();
+        roomType.setRooms(rooms);
+        roomType = roomTypeRepository.save(roomType);
         mongoTemplate.update(Hotel.class)
                 .matching(Criteria.where("id").is(hotelId))
                 .apply(new Update().push("roomTypes", roomType))
                 .first();
-        return roomTypeRepository.save(roomType);
+        return roomType;
     }
 
     public RoomType updateRoomType(String id, RoomType roomType) {

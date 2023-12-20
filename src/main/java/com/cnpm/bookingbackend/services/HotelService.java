@@ -40,28 +40,35 @@ public class HotelService {
     }
 
     public Page<Hotel> searchHotels(int page, int size, SearchHotelDto searchHotelDto, FilterHotelDto filter) {
-        String dest = searchHotelDto.getLocation();
-        LocalDate checkIn = searchHotelDto.getCheckIn();
-        LocalDate checkOut = searchHotelDto.getCheckOut();
-        int adults = searchHotelDto.getAdults();
-        int children = searchHotelDto.getChildren();
-        int noRooms = searchHotelDto.getNoRooms();
+        List<Hotel> hotelList;
+        if (searchHotelDto.getLocation() != null) {
+            String dest = searchHotelDto.getLocation();
+            hotelList = hotelRepository.findByDest(dest);
+            if (searchHotelDto.getCheckIn() != null && searchHotelDto.getCheckOut() != null) {
+                LocalDate checkIn = searchHotelDto.getCheckIn();
+                LocalDate checkOut = searchHotelDto.getCheckOut();
+                int adults = searchHotelDto.getAdults() != null ? searchHotelDto.getAdults() : 0;
+                int children = searchHotelDto.getChildren() != null ? searchHotelDto.getChildren() : 0;
+                int noRooms = searchHotelDto.getNoRooms() != null ? searchHotelDto.getNoRooms() : 1;
 
-        List<Hotel> hotelList = hotelRepository.findByDest(dest).stream().filter(hotel -> {
-            int maxPeople = 0, numOfRooms = 0;
-            for (RoomType roomType : hotel.getRoomTypes()) {
-                int numAvailableRooms = roomType.countAvailableRooms(checkIn, checkOut);
-                maxPeople += numAvailableRooms * roomType.getCapacity();
-                numOfRooms += numAvailableRooms;
+                hotelList = hotelList.stream().filter(hotel -> {
+                    int maxPeople = 0, numOfRooms = 0;
+                    for (RoomType roomType : hotel.getRoomTypes()) {
+                        int numAvailableRooms = roomType.countAvailableRooms(checkIn, checkOut);
+                        maxPeople += numAvailableRooms * roomType.getCapacity();
+                        numOfRooms += numAvailableRooms;
+                    }
+                    return maxPeople >= adults + children / 4 || numOfRooms >= noRooms - 1;
+                }).toList();
             }
-            return maxPeople >= adults + children / 4 || numOfRooms >= noRooms - 1;
-        }).toList();
+        } else hotelList = hotelRepository.findAll();
         hotelList = filterHotels(hotelList, filter);
+
         Pageable pageable = PageRequest.of(page, size, Sort.by("rating").descending());
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), hotelList.size());
         List<Hotel> hotels = hotelList.subList(start, end);
-        return new PageImpl<>(hotels,pageable, hotelList.size());
+        return new PageImpl<>(hotels, pageable, hotelList.size());
     }
 
     public void deletedHotel(String id) {
@@ -76,7 +83,7 @@ public class HotelService {
 
     public Map<String, Integer> countByType(List<String> types) {
         Map<String, Integer> map = new HashMap<>();
-        types.forEach(type -> map.put(type, hotelRepository.findByType(typeRepository.findByLabel(type).orElse(null)).size()));
+        types.forEach(type -> map.put(type, hotelRepository.findByType(typeRepository.findByName(type).orElse(null)).size()));
         return map;
     }
 

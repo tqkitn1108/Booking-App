@@ -4,6 +4,7 @@ D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\r
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\models\Review.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\event\RegistrationCompleteEvent.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\services\ImageService.java
+D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\dtos\request\RoomTypeDto.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\models\token\VerificationToken.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\security\SecurityConfiguration.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\dtos\request\LoginUserDto.java

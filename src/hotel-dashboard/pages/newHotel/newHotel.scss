@@ -14,13 +14,16 @@
       display: flex;
 
       h1 {
-        color: lightgray;
+        color: rgb(41, 38, 38);
         font-size: 20px;
+        font-weight: bold;
       }
 
       .left {
         flex: 1;
         text-align: center;
+        display: flex;
+        flex-wrap: wrap;
 
         img {
           width: 100px;
@@ -29,47 +32,47 @@
           object-fit: cover;
         }
 
-      }
-      .left .imageContainer {
-        position: relative;
-        width: 48%; /* Chọn kích thước phù hợp để hiển thị 2 ảnh trên 1 dòng */
-        margin: 1%; /* Tạo khoảng cách giữa các ảnh */
-      
-        img {
-          width: 100%;
-          border-radius: 10%;
-          object-fit: cover;
-        }
-      
-        .removeButton {
-          width: 15px;
-          height:15px;
+        .imageContainer {
+          position: relative;
+          width: 48%;
+          /* Chọn kích thước phù hợp để hiển thị 2 ảnh trên 1 dòng */
+          margin: 1%;
+          /* Tạo khoảng cách giữa các ảnh */
 
-          position: absolute;
-          top: 5px;
-          right: 5px;
-          background-color: red;
-          color: white;
-          border: none;
-          padding: 5px;
-          border-radius: 50%;
-          cursor: pointer;
-          font-size: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          img {
+            width: 100%;
+            border-radius: 10%;
+            object-fit: cover;
+          }
+
+          .removeButton {
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+        }
+
+        img {
+          width: 48%;
+          /* Chọn kích thước phù hợp để hiển thị 2 ảnh trên 1 dòng */
+          margin: 1%;
+          /* Tạo khoảng cách giữa các ảnh */
         }
       }
-      .left {
-        display: flex;
-        flex-wrap: wrap;
-      }
-      
-      .left img {
-        width: 48%; /* Chọn kích thước phù hợp để hiển thị 2 ảnh trên 1 dòng */
-        margin: 1%; /* Tạo khoảng cách giữa các ảnh */
-      }
-      
+
       .right {
         flex: 2;
         padding: 0px 20px;
@@ -80,10 +83,10 @@
           gap: 30px;
           justify-content: space-between;
 
-          .selectRooms{
+          .selectRooms {
             width: 100%;
 
-            select{
+            select {
               width: 100%;
               padding: 10px;
             }
@@ -96,7 +99,8 @@
               display: flex;
               align-items: center;
               gap: 10px;
-
+              font-weight: bold;
+              margin-bottom:5px ;
               .icon {
                 cursor: pointer;
               }
@@ -108,21 +112,31 @@
               border: none;
               border-bottom: 1px solid gray;
             }
+            #facilities{
+              padding-left: 8px;
+              padding-right: 8px;
+            }
+            #description{
+              padding-left: 8px;
+              padding-right: 8px;
+            }
+            
           }
-          button {
+        
+          .submit-button {
             width: 150px;
             padding: 10px;
-            border-radius: 10%;
+            border-radius: 10px;
             background-color: teal;
             color: white;
             font-weight: bold;
             cursor: pointer;
             margin-top: 50px;
-            margin-left:300px;
+            margin-left: 300px;
           }
-        
+
         }
-       
+
       }
     }
   }

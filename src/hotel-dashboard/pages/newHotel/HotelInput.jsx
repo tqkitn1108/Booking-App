@@ -7,8 +7,9 @@ import { useEffect, useState } from "react";
 import { hotelInputs } from "../../formSource";
 import api from "../../../api/AxiosConfig";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
 
 const HotelInput = () => {
   const navigate = useNavigate();
@@ -64,12 +65,14 @@ const HotelInput = () => {
       return (
         <div key={index} className="imageContainer">
           <img src={typeof file === 'string' ? file : URL.createObjectURL(file)} alt="" />
-          <button onClick={() => handleRemoveImage(index)} className="removeButton">X</button>
+          <button onClick={() => handleRemoveImage(index)} className="removeButton">
+          <FontAwesomeIcon icon={faTimes} />
+          </button>
         </div>
       );
     });
   };
-  
+
   const handleRemoveImage = (index) => {
     const newImages = [...images];
     newImages.splice(index, 1);
@@ -148,7 +151,7 @@ const HotelInput = () => {
       <div className="newContainer">
         <Navbar />
         <div className="top">
-          <h1>Thêm khách sạn</h1>
+          <h1>Chi tiết khách sạn</h1>
         </div>
         <div className="bottom">
           <div className="left">
@@ -268,8 +271,8 @@ const HotelInput = () => {
               </div>
 
 
-              <div className=" d-flex justify-content-center">
-                <button className='dky' onClick={handleClick}>
+              <div className="d-flex justify-content-center">
+                <button className="submit-button" onClick={handleClick}>
                   {hotelId ? "Cập nhật" : "Đăng ký khách sạn"}
                 </button>
               </div>

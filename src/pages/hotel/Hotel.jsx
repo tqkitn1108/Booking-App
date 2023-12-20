@@ -2,7 +2,9 @@ import "./hotel.css";
 import React, { useEffect } from 'react';
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
+import TripPlanner from "../../components/trip-planner/TripPlanner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Badges from "./badge";
 import {
   faCircleArrowLeft,
   faCircleArrowRight,
@@ -11,7 +13,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import Table from "./Table";
-import CardReview from "./Card";
+import CardSlick from "./CardSlick";
+import RatingR from "./Rating";
 const Hotel = () => {
 
   const [slideNumber, setSlideNumber] = useState(0);
@@ -36,9 +39,7 @@ const Hotel = () => {
     {
       src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707389.jpg?k=52156673f9eb6d5d99d3eed9386491a0465ce6f3b995f005ac71abc192dd5827&o=&hp=1",
     },
-    {
-     src :"https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707776.jpg?k=054bb3e27c9e58d3bb1110349eb5e6e24dacd53fbb0316b9e2519b2bf3c520ae&o=&hp=1"
-    }
+    
   ];
 
   const handleOpen = (i) => {
@@ -61,7 +62,7 @@ const Hotel = () => {
 
   return (
     
-      <div>
+      <div className="Hotel">
       <div className="hotelContainer">
         {open && (
           <div className="slider">
@@ -87,12 +88,13 @@ const Hotel = () => {
           <h1 className="hotelTitle">Tower Street Apartments</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
-            <span>Số 2 Đại Cồ Việt, quận Hai Bà Trưng, Hà Nội</span>
+            <span> 219/8 Ngô Tất Tố, phường 22, Quận Bình Thạnh, Binh Thanh, Ho Chi Minh City, Vietnam</span>
           </div>
           <span className="hotelDistance">
             Vị trí xuất sắc - Nằm ngay trên bản đồ
           </span>
           <span className="hotelPriceHighlight">
+            <RatingR/>
             Chúng tôi luôn tận tâm
           </span>
           <div className="hotelImages">
@@ -108,6 +110,7 @@ const Hotel = () => {
           </div>
           <div className="hotelDetails">
             <div className="hotelDetailsTexts">
+              <Badges/>
               <h1 className="hotelTitle">Stay in the heart of City</h1>
               <p className="hotelDesc">
                 <p style={{ marginBottom: 0.5 + 'em' }}>Bạn đủ điều kiện nhận giảm giá Genius tại La Passion Premium Cau Go! Để tiết kiệm tại chỗ nghỉ này, bạn chỉ cần đăng nhập.
@@ -134,16 +137,18 @@ const Hotel = () => {
           </div>
         </div>
         <div className="HotelRoom">
-        <h3 style={{ marginRight: 41.0 + 'em' }}>Phòng trống</h3>
+        <h3 style={{ marginRight: 31 + 'em' }}>Phòng trống</h3>
         </div>
           <Table />
           <div className="HotelRoom">
-        <h3 style={{ marginRight: 38.0 + 'em' }} >Đánh giá của khách</h3>
+        <h3 style={{ marginRight: 28 + 'em' }} >Đánh giá của khách</h3>
+        
         </div>
-          <CardReview/>
+        <CardSlick/>
       </div>
         
     </div>
+    
   );
 };
 

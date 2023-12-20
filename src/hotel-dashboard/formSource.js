@@ -72,19 +72,19 @@ export const productInputs = [
 export const hotelInputs = [
   {
     id: "name",
-    label: "Name",
+    label: "Tên khách sạn",
     type: "text",
     placeholder: "My Hotel",
   },
   {
     id: "phoneNumber",
-    label: "Phone Number",
+    label: "Số điện thoại",
     type: "text",
     placeholder: "+84",
   },
   {
     id: "address",
-    label: "Address",
+    label: "Địa chỉ",
     type: "text",
     placeholder: "elton st, 216",
   }

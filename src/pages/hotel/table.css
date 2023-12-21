@@ -1,73 +1,90 @@
-/* table {
+/* Apply general styling to the table */
+
+.containerT {
+  max-width: 1024px;
+  width: 100%;
+  margin: auto; 
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  display: flex;
   margin: 0 auto;
-  width: 50%;
-  border: collapse;
-}
-
-table,
-th,
-td {
-  border: 1px solid black;
-  padding: 5px;
-}
-
-th,
-td {
-  border: 1px solid black;
-  padding: 5px;
-}
-
-tr td {
-  border-right: 1px solid black;
-}
-
-tr {
-  border: 1px solid black;
-  padding: 5px;
-  border-bottom: 1px solid black;
-}
-
-th {
-  border: 1px solid black;
-  text-align: center;
-  background-color: #0071c2;
-  padding: 5px;
-  font-size: 15px;
-  color: white;
-  margin-left: 10px;
-}
-
-td {
-  border-right: 1px solid black;
-  border: 1px solid black;
-  text-align: 5px;
-  padding: 5px;
-  color: #0071c2;
-}
-
-.room-type {
-  width: 40%;
-}
-
-.guest-capacity {
-  width: 30%;
-}
-
-.price {
-  width: 30%;
-  text-align: right;
-}
-
-/* button {
-    padding: 4px 100px;
-    cursor: pointer;
-    border: 1px solid black;
-    margin-left: 10px;
-    margin-right: 10px;
-    display: block;
-    background-color: #0071c2;
-  }
   
-  button:hover {
-    background-color: #ccc;
-  } */ 
+}
+
+.containerT table {
+  border: 2px solid #4b76b2;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+/* Style the table headers */
+.containerT th {
+  background-color: #4c76b2;
+  border: 2px solid #4c76b2;
+  text-align: left;
+  padding: 8px;
+  color: white; 
+}
+
+
+.containerT td {
+  border: 2px solid #4c76b2;
+  text-align: left;
+  padding: 8px;
+}
+.containerT tr{
+  border: 2px solid #4c76b2;
+}
+
+/* Apply additional styling to specific elements */
+.Studio h1 {
+  color: #0071c2;
+  font-size: 14px;
+  text-align: left;
+  display: inline;
+  font-weight: 700;
+  line-height:20px;
+}
+
+.Studio p1 {
+  font-size: 12px;
+  color:#262626;
+  display:inline-block;
+  font-size:12px;
+  line-height:18px;
+  padding:0px 3px 0px 0px /* Adjusted: Increased font size for better readability */
+}
+.Studio p{
+  font-size: 12px;
+  color:#262626;
+}
+
+.onebed .tv {
+  font-weight: bold;
+}
+
+.twobed span {
+  font-size: 12px;
+  color:#262626;
+  display:inline;
+  font-size:12px;
+  line-height:18px;
+  padding:0px 4px 0px 0px
+}
+
+/* Style the buttons */
+.containerT button {
+  background-color: #4c76b2;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.containerT button:hover {
+  background-color: #4c76b2;
+}

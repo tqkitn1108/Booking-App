@@ -1,65 +1,92 @@
 import React, { useState } from 'react';
-import './table.css'
-import {
-    faPeopleArrows
-  
-  } from "@fortawesome/free-solid-svg-icons";
-import { icon } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import './table.css';
+import SplitButton from './SplitButton';
+import SingleBedIcon from '@mui/icons-material/SingleBed';
+import PersonIcon from '@mui/icons-material/Person';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHandHoldingMedical } from '@fortawesome/free-solid-svg-icons';
 const Table = () => {
-  const data = [
-    {
-      roomType: 'Suite có Ban công',
-      guestCapacity: '2',
-      price: 'Hiển thị giá',
-    },
-    {
-      roomType: 'Suite Nhin Ra Ho',
-      guestCapacity: '3',
-      price: 'Hiển thị giá',
-    },
-    {
-      roomType: 'Suite Junior',
-      guestCapacity: '3',
-      price: 'Hiển thị giá',
-    },
-    {
-      roomType: 'Suite Deluxe',
-      guestCapacity: '4',
-      price: 'Hiển thị giá',
-    },
-  ];
-  const [showPrice, setShowPrice] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleTogglePrice = () => {
-    setShowPrice((prevState) => !prevState);
+  const handleButtonClick = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleOptionClick = (option) => {
+
+    console.log(`Option clicked: ${option}`);
+    // You can perform additional actions based on the selected option
   };
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th className="room-type">Loại chỗ nghỉ</th>
-          <th className="guest-capacity">Số lượng khách</th>
-          <th className="price"></th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((room) => (
-          <tr key={room.roomType}>
-            
-            <td>{room.roomType}</td>
-            <td>{room.guestCapacity}</td>
-            
-            <td className="price">
-              <button onClick={handleTogglePrice}>
-                {showPrice ? '100000000' : room.price}
-              </button>
+    <div className='containerT'>
+      <table striped>
+        <thead>
+          <tr>
+            <th>Loại phòng</th>
+            <th>Số lượng khách</th>
+            <th>Giá cho 2 đêm </th>
+            <th>Điều kiện hủy bỏ</th>
+            <th>Chọn số lượng</th>
+            <th>Đặt ngay</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr key="dong1">
+            <div className='Studio'>
+              <h1>Studio có ban công</h1>
+              <p>1 giường đôi lớn<SingleBedIcon /></p>
+            </div>
+            <td>
+              <PersonIcon /> <PersonIcon /> + <PersonIcon />
+            </td>
+            <td>VND 2,898,000</td>
+            <td>Hoàn tiền 100% trong vòng 24h sau đặt cọc</td>
+            <td>
+              <SplitButton />
+            </td>
+            <td>
+              <button>Đặt ngay</button>
             </td>
           </tr>
-        ))}
-      </tbody>
-    </table>
+          <tr key="dong2">
+            <div className='Studio'>
+              <h1>Căn hộ 1 phòng ngủ</h1>
+              <p>1 giường đôi lớn <SingleBedIcon /></p>
+            </div>
+            <td>
+              <PersonIcon /> <PersonIcon /> + <PersonIcon />
+            </td>
+            <td>VND 3.118.000</td>
+            <td>Hoàn tiền 100% trong vòng 24h sau đặt cọc</td>
+            <td>
+              <SplitButton />
+            </td>
+            <td>
+              <button>Đặt ngay</button>
+            </td>
+          </tr>
+          <tr key="dong3">
+            <div className='Studio'>
+              <h1>Căn hộ 2 phòng ngủ</h1>
+              <p>Phòng ngủ 1: 1 giường đôi lớn<SingleBedIcon /></p>
+              <p>Phòng ngủ 2: 1 giường đôi lớn<SingleBedIcon /><SingleBedIcon /></p>
+            </div>
+            <td>
+              <PersonIcon />x4 +<PersonIcon /><PersonIcon />
+            </td>
+            <td>VND 3.640.000</td>
+            <td>Hoàn tiền 100% trong vòng 24h sau đặt cọc</td>
+            <td>
+              <SplitButton />
+            </td>
+            <td>
+              <button>Đặt ngay</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 };
 

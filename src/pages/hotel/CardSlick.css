@@ -1,0 +1,64 @@
+.CardSlick {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    margin: 0px 96px;
+}
+
+.CardSlick .CardSlick-item {
+    flex: 1;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.CardSlick .CardSlick-img {
+    border-radius: 10px;
+    width: 156px;
+    height: 136px;
+    object-fit: cover;
+}
+
+.CardSlick .CardSlick-titles {
+    font-size: 18px;
+}
+
+.CardSlick .CardSlick-desrcibe {
+    color: #474747;
+    font-weight: 400;
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+.CardSlick .swiper-button-prev,
+.CardSlick .swiper-button-next {
+    color: #262626;
+    display: inline-block;
+    fill: #262626;
+    font-size: 14px;
+    font-weight: 500;
+    grid-area: auto;
+    line-height: 20px
+}
+
+.CardSlick .swiper-button-prev {
+    margin: -30px 0px 0px -20px;
+}
+
+.CardSlick .swiper-button-next {
+    margin: -30px -2px 0px 0px;
+}
+
+.CardSlick .swiper-button-prev:after,
+.CardSlick .swiper-button-next:after {
+    font-size: 14px;
+    line-height: 14px;
+}
+
+.CardSlick .swiper-button-prev.swiper-button-disabled,
+.CardSlick .swiper-button-next.swiper-button-disabled {
+    opacity: 0;
+    cursor: none;
+}

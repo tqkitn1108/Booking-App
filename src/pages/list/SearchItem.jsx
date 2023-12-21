@@ -1,6 +1,9 @@
+import { number } from "yup";
 import "./searchItem.css";
 
-const SearchItem = ({hotel}) => {
+const SearchItem = ({ hotel }) => {
+  
+
   const renderStars = (value) => {
     const stars = [];
     if (value > 0) {
@@ -16,17 +19,17 @@ const SearchItem = ({hotel}) => {
   };
   function RatingComponent({ rating }) {
     let textToShow;
-    if (rating != null) {
-    if (rating >= 9.0) {
-      textToShow = "Tuyệt hảo";
-    } else if (rating >= 8.0) {
-      textToShow = "Rất tốt";
-    } else if (rating >= 7.0) {
-      textToShow = "Tốt";
-    } else if (rating >= 6.0) {
-      textToShow = "Dễ chịu";
-    } else textToShow = "Bình thường"
-  }
+    if (rating !== undefined && rating !== null) {
+      if (rating >= 9.0) {
+        textToShow = "Tuyệt hảo";
+      } else if (rating >= 8.0) {
+        textToShow = "Rất tốt";
+      } else if (rating >= 7.0) {
+        textToShow = "Tốt";
+      } else if (rating >= 6.0) {
+        textToShow = "Dễ chịu";
+      } else textToShow = "Bình thường"
+    }
 
     return textToShow;
   }
@@ -36,7 +39,7 @@ const SearchItem = ({hotel}) => {
   return (
     <div className="searchItem">
       <img
-        src={hotel.photos}
+        src={hotel.photos[0]}
         alt=""
         className="siImg"
       />
@@ -51,21 +54,25 @@ const SearchItem = ({hotel}) => {
           <a id="diachi" href={mapSearchString(hotel.address)} target="_blank" rel="noopener noreferrer">{hotel.address}</a>
           <a href={mapSearchString(hotel.address)} target="_blank" rel="noopener noreferrer">Xem tren ban do</a>
         </div>
-        <span className="siTaxiOp">Free airport taxi</span>
+        {/* <span className="siTaxiOp">Free airport taxi</span> */}
         <span className="siSubtitle">
-          Studio Apartment with Air conditioning
+          {hotel.description}
         </span>
         <span className="siFeatures">
-          Entire studio • 1 bathroom • 21m² 1 full bed
         </span>
-        <span className="siCancelOp">Free cancellation </span>
+        <span className="siCancelOp">       
+         {hotel.facilities?.[0]?.label}
+        </span>
+        <span className="siCancelOp">        
+        {hotel.facilities?.[1]?.label}
+        </span>
         <span className="siCancelOpSubtitle">
           You can cancel later, so lock in this great price today!
         </span>
       </div>
       <div className="siDetails">
         <div className="siRating">
-          <span className="nhanXet"><RatingComponent  rating={hotel.rating}></RatingComponent></span>
+          <span className="cmt"><RatingComponent rating={hotel.rating}></RatingComponent></span>
           <button>{hotel.rating}</button>
         </div>
         <div className="siDetailTexts">

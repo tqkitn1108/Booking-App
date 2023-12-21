@@ -50,8 +50,14 @@
   }
   
   .siSubtitle{
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 13px;
+    display: -webkit-box;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    /* font-weight: bold; */
   }
   
   .siFeatures{
@@ -86,10 +92,11 @@
     margin-left: 15px;
     font-weight: 500;
   }
-  .siRating .nhanXet{
+  .siRating .cmt{
     float: right;
     margin-right: 10px;
     font-size: 14px;
+    white-space: nowrap;
   }
   .siRating button {
     cursor: default;

@@ -9,7 +9,12 @@ const Pagination = ({ currentPage, totalPages, onPageChange, searchParams }) => 
   useEffect(() => {
     onPageChange(currentPage);
   }, [currentPage]);
-
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 300,
+      behavior: 'smooth'
+    });
+  };
   const handlePageChange = (page) => {
     searchParams.set('page', page - 1);
     const query = searchParams.toString();
@@ -17,13 +22,19 @@ const Pagination = ({ currentPage, totalPages, onPageChange, searchParams }) => 
     onPageChange(page);
   };
 
+  const handleClick = (i) => {
+    handlePageChange(i);
+    scrollToTop();
+  };
   const renderPagination = () => {
     const pages = [];
     for (let i = 1; i <= totalPages; i++) {
       pages.push(
         <li className="page-item"><button className="page-link" 
         key={i}
-        onClick={() => handlePageChange(i)}
+        onClick={() => handleClick(i)
+          
+        }
         >{i}</button></li>
       );
     }

@@ -66,6 +66,8 @@ const Header = () => {
         }
     };       
     
+    // Hau them ham
+    
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (buttonClicked && !event.target.closest('.header-btn')) {

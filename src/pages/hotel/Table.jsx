@@ -5,7 +5,7 @@ import SingleBedIcon from '@mui/icons-material/SingleBed';
 import PersonIcon from '@mui/icons-material/Person';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingMedical } from '@fortawesome/free-solid-svg-icons';
-const Table = () => {
+const Table = ({ roomTypes }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleButtonClick = () => {
@@ -32,58 +32,24 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          <tr key="dong1">
+          {roomTypes?.map((roomType, index) =>
+          (<tr key={index}>
             <div className='Studio'>
-              <h1>Studio có ban công</h1>
-              <p>1 giường đôi lớn<SingleBedIcon /></p>
+              <h1>{roomType.title}</h1>
+              {roomType.beds.map((bed, i) => <p key={i}>{bed}<SingleBedIcon /></p>)}
             </div>
             <td>
-              <PersonIcon /> <PersonIcon /> + <PersonIcon />
+              {new Array(roomType.capacity).fill(1).map((_, i) => <PersonIcon key={i} />)}
             </td>
-            <td>VND 2,898,000</td>
+            <td>VND {roomType.pricePerNight}</td>
             <td>Hoàn tiền 100% trong vòng 24h sau đặt cọc</td>
             <td>
-              <SplitButton />
+              <SplitButton noRooms={roomType.rooms.length}/>
             </td>
             <td>
               <button>Đặt ngay</button>
             </td>
-          </tr>
-          <tr key="dong2">
-            <div className='Studio'>
-              <h1>Căn hộ 1 phòng ngủ</h1>
-              <p>1 giường đôi lớn <SingleBedIcon /></p>
-            </div>
-            <td>
-              <PersonIcon /> <PersonIcon /> + <PersonIcon />
-            </td>
-            <td>VND 3.118.000</td>
-            <td>Hoàn tiền 100% trong vòng 24h sau đặt cọc</td>
-            <td>
-              <SplitButton />
-            </td>
-            <td>
-              <button>Đặt ngay</button>
-            </td>
-          </tr>
-          <tr key="dong3">
-            <div className='Studio'>
-              <h1>Căn hộ 2 phòng ngủ</h1>
-              <p>Phòng ngủ 1: 1 giường đôi lớn<SingleBedIcon /></p>
-              <p>Phòng ngủ 2: 1 giường đôi lớn<SingleBedIcon /><SingleBedIcon /></p>
-            </div>
-            <td>
-              <PersonIcon />x4 +<PersonIcon /><PersonIcon />
-            </td>
-            <td>VND 3.640.000</td>
-            <td>Hoàn tiền 100% trong vòng 24h sau đặt cọc</td>
-            <td>
-              <SplitButton />
-            </td>
-            <td>
-              <button>Đặt ngay</button>
-            </td>
-          </tr>
+          </tr>))}
         </tbody>
       </table>
     </div>

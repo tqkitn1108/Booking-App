@@ -1,5 +1,6 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
+
 import { Link, useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import api from "../../../api/AxiosConfig";
@@ -70,7 +71,6 @@ const RoomsDatatable = ({ columns }) => {
       {loading && <LoadingSpinner />}
       <div className="datatableTitle">
         Danh sách khách sạn
-        {/* {path} */}
         <Link to={`${path}/form`} className="link">
           Add New
         </Link>

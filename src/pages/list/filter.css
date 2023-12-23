@@ -32,19 +32,24 @@
     border-color: #d7d4d4;
     width: 100%;
 }
+.leftP >  .listWrapper:first-child > .listSearch {
+    border-radius: 5px 5px 0px 0px;
+}
+.leftP >  .listWrapper:last-child > .listSearch {
+    border-radius: 0px 0px 5px 5px;
+    margin-bottom: 20px;
+}
 .sitem{
     width: 110%;
 }
-.lsTitle{
+.listSearch .lsTitle{
     font-size: 16px;
     color: #555;
     margin-bottom: 10px;
+    font-weight: bold;
 }
-.lsT{
+.listSearch .lsT{
     font-size: 18px;
-    /* margin-left: 220px; */
-    /* margin-bottom: 2px; */
-    
 }
 .listResult{
     flex: 3;
@@ -61,7 +66,7 @@
 }
 .lsItem .form-check-input {
     cursor: pointer;
-    padding: 7px;
+    padding: 7.5px;
 }
 input[type="range"] {
     -webkit-appearance: none; /* Loại bỏ kiểu mặc định */

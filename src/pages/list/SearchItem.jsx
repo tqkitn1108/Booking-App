@@ -1,6 +1,9 @@
 import "./searchItem.css";
+import { useNavigate } from "react-router-dom";
 
-const SearchItem = ({name, photos, address, rating, star}) => {
+const SearchItem = ({ hotel }) => {
+  const navigate = useNavigate();
+
   const renderStars = (value) => {
     const stars = [];
     if (value > 0) {
@@ -16,61 +19,71 @@ const SearchItem = ({name, photos, address, rating, star}) => {
   };
   function RatingComponent({ rating }) {
     let textToShow;
-
-    if (rating >= 9.0) {
-      textToShow = "Tuyệt hảo";
-    } else if (rating >= 8.0) {
-      textToShow = "Rất tốt";
-    } else if (rating >= 7.0) {
-      textToShow = "Tốt";
-    } else if (rating >= 6.0) {
-      textToShow = "Dễ chịu";
-    } else textToShow = "Bình thường"
+    if (rating !== undefined && rating !== null) {
+      if (rating >= 9.0) {
+        textToShow = "Tuyệt hảo";
+      } else if (rating >= 8.0) {
+        textToShow = "Rất tốt";
+      } else if (rating >= 7.0) {
+        textToShow = "Tốt";
+      } else if (rating >= 6.0) {
+        textToShow = "Dễ chịu";
+      } else textToShow = "Bình thường"
+    }
 
     return textToShow;
   }
   function mapSearchString(str) {
     return "https://www.google.com/maps/place/" + str.split(' ').join('+');
   }
+
+  function handleClick(id){
+    navigate(`/hotels/${id}`);
+  }
+
   return (
     <div className="searchItem">
       <img
-        src={photos}
+        src={hotel.photos[0]}
         alt=""
         className="siImg"
       />
       <div className="siDesc">
         <div className="Title">
-          <h1 className="siTitle">{name}</h1>
+          <h1 className="siTitle">{hotel.name}</h1>
           <div className="star">
-            {renderStars(star)}
+            {renderStars(hotel.star)}
           </div>
         </div>
         <div className="siDistance">
-          <a id="diachi" href={mapSearchString(address)} target="_blank" rel="noopener noreferrer">{address}</a>
-          <a href={mapSearchString(address)} target="_blank" rel="noopener noreferrer">Xem tren ban do</a>
+          <a id="diachi" href={mapSearchString(hotel.address)} target="_blank" rel="noopener noreferrer">{hotel.address}</a>
+          <a href={mapSearchString(hotel.address)} target="_blank" rel="noopener noreferrer">Xem tren ban do</a>
         </div>
-        <span className="siTaxiOp">Free airport taxi</span>
+        {/* <span className="siTaxiOp">Free airport taxi</span> */}
         <span className="siSubtitle">
-          Studio Apartment with Air conditioning
+          {hotel.description}
         </span>
         <span className="siFeatures">
-          Entire studio • 1 bathroom • 21m² 1 full bed
         </span>
-        <span className="siCancelOp">Free cancellation </span>
+        <span className="siCancelOp">       
+         {hotel.facilities?.[0]?.label}
+        </span>
+        <span className="siCancelOp">        
+        {hotel.facilities?.[1]?.label}
+        </span>
         <span className="siCancelOpSubtitle">
           You can cancel later, so lock in this great price today!
         </span>
       </div>
       <div className="siDetails">
         <div className="siRating">
-          <RatingComponent className="nhanXet" rating={rating}></RatingComponent>
-          <button>{rating}</button>
+          <span className="cmt"><RatingComponent rating={hotel.rating}></RatingComponent></span>
+          <button>{hotel.rating}</button>
         </div>
         <div className="siDetailTexts">
           <span className="siPrice">Liên hệ</span>
           <span className="siTaxOp">Includes taxes and fees</span>
-          <button className="siCheckButton">See availability</button>
+          <button className="siCheckButton" onClick={() => handleClick(hotel.id)}>See availability</button>
         </div>
       </div>
     </div>

@@ -14,8 +14,9 @@ import {
 import { useState } from "react";
 import Table from "./Table";
 import CardSlick from "./CardSlick";
-import RatingR from "./Rating";
+
 import { useParams } from "react-router-dom";
+import HeaderH from "./NavbarH";
 const Hotel = () => {
   const {hotelId} = useParams();
   const [slideNumber, setSlideNumber] = useState(0);
@@ -33,7 +34,33 @@ const Hotel = () => {
     }
     loadHotelData();
   }, [])
+  const rStars = (value) => {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      stars.push(
+        <span key={i} style={{ color: i < value ? '#FFD700' : '#C0C0C0' }}>
+          &#9733; {/* Dấu sao */}
+        </span>
+      );
+    }
+    return stars;
+  };
+  function RatingComponentH({ rating }) {
+    let textToShow;
+    if (rating !== undefined && rating !== null) {
+      if (rating >= 9.0) {
+        textToShow = "Tuyệt hảo";
+      } else if (rating >= 8.0) {
+        textToShow = "Rất tốt";
+      } else if (rating >= 7.0) {
+        textToShow = "Tốt";
+      } else if (rating >= 6.0) {
+        textToShow = "Dễ chịu";
+      } else textToShow = "Bình thường"
+    }
 
+    return textToShow;
+  }
   const handleOpen = (i) => {
     setSlideNumber(i);
     setOpen(true);
@@ -76,7 +103,14 @@ const Hotel = () => {
           </div>
         )}
         <div className="hotelWrapper">
+        
           <button className="bookNow">Đặt ngay!</button>
+          
+          <div className="cpn">
+          <span className="Rating"><RatingComponentH rating={hotel.rating}></RatingComponentH></span>
+          
+          <button className="bookNow1"  >{hotel.rating}</button>
+          </div>
           <h1 className="hotelTitle">{hotel?.name}</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
@@ -86,7 +120,7 @@ const Hotel = () => {
             Vị trí xuất sắc - Nằm ngay trên bản đồ
           </span>
           <span className="hotelPriceHighlight">
-            <RatingR star={hotel?.star}/>
+          {rStars(hotel.star)}
             Chúng tôi luôn tận tâm
           </span>
           <div className="hotelImages">
@@ -122,19 +156,30 @@ const Hotel = () => {
             </div>
           </div>
         </div>
+        <div className="textH">
+        <h3  style={{ marginRight: 31 + 'em' }}>Phòng trống</h3>
+        </div>
+        <div className="Hotelnavbar">
+       
+        <HeaderH/>
+        </div>
         <div className="HotelRoom">
-          <h3 style={{ marginRight: 31 + 'em' }}>Phòng trống</h3>
+
+       <div className="HotelTable">
+        
         </div>
         <Table roomTypes={hotel?.roomTypes} />
-        <div className="HotelRoom">
-          <h3 style={{ marginRight: 28 + 'em' }} >Đánh giá của khách</h3>
-
+          </div>
+          <div className="HotelRoom">
+        <h3 style={{ marginRight: 28 + 'em' }} >Đánh giá của khách</h3>
+        
         </div>
+        <div className="slick">
         <CardSlick reviews = {hotel?.reviews}/>
-      </div>
-
+        </div>
+        </div>
     </div>
-
+    
   );
 };
 

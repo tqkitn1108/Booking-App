@@ -46,10 +46,14 @@ const Table = ({ roomTypes }) => {
             <td>
               <SplitButton noRooms={roomType.rooms.length}/>
             </td>
-            <td>
+            <td  style={{ borderBottomColor: index < roomType.length -1  ? 'your-desired-color' : 'white' }} >
+            
+            {index === 0 && (
               <button>Đặt ngay</button>
-            </td>
+            )}
+          </td>
           </tr>))}
+     
         </tbody>
       </table>
     </div>

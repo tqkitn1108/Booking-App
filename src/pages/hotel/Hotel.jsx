@@ -14,7 +14,8 @@ import {
 import { useState } from "react";
 import Table from "./Table";
 import CardSlick from "./CardSlick";
-
+import Navbar from "../../components/navbar/Navbar.jsx";
+import Header from "../../components/header/Header.jsx";
 import { useParams } from "react-router-dom";
 import HeaderH from "./NavbarH";
 const Hotel = () => {
@@ -82,6 +83,9 @@ const Hotel = () => {
   return (
 
     <div className="hotel">
+       <Navbar />
+            <Header showTitle={false} />
+           
       <div className="hotelContainer">
         {open && (
           <div className="slider">

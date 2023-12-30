@@ -8,15 +8,37 @@ import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
+import api from '../../api/AxiosConfig';
+import { useLocation } from 'react-router-dom';
 
-export default function SplitButton({ noRooms }) {
-  const options = Array.from({ length: noRooms }, (_, i) => i);
+export default function SplitButton({ id, setSelectedRooms }) {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const [options, setOptions] = React.useState([]);
+  const [availRooms, setAvailRooms] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
+  React.useEffect(() => {
+    async function loadOptions() {
+      try {
+        const response = await api.get(`/hotels/roomTypes/${id}/availableRooms?checkIn=${searchParams.get('checkIn')}&checkOut=${searchParams.get('checkOut')}`);
+        setAvailRooms(response.data);
+        setOptions(Array.from({ length: response.data.length + 1 }, (_, i) => i));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    loadOptions();
+  }, []);
+
   const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);
+    setSelectedRooms((prev) => ({
+      ...prev,
+      [`${id}`]: availRooms.slice(0, index)
+    }))
     setOpen(false);
   };
 
@@ -49,7 +71,7 @@ export default function SplitButton({ noRooms }) {
       </ButtonGroup>
       <Popper
         sx={{
-          zIndex: 1,
+          zIndex: 1000,
         }}
         open={open}
         anchorEl={anchorRef.current}
@@ -62,7 +84,7 @@ export default function SplitButton({ noRooms }) {
             {...TransitionProps}
             style={{
               transformOrigin:
-                placement === 'bottom' ? 'center top' : 'center bottom',
+                placement === 'bottom' ? 'center top' : 'center bottom'
             }}
           >
             <Paper>

@@ -1,10 +1,12 @@
 import "./hotel.css";
 import React, { useEffect } from 'react';
-import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
+import Footer from "../../components/footer/Footer";
+import Email from "../../components/email/Email";
+import { RatingComponent } from "../list/SearchItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import api from "../../api/AxiosConfig";
-import Badges from "./badge";
+import Badges from "./Badge";
 import {
   faCircleArrowLeft,
   faCircleArrowRight,
@@ -14,21 +16,25 @@ import {
 import { useState } from "react";
 import Table from "./Table";
 import CardSlick from "./CardSlick";
+import { useLocation, useParams } from "react-router-dom";
 
-import { useParams } from "react-router-dom";
-import HeaderH from "./NavbarH";
 const Hotel = () => {
-  const {hotelId} = useParams();
+  const { hotelId } = useParams();
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [hotel, setHotel] = useState({});
+  const [availRoomTypes, setAvailRoomTypes] = useState([]);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
 
   useEffect(() => {
-    async function loadHotelData(){
-      try{
-        const response = await api.get(`/business/hotels/${hotelId}`);
-        setHotel(response.data);
-      } catch(err){
+    async function loadHotelData() {
+      try {
+        const hotelResponse = await api.get(`/business/hotels/${hotelId}`);
+        const roomTypeResponse = await api.get(`/hotels/${hotelId}/roomTypes/available?checkIn=${searchParams.get('checkIn')}&checkOut=${searchParams.get('checkOut')}`);
+        setAvailRoomTypes(roomTypeResponse.data);
+        setHotel(hotelResponse.data);
+      } catch (err) {
         console.log(err);
       }
     }
@@ -39,28 +45,13 @@ const Hotel = () => {
     for (let i = 0; i < 5; i++) {
       stars.push(
         <span key={i} style={{ color: i < value ? '#FFD700' : '#C0C0C0' }}>
-          &#9733; {/* Dấu sao */}
+          &#9733;
         </span>
       );
     }
     return stars;
   };
-  function RatingComponentH({ rating }) {
-    let textToShow;
-    if (rating !== undefined && rating !== null) {
-      if (rating >= 9.0) {
-        textToShow = "Tuyệt hảo";
-      } else if (rating >= 8.0) {
-        textToShow = "Rất tốt";
-      } else if (rating >= 7.0) {
-        textToShow = "Tốt";
-      } else if (rating >= 6.0) {
-        textToShow = "Dễ chịu";
-      } else textToShow = "Bình thường"
-    }
 
-    return textToShow;
-  }
   const handleOpen = (i) => {
     setSlideNumber(i);
     setOpen(true);
@@ -70,9 +61,9 @@ const Hotel = () => {
     let newSlideNumber;
 
     if (direction === "l") {
-      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
+      newSlideNumber = slideNumber === 0 ? hotel.photos.length - 1 : slideNumber - 1;
     } else {
-      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+      newSlideNumber = slideNumber === hotel.photos.length - 1 ? 0 : slideNumber + 1;
     }
 
     setSlideNumber(newSlideNumber)
@@ -82,6 +73,7 @@ const Hotel = () => {
   return (
 
     <div className="hotel">
+      <div className='fixed-navbar'><Navbar /></div>
       <div className="hotelContainer">
         {open && (
           <div className="slider">
@@ -103,28 +95,23 @@ const Hotel = () => {
           </div>
         )}
         <div className="hotelWrapper">
-        
-          <button className="bookNow">Đặt ngay!</button>
-          
-          <div className="cpn">
-          <span className="Rating"><RatingComponentH rating={hotel.rating}></RatingComponentH></span>
-          
-          <button className="bookNow1"  >{hotel.rating}</button>
+          <div className="siRating rating">
+            <span className="cmt"><RatingComponent rating={hotel.rating}></RatingComponent></span>
+            <button>{hotel.rating}</button>
           </div>
-          <h1 className="hotelTitle">{hotel?.name}</h1>
+          <h1 className="hotelTitle">{hotel.name} {rStars(hotel.star)}</h1>
           <div className="hotelAddress">
-            <FontAwesomeIcon icon={faLocationDot} />
-            <span>{hotel?.address}</span>
+            <FontAwesomeIcon icon={faLocationDot} style={{ color: "#0071C2" }} />
+            <span>{hotel.address}</span>
           </div>
           <span className="hotelDistance">
             Vị trí xuất sắc - Nằm ngay trên bản đồ
           </span>
           <span className="hotelPriceHighlight">
-          {rStars(hotel.star)}
             Chúng tôi luôn tận tâm
           </span>
           <div className="hotelImages">
-            {hotel?.photos?.map((photoSrc, i) => (
+            {hotel.photos?.map((photoSrc, i) => (
               <div className="hotelImgWrapper" key={i}>
                 <img
                   onClick={() => handleOpen(i)}
@@ -136,16 +123,17 @@ const Hotel = () => {
           </div>
           <div className="hotelDetails">
             <div className="hotelDetailsTexts">
-              <Badges />
-              <h1 className="hotelTitle">Stay in the heart of City</h1>
+              <h3 className="hotelTitle">Những tiện nghi được ưa chuộng nhất</h3>
+              <Badges hotelFacilites={hotel.facilities} />
+              <h3 className="hotelTitle">Mô tả về chỗ nghỉ</h3>
               <p className="hotelDesc">
-                {hotel?.description}
+                {hotel.description}
               </p>
             </div>
             <div className="hotelDetailsPrice">
               <h1>Điểm nổi bật của chỗ nghỉ</h1>
               <span>
-                Nằm ở {hotel?.dest}, khách sạn này có vị trí tuyệt vời
+                Nằm ở {hotel.dest}, {hotel.type?.label} này có vị trí tuyệt vời
               </span>
               <h1>Thông tin về bữa sáng</h1>
               <div className="hotelAddress1">
@@ -156,30 +144,21 @@ const Hotel = () => {
             </div>
           </div>
         </div>
-        <div className="textH">
-        <h3  style={{ marginRight: 31 + 'em' }}>Phòng trống</h3>
+        <div className="hotel-rooms">
+          <h3 className="hotelTitle">Phòng trống</h3>
+          <Table roomTypes={availRoomTypes} />
         </div>
-        <div className="Hotelnavbar">
-       
-        <HeaderH/>
-        </div>
-        <div className="HotelRoom">
-
-       <div className="HotelTable">
-        
-        </div>
-        <Table roomTypes={hotel?.roomTypes} />
+        <div className="review-section">
+          <h3 className="hotelTitle">Đánh giá của khách</h3>
+          <div className="slick">
+            <CardSlick reviews={hotel.reviews} />
           </div>
-          <div className="HotelRoom">
-        <h3 style={{ marginRight: 28 + 'em' }} >Đánh giá của khách</h3>
-        
         </div>
-        <div className="slick">
-        <CardSlick reviews = {hotel?.reviews}/>
-        </div>
-        </div>
+      </div>
+      <Email />
+      <Footer />
     </div>
-    
+
   );
 };
 

@@ -37,10 +37,14 @@ const RoomsDatatable = ({ columns }) => {
   }, []);
 
   const handleDelete = async (id) => {
-    try {
-      await api.delete(`/${path}/${id}`);
-      setList(list.filter((item) => item.id !== id));
-    } catch (err) { }
+    if (window.confirm('Bạn có chắc chắn muốn xóa khách sạn này không?')) {
+      try {
+        await api.delete(`${path}/${id}`);
+        setList(list.filter((item) => item.id !== id));
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   const actionColumn = [
@@ -72,7 +76,7 @@ const RoomsDatatable = ({ columns }) => {
       <div className="datatableTitle">
         Danh sách khách sạn
         <Link to={`${path}/form`} className="link">
-          Add New
+          Thêm khách sạn
         </Link>
       </div>
       <DataGrid

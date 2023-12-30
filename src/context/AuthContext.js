@@ -24,10 +24,12 @@ function AuthProvider({ children }) {
   }
 
   function handleLogout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setUser(null);
-    window.location.reload();
+    if (window.confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      setUser(null);
+      window.location.reload();
+    }
   }
 
   return (

@@ -77,7 +77,7 @@ const List = () => {
                     <div className="leftP">
                         <div className="listWrapper">
                             <div className="listSearch">
-                                <h2 class="lsT">Chọn lọc theo:</h2>
+                                <h2 className="lsT">Chọn lọc theo:</h2>
                             </div>
                         </div>
                         {/* <div className="listWrapper">
@@ -90,16 +90,16 @@ const List = () => {
                             </div>
                         </div> */}
                         {filters.map(filter => (
-                            <div className="listWrapper">
+                            <div key={filter.id} className="listWrapper">
                                 <div className="listSearch">
                                     <h3 className="lsTitle">{filter.name} </h3>
                                     <div className="lsItem">
                                         {filter.options.map(option => (
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox"
+                                            <div key={option.value} className="form-check">
+                                                <input className="form-check-input" type="checkbox"
                                                     value={option.value} id={option.value}
                                                     onChange={() => handleFilter(option.value, filter.id)} />
-                                                <label class="form-check-label" for={option.value}>
+                                                <label className="form-check-label" htmlFor={option.value}>
                                                     {option.label}
                                                 </label>
                                             </div>
@@ -137,10 +137,10 @@ const List = () => {
                             <div className="sitem">
                                 {hotels.map(hotel =>
                                 (
-                                    <SearchItem
+                                    <SearchItem key={hotel.id}
                                         hotel = {hotel}
+                                        location = {location}
                                     />
-
                                 )
                                 )}
                                 <div className="pagiContainer">

@@ -1,7 +1,23 @@
 import "./searchItem.css";
 import { useNavigate } from "react-router-dom";
 
-const SearchItem = ({ hotel }) => {
+export function RatingComponent({ rating }) {
+  let textToShow;
+  if (rating !== undefined && rating !== null) {
+    if (rating >= 9.0) {
+      textToShow = "Tuyệt hảo";
+    } else if (rating >= 8.0) {
+      textToShow = "Rất tốt";
+    } else if (rating >= 7.0) {
+      textToShow = "Tốt";
+    } else if (rating >= 6.0) {
+      textToShow = "Dễ chịu";
+    } else textToShow = "Bình thường"
+  }
+  return textToShow;
+}
+
+const SearchItem = ({ hotel, location }) => {
   const navigate = useNavigate();
 
   const renderStars = (value) => {
@@ -17,28 +33,13 @@ const SearchItem = ({ hotel }) => {
     }
     return stars;
   };
-  function RatingComponent({ rating }) {
-    let textToShow;
-    if (rating !== undefined && rating !== null) {
-      if (rating >= 9.0) {
-        textToShow = "Tuyệt hảo";
-      } else if (rating >= 8.0) {
-        textToShow = "Rất tốt";
-      } else if (rating >= 7.0) {
-        textToShow = "Tốt";
-      } else if (rating >= 6.0) {
-        textToShow = "Dễ chịu";
-      } else textToShow = "Bình thường"
-    }
 
-    return textToShow;
-  }
   function mapSearchString(str) {
     return "https://www.google.com/maps/place/" + str.split(' ').join('+');
   }
 
-  function handleClick(id){
-    navigate(`/hotels/${id}`);
+  function handleClick(id) {
+    navigate(`/hotels/${id}` + location.search);
   }
 
   return (
@@ -65,11 +66,11 @@ const SearchItem = ({ hotel }) => {
         </span>
         <span className="siFeatures">
         </span>
-        <span className="siCancelOp">       
-         {hotel.facilities?.[0]?.label}
+        <span className="siCancelOp">
+          {hotel.facilities?.[0]?.label}
         </span>
-        <span className="siCancelOp">        
-        {hotel.facilities?.[1]?.label}
+        <span className="siCancelOp">
+          {hotel.facilities?.[1]?.label}
         </span>
         <span className="siCancelOpSubtitle">
           You can cancel later, so lock in this great price today!

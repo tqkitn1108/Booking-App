@@ -35,17 +35,21 @@ const Datatable = ({ columns }) => {
   }, []);
 
   const handleDelete = async (id) => {
-    try {
-      await api.delete(`/${path}/${id}`);
-      setList(list.filter((item) => item._id !== id));
-    } catch (err) { }
+    if (window.confirm('Bạn có chắc chắn muốn xóa phòng này không?')) {
+      try {
+        await api.delete(`/hotels/${hotelId}/roomTypes/${id}`);
+        setList(list.filter((item) => item.id !== id));
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   const actionColumn = [
     {
       field: "action",
       headerName: "Action",
-      width: 180,
+      width: 150,
       renderCell: (params) => {
         return (
           <div className="cellAction">
@@ -68,7 +72,7 @@ const Datatable = ({ columns }) => {
     <div className="datatable" style={{ width: "100%" }}>
       {loading && <LoadingSpinner />}
       <div className="datatableTitle">
-        {path}
+        Danh sách phòng
         <Link to={`${path}/form`} className="link">
           Thêm phòng mới
         </Link>
@@ -79,7 +83,7 @@ const Datatable = ({ columns }) => {
         columns={columns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
-        // checkboxSelection
+        checkboxSelection
         getRowId={(row) => row.id}
         getRowHeight={() => 60}
       />

@@ -13,7 +13,7 @@ import { Button } from '@mui/material';
 const CardSlick = ({ reviews }) => {
     return (
         <div className="CardSlick">
-            <Swiper navigation={true} modules={[Navigation]} slidesPerView={3} className="mySwiper">
+            <Swiper navigation={true} modules={[Navigation]} slidesPerView={3} spaceBetween={16} className="mySwiper">
                 {reviews?.map((review, index) => (
                     <SwiperSlide key={index}>
                         <div className="Card-header">

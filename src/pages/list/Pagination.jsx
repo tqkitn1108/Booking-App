@@ -30,12 +30,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange, searchParams }) => 
     const pages = [];
     for (let i = 1; i <= totalPages; i++) {
       pages.push(
-        <li className="page-item"><button className="page-link" 
-        key={i}
-        onClick={() => handleClick(i)
-          
-        }
-        >{i}</button></li>
+        <li key={i} className="page-item">
+          <button className="page-link" onClick={() => handleClick(i)}>{i}</button>
+        </li>
       );
     }
     return pages;
@@ -58,7 +55,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, searchParams }) => 
       <nav aria-label="Page navigation">
         <ul className="pagination">
           <li className="page-item">
-            <button className="page-link"  onClick={goToPrevPage} disabled={currentPage === 1}>
+            <button className="page-link" onClick={goToPrevPage} disabled={currentPage === 1}>
               <span aria-hidden="true">&laquo;</span>
             </button>
           </li>

@@ -21,9 +21,11 @@ import { useState, useEffect, useRef } from "react";
 import HeadlessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css'; // optional
 import { destinations } from '../../data/destinationData';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = ({ showTitle }) => {
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
     const [defaultText, setDefaultText] = useState(true);
     const [searchSuggestions, setsearchSuggestions] = useState([]);
     const [showResult, setShowResult] = useState(true);
@@ -34,7 +36,6 @@ const Header = ({ showTitle }) => {
     // }, []);
     const [destInput, setDestInput] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [dateSelected, setDateSelected] = useState(false);
     const [buttonClicked, setButtonClicked] = useState(false);
     const headerBtnRef = useRef(null);
     const navigate = useNavigate();
@@ -46,7 +47,7 @@ const Header = ({ showTitle }) => {
         } else {
             setErrorMessage('');
         }
-        if (!dateSelected) {
+        if (defaultText) {
             // Nếu chưa chọn ngày
             setButtonClicked(true); // Đánh dấu rằng người dùng đã nhấn nút
             setOpenDate(true); // Hiển thị DateRanger
@@ -65,6 +66,24 @@ const Header = ({ showTitle }) => {
             }
         }
     };
+    useEffect(() => {
+        if (location.pathname !== '/') {
+            setDestInput(searchParams.get('location'));
+            if (searchParams.get('checkIn')) {
+                setDefaultText(false);
+                setDate([{
+                    startDate: new Date(searchParams.get('checkIn')),
+                    endDate: new Date(searchParams.get('checkOut')),
+                    key: 'selection'
+                }]);
+            }
+            setOptions({
+                adult: searchParams.get('adults') || 2,
+                children: searchParams.get('children') || 0,
+                room: searchParams.get('noRooms') || 1,
+            })
+        }
+    }, [])
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (buttonClicked && !event.target.closest('.header-btn')) {
@@ -118,7 +137,6 @@ const Header = ({ showTitle }) => {
         ]
     );
     const handleDateChange = (item) => {
-        setDateSelected(true); // Đánh dấu rằng ngày đã được chọn
         setDate([item.selection]);
         setDefaultText(false);
     };
@@ -217,7 +235,7 @@ const Header = ({ showTitle }) => {
                                     <div className="search-result-text">Điểm đến được ưa thích gần đây</div>
                                     {destinations.map((destination, index) => {
                                         return (
-                                            <div className="search-result-place">
+                                            <div key={index} className="search-result-place">
                                                 <div className="search-result-icon">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 8.25a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm1.5 0a4.5 4.5 0 1 0-9 0 4.5 4.5 0 0 0 9 0zM12 1.5a6.75 6.75 0 0 1 6.75 6.75c0 2.537-3.537 9.406-6.75 14.25-3.214-4.844-6.75-11.713-6.75-14.25A6.75 6.75 0 0 1 12 1.5zM12 0a8.25 8.25 0 0 0-8.25 8.25c0 2.965 3.594 9.945 7 15.08a1.5 1.5 0 0 0 2.5 0c3.406-5.135 7-12.115 7-15.08A8.25 8.25 0 0 0 12 0z"></path></svg>
                                                 </div>

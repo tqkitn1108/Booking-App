@@ -236,9 +236,9 @@ const HotelInput = () => {
                   <option value={"non_smoking"}>Phòng không hút thuốc</option>
                   <option value={"family_room"}>Phòng gia đình</option>
                   <option value={"free_wifi"}>Wifi miễn phí</option>
-                  <option value={"private_parking"}>Chỗ để xe </option>
-                  <option value={"elevator"}>Thang máy </option>
-                  <option value={"air_conditioning"}>Điều hòa  </option>
+                  <option value={"private_parking"}>Chỗ để xe</option>
+                  <option value={"elevator"}>Thang máy</option>
+                  <option value={"air_conditioning"}>Điều hòa</option>
                 </select>
               </div>
               <div className="formInput desc">

@@ -1,4 +1,15 @@
-.badge
-.card{
-    max-width: min-content;
+.badge {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+    margin-bottom: 20px;
+}
+
+.badge .facility {
+    color: green;
+    font-size: 16px;
+    background-color: #f4f4f4;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
 }

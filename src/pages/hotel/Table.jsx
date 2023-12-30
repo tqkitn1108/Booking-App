@@ -1,22 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './table.css';
 import SplitButton from './SplitButton';
 import SingleBedIcon from '@mui/icons-material/SingleBed';
 import PersonIcon from '@mui/icons-material/Person';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHandHoldingMedical } from '@fortawesome/free-solid-svg-icons';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 const Table = ({ roomTypes }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const location = useLocation();
+  const [selectedRooms, setSelectedRooms] = useState({});
+  const [totalPrice, setTotalPrice] = useState(0);
+  const navigate = useNavigate();
 
-  const handleButtonClick = () => {
-    setDropdownOpen(!dropdownOpen);
+  const handleReservation = () => {
+    navigate(`${location.pathname}/reservation${location.search}`,
+      {
+        state: {
+          roomList: Object.values(selectedRooms).reduce((result, arr) => result.concat(arr), []).map(room => room.id),
+          totalPrice
+        }
+      });
   };
 
-  const handleOptionClick = (option) => {
-
-    console.log(`Option clicked: ${option}`);
-    // You can perform additional actions based on the selected option
-  };
+  useEffect(() => {
+    setTotalPrice(roomTypes?.reduce((sum, roomType) => {
+      if (selectedRooms[roomType.id] === undefined) selectedRooms[roomType.id] = [];
+      return sum + selectedRooms[roomType.id].length * roomType.pricePerNight;
+    }, 0));
+  }, [selectedRooms]);
 
   return (
     <div className='containerT'>
@@ -25,15 +35,15 @@ const Table = ({ roomTypes }) => {
           <tr>
             <th>Loại phòng</th>
             <th>Số lượng khách</th>
-            <th>Giá cho 2 đêm </th>
+            <th>Giá cho 2 đêm</th>
             <th>Điều kiện hủy bỏ</th>
             <th>Chọn số lượng</th>
-            <th>Đặt ngay</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           {roomTypes?.map((roomType, index) =>
-          (<tr key={index}>
+          (<tr key={roomType.id} className='room-row'>
             <div className='Studio'>
               <h1>{roomType.title}</h1>
               {roomType.beds.map((bed, i) => <p key={i}>{bed}<SingleBedIcon /></p>)}
@@ -42,18 +52,20 @@ const Table = ({ roomTypes }) => {
               {new Array(roomType.capacity).fill(1).map((_, i) => <PersonIcon key={i} />)}
             </td>
             <td>VND {roomType.pricePerNight}</td>
-            <td>Hoàn tiền 100% trong vòng 24h sau đặt cọc</td>
-            <td>
-              <SplitButton noRooms={roomType.rooms.length}/>
+            <td width={'200px'}>Hoàn tiền 100% trong vòng 24h sau đặt cọc</td>
+            <td width={'100px'}>
+              <SplitButton id={roomType.id} setSelectedRooms={setSelectedRooms} />
             </td>
-            <td  style={{ borderBottomColor: index < roomType.length -1  ? 'your-desired-color' : 'white' }} >
-            
-            {index === 0 && (
-              <button>Đặt ngay</button>
-            )}
-          </td>
+            <td style={{ borderBottomColor: 'white', borderRightColor: 'white', textAlign: 'center' }} >
+              {index === 0 && (
+                <div className='price'>
+                  {totalPrice > 0 && <span>Tổng giá: VND {totalPrice}</span>}
+                  <button onClick={handleReservation}>Đặt ngay</button>
+                </div>
+              )}
+            </td>
           </tr>))}
-     
+
         </tbody>
       </table>
     </div>

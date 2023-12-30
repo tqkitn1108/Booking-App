@@ -1,9 +1,5 @@
-.hotel {
-  text-align: left;
-}
-
 .hotel .HotelRoom>h3 {
-  color: #212529;
+  color: #2880d9;
   font-family: system-ui;
   font-size: 28px;
   font-weight: 500;
@@ -21,57 +17,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
-  height: fit-content;
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
 }
 
 .hotel .hotelWrapper {
   width: 100%;
-
-  max-width: 1024px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
   position: relative;
+  margin-top: 100px;
 }
-.Hotel .hotelWrapper>button{
+
+.Hotel .hotelWrapper>button {
   background-color: #0a4fb0;
-   color: white;
-   padding: 5px;
-   font-weight: bold;
-   border: none;
-   border-radius: 7px;
-   border-bottom-left-radius: 0px;
-   box-shadow: 2px 2px 5px #000b80;
-}
-.hotel .Rating{
-  right: 0;
-  padding: 10px 20px;
-  position: absolute;
-  margin-top: 60px;
-  margin-right: 40px;
-  
-}
-.hotel .bookNow {
-  position: absolute;
-  top: 10px;
-  right: 0;
-  border: none;
-  padding: 10px 20px;
-  background-color: #0071c2;
   color: white;
+  padding: 5px;
   font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
+  border: none;
+  border-radius: 7px;
+  border-bottom-left-radius: 0px;
+  box-shadow: 2px 2px 5px #000b80;
 }
-.hotel .bookNow1{
+
+.hotel .rating {
   position: absolute;
   top: 60px;
   right: 0;
   border: none;
   padding: 10px 20px;
-  background-color: #0071c2;
-  color: white;
+  color: #000;
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
@@ -79,10 +56,10 @@
 
 .hotel .hotelTitle {
   font-size: 24px;
+  margin-bottom: 10px;
 }
 
 .hotel .hotelAddress {
-  font-size: 12px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -99,19 +76,14 @@
 }
 
 .hotel .hotelImages {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
- 
-
-}
-
-.hotel .hotelImgWrapper {
-  width: 33.3%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 4px;
+  grid-row-gap: 8px;
 }
 
 .hotel .hotelImg {
-  width: 334.1px;
+  width: 360px;
   height: 200px;
   object-fit: cover;
   cursor: pointer;
@@ -132,8 +104,6 @@
 
 .hotel .hotelDesc {
   font-size: 20px;
-  margin-top: 30px;
-
 }
 
 .hotel .hotelDetailsPrice {
@@ -176,7 +146,7 @@
 }
 
 .hotel .slider {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -188,16 +158,15 @@
 }
 
 .hotel .sliderWrapper {
-  width: 33.33%;
-  height: 100px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .hotel .sliderImg {
-  width: 341.33px;
-  height: 100px;
+  height: 500px;
+  object-fit: cover;
 }
 
 .hotel .close {
@@ -215,19 +184,17 @@
   color: lightgray;
   cursor: pointer;
 }
-.hotel .Hotelnavbar{
-  margin-top: 20px;
-  margin-right: 1024px;
+
+.hotel .HotelTable {
+  margin-top: 60px;
 }
-.hotel .HotelTable{
-margin-top: 60px;
+
+.hotel .slick {
+  margin-top: 40px;
 }
-.hotel .textH{
-margin-top: 40px;
-}
-.hotel .slick{
-margin-top: 40px;
-}
-.hotel .HotelRoom{
-margin-top: 40px;
+
+.hotel .hotel-rooms,
+.hotel .review-section {
+  max-width: 1100px;
+  width: 100%;
 }

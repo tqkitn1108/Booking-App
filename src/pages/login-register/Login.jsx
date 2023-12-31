@@ -15,7 +15,6 @@ import * as Yup from 'yup'; // Import Yup for validation
 import { useAuth } from '../../context/AuthContext';
 import LoadingSpinner from '../../components/loading-spinner/LoadingSpinner';
 import Navbar from '../../components/navbar/Navbar';
-import './Login.css'
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address').required('Email is required'),
   password: Yup.string().required('Password is required'),

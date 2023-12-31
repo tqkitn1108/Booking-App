@@ -1,5 +1,3 @@
-// App.jsx
-
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import { Container, Form, Button } from 'react-bootstrap'; // Import các thành phần Bootstrap

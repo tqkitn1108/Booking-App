@@ -86,3 +86,91 @@
         width: calc(350px - 8px);
     }
 }
+
+.review-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.review-popup {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.review-popup {
+    width: 400px; /* Set the width of the pop-up */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+.review-popup label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.review-popup textarea {
+    width: 100%;
+    resize: vertical; /* Allow vertical resizing of the textarea */
+}
+
+.submit-button-container {
+    text-align: center;
+    margin-top: 15px;
+}
+.review-popup {
+    width: 400px;
+    padding: 20px;
+    border-radius: 15px; /* Increase border radius for rounded corners */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+.review-popup label {
+    display: block;
+    margin-bottom: 10px; /* Increase margin for better spacing */
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Round the corners of input fields */
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #3235e2; /* Green color */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 10px; /* Round the corners of the button */
+    cursor: pointer;
+}
+
+.close-button {
+    margin-left: 340px;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

@@ -323,6 +323,7 @@ const SecurePage = ({ hotelId, location }) => {
 
 const ReservationPage = () => {
     const location = useLocation();
+    const state = location.state;
     const { hotelId } = useParams();
     const [hotel, setHotel] = useState({});
 
@@ -375,7 +376,7 @@ const ReservationPage = () => {
                             <h5>Your booking details</h5>
                             <p style={{ fontWeight: 'bold' }}> Check-in: <span className='check-in'> Mon 8 Jan 2024 </span> </p>
                             <p style={{ fontWeight: 'bold' }}> Check-out: <span className='check-out'> Fri 12 Jan 2024 </span></p>
-                            <p style={{ fontWeight: 'bold' }}> Total length of stay: <span className='totalStays'> 4 nights </span> </p>
+                            <p style={{ fontWeight: 'bold' }}> Total length of stay: <span className='totalStays'> {state?.stayLength} nights </span> </p>
                             <span className="text-success"> Change your selection </span>
                         </div>
 
@@ -384,7 +385,7 @@ const ReservationPage = () => {
 
                             <div className=' p-3 mb-3' style={{ backgroundColor: '#ADD8E6' }}>
                                 <h2 className='tp'>
-                                    Total: <span className="total-price">{location.state?.totalPrice.toLocaleString('vi-VN')}</span>
+                                    Total: <span className="total-price">{state?.totalPrice.toLocaleString('vi-VN')}</span>
                                 </h2>
                             </div>
 
@@ -392,7 +393,7 @@ const ReservationPage = () => {
                                 <h5>Price Information</h5>
                                 <p>
                                     <FontAwesomeIcon icon={faMoneyBill} className="mr-3" />
-                                    Include VND <span className='vat'>{Math.round(location.state?.totalPrice / 11)}</span> in taxes <br /> and charges
+                                    Include VND <span className='vat'>{Math.round(state?.totalPrice / 11)}</span> in taxes <br /> and charges
                                 </p>
                                 <p>
                                     10% VAT <span className='tax'>VND 322.085</span>

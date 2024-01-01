@@ -16,13 +16,17 @@
     padding: 5px;
     border-radius: 5px;
 
-    &.Approved {
+    &.ACCEPTED {
       color: green;
       background-color: rgba(0, 128, 0, 0.151);
     }
-    &.Pending {
+    &.PENDING {
       color: goldenrod;
       background-color: rgba(189, 189, 3, 0.103);
+    }
+    &.CANCELLED {
+      color: crimson;
+      background-color: rgba(189, 3, 28, 0.115);
     }
   }
 }

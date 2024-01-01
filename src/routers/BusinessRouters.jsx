@@ -1,11 +1,12 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from '../hotel-dashboard/pages/home/Home';
 import Single from '../hotel-dashboard/pages/single/Single';
+import BookingList from "../hotel-dashboard/components/table/Table";
 import New from '../hotel-dashboard/pages/new/New';
 import List from '../hotel-dashboard/pages/list/List';
 import HotelInput from '../hotel-dashboard/pages/newHotel/HotelInput';
 import BusinessSignup from '../hotel-dashboard/pages/signup/BusinessSignup';
-import { hotelColumns, roomColumns, userColumns } from "../hotel-dashboard/datatablesource";
+import { bookingColumns, hotelColumns, roomColumns, userColumns } from "../hotel-dashboard/datatablesource";
 import { userInputs } from "../hotel-dashboard/formSource";
 import { DarkModeContext } from "../hotel-dashboard/context/darkModeContext";
 import { useContext } from "react";
@@ -84,7 +85,15 @@ function BusinessRouters() {
                       index
                       element={
                         <ProtectedRoute>
-                          <List columns={userColumns} hideSideBar={false} />
+                          <List columns={bookingColumns} hideSideBar={false} />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="pending"
+                      element={
+                        <ProtectedRoute>
+                          <List columns={bookingColumns} hideSideBar={false} />
                         </ProtectedRoute>
                       }
                     />

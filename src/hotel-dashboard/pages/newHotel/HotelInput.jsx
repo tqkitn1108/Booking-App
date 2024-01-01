@@ -2,7 +2,7 @@ import "./newHotel.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { Button, Modal } from 'react-bootstrap';
+import ModalBootstrap from "../../../components/modal/ModalBootstrap";
 import { useEffect, useState } from "react";
 import { hotelInputs } from "../../formSource";
 import api from "../../../api/AxiosConfig";
@@ -128,18 +128,7 @@ const HotelInput = () => {
   ];
   return (
     <div className="new">
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Thông báo</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{modalMessage}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Đóng
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
+      <ModalBootstrap body={modalMessage} showModal={showModal} handleCloseModal={handleCloseModal} />
       <Sidebar hideSideBar={true} />
       <div className="newContainer">
         <Navbar />

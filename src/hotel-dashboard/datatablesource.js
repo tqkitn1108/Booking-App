@@ -1,14 +1,14 @@
-export const userColumns = [
-  { field: "_id", headerName: "ID", width: 70 },
+export const bookingColumns = [
+  { field: "id", headerName: "Mã đặt phòng", width: 200 },
   {
-    field: "user",
-    headerName: "User",
-    width: 230,
+    field: "fullName",
+    headerName: "Người đặt",
+    width: 160,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
           <img className="cellImg" src={params.row.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"} alt="avatar" />
-          {params.row.username}
+          {params.value}
         </div>
       );
     },
@@ -16,24 +16,37 @@ export const userColumns = [
   {
     field: "email",
     headerName: "Email",
-    width: 230,
+    width: 200,
   },
 
   {
-    field: "country",
-    headerName: "Country",
+    field: "phoneNumber",
+    headerName: "Số điện thoại",
+    width: 120,
+  },
+  {
+    field: "checkInDate",
+    headerName: "Ngày nhận phòng",
     width: 100,
   },
   {
-    field: "city",
-    headerName: "City",
+    field: "checkOutDate",
+    headerName: "Ngày trả phòng",
     width: 100,
   },
   {
-    field: "phone",
-    headerName: "Phone",
-    width: 100,
+    field: "rooms",
+    headerName: "Danh sách phòng",
+    width: 180,
+    renderCell: (params) => (
+      <span>{params.value.map(room => room.roomNumber).join(", ")}</span>
+    )
   },
+  {
+    field: "totalPrice",
+    headerName: "Giá (VND)",
+    width: 90,
+  }
 ];
 
 export const hotelColumns = [

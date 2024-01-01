@@ -34,7 +34,7 @@ const Sidebar = ({ hideSideBar }) => {
     async function loadData() {
       try {
         const response = await api.get(`/business/hotels/${hotelId}`);
-        setHotelImg(response.data.photos[0])
+        setHotelImg(response.data.photos?.[0])
         setHotelName(response.data.name);
       } catch (error) {
         console.log(error);
@@ -48,7 +48,7 @@ const Sidebar = ({ hideSideBar }) => {
     <div className="sidebar">
       <div className="top">
         {hideSideBar ?
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/business/hotels" style={{ textDecoration: "none" }}>
             <span className="logo">Booking.com</span>
           </Link> : (
             <div className="avatar-with-hotelName">
@@ -71,9 +71,15 @@ const Sidebar = ({ hideSideBar }) => {
           {!hideSideBar && (
             <>
               <p className="title">LISTS</p>
-              <Link to={`/business/hotels/${hotelId}/bookings`} style={{ textDecoration: "none" }}>
+              <Link to={`/business/hotels/${hotelId}/bookings/pending`} style={{ textDecoration: "none" }}>
                 <li>
                   <PersonOutlineIcon className="icon" />
+                  <span>Đặt phòng đang chờ</span>
+                </li>
+              </Link>
+              <Link to={`/business/hotels/${hotelId}/bookings`} style={{ textDecoration: "none" }}>
+                <li>
+                  <LocalShippingIcon className="icon" />
                   <span>Đặt phòng</span>
                 </li>
               </Link>
@@ -89,10 +95,6 @@ const Sidebar = ({ hideSideBar }) => {
                   <span>Danh sách phòng</span>
                 </li>
               </Link>
-              <li>
-                <LocalShippingIcon className="icon" />
-                <span>Delivery</span>
-              </li>
               <p className="title">USEFUL</p>
               <Link to={`/business/hotels/${hotelId}/stats`} style={{ textDecoration: "none" }}>
                 <li>

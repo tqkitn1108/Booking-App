@@ -1,7 +1,7 @@
 import "./newRoom.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import { Button, Modal } from 'react-bootstrap';
+import ModalBootstrap from "../../../components/modal/ModalBootstrap";
 import { useState } from "react";
 import { roomInputs } from "../../formSource";
 import api from "../../../api/AxiosConfig";
@@ -49,19 +49,8 @@ const RoomInput = () => {
 
   return (
     <div className="new">
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Thông báo</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{modalMessage}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Đóng
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      <Sidebar hideSideBar={false}/>
+      <ModalBootstrap body={modalMessage} showModal={showModal} handleCloseModal={handleCloseModal} />
+      <Sidebar hideSideBar={false} />
       <div className="newContainer">
         <Navbar />
         <div className="top">

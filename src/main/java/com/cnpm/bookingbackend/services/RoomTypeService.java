@@ -37,6 +37,11 @@ public class RoomTypeService {
                 .filter(roomType -> roomType.countAvailableRooms(checkIn, checkOut) > 0).toList();
     }
 
+    public List<Room> availableRooms(String roomTypeId, LocalDate checkIn, LocalDate checkOut) {
+        return roomTypeRepository.findById(roomTypeId).orElseThrow().getRooms().stream()
+                .filter(room -> room.isAvailableBetween(checkIn, checkOut)).toList();
+    }
+
     public RoomType newRoomType(String hotelId, RoomTypeDto roomTypeDto) {
         System.out.println(roomTypeDto);
         List<Room> rooms = roomTypeDto.getRoomNumbers().stream()

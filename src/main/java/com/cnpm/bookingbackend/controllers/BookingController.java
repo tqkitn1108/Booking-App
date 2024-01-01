@@ -27,20 +27,26 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.allUserBookings(userId));
     }
 
-    @GetMapping("/{hotelId}")
-    @PreAuthorize("hasRole('HOTEL')")
+    @GetMapping("/hotels/{hotelId}")
+//    @PreAuthorize("hasRole('HOTEL')")
     public ResponseEntity<List<Booking>> getBookingsOfHotel(@PathVariable String hotelId) {
         return ResponseEntity.ok(bookingService.allHotelBookings(hotelId));
     }
 
-    @PostMapping("/{hotelId}")
+    @GetMapping("/hotels/{hotelId}/pending")
+//    @PreAuthorize("hasRole('HOTEL')")
+    public ResponseEntity<List<Booking>> getPendingBookings(@PathVariable String hotelId) {
+        return ResponseEntity.ok(bookingService.pendingBookings(hotelId));
+    }
+
+    @PostMapping("/hotels/{hotelId}")
     public ResponseEntity<Booking> createBooking(@PathVariable String hotelId, @Valid @RequestBody BookingDto bookingDto) {
         return ResponseEntity.ok(bookingService.createReservation(hotelId, bookingDto));
     }
 
-    @PostMapping("/{bookingId}")
-    public void confirmBooking(@PathVariable String bookingId, @RequestParam BookingStatus status){
-        bookingService.confirmBooking(bookingId, status);
+    @PutMapping("/{bookingId}")
+    public void confirmBooking(@RequestBody Booking booking){
+        bookingService.confirmBooking(booking);
     }
 
     @DeleteMapping("/{bookingId}")

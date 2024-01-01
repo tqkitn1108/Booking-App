@@ -1,6 +1,7 @@
 package com.cnpm.bookingbackend.controllers;
 
 import com.cnpm.bookingbackend.dtos.request.RoomTypeDto;
+import com.cnpm.bookingbackend.models.Room;
 import com.cnpm.bookingbackend.models.RoomType;
 import com.cnpm.bookingbackend.services.RoomTypeService;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,17 +31,25 @@ public class RoomTypeController {
         return new ResponseEntity<>(roomTypeService.singleRoomType(id), HttpStatus.OK);
     }
 
-    @GetMapping("/{hotelId}/available")
+    @GetMapping("/{hotelId}/roomTypes/available")
     public ResponseEntity<List<RoomType>> getAvailableRoomTypes(
             @PathVariable String hotelId,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout) {
-        return ResponseEntity.ok(roomTypeService.availableRoomTypes(hotelId, checkin, checkout));
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkIn,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkOut) {
+        return ResponseEntity.ok(roomTypeService.availableRoomTypes(hotelId, checkIn, checkOut));
+    }
+
+    @GetMapping("/roomTypes/{roomTypeId}/availableRooms")
+    public ResponseEntity<List<Room>> getAvailableRooms(
+            @PathVariable String roomTypeId,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkIn,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkOut) {
+        return ResponseEntity.ok(roomTypeService.availableRooms(roomTypeId, checkIn, checkOut));
     }
 
     @PostMapping("/{hotelId}/roomTypes")
     public ResponseEntity<RoomType> addNewRoomType(@PathVariable String hotelId, @RequestBody RoomTypeDto roomTypeDto) {
-        return new ResponseEntity<>(roomTypeService.newRoomType(hotelId, roomTypeDto    ), HttpStatus.CREATED);
+        return new ResponseEntity<>(roomTypeService.newRoomType(hotelId, roomTypeDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/roomTypes/{id}")
@@ -48,7 +57,7 @@ public class RoomTypeController {
         return ResponseEntity.ok(roomTypeService.updateRoomType(id, roomType));
     }
 
-    @DeleteMapping("/{hotelId}/rooms/{id}")
+    @DeleteMapping("/{hotelId}/roomTypes/{id}")
     public ResponseEntity<String> deleteRoomType(@PathVariable String hotelId, @PathVariable String id) {
         roomTypeService.deleteRoomType(hotelId, id);
         return ResponseEntity.ok("This RoomType has been deleted");

@@ -35,7 +35,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilter(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/**", "/api/v1/hotels/**", "/api/v1/business/**", "/api/v1/upload").permitAll()
+                        .requestMatchers("/api/v1/auth/**", "/api/v1/hotels/**", "/api/v1/business/**", "/api/v1/upload", "/api/v1/bookings/**").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Permit Preflight Request
                         .anyRequest().authenticated())

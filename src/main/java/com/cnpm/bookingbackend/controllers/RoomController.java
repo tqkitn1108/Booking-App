@@ -31,14 +31,6 @@ public class RoomController {
         return new ResponseEntity<>(roomService.singleRoom(id), HttpStatus.OK);
     }
 
-    @GetMapping("/{hotelId}/availableRooms")
-    public ResponseEntity<List<Room>> getAvailableRooms(
-            @PathVariable String hotelId,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkin,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkout) {
-        return ResponseEntity.ok(roomService.availableRooms(hotelId, checkin, checkout));
-    }
-
     @PostMapping("/rooms")
     public ResponseEntity<Room> addNewRoom(@RequestBody Room room) {
         URI location = ServletUriComponentsBuilder

@@ -43,4 +43,9 @@ public class BusinessService {
         hotel.setId(id);
         return hotelRepository.save(hotel);
     }
+
+    public void deletedHotel(String id) {
+        hotelRepository.deleteById(id);
+    }
+
 }

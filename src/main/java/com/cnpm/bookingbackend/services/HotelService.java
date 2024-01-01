@@ -70,11 +70,6 @@ public class HotelService {
         List<Hotel> hotels = hotelList.subList(start, end);
         return new PageImpl<>(hotels, pageable, hotelList.size());
     }
-
-    public void deletedHotel(String id) {
-        hotelRepository.deleteById(id);
-    }
-
     public Map<String, Integer> countByDest(List<String> destinations) {
         Map<String, Integer> map = new HashMap<>();
         destinations.forEach(dest -> map.put(dest, hotelRepository.findByDest(dest).size()));

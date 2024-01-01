@@ -20,12 +20,11 @@ public class Room {
     private String id;
     private String roomNumber;
     private List<LocalDate> unavailableDates;
-    @DocumentReference(lazy = true)
-    private List<Booking> bookings;
+    private List<String> bookingIds;
     public Room(String roomNumber) {
         this.roomNumber = roomNumber;
         this.unavailableDates = new ArrayList<>();
-        this.bookings = new ArrayList<>();
+        this.bookingIds = new ArrayList<>();
     }
     public Boolean isAvailableBetween(LocalDate checkIn, LocalDate checkOut) {
         LocalDate date = checkIn;

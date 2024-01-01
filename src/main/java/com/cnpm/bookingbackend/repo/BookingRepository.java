@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 public interface BookingRepository extends MongoRepository<Booking, String> {
-    List<Booking> findByBookingStatus(BookingStatus bookingStatus);
+    List<Booking> findByHotelIdAndBookingStatus(String hotelId, BookingStatus bookingStatus);
 }

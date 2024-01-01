@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Facility {
     @Id
     private String id;
-    private String icon;
     private String name;
     private String label;
 }

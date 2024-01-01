@@ -42,12 +42,6 @@ public class HotelController {
         return ResponseEntity.ok(hotelService.searchHotels(page, size, searchHotelDto, filter));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteHotel(@PathVariable String id) {
-        hotelService.deletedHotel(id);
-        return ResponseEntity.ok("Hotel has been deleted");
-    }
-
     @GetMapping("/countByDest")
     public ResponseEntity<Map<String, Integer>> countByDest(@RequestParam List<String> destinations) {
         return new ResponseEntity<>(hotelService.countByDest(destinations), HttpStatus.OK);

@@ -46,4 +46,10 @@ public class BusinessController {
     public ResponseEntity<Hotel> updateHotel(@RequestBody Hotel hotel, @PathVariable String id) {
         return new ResponseEntity<>(businessService.updatedHotel(id, hotel), HttpStatus.OK);
     }
+
+    @DeleteMapping("/hotels/{id}")
+    public ResponseEntity<String> deleteHotel(@PathVariable String id) {
+        businessService.deletedHotel(id);
+        return ResponseEntity.ok("Hotel has been deleted");
+    }
 }

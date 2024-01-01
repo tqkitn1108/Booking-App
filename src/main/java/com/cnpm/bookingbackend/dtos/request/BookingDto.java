@@ -13,7 +13,6 @@ import java.util.List;
 
 @Data
 public class BookingDto {
-    private String bookingPersonId;
     @NotBlank
     private String fullName;
     @NotBlank
@@ -29,7 +28,7 @@ public class BookingDto {
     private Integer children;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
-    private PaymentDetails paymentDetails;
+//    private PaymentDetails paymentDetails;
 
     public Booking toBooking(){
         return new Booking()
@@ -40,7 +39,7 @@ public class BookingDto {
                 .setAdults(adults)
                 .setChildren(children)
                 .setCheckInDate(checkInDate)
-                .setCheckOutDate(checkOutDate)
-                .setPaymentDetails(paymentDetails);
+                .setCheckOutDate(checkOutDate);
+//                .setPaymentDetails(paymentDetails);
     }
 }

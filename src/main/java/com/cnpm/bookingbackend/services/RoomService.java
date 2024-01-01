@@ -37,11 +37,6 @@ public class RoomService {
         return roomRepository.findById(id).orElse(null);
     }
 
-    public List<Room> availableRooms(String hotelId, LocalDate checkIn, LocalDate checkOut) {
-        return allRooms(hotelId).stream()
-                .filter(room -> room.isAvailableBetween(checkIn, checkOut)).toList();
-    }
-
     public Room newRoom(Room room) {
         roomRepository.save(room);
 //        mongoTemplate.update(RoomType.class)

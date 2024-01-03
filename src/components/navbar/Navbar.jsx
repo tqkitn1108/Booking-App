@@ -37,7 +37,7 @@ const Navbar = () => {
     if (logoutType === 'navigate') {
       // Perform any logout actions if needed
       // For now, let's navigate to the Bookings page
-      navigate(`/bookings/${user.userId}`);
+      navigate(`/bookings`);
     } else if (logoutType === 'setUserFalse') {
       authContext.handleLogout();
     }

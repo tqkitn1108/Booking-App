@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWifi, faShuttleVan, faParking, faCheckCircle, faLock, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +7,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Formik, Field, Form, ErrorMessage, useFormikContext } from 'formik';
 import * as Yup from 'yup';
 import cvcCodeImage from './cvcCodeImage.png';
+import { AuthContext } from '../../context/AuthContext';
 import api from '../../api/AxiosConfig'
 import Navbar from '../../components/navbar/Navbar';
 
@@ -24,6 +25,7 @@ const GoodToKnow = () => {
 };
 
 const SecurePage = ({ hotelId, location }) => {
+    const { user } = useContext(AuthContext);
 
     const formik = useFormikContext();
     const navigate = useNavigate();
@@ -65,7 +67,7 @@ const SecurePage = ({ hotelId, location }) => {
         firstname: '',
         lastname: '',
         telephone: '',
-        email: '',
+        email: user?.userEmail || '',
     };
 
     const validate = (values) => {
@@ -189,23 +191,12 @@ const SecurePage = ({ hotelId, location }) => {
                                             <Field
                                                 type="email"
                                                 name="email"
+                                                readOnly={user !== null}
                                                 placeholder='Enter email'
                                                 className='form-control'
                                             />
                                             <ErrorMessage name="email" component="span" className='form-message' style={{ color: 'red' }} />
                                         </div>
-                                        {/* <div className='country form-group w-50 mb-3'>
-                                            <label htmlFor='country' className='mb-1' style={{ fontWeight: 'bold' }} >
-                                                Country/Region
-                                            </label>
-                                            <Field
-                                                type='text'
-                                                id='country'
-                                                name='country'
-                                                placeholder='Country'
-                                                className='form-control'
-                                            />
-                                        </div> */}
                                         <div className="booking-for-section mt-3">
                                             <p className="mb-2" style={{ fontWeight: 'bold' }}>Who are you booking for?</p>
                                             <div className="form-check mb-2">

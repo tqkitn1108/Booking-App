@@ -99,12 +99,11 @@
 .nav-user-img {
     width: 36px;
     height: 36px;
-    line-height: 33px;
+    line-height: 36px;
     text-align: center;
     object-fit: cover;
     border-radius: 50%;
     font-size: 25px;
-    text-shadow: 1px 1px black;
 }
 .nav-user-account {
     font-weight: 600;

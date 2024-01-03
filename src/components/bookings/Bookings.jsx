@@ -1,14 +1,45 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "./bookings.css";
+import api from "../../api/AxiosConfig";
+import { AuthContext } from '../../context/AuthContext';
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
+import ModalBootstrap from '../modal/ModalBootstrap';
 
 function Bookings() {
     const [showReviewPopup, setShowReviewPopup] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
     const [rating, setRating] = useState(0);
     const [reviewText, setReviewText] = useState("");
+    const { user } = useContext(AuthContext);
+    const [bookingInfo, setBookingInfo] = useState({});
+    const [list, setList] = useState([]);
 
-    const handleRateReviewClick = () => {
+    useEffect(() => {
+        loadData();
+    }, []);
+
+    async function loadData() {
+        try {
+            const response = await api.get(`/bookings/users/${user?.userId}`);
+            const data = await Promise.all(response.data.map(async (booking) => {
+                const roomTypeId = booking.rooms[0].roomTypeId;
+                const hotelRes = await api.get(`/business/hotels/${booking.hotelId}`);
+                return {
+                    ...booking,
+                    hotelName: hotelRes.data.name,
+                    roomType: hotelRes.data.roomTypes.find(roomType => roomType.id === roomTypeId).title
+                }
+            }))
+            setList(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleRateReviewClick = (id, hotelId) => {
+        setBookingInfo({ id, hotelId });
         setShowReviewPopup(true);
     };
 
@@ -20,22 +51,37 @@ function Bookings() {
         setReviewText(event.target.value);
     };
 
-    const handleSubmitReview = () => {
-        // Log the values to the console
-        console.log("Rating:", rating);
-        console.log("Review Text:", reviewText);
-
+    const handleSubmitReview = async () => {
+        try {
+            await api.post(`/hotels/${bookingInfo.hotelId}/reviews`,
+                {
+                    bookingId: bookingInfo.id,
+                    fullName: user.userFullName,
+                    rating: rating,
+                    content: reviewText,
+                });
+            setModalMessage('Gửi đánh giá thành công!');
+        } catch (err) {
+            setModalMessage(err.response);
+        }
+        setShowModal(true);
         // Reset state and close the pop-up
-        setRating(0);
-        setReviewText("");
-        setShowReviewPopup(false);
+        // setRating(0);
+        // setReviewText("");
+        // setShowReviewPopup(false);
     };
 
     const handleClosePopup = () => {
         setShowReviewPopup(false);
     };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        window.location.reload();
+    };
     return (
         <>
+            <ModalBootstrap body={modalMessage} showModal={showModal} handleCloseModal={handleCloseModal} />
             <Navbar />
             <div className="bookings">
                 <div className="bookings-container">
@@ -44,37 +90,51 @@ function Bookings() {
                         <div className="bookings-ttl-des">HOME {'>'} BOOKINGS</div>
                     </div>
                     <div className="bookings-content">
-                        <div className="bookings-item">
-                            <div className="bks-item-type bks-fnw">Luxury Room</div>
-                            <div className="bks-item-price">300 per night</div>
-                            <div className="bks-item-cntn">
-                                <div><span className="bks-fnw">Check in:</span> 20-07-2022</div>
-                                <div><span className="bks-fnw">Check out:</span> 26-07-2022</div>
+                        {list?.map(booking => (
+                            <div className="bookings-item" key={booking.id}>
+                                <div className="bks-item-type bks-fnw">{booking?.roomType}</div>
+                                <div className="bks-item-type bks-fnw">{booking?.hotelName}</div>
+                                <div className="bks-item-price">{`Tổng giá đặt phòng: ${booking.totalPrice.toLocaleString('vi-VN')} VND`}</div>
+                                <div className="bks-item-cntn">
+                                    <div><span className="bks-fnw">Check in: </span>{booking.checkInDate}</div>
+                                    <div><span className="bks-fnw">Check out: </span>{booking.checkOutDate}</div>
+                                    <div><span className="bks-fnw">Người lớn: </span>{booking.adults}</div>
+                                    <div><span className="bks-fnw">Trẻ em: </span>{booking.children}</div>
+                                </div>
+                                <div className="bks-item-cntn">
+                                    <div><span className="bks-fnw">Danh sách phòng: </span>{booking.rooms.map(room => room.roomNumber).join(', ')}</div>
+                                    <div><span className="bks-fnw">Order ID: </span>{booking.id}</div>
+                                </div>
+                                <div>
+                                    <span className={`status ${booking.bookingStatus}`}>{booking.bookingStatus}</span>
+                                </div>
+                                <div>
+                                    <button className="btn-bottom">Download PDF</button>
+                                    {booking.isRated ?
+                                        <button className="btn-bottom">
+                                            &#10004; Đã đánh giá
+                                        </button> :
+                                        <button className="btn-bottom"
+                                            onClick={() => handleRateReviewClick(booking.id, booking.hotelId)}>
+                                            Đánh giá về khách sạn
+                                        </button>}
+                                </div>
                             </div>
-                            <div className="bks-item-cntn">
-                                <div><span className="bks-fnw">Amount:</span> 300</div>
-                                <div><span className="bks-fnw">Order ID:</span> ORD_20235650</div>
-                                <div><span className="bks-fnw">Date:</span> 20-07-2022</div>
-                            </div>
-                            <button className="bks-item-status">BOOKED</button>
-                            <div>
-                                <button className="btn-bottom">Download PDF</button>
-                                <button className="btn-bottom" onClick={handleRateReviewClick}>Rate & Review</button>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
             {showReviewPopup && (
                 <div className="review-popup-overlay">
                     <div className="review-popup">
-                    <div className="close-button" onClick={handleClosePopup}>
+                        <div className="close-button" onClick={handleClosePopup}>
                             <i className="fas fa-times"></i>
                         </div>
                         <div>
-                            <label>Rating:</label>
+                            <label>Đánh giá chỗ nghỉ</label>
                             <select value={rating} onChange={handleRatingChange} className="input-field">
-                                <option value="0">Select Rating</option>
+                                <option disabled selected> -- Điểm trên thang 10 --</option>
+                                <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -85,11 +145,10 @@ function Bookings() {
                                 <option value="8">8</option>
                                 <option value="9">9</option>
                                 <option value="10">10</option>
-
                             </select>
                         </div>
                         <div>
-                            <label>Review:</label>
+                            <label>Nhận xét</label>
                             <textarea
                                 value={reviewText}
                                 onChange={handleReviewTextChange}
@@ -99,7 +158,7 @@ function Bookings() {
                         </div>
                         <div className="submit-button-container">
                             <button onClick={handleSubmitReview} className="submit-button">
-                                Review
+                                Gửi đánh giá
                             </button>
                         </div>
                     </div>

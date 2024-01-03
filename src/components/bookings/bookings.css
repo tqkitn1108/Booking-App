@@ -3,9 +3,11 @@
     padding: 0px;
     box-sizing: border-box;
 }
+
 .bks-fnw {
     font-weight: 700;
 }
+
 .bookings {
     display: flex;
     justify-content: center;
@@ -13,46 +15,46 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0ffff87;
 }
+
 .bookings-container {
     width: 100%;
     max-width: 1100px;
 }
+
 .bookings-titles {
-    margin: 30px 0 ;
+    margin: 30px 0;
 }
+
 .bookings-ttl-text {
     font-size: 22px;
     font-weight: 600;
 }
+
 .bookings-ttl-des {
     font-size: 10px;
 }
+
 .bookings-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-.bookings-item {
-    width: calc((1100px - 50px) / 3);
-    border: 1px solid white;
-    padding: 12px;
-    margin-bottom: 25px;
-    background-color: white;
-    box-shadow: 2px 2px 10px 0px #1b2025c2;
-    font-size: 14px;
-}
+
 .bks-item-type {
     font-size: 15px;
     margin-bottom: 2px;
 }
+
 .bks-item-price {
     margin-bottom: 15px;
 }
+
 .bks-item-cntn {
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
 }
+
 .bks-item-status {
     color: white;
     background-color: #017840;
@@ -68,20 +70,25 @@
     border: 1px solid black;
     border-radius: 3px;
     margin-right: 10px;
+    margin-top: 12px;
     padding: 3px 8px;
 }
-@media (min-width:  46.1875em) and (max-width: 68.74em) {
+
+@media (min-width: 46.1875em) and (max-width: 68.74em) {
     .bookings-container {
         max-width: 700px;
     }
+
     .bookings-item {
         width: calc((700px - 50px) / 2);
     }
 }
+
 @media (max-width: 46.1875em) {
     .bookings-container {
         max-width: 350px;
     }
+
     .bookings-item {
         width: calc(350px - 8px);
     }
@@ -107,7 +114,8 @@
 }
 
 .review-popup {
-    width: 400px; /* Set the width of the pop-up */
+    width: 400px;
+    /* Set the width of the pop-up */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
@@ -120,30 +128,35 @@
 
 .review-popup textarea {
     width: 100%;
-    resize: vertical; /* Allow vertical resizing of the textarea */
+    resize: vertical;
+    /* Allow vertical resizing of the textarea */
 }
 
 .submit-button-container {
     text-align: center;
     margin-top: 15px;
 }
+
 .review-popup {
     width: 400px;
     padding: 20px;
-    border-radius: 15px; /* Increase border radius for rounded corners */
+    border-radius: 15px;
+    /* Increase border radius for rounded corners */
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
 .review-popup label {
     display: block;
-    margin-bottom: 10px; /* Increase margin for better spacing */
+    margin-bottom: 10px;
+    /* Increase margin for better spacing */
 }
 
 .input-field {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 8px; /* Round the corners of input fields */
+    border-radius: 8px;
+    /* Round the corners of input fields */
     margin-bottom: 15px;
     box-sizing: border-box;
 }
@@ -151,10 +164,13 @@
 .submit-button {
     width: 100%;
     padding: 15px;
-    background-color: #3235e2; /* Green color */
-    color: #fff; /* White text */
+    background-color: #3235e2;
+    /* Green color */
+    color: #fff;
+    /* White text */
     border: none;
-    border-radius: 10px; /* Round the corners of the button */
+    border-radius: 10px;
+    /* Round the corners of the button */
     cursor: pointer;
 }
 
@@ -174,3 +190,35 @@
     justify-content: center;
 }
 
+.bookings {
+    .bookings-item {
+        width: calc((1100px - 50px) / 3);
+        border: 1px solid white;
+        padding: 12px;
+        margin-bottom: 25px;
+        background-color: white;
+        box-shadow: 0px 0px 8px #1b2025c2;
+        border-radius: 10px;
+        font-size: 14px;
+
+        .status {
+            padding: 5px;
+            border-radius: 5px;
+
+            &.ACCEPTED {
+                color: green;
+                background-color: rgba(0, 128, 0, 0.151);
+            }
+
+            &.PENDING {
+                color: goldenrod;
+                background-color: rgba(189, 189, 3, 0.103);
+            }
+
+            &.CANCELLED {
+                color: crimson;
+                background-color: rgba(189, 3, 28, 0.115);
+            }
+        }
+    }
+}

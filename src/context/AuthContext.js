@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/ApiAuthService";
 import api from "../api/AxiosConfig";
 import React, { createContext, useState, useContext, useEffect } from "react"
@@ -9,6 +10,7 @@ export const useAuth = () => useContext(AuthContext);
 // Shared the created context with other components
 function AuthProvider({ children }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
+  const navigate = useNavigate();
 
   async function handleLogin(credentials) {
     try {
@@ -28,6 +30,7 @@ function AuthProvider({ children }) {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       setUser(null);
+      navigate("/");
       window.location.reload();
     }
   }

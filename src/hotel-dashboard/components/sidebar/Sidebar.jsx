@@ -23,10 +23,8 @@ const Sidebar = ({ hideSideBar }) => {
   const [hotelImg, setHotelImg] = useState("");
   const [hotelName, setHotelName] = useState("");
   const authContext = useAuth();
-  const navigate = useNavigate();
 
   const handleLogoutClick = () => {
-    navigate("/");
     authContext.handleLogout();
   };
 

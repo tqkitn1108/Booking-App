@@ -28,8 +28,6 @@ public class User implements UserDetails {
     private boolean isVerified;
     @DBRef
     private Role role;
-    @DocumentReference(lazy = true)
-    private List<Booking> bookings;
 
     public User(String fullName, String email, String password) {
         this.email = email;

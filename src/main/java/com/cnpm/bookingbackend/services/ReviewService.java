@@ -1,6 +1,7 @@
 package com.cnpm.bookingbackend.services;
 
 import com.cnpm.bookingbackend.dtos.request.ReviewDto;
+import com.cnpm.bookingbackend.models.Booking;
 import com.cnpm.bookingbackend.models.Hotel;
 import com.cnpm.bookingbackend.models.Review;
 import com.cnpm.bookingbackend.repo.HotelRepository;
@@ -50,6 +51,7 @@ public class ReviewService {
                 .matching(Criteria.where("id").is(hotelId))
                 .apply(new Update().push("reviews").value(review))
                 .first();
+        Objects.requireNonNull(mongoTemplate.findById(input.getBookingId(), Booking.class)).setIsRated(true);
         return review;
     }
 

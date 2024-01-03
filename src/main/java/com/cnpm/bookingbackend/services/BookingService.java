@@ -26,8 +26,13 @@ public class BookingService {
         this.mongoTemplate = mongoTemplate;
     }
 
+//    public List<Booking> allUserBookings(String userId) {
+//        return Objects.requireNonNull(mongoTemplate.findById(userId, User.class)).getBookings();
+//    }
+
     public List<Booking> allUserBookings(String userId) {
-        return Objects.requireNonNull(mongoTemplate.findById(userId, User.class)).getBookings();
+        String userEmail = Objects.requireNonNull(mongoTemplate.findById(userId, User.class)).getEmail();
+        return bookingRepository.findByEmail(userEmail);
     }
 
     public List<Booking> allHotelBookings(String hotelId) {
@@ -45,6 +50,7 @@ public class BookingService {
         booking.setHotelId(hotelId);
         booking.setRooms(roomList);
         booking.setBookingStatus(BookingStatus.PENDING);
+        booking.setIsRated(false);
 
         bookingRepository.save(booking);
         mongoTemplate.update(User.class)

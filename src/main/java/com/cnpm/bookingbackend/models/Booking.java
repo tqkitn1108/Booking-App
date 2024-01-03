@@ -32,4 +32,5 @@ public class Booking {
 //    private PaymentDetails paymentDetails;
     @Field(targetType = FieldType.STRING)
     private BookingStatus bookingStatus;
+    private Boolean isRated;
 }

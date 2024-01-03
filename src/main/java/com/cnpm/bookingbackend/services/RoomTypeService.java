@@ -43,7 +43,6 @@ public class RoomTypeService {
     }
 
     public RoomType newRoomType(String hotelId, RoomTypeDto roomTypeDto) {
-        System.out.println(roomTypeDto);
         List<Room> rooms = roomTypeDto.getRoomNumbers().stream()
                 .map(roomNumber -> roomRepository.save(new Room(roomNumber))).toList();
         RoomType roomType = roomTypeDto.toRoomType();
@@ -53,6 +52,11 @@ public class RoomTypeService {
                 .matching(Criteria.where("id").is(hotelId))
                 .apply(new Update().push("roomTypes", roomType))
                 .first();
+        String roomTypeId = roomType.getId();
+        roomType.getRooms().forEach(room -> {
+            room.setRoomTypeId(roomTypeId);
+            roomRepository.save(room);
+        });
         return roomType;
     }
 

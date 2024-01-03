@@ -21,6 +21,7 @@ public class Room {
     private String roomNumber;
     private List<LocalDate> unavailableDates;
     private List<String> bookingIds;
+    private String roomTypeId;
     public Room(String roomNumber) {
         this.roomNumber = roomNumber;
         this.unavailableDates = new ArrayList<>();

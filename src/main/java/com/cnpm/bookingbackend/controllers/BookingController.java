@@ -21,8 +21,8 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    @GetMapping("/{userId}")
-    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/users/{userId}")
+//    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<Booking>> getBookingsOfUser(@PathVariable String userId) {
         return ResponseEntity.ok(bookingService.allUserBookings(userId));
     }

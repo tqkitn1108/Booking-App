@@ -34,6 +34,7 @@ const PendingDatatable = ({ columns }) => {
   }
 
   const handleComfirm = async (booking, status) => {
+    setLoading(true);
     try {
       booking.bookingStatus = status;
       await api.put(`/bookings/${booking.id}`, booking);
@@ -42,6 +43,7 @@ const PendingDatatable = ({ columns }) => {
     } catch (err) {
       setModalMessage(err.response.data.detail);
     }
+    setLoading(false);
     setShowModal(true);
   };
 
@@ -59,7 +61,7 @@ const PendingDatatable = ({ columns }) => {
         return (
           <div className="cellAction">
             {/* <Link to={`/business/hotels/${params.row.id}`} style={{ textDecoration: "none" }}> */}
-              <div className="viewButton">View</div>
+            <div className="viewButton">View</div>
             {/* </Link> */}
 
             <div className="acceptButton" onClick={() => handleComfirm(params.row, 'ACCEPTED')}>Accept</div>
@@ -72,7 +74,7 @@ const PendingDatatable = ({ columns }) => {
   ];
   return (
     <div className="datatable" style={{ width: "100%" }}>
-      <ModalBootstrap body={modalMessage} showModal={showModal} handleCloseModal={handleCloseModal}/>
+      <ModalBootstrap body={modalMessage} showModal={showModal} handleCloseModal={handleCloseModal} />
       {loading && <LoadingSpinner />}
       <div className="datatableTitle">
         Danh sách đặt phòng đang chờ xét duyệt

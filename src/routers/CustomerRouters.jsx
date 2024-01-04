@@ -6,8 +6,9 @@ import Hotel from "../pages/hotel/Hotel";
 import ReservationPage from "../pages/reservation/ReservationPage";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Bookings from "../components/bookings/Bookings";
-import { useAuth } from "../context/AuthContext";
+import { AuthContext, useAuth } from "../context/AuthContext";
 import AuthProvider from "../context/AuthContext";
+import { useContext } from "react";
 
 
 function AuthenticatedRoute({ children }) {
@@ -18,11 +19,20 @@ function AuthenticatedRoute({ children }) {
   return <Navigate to="/" />
 }
 
+const ProtectedRoute = ({ children }) => {
+  const { user } = useContext(AuthContext);
+  if (user !== null && user.userRole.name === "HOTEL") {
+    return <Navigate to="/business/hotels" />;
+  }
+  return children;
+};
+
 function CustomerRouters() {
   return (
     <div>
       <AuthProvider>
-        {/* <BrowserRouter> */}
+        <ProtectedRoute>
+          {/* <BrowserRouter> */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="hotels/search" element={<List />} />
@@ -32,7 +42,8 @@ function CustomerRouters() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
           </Routes>
-        {/* </BrowserRouter> */}
+          {/* </BrowserRouter> */}
+        </ProtectedRoute>
       </AuthProvider>
     </div>
   )

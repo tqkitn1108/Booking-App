@@ -41,8 +41,8 @@ const Header = ({ showTitle }) => {
     const navigate = useNavigate();
     const handleSearch = (event) => {
         event.preventDefault();
-        setDestInput(destInput.trim());
-        if (destInput.trim() === '') {
+        setDestInput(destInput ? destInput.trim() : '');
+        if (!destInput || destInput.trim() === '') {
             setErrorMessage('Vui lòng nhập điểm đến để bắt đầu tìm kiếm.');
         } else {
             setErrorMessage('');

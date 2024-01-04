@@ -24,6 +24,7 @@ const Hotel = () => {
   const [open, setOpen] = useState(false);
   const [hotel, setHotel] = useState({});
   const [availRoomTypes, setAvailRoomTypes] = useState([]);
+  const [showRooms, setShowRooms] = useState(true);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
 
@@ -31,8 +32,10 @@ const Hotel = () => {
     async function loadHotelData() {
       try {
         const hotelResponse = await api.get(`/business/hotels/${hotelId}`);
-        const roomTypeResponse = await api.get(`/hotels/${hotelId}/roomTypes/available?checkIn=${searchParams.get('checkIn')}&checkOut=${searchParams.get('checkOut')}`);
-        setAvailRoomTypes(roomTypeResponse.data);
+        if (searchParams.get('checkIn')) {
+          const roomTypeResponse = await api.get(`/hotels/${hotelId}/roomTypes/available?checkIn=${searchParams.get('checkIn')}&checkOut=${searchParams.get('checkOut')}`);
+          setAvailRoomTypes(roomTypeResponse.data);
+        } else setShowRooms(false);
         setHotel(hotelResponse.data);
       } catch (err) {
         console.log(err);
@@ -144,10 +147,13 @@ const Hotel = () => {
             </div>
           </div>
         </div>
-        <div className="hotel-rooms">
-          <h3 className="hotelTitle">Phòng trống</h3>
-          <Table roomTypes={availRoomTypes} />
-        </div>
+        {showRooms ?
+          <div className="hotel-rooms">
+            <h3 className="hotelTitle">Phòng trống</h3>
+            <Table roomTypes={availRoomTypes} />
+          </div> :
+          <h3 className="mt-5">Vui lòng chọn ngày để đặt phòng</h3>
+        }
         <div className="review-section">
           <h3 className="hotelTitle">Đánh giá của khách</h3>
           <div className="slick">

@@ -5,6 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
 import ModalBootstrap from '../modal/ModalBootstrap';
+import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 
 function Bookings() {
     const [showReviewPopup, setShowReviewPopup] = useState(false);
@@ -15,6 +16,7 @@ function Bookings() {
     const { user } = useContext(AuthContext);
     const [bookingInfo, setBookingInfo] = useState({});
     const [list, setList] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         loadData();
@@ -24,18 +26,17 @@ function Bookings() {
         try {
             const response = await api.get(`/bookings/users/${user?.userId}`);
             const data = await Promise.all(response.data.map(async (booking) => {
-                const roomTypeId = booking.rooms[0].roomTypeId;
                 const hotelRes = await api.get(`/business/hotels/${booking.hotelId}`);
                 return {
                     ...booking,
-                    hotelName: hotelRes.data.name,
-                    roomType: hotelRes.data.roomTypes.find(roomType => roomType.id === roomTypeId).title
+                    hotelName: hotelRes.data.name
                 }
             }))
             setList(data);
         } catch (error) {
             console.log(error);
         }
+        setLoading(false);
     }
 
     const handleRateReviewClick = (id, hotelId) => {
@@ -82,6 +83,7 @@ function Bookings() {
     return (
         <>
             <ModalBootstrap body={modalMessage} showModal={showModal} handleCloseModal={handleCloseModal} />
+            {loading && <LoadingSpinner />}
             <Navbar />
             <div className="bookings">
                 <div className="bookings-container">
@@ -92,7 +94,6 @@ function Bookings() {
                     <div className="bookings-content">
                         {list?.map(booking => (
                             <div className="bookings-item" key={booking.id}>
-                                <div className="bks-item-type bks-fnw">{booking?.roomType}</div>
                                 <div className="bks-item-type bks-fnw">{booking?.hotelName}</div>
                                 <div className="bks-item-price">{`Tổng giá đặt phòng: ${booking.totalPrice.toLocaleString('vi-VN')} VND`}</div>
                                 <div className="bks-item-cntn">

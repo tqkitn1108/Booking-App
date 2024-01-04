@@ -26,10 +26,6 @@ public class BookingService {
         this.mongoTemplate = mongoTemplate;
     }
 
-//    public List<Booking> allUserBookings(String userId) {
-//        return Objects.requireNonNull(mongoTemplate.findById(userId, User.class)).getBookings();
-//    }
-
     public List<Booking> allUserBookings(String userId) {
         String userEmail = Objects.requireNonNull(mongoTemplate.findById(userId, User.class)).getEmail();
         return bookingRepository.findByEmail(userEmail);
@@ -53,10 +49,6 @@ public class BookingService {
         booking.setIsRated(false);
 
         bookingRepository.save(booking);
-        mongoTemplate.update(User.class)
-                .matching(Criteria.where("email").is(booking.getEmail()))
-                .apply(new Update().push("bookings", booking))
-                .first();
         mongoTemplate.update(Hotel.class)
                 .matching(Criteria.where("id").is(hotelId))
                 .apply(new Update().push("bookings", booking))

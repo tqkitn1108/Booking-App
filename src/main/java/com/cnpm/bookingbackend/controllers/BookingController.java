@@ -2,23 +2,25 @@ package com.cnpm.bookingbackend.controllers;
 
 import com.cnpm.bookingbackend.dtos.request.BookingDto;
 import com.cnpm.bookingbackend.models.Booking;
-import com.cnpm.bookingbackend.models.BookingStatus;
 import com.cnpm.bookingbackend.services.BookingService;
+import com.cnpm.bookingbackend.services.EmailService;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/bookings")
 public class BookingController {
     private final BookingService bookingService;
+    private final EmailService emailService;
 
-    public BookingController(BookingService bookingService) {
+    public BookingController(BookingService bookingService, EmailService emailService) {
         this.bookingService = bookingService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/users/{userId}")
@@ -45,8 +47,9 @@ public class BookingController {
     }
 
     @PutMapping("/{bookingId}")
-    public void confirmBooking(@RequestBody Booking booking){
+    public void confirmBooking(@RequestBody Booking booking) throws Exception {
         bookingService.confirmBooking(booking);
+        emailService.sendConfirmBookingEmail(booking);
     }
 
     @DeleteMapping("/{bookingId}")

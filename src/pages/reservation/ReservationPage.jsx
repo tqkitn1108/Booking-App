@@ -178,7 +178,7 @@ const SecurePage = ({ hotelId, location }) => {
                                         </div>
                                     </div>
                                     <GoodToKnow />
-                                    <div className="submit-button mt-3">
+                                    <div className=" mt-3">
                                         <button type="submit" className="btn btn-primary">
                                             Complete Booking
                                         </button>
@@ -270,7 +270,7 @@ const ReservationPage = () => {
                                     Include VND <span className='vat'>{Math.round(state?.totalPrice / 11)}</span> in taxes <br /> and charges
                                 </p>
                                 <p>
-                                    10% VAT <span className='tax'>VND 322.085</span>
+                                    10% VAT <span className='tax'>VND {Math.round(state?.totalPrice / 10)}</span>
                                 </p>
                             </div>
                         </div>

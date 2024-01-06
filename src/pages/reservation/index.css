@@ -73,6 +73,7 @@ margin-bottom: 20px; /* Adjust the margin as needed to create space between Hote
 margin-right: 0px;
 }
 .hotel-information {
+ width: 333px; 
 margin-bottom: 20px; /* Adjust the margin as needed to create space between HotelInformation and the form */
 margin-right: 40px; /* Add a right margin to shift the hotel information to the left */
 }
@@ -135,4 +136,11 @@ border-radius: 5px;
 border: 1px solid #ccc;  /* Màu sắc của đường viền */
 border-radius: 10px;    /* Bán kính của đường viền bo góc */
 padding: 15px;          /* Khoảng cách nội dung từ đường viền */
+}
+.address-wrap {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: break-word;
 }

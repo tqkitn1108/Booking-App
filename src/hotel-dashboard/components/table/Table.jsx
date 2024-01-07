@@ -31,7 +31,7 @@ const BookingList = () => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell className="tableCell">Mã đặt phòng</TableCell>
+            <TableCell className="tableCell id">Mã đặt phòng</TableCell>
             <TableCell className="tableCell">Người đặt</TableCell>
             <TableCell className="tableCell">Email</TableCell>
             <TableCell className="tableCell">Ngày nhận phòng</TableCell>
@@ -39,7 +39,7 @@ const BookingList = () => {
             <TableCell className="tableCell">Danh sách phòng</TableCell>
             <TableCell className="tableCell">Giá (VND)</TableCell>
             <TableCell className="tableCell">Phương thức thanh toán</TableCell>
-            <TableCell className="tableCell">Trạng thái</TableCell>
+            <TableCell className="tableCell status-column">Trạng thái</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

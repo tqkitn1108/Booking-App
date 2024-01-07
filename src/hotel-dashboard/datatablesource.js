@@ -1,9 +1,9 @@
 export const bookingColumns = [
-  { field: "id", headerName: "Mã đặt phòng", width: 200 },
+  { field: "id", headerName: "Mã đặt phòng", width: 210 },
   {
     field: "fullName",
     headerName: "Người đặt",
-    width: 160,
+    width: 140,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
@@ -22,7 +22,7 @@ export const bookingColumns = [
   {
     field: "phoneNumber",
     headerName: "Số điện thoại",
-    width: 120,
+    width: 110,
   },
   {
     field: "checkInDate",
@@ -37,7 +37,7 @@ export const bookingColumns = [
   {
     field: "rooms",
     headerName: "Danh sách phòng",
-    width: 180,
+    width: 150,
     renderCell: (params) => (
       <span>{params.value.map(room => room.roomNumber).join(", ")}</span>
     )
@@ -71,17 +71,17 @@ export const hotelColumns = [
   {
     field: "address",
     headerName: "Address",
-    width: 450,
+    width: 400,
   },
   {
     field: "rating",
     headerName: "Rating",
-    width: 100,
+    width: 80,
   },
   {
     field: "reviews",
     headerName: "Reviews",
-    width: 100,
+    width: 80,
     renderCell: (params) => (
       <span>{params.value}</span>
     )

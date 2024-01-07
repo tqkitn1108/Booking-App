@@ -47,12 +47,14 @@ const Sidebar = ({ hideSideBar }) => {
       <div className="top">
         {hideSideBar ?
           <Link to="/business/hotels" style={{ textDecoration: "none" }}>
-            <span className="logo">Booking.com</span>
+            <span className="logo">TravelBK</span>
           </Link> : (
-            <div className="avatar-with-hotelName">
-              <img className="avatar" src={hotelImg} alt="Avatar" />
-              <div className="hotelName">{hotelName}</div>
-            </div>
+            <Link to={`/business/hotels/${hotelId}`} style={{ textDecoration: "none" }}>
+              <div className="avatar-with-hotelName">
+                <img className="avatar" src={hotelImg} alt="Avatar" />
+                <div className="hotelName">{hotelName}</div>
+              </div>
+            </Link>
           )
         }
       </div>
@@ -81,16 +83,16 @@ const Sidebar = ({ hideSideBar }) => {
                   <span>Đặt phòng</span>
                 </li>
               </Link>
-              <Link to="/business/hotels" style={{ textDecoration: "none" }}>
-                <li>
-                  <StoreIcon className="icon" />
-                  <span>Hotels</span>
-                </li>
-              </Link>
               <Link to={`/business/hotels/${hotelId}/rooms`} style={{ textDecoration: "none" }}>
                 <li>
                   <CreditCardIcon className="icon" />
                   <span>Danh sách phòng</span>
+                </li>
+              </Link>
+              <Link to={`/business/hotels/${hotelId}`} style={{ textDecoration: "none" }}>
+                <li>
+                  <StoreIcon className="icon" />
+                  <span>Tổng quan khách sạn</span>
                 </li>
               </Link>
               <p className="title">USEFUL</p>

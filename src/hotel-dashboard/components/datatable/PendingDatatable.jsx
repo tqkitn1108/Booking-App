@@ -56,12 +56,12 @@ const PendingDatatable = ({ columns }) => {
     {
       field: "action",
       headerName: "Action",
-      width: 200,
+      width: 150,
       renderCell: (params) => {
         return (
           <div className="cellAction">
             {/* <Link to={`/business/hotels/${params.row.id}`} style={{ textDecoration: "none" }}> */}
-            <div className="viewButton">View</div>
+            {/* <div className="viewButton">View</div> */}
             {/* </Link> */}
 
             <div className="acceptButton" onClick={() => handleComfirm(params.row, 'ACCEPTED')}>Accept</div>

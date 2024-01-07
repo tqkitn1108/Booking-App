@@ -48,7 +48,7 @@ const Navbar = () => {
   return (
     <div className="home-navbar">
       <div className="home-nav-container">
-        <span className="home-nav-logo" onClick={handleLogoClick}>Booking.com</span>
+        <span className="home-nav-logo" onClick={handleLogoClick}>TravelBK</span>
         {userFullName ? (
           <div className="nav-items">
             <div className="nav-items-icon">

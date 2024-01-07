@@ -12,6 +12,19 @@
     }
   }
 
+  .tableCell {
+    padding: 10px;
+    max-width: 250px;
+    min-width: 100px;
+    word-break: break-word;
+    &.id{
+      width: 210px;
+    }
+    &.status-column{
+      width: 120px;
+    }
+  }
+
   .status {
     padding: 5px;
     border-radius: 5px;

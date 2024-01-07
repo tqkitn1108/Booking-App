@@ -31,13 +31,14 @@
 
       .hotelName {
         font-size: 20px;
+        font-weight: bold;
+        color: #6439ff;
         display: -webkit-box;
         word-wrap: break-word;
         text-overflow: ellipsis;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;
         overflow: hidden;
-        font-weight: bold;
       }
     }
   }

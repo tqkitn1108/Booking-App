@@ -78,9 +78,9 @@ const Header = ({ showTitle }) => {
                 }]);
             }
             setOptions({
-                adult: searchParams.get('adults') || 2,
-                children: searchParams.get('children') || 0,
-                room: searchParams.get('noRooms') || 1,
+                adult: parseInt(searchParams.get('adults')) || 2,
+                children: parseInt(searchParams.get('children')) || 0,
+                room: parseInt(searchParams.get('noRooms')) || 1,
             })
         }
     }, [])

@@ -65,7 +65,7 @@ const Single = () => {
           </div>
         </div>
         <div className="bottom">
-          <h1 className="title">Last Transactions</h1>
+          <h1 className="title">Các đặt phòng gần đây</h1>
           <BookingList />
         </div>
       </div>

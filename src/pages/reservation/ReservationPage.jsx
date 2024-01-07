@@ -33,11 +33,7 @@ const SecurePage = ({ hotelId, location }) => {
 
     const completeBooking = async (values) => {
         const requestData = {
-            // cardName: values.cardName,
-            // cardType: values.cardType,
-            // cardNumber: values.cardNumber,
-            // cvcCode: values.cvcCode,
-            // expirationDate: values.expirationDate,
+
             fullName: values.firstname + ' ' + values.lastname,
             phoneNumber: values.telephone,
             email: values.email,
@@ -59,11 +55,6 @@ const SecurePage = ({ hotelId, location }) => {
 
     };
     const initialValues = {
-        // cardName: '',
-        // cardType: '',
-        // cardNumber: '',
-        // cvcCode: '',
-        // expirationDate: '',
         firstname: '',
         lastname: '',
         telephone: '',
@@ -72,38 +63,6 @@ const SecurePage = ({ hotelId, location }) => {
 
     const validate = (values) => {
         const errors = {};
-
-        // if (!values.cardName) {
-        //     errors.cardName = 'Cardholder\'s name is required';
-        // } else if (!/^[^\d]+$/.test(values.cardName)) {
-        //     errors.cardName = 'Cardholder\'s name should not contain numbers';
-        // }
-
-        // if (!values.cardType) {
-        //     errors.cardType = 'Card type is required';
-        // }
-
-        // if (!values.cardNumber) {
-        //     errors.cardNumber = 'Card number is required';
-        // } else if (!/^\d+$/.test(values.cardNumber)) {
-        //     errors.cardNumber = 'Card number should only contain numbers';
-        // }
-
-        // if (!values.cvcCode) {
-        //     errors.cvcCode = 'CVC code is required';
-        // } else if (!/^\d+$/.test(values.cvcCode)) {
-        //     errors.cvcCode = 'Invalid CVC code';
-        // }
-
-        // if (!values.expirationDate) {
-        //     errors.expirationDate = 'Expiration date is required';
-        // } else {
-        //     const currentDate = new Date();
-        //     const inputDate = new Date(values.expirationDate);
-        //     if (inputDate < currentDate) {
-        //         errors.expirationDate = 'Expiration date should be in the future';
-        //     }
-        // }
         if (!values.firstname) {
             errors.firstname = 'First name is required';
         }
@@ -140,8 +99,6 @@ const SecurePage = ({ hotelId, location }) => {
                             validate={validate}
                         >
                             <Form className='form-secure'>
-                                {/* <div className='Login template d-flex flex-column w-75 bg-white mt'> */}
-
                                 <div className='mb-2 d-grid'>
                                     <div className='ad1 mb-2' >
                                         <h3 className='text-right'>Enter your details</h3>
@@ -221,86 +178,12 @@ const SecurePage = ({ hotelId, location }) => {
                                         </div>
                                     </div>
                                     <GoodToKnow />
-                                    {/* <div className='ad2'>
-                                        <h3 className='text-right'>How do you want to pay</h3>
-                                        <div className='mb-3 w-75'>
-                                            <label htmlFor='cardName' className='form-label ' style={{ fontWeight: 'bold' }}>
-                                                Cardholder's name <span className="required text-danger">*</span>
-                                            </label>
-                                            <Field
-                                                type="text"
-                                                name="cardName"
-                                                placeholder="Enter cardholder"
-                                                className='form-control'
-                                            />
-                                            <ErrorMessage name="cardName" component="span" className='form-message' style={{ color: 'red' }} />
-                                        </div>
-                                        <div className='mb-3 w-75'>
-                                            <label htmlFor='cardType' className='form-label' style={{ fontWeight: 'bold' }}>
-                                                Card type <span className="required text-danger">*</span>
-                                            </label>
-                                            <Field
-                                                as="select"
-                                                name="cardType"
-                                                className='form-select'
-                                            >
-                                                <option value=''>Select Card Type</option>
-                                                {cardTypes.map((type, index) => (
-                                                    <option key={index} value={type}>{type}</option>
-                                                ))}
-                                            </Field>
-                                            <ErrorMessage name="cardType" component="span" className='form-message' style={{ color: 'red' }} />
-                                        </div>
-                                        <div className='mb-3 w-75 '>
-                                            <label htmlFor='cardNumber' className='form-label' style={{ fontWeight: 'bold' }}>
-                                                Card Number <span className="required text-danger">*</span>
-                                            </label>
-                                            <Field
-                                                type="text"
-                                                name="cardNumber"
-                                                placeholder='Enter cardnumber'
-                                                className='form-control'
-                                            />
-                                            <ErrorMessage name="cardNumber" component="span" className='form-message' style={{ color: 'red' }} />
-                                        </div>
-                                        <div className='mb-3 w-75'>
-                                            <label htmlFor='cvcCode' className='form-label' style={{ fontWeight: 'bold' }}>
-                                                CVC Code <span className="required text-danger">*</span>
-                                            </label>
-                                            <Field
-                                                type="text"
-                                                name="cvcCode"
-                                                placeholder='Enter CVC code'
-                                                className='form-control'
-                                            />
-                                            <ErrorMessage name="cvcCode" component="span" className='form-message' style={{ color: 'red' }} />
-                                        </div>
-                                        <div className='mb-2'>
-                                            <label className='form-label'></label>
-                                            <div className='mb-2'>
-                                                <label className='form-label'></label>
-                                                <img src={cvcCodeImage} alt="CVC Code Image" />
-                                            </div>
-                                        </div>
-                                        <div className='mb-2 w-75'>
-                                            <label htmlFor='expirationDate' className='form-label' style={{ fontWeight: 'bold' }}>
-                                                Expiration Date <span className="required text-danger" >*</span>
-                                            </label>
-                                            <Field
-                                                type="date"
-                                                name="expirationDate"
-                                                className='form-control'
-                                            />
-                                            <ErrorMessage name="expirationDate" component="span" className='form-message' style={{ color: 'red' }} />
-                                        </div>
-                                    </div> */}
-                                    <div className="submit-button mt-3">
+                                    <div className=" mt-3">
                                         <button type="submit" className="btn btn-primary">
                                             Complete Booking
                                         </button>
                                     </div>
                                 </div>
-                                {/* </div> */}
                             </Form>
                         </Formik>
                     </div>
@@ -340,10 +223,10 @@ const ReservationPage = () => {
                         <div className="hotel-information">
                             <div className="hotel-info-border">
                                 <h5>{hotel.name}</h5>
-                                <p className=''>Address: 123 Main Street, Cityville</p>
+                                <p className=''>Address: {hotel.address}</p>
                                 <div className='d-flex'  > Rating:
                                     <div className="siRating">
-                                        <button>8.9</button>
+                                        <button>{hotel.rating}</button>
                                     </div>
                                 </div>
                                 <div className="amenities">
@@ -387,7 +270,7 @@ const ReservationPage = () => {
                                     Include VND <span className='vat'>{Math.round(state?.totalPrice / 11)}</span> in taxes <br /> and charges
                                 </p>
                                 <p>
-                                    10% VAT <span className='tax'>VND 322.085</span>
+                                    10% VAT <span className='tax'>VND {Math.round(state?.totalPrice / 11)}</span>
                                 </p>
                             </div>
                         </div>

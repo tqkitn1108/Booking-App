@@ -45,12 +45,14 @@ const Hotel = () => {
   }, [])
   const rStars = (value) => {
     const stars = [];
-    for (let i = 0; i < 5; i++) {
-      stars.push(
-        <span key={i} style={{ color: i < value ? '#FFD700' : '#C0C0C0' }}>
-          &#9733;
-        </span>
-      );
+    if (value > 0) {
+      for (let i = 0; i < 5; i++) {
+        stars.push(
+          <span key={i} style={{ color: i < value ? '#FFD700' : '#C0C0C0' }}>
+            &#9733;
+          </span>
+        );
+      }
     }
     return stars;
   };
@@ -68,7 +70,6 @@ const Hotel = () => {
     } else {
       newSlideNumber = slideNumber === hotel.photos.length - 1 ? 0 : slideNumber + 1;
     }
-
     setSlideNumber(newSlideNumber)
   };
 

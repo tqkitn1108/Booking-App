@@ -43,6 +43,7 @@ public class ReviewService {
     public Review newReview(ReviewDto input, String hotelId) {
         Hotel hotel = hotelRepository.findById(hotelId).orElseThrow();
         hotel.updateRating(input.getRating());
+        hotelRepository.save(hotel);
 
         Review review = new Review(input.getBookingId(), input.getFullName(), input.getRating(), input.getContent());
         review.setReviewDate(LocalDate.now());

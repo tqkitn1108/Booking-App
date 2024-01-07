@@ -43,6 +43,11 @@ public class RoomTypeService {
     }
 
     public RoomType newRoomType(String hotelId, RoomTypeDto roomTypeDto) {
+        Hotel hotel = hotelRepository.findById(hotelId).orElseThrow();
+        if(hotel.getMinPrice() == 0 || hotel.getMinPrice() > roomTypeDto.getPricePerNight()) {
+            hotel.setMinPrice(roomTypeDto.getPricePerNight());
+            hotelRepository.save(hotel);
+        }
         List<Room> rooms = roomTypeDto.getRoomNumbers().stream()
                 .map(roomNumber -> roomRepository.save(new Room(roomNumber))).toList();
         RoomType roomType = roomTypeDto.toRoomType();

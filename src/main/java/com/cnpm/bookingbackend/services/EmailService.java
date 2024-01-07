@@ -1,9 +1,6 @@
 package com.cnpm.bookingbackend.services;
 
-import com.cnpm.bookingbackend.models.Booking;
-import com.cnpm.bookingbackend.models.Hotel;
-import com.cnpm.bookingbackend.models.Room;
-import com.cnpm.bookingbackend.models.User;
+import com.cnpm.bookingbackend.models.*;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,19 +25,9 @@ public class EmailService {
         this.mongoTemplate = mongoTemplate;
     }
 
-    public void sendEmail(String to, String subject, String body) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(fromEmail);
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(body);
-
-        mailSender.send(message);
-    }
-
     public void sendVerificationEmail(String url, User user) throws MessagingException, UnsupportedEncodingException {
         String subject = "Email Verification";
-        String senderName = "Booking App";
+        String senderName = "TravelBK";
         String mailContent = "<p> Hi, " + user.getFullName() + ", </p>" +
                 "<p> Thank you for registering with us, </p>" +
                 "<p> Please, follow the link below to complete your registration. </p>" +
@@ -59,30 +46,58 @@ public class EmailService {
     public void sendConfirmBookingEmail(Booking booking) throws MessagingException, UnsupportedEncodingException {
         Hotel hotel = mongoTemplate.findById(booking.getHotelId(), Hotel.class);
         assert hotel != null;
-        StringJoiner joiner = new StringJoiner(", ");
-        booking.getRooms().forEach(room -> joiner.add(room.getRoomNumber()));
-        String subject = "Xác nhận đặt phòng";
         String senderName = "TravelBK";
-        String mailContent = "<p> Chào " + booking.getFullName() + ", </p>" +
-                "<p> Chúc mừng! Yêu cầu đặt phòng của bạn đã được xác nhận thành công. Dưới đây là thông tin chi tiết về đặt phòng của bạn: </p>" +
-                "<ul>" +
-                "<li><strong>Tên khách hàng: </strong>" + booking.getFullName() + "</li>" +
-                "<li><strong>Email: </strong> " + booking.getEmail() + "</li>" +
-                "<li><strong>Số điện thoại liên lạc: </strong>" + booking.getPhoneNumber() + "</li>" +
-                "<li><strong>Ngày nhận phòng: </strong>" + booking.getCheckInDate() + "</li>" +
-                "<li><strong>Ngày trả phòng: </strong>" + booking.getCheckOutDate() + "</li>" +
-                "<li><strong>Danh sách phòng: </strong> " + joiner + "</li>" +
-                "<li><strong>Số lượng khách: </strong>" + booking.getAdults() + " người lớn và " + booking.getChildren() + " trẻ em" + "</li>" +
-                "<li><strong>Tổng cộng tiền phòng: </strong>" + booking.getTotalPrice() + "VND </li>" +
-                "</ul>" +
-                "<p>Nếu bạn có bất kỳ câu hỏi hoặc yêu cầu đặc biệt nào, " +
-                "xin vui lòng liên hệ với chúng tôi qua địa chỉ email " +
-                "<a href=\"mailto:" + hotel.getEmail() + "\">" + hotel.getEmail() + "</a> hoặc số điện thoại " +
-                "<a href=\"tel:" + hotel.getPhoneNumber() + "\">" + hotel.getPhoneNumber() + "</a>. " +
-                "Đội ngũ chúng tôi luôn sẵn sàng hỗ trợ bạn.</p>" +
-                "<p>Chúng tôi rất mong chờ đón tiếp bạn tại khách sạn chúng tôi. Xin cảm ơn đã tin tưởng và đặt phòng với chúng tôi!</p>" +
-                "<p> Trân trọng,<br>" + hotel.getName() + "<br>" +
-                hotel.getAddress() + "<br>" + hotel.getPhoneNumber() + "</p>";
+        String subject = "";
+        String mailContent = "";
+        if (booking.getBookingStatus() == BookingStatus.ACCEPTED) {
+            StringJoiner joiner = new StringJoiner(", ");
+            booking.getRooms().forEach(room -> joiner.add(room.getRoomNumber()));
+            subject = "Xác nhận đặt phòng";
+            mailContent = "<p> Chào " + booking.getFullName() + ", </p>" +
+                    "<p> Chúc mừng! Yêu cầu đặt phòng của bạn đã được xác nhận thành công. Dưới đây là thông tin chi tiết về đặt phòng của bạn: </p>" +
+                    "<ul>" +
+                    "<li><strong>Tên khách hàng: </strong>" + booking.getFullName() + "</li>" +
+                    "<li><strong>Email: </strong> " + booking.getEmail() + "</li>" +
+                    "<li><strong>Số điện thoại liên lạc: </strong>" + booking.getPhoneNumber() + "</li>" +
+                    "<li><strong>Ngày nhận phòng: </strong>" + booking.getCheckInDate() + "</li>" +
+                    "<li><strong>Ngày trả phòng: </strong>" + booking.getCheckOutDate() + "</li>" +
+                    "<li><strong>Danh sách phòng: </strong> " + joiner + "</li>" +
+                    "<li><strong>Số lượng khách: </strong>" + booking.getAdults() + " người lớn và " + booking.getChildren() + " trẻ em" + "</li>" +
+                    "<li><strong>Tổng cộng tiền phòng: </strong>" + booking.getTotalPrice() + "VND </li>" +
+                    "</ul>" +
+                    "<p>Nếu bạn có bất kỳ câu hỏi hoặc yêu cầu đặc biệt nào, " +
+                    "xin vui lòng liên hệ với chúng tôi qua địa chỉ email " +
+                    "<a href=\"mailto:" + hotel.getEmail() + "\">" + hotel.getEmail() + "</a> hoặc số điện thoại " +
+                    "<a href=\"tel:" + hotel.getPhoneNumber() + "\">" + hotel.getPhoneNumber() + "</a>. " +
+                    "Đội ngũ chúng tôi luôn sẵn sàng hỗ trợ bạn.</p>" +
+                    "<p>Chúng tôi rất mong chờ đón tiếp bạn tại khách sạn chúng tôi. Xin cảm ơn đã tin tưởng và đặt phòng với chúng tôi!</p>" +
+                    "<p> Trân trọng,<br>" + hotel.getName() + "<br>" +
+                    hotel.getAddress() + "<br>" + hotel.getPhoneNumber() + "</p>";
+        } else if (booking.getBookingStatus() == BookingStatus.CANCELLED){
+            StringJoiner joiner = new StringJoiner(", ");
+            booking.getRooms().forEach(room -> joiner.add(room.getRoomNumber()));
+            subject = "Từ chối đặt phòng";
+            mailContent = "<p> Chào " + booking.getFullName() + ", </p>" +
+                    "<p> Chúng tôi rất tiếc phải thông báo với bạn rằng: Yêu cầu đặt phòng của bạn với thông tin dưới đây đã không thành công</p>" +
+                    "<ul>" +
+                    "<li><strong>Tên khách hàng: </strong>" + booking.getFullName() + "</li>" +
+                    "<li><strong>Email: </strong> " + booking.getEmail() + "</li>" +
+                    "<li><strong>Số điện thoại liên lạc: </strong>" + booking.getPhoneNumber() + "</li>" +
+                    "<li><strong>Ngày nhận phòng: </strong>" + booking.getCheckInDate() + "</li>" +
+                    "<li><strong>Ngày trả phòng: </strong>" + booking.getCheckOutDate() + "</li>" +
+                    "<li><strong>Danh sách phòng: </strong> " + joiner + "</li>" +
+                    "<li><strong>Số lượng khách: </strong>" + booking.getAdults() + " người lớn và " + booking.getChildren() + " trẻ em" + "</li>" +
+                    "<li><strong>Tổng cộng tiền phòng: </strong>" + booking.getTotalPrice() + "VND </li>" +
+                    "</ul>" +
+                    "<p>Nếu bạn có bất kỳ câu hỏi hoặc yêu cầu đặc biệt nào, " +
+                    "xin vui lòng liên hệ với chúng tôi qua địa chỉ email " +
+                    "<a href=\"mailto:" + hotel.getEmail() + "\">" + hotel.getEmail() + "</a> hoặc số điện thoại " +
+                    "<a href=\"tel:" + hotel.getPhoneNumber() + "\">" + hotel.getPhoneNumber() + "</a>. " +
+                    "Đội ngũ chúng tôi luôn sẵn sàng hỗ trợ bạn.</p>" +
+                    "<p>Chúng tôi rất xin lỗi vì sự bất tiện này!Chúng tôi mong chờ được đón tiếp bạn tại khách sạn chúng tôi trong một ngày không xa.</p>" +
+                    "<p> Trân trọng,<br>" + hotel.getName() + "<br>" +
+                    hotel.getAddress() + "<br>" + hotel.getPhoneNumber() + "</p>";
+        }
         MimeMessage message = mailSender.createMimeMessage();
         var messageHelper = new MimeMessageHelper(message);
         messageHelper.setFrom(fromEmail, senderName);

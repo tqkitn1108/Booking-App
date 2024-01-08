@@ -23,15 +23,15 @@ import 'tippy.js/dist/tippy.css'; // optional
 import { destinations } from '../../data/destinationData';
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ showTitle }) => {
     const [defaultText, setDefaultText] = useState(true);
     const [searchSuggestions, setsearchSuggestions] = useState([]);
     const [showResult, setShowResult] = useState(true);
-    useEffect(() => {
-        setTimeout(() => {
-            setsearchSuggestions([1, 2, 3]);
-        }, 0);
-    }, []);
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         setsearchSuggestions([1, 2, 3]);
+    //     }, 0);
+    // }, []);
     const [destInput, setDestInput] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [dateSelected, setDateSelected] = useState(false);
@@ -40,7 +40,7 @@ const Header = () => {
     const navigate = useNavigate();
     const handleSearch = (event) => {
         event.preventDefault();
-    
+        setDestInput(destInput.trim());
         if (destInput.trim() === '') {
             setErrorMessage('Vui lòng nhập điểm đến để bắt đầu tìm kiếm.');
         } else {
@@ -68,6 +68,7 @@ const Header = () => {
     
     // Hau them ham
     
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (buttonClicked && !event.target.closest('.header-btn')) {
@@ -144,7 +145,7 @@ const Header = () => {
 
     const [openOptions, setOpenOptions] = useState(false);
     const [options, setOptions] = useState({
-        adult: 1,
+        adult: 2,
         children: 0,
         room: 1,
     });
@@ -171,11 +172,6 @@ const Header = () => {
                 [name]: operation === "i" ? options[name] + 1 : options[name] - 1
             };
         });
-        // setOptions({
-        //         ...options,
-        //         [name]: operation === "i" ? options[name] + 1 : options[name] - 1
-        //     }
-        // );
     };
     return (
         <div className="header">
@@ -206,10 +202,13 @@ const Header = () => {
                         <span>Taxi sân bay</span>
                     </div>
                 </div>
-                <h1 className="header-title">Tìm chỗ nghỉ tiếp theo</h1>
-                <p className="header-describe">
-                    Tìm ưu đãi khách sạn, chỗ nghỉ dạng nhà và nhiều hơn nữa...
-                </p>
+                {showTitle &&
+                    <div className="title-banner">
+                        <h1 className="header-title">Tìm chỗ nghỉ tiếp theo</h1>
+                        <p className="header-describe">
+                            Tìm ưu đãi khách sạn, chỗ nghỉ dạng nhà và nhiều hơn nữa...
+                        </p>
+                    </div>}
                 <div>
                     <form className="header-search" action="" onSubmit={handleSearch}>
                         <HeadlessTippy

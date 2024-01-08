@@ -76,7 +76,8 @@ const SearchItem = ({ hotel }) => {
           <button>{hotel.rating}</button>
         </div>
         <div className="siDetailTexts">
-          <span className="siPrice">Liên hệ</span>
+          <span className="siPrice">Giá 1 đêm</span>
+          <span className="siPrice">{(hotel.minPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} VND</span>
           <span className="siTaxOp">Includes taxes and fees</span>
           <button className="siCheckButton">See availability</button>
         </div>

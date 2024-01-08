@@ -19,7 +19,8 @@
 .header-container {
     width: 100%;
     max-width: 1100px;
-    margin: 20px 0px 100px 0px;
+    /* margin: 20px 0px 100px 0px; */
+    margin-top: 20px;
 }
 
 
@@ -45,6 +46,10 @@
     border: 1px solid white;
     border-radius: 20px;
     background-color: #0c50b0;
+}
+
+.header .title-banner {
+    margin-bottom: 100px;
 }
 
 .header-title {

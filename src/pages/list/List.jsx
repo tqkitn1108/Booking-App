@@ -1,11 +1,9 @@
-import { FormCheck } from "react-bootstrap";
 import "./list.css"
 import './filter.css'
 import SearchItem from "./SearchItem"
 import { useEffect, useState } from 'react';
 import Pagination from './Pagination';
 import "./searchItem.css";
-import Filter from './Filter.jsx'
 import { useLocation, useNavigate } from "react-router-dom";
 import { filters } from '../../data/filterData';
 import api from '../../api/AxiosConfig.js';
@@ -57,22 +55,30 @@ const List = () => {
         const query = searchParams.toString();
         navigate({ search: `?${query}` });
     }
-
+    const startDateString = searchParams.get('start_date');
+    const endDateString = searchParams.get('end_date');
+    
+    // Chuyển đổi chuỗi ngày thành đối tượng Date hoặc Moment (nếu sử dụng thư viện moment.js)
+    const startDate = new Date(startDateString);
+    const endDate = new Date(endDateString);
+    
+    // Tính số ngày bằng cách lấy hiệu của ngày kết thúc và ngày bắt đầu
+    const numberOfDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24))
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
     }
     // price range
-    const [rangeValue, setRangeValue] = useState(2000000); // Giá trị mặc định của thanh trượt
+    // const [rangeValue, setRangeValue] = useState(2000000); // Giá trị mặc định của thanh trượt
 
-    const handleRangeChange = (event) => {
-        setRangeValue(event.target.value);
-    };
+    // const handleRangeChange = (event) => {
+    //     setRangeValue(event.target.value);
+    // };
     const isItemsEmpty = hotels.length === 0;
     return (
         <div className="list_hotels">
             <Navbar />
-            <Header />
+            <Header showTitle={false} />
             {loading && <LoadingSpinner />}
 
             <div className="listFilter">
@@ -83,7 +89,7 @@ const List = () => {
                                 <h2 class="lsT">Chọn lọc theo:</h2>
                             </div>
                         </div>
-                        <div className="listWrapper">
+                        {/* <div className="listWrapper">
                             <div className="listSearch">
                                 <h3 className="lsTitle">Ngân sách tối đa của bạn (mỗi đêm)</h3>
                                 <div>
@@ -91,7 +97,7 @@ const List = () => {
                                     <input type="range" id="filterRange" name="filterRange" min="0" max="4000000" value={rangeValue} onChange={handleRangeChange} />
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         {filters.map(filter => (
                             <div className="listWrapper">
                                 <div className="listSearch">

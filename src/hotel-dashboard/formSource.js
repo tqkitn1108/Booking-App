@@ -72,19 +72,19 @@ export const productInputs = [
 export const hotelInputs = [
   {
     id: "name",
-    label: "Name",
+    label: "Tên khách sạn",
     type: "text",
     placeholder: "My Hotel",
   },
   {
     id: "phoneNumber",
-    label: "Phone Number",
+    label: "Số điện thoại",
     type: "text",
     placeholder: "+84",
   },
   {
     id: "address",
-    label: "Address",
+    label: "Địa chỉ",
     type: "text",
     placeholder: "elton st, 216",
   }
@@ -93,25 +93,19 @@ export const hotelInputs = [
 export const roomInputs = [
   {
     id: "title",
-    label: "Title",
+    label: "Tên loại phòng",
     type: "text",
     placeholder: "2 bed room",
   },
   {
-    id: "desc",
-    label: "Description",
-    type: "text",
-    placeholder: "King size bed, 1 bathroom",
-  },
-  {
-    id: "price",
-    label: "Price",
+    id: "pricePerNight",
+    label: "Giá phòng một đêm (VND)",
     type: "number",
     placeholder: "100",
   },
   {
-    id: "maxPeople",
-    label: "Max People",
+    id: "capacity",
+    label: "Số khách tối đa",
     type: "number",
     placeholder: "2",
   },

@@ -7,6 +7,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { registerUser } from '../../../api/ApiAuthService';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../../../components/loading-spinner/LoadingSpinner';
+import Navbar from '../../../components/navbar/Navbar';
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string()
@@ -76,7 +77,8 @@ const BusinessSignup = () => {
 
   return (
     <div>
-      <div className="bg-light " style={{ height: '30px' }}></div>
+      <div className='fixed-navbar'><Navbar /></div>
+      <div className="bg-light " style={{ height: '100px' }}></div>
       <Formik
         initialValues={{
           fullName: '',
@@ -111,8 +113,8 @@ const BusinessSignup = () => {
                             </div>
                           </>}
                         {!successMessage && <form onSubmit={formik.handleSubmit}>
-                          <div className="form-outline mb-4" style={customStyle.formGroup}>
-                            <label className="form-label" htmlFor="fullName" style={{ ...customStyle.label, fontWeight: 'bold' }}>
+                          <div className="form-outline mb-3" style={{ ...customStyle.label, fontWeight: 'bold' }}>
+                            <label className="form-label" htmlFor="fullName" style={customStyle.label}>
                               Full Name <span className="required text-danger">*</span>
                             </label>
                             <input
@@ -256,6 +258,7 @@ const BusinessSignup = () => {
           </section >
         </div >
       </Formik >
+      <div className="bg-light " style={{ height: '100px' }}></div>
     </div>
   );
 }

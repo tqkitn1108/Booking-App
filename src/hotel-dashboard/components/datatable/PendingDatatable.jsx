@@ -78,7 +78,7 @@ const PendingDatatable = ({ columns }) => {
       {loading && <LoadingSpinner />}
       <div className="datatableTitle">
         Danh sách đặt phòng đang chờ xét duyệt
-        <Link to={`${path}/form`} className="link">
+        <Link to={`/business/hotels/${hotelId}/bookings`} className="link">
           Xem tất cả đặt phòng
         </Link>
       </div>

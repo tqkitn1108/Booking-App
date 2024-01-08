@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import ModalBootstrap from "../../../components/modal/ModalBootstrap";
 import { useEffect, useState } from "react";
-import { hotelInputs } from "../../formSource";
+import { hotelInputs } from "../../../data/formSource";
 import api from "../../../api/AxiosConfig";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

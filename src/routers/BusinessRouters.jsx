@@ -1,13 +1,12 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from '../hotel-dashboard/pages/home/Home';
 import Single from '../hotel-dashboard/pages/single/Single';
-import BookingList from "../hotel-dashboard/components/table/Table";
 import New from '../hotel-dashboard/pages/new/New';
 import List from '../hotel-dashboard/pages/list/List';
 import HotelInput from '../hotel-dashboard/pages/newHotel/HotelInput';
 import BusinessSignup from '../hotel-dashboard/pages/signup/BusinessSignup';
-import { bookingColumns, hotelColumns, roomColumns, userColumns } from "../hotel-dashboard/datatablesource";
-import { userInputs } from "../hotel-dashboard/formSource";
+import { bookingColumns, hotelColumns, roomColumns, userColumns } from "../data/datatablesource";
+import { userInputs } from "../data/formSource";
 import { DarkModeContext } from "../hotel-dashboard/context/darkModeContext";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";

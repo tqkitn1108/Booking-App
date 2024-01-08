@@ -1,11 +1,11 @@
-import Home from "../pages/home/Home";
-import List from "../pages/list/List";
-import Login from "../pages/login-register/Login";
-import Signup from "../pages/login-register/Signup";
-import Hotel from "../pages/hotel/Hotel";
-import ReservationPage from "../pages/reservation/ReservationPage";
+import Home from "../customer/pages/home/Home";
+import List from "../customer/pages/list/List";
+import Login from "../customer/pages/login-register/Login";
+import Signup from "../customer/pages/login-register/Signup";
+import Hotel from "../customer/pages/hotel/Hotel";
+import ReservationPage from "../customer/pages/reservation/ReservationPage";
+import Bookings from "../customer/bookings/Bookings";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Bookings from "../components/bookings/Bookings";
 import { AuthContext, useAuth } from "../context/AuthContext";
 import AuthProvider from "../context/AuthContext";
 import { useContext } from "react";

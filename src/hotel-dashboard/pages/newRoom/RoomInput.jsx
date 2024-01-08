@@ -3,7 +3,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import ModalBootstrap from "../../../components/modal/ModalBootstrap";
 import { useState } from "react";
-import { roomInputs } from "../../formSource";
+import { roomInputs } from "../../../data/formSource";
 import api from "../../../api/AxiosConfig";
 import { useNavigate, useParams } from "react-router-dom";
 

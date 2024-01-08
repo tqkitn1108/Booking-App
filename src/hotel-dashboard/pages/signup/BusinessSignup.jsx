@@ -7,7 +7,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { registerUser } from '../../../api/ApiAuthService';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../../../components/loading-spinner/LoadingSpinner';
-import Navbar from '../../../components/navbar/Navbar';
+import Navbar from '../../../customer/navbar/Navbar';
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string()

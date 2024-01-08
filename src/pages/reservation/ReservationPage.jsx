@@ -5,6 +5,8 @@ import { faWifi, faShuttleVan, faParking, faCheckCircle, faLock, faMoneyBill } f
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { Formik, Field, Form, ErrorMessage, useFormikContext } from 'formik';
+import { format } from 'date-fns';
+import { vi } from 'date-fns/locale';
 import * as Yup from 'yup';
 import cvcCodeImage from './cvcCodeImage.png';
 import { AuthContext } from '../../context/AuthContext';
@@ -199,8 +201,8 @@ const ReservationPage = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
 
-    const checkInDate = queryParams.get('checkIn');
-    const checkOutDate = queryParams.get('checkOut');
+    const checkInDate = new Date(queryParams.get('checkIn'));
+    const checkOutDate = new Date(queryParams.get('checkOut'));
     const state = location.state;
     const { hotelId } = useParams();
     const [hotel, setHotel] = useState({});
@@ -227,7 +229,7 @@ const ReservationPage = () => {
                         <div className="hotel-information">
                             <div className="hotel-info-border">
                                 <h5>{hotel.name}</h5>
-                                <p className=''>Address: {hotel.address}</p>
+                                <p className=''>Địa chỉ: {hotel.address}</p>
                                 <div className='d-flex'  > Rating:
                                     <div className="siRating">
                                         <button>{hotel.rating}</button>
@@ -252,9 +254,9 @@ const ReservationPage = () => {
 
                         <div className="hotel-detail-border" >
                             <h5>Your booking details</h5>
-                            <p style={{ fontWeight: 'bold' }}> Check-in: <span className='check-in'>{checkInDate} </span> </p>
-                            <p style={{ fontWeight: 'bold' }}> Check-out: <span className='check-out'> {checkOutDate} </span></p>
-                            <p style={{ fontWeight: 'bold' }}> Total length of stay: <span className='totalStays'> {state?.stayLength} nights </span> </p>
+                            <p style={{ fontWeight: 'bold' }}> Check-in: <span className='check-in'>{format(checkInDate, "EEE, dd/MM/yyyy", { locale: vi })}</span> </p>
+                            <p style={{ fontWeight: 'bold' }}> Check-out: <span className='check-out'> {format(checkOutDate, "EEE, dd/MM/yyyy", { locale: vi })} </span></p>
+                            <p style={{ fontWeight: 'bold' }}> Total length of stay: <span className='totalStays'> {state?.stayLength} đêm </span> </p>
                             <span className="text-success"> Change your selection </span>
                         </div>
 
@@ -270,11 +272,11 @@ const ReservationPage = () => {
                             <div className="priceInfor bg-light p-3">
                                 <h5>Price Information</h5>
                                 <p>
-                                    <FontAwesomeIcon icon={faMoneyBill} className="mr-3" />
-                                    Include VND <span className='vat'>{Math.round(state?.totalPrice / 11)}</span> in taxes <br /> and charges
+                                    <FontAwesomeIcon icon={faMoneyBill} className="mr-5" />
+                                    Include VND <span className='vat'>{Math.round(state?.totalPrice / 11).toLocaleString('vi-VN')}</span> in taxes <br /> and charges
                                 </p>
                                 <p>
-                                    10% VAT <span className='tax'>VND {Math.round(state?.totalPrice / 11)}</span>
+                                    10% VAT <span className='tax'>VND {Math.round(state?.totalPrice / 11).toLocaleString('vi-VN')}</span>
                                 </p>
                             </div>
                         </div>

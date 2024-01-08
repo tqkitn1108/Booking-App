@@ -197,6 +197,10 @@ const SecurePage = ({ hotelId, location }) => {
 
 const ReservationPage = () => {
     const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+
+    const checkInDate = queryParams.get('checkIn');
+    const checkOutDate = queryParams.get('checkOut');
     const state = location.state;
     const { hotelId } = useParams();
     const [hotel, setHotel] = useState({});
@@ -248,8 +252,8 @@ const ReservationPage = () => {
 
                         <div className="hotel-detail-border" >
                             <h5>Your booking details</h5>
-                            <p style={{ fontWeight: 'bold' }}> Check-in: <span className='check-in'> Mon 8 Jan 2024 </span> </p>
-                            <p style={{ fontWeight: 'bold' }}> Check-out: <span className='check-out'> Fri 12 Jan 2024 </span></p>
+                            <p style={{ fontWeight: 'bold' }}> Check-in: <span className='check-in'>{checkInDate} </span> </p>
+                            <p style={{ fontWeight: 'bold' }}> Check-out: <span className='check-out'> {checkOutDate} </span></p>
                             <p style={{ fontWeight: 'bold' }}> Total length of stay: <span className='totalStays'> {state?.stayLength} nights </span> </p>
                             <span className="text-success"> Change your selection </span>
                         </div>

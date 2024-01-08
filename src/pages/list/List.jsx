@@ -54,7 +54,15 @@ const List = () => {
         const query = searchParams.toString();
         navigate({ search: `?${query}` });
     }
-
+    const startDateString = searchParams.get('start_date');
+    const endDateString = searchParams.get('end_date');
+    
+    // Chuyển đổi chuỗi ngày thành đối tượng Date hoặc Moment (nếu sử dụng thư viện moment.js)
+    const startDate = new Date(startDateString);
+    const endDate = new Date(endDateString);
+    
+    // Tính số ngày bằng cách lấy hiệu của ngày kết thúc và ngày bắt đầu
+    const numberOfDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24))
 
     const handlePageChange = (page) => {
         setCurrentPage(page);

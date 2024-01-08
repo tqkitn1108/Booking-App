@@ -58,9 +58,8 @@ const SearchItem = ({ hotel, location }) => {
         </div>
         <div className="siDistance">
           <a id="diachi" href={mapSearchString(hotel.address)} target="_blank" rel="noopener noreferrer">{hotel.address}</a>
-          <a href={mapSearchString(hotel.address)} target="_blank" rel="noopener noreferrer">Xem tren ban do</a>
+          <a href={mapSearchString(hotel.address)} target="_blank" rel="noopener noreferrer">Xem trên bản đồ</a>
         </div>
-        {/* <span className="siTaxiOp">Free airport taxi</span> */}
         <span className="siSubtitle">
           {hotel.description}
         </span>
@@ -82,7 +81,8 @@ const SearchItem = ({ hotel, location }) => {
           <button>{hotel.rating}</button>
         </div>
         <div className="siDetailTexts">
-          <span className="siPrice">Liên hệ</span>
+          <span className="siPrice">Giá 1 đêm</span>
+          <span className="siPrice">{(hotel.minPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} VND</span>
           <span className="siTaxOp">Includes taxes and fees</span>
           <button className="siCheckButton" onClick={() => handleClick(hotel.id)}>See availability</button>
         </div>

@@ -84,6 +84,7 @@ const Header = ({ showTitle }) => {
             })
         }
     }, [])
+    
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (buttonClicked && !event.target.closest('.header-btn')) {

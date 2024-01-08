@@ -98,14 +98,14 @@ const Signup = () => {
                                                 {errorMessage && <p className="alert alert-danger">{errorMessage}</p>}
                                                 {successMessage &&
                                                     <>
-                                                        <p className="alert alert-success">{successMessage}</p>
+                                                        <p className="alert alert-success">Vui lòng kiểm tra email đăng ký của bạn để kích hoạt tài khoản</p>
                                                         <div className="d-flex justify-content-center">
                                                             <button
                                                                 onClick={() => navigate("/login")}
                                                                 className="btn btn-primary btn-block btn-lg gradient-custom-4 w-100 text-white"
                                                                 style={customStyle.button}
                                                             >
-                                                                Click here to redirect to the login
+                                                                Chuyển hướng tới đăng nhập
                                                             </button>
                                                         </div>
                                                     </>}

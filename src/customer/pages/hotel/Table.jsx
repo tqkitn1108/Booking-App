@@ -12,17 +12,20 @@ const Table = ({ roomTypes }) => {
   const stayLength = differenceInDays(new Date(searchParams.get('checkOut')), new Date(searchParams.get('checkIn'))) + 1;
   const [selectedRooms, setSelectedRooms] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
+  const [showMessage, setShowMessage] = useState(false);
   const navigate = useNavigate();
 
   const handleReservation = () => {
-    navigate(`${location.pathname}/reservation${location.search}`,
-      {
-        state: {
-          roomList: Object.values(selectedRooms).reduce((result, arr) => result.concat(arr), []).map(room => room.id),
-          stayLength,
-          totalPrice
-        }
-      });
+    if (totalPrice === 0) setShowMessage(true);
+    else
+      navigate(`${location.pathname}/reservation${location.search}`,
+        {
+          state: {
+            roomList: Object.values(selectedRooms).reduce((result, arr) => result.concat(arr), []).map(room => room.id),
+            stayLength,
+            totalPrice
+          }
+        });
   };
 
   useEffect(() => {
@@ -30,6 +33,7 @@ const Table = ({ roomTypes }) => {
       if (selectedRooms[roomType.id] === undefined) selectedRooms[roomType.id] = [];
       return sum + selectedRooms[roomType.id].length * roomType.pricePerNight * stayLength;
     }, 0));
+    setShowMessage(false);
   }, [selectedRooms]);
 
   return (
@@ -64,6 +68,7 @@ const Table = ({ roomTypes }) => {
               {index === 0 && (
                 <div className='price'>
                   {totalPrice > 0 && <span>Tổng giá {stayLength} đêm: VND {totalPrice}</span>}
+                  {(showMessage && !totalPrice) && <span style={{color: "red"}}>Vui lòng chọn ít nhất một phòng!</span>}
                   <button onClick={handleReservation}>Đặt ngay</button>
                 </div>
               )}

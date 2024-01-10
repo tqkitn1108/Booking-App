@@ -41,8 +41,8 @@ const Header = ({ showTitle }) => {
     const navigate = useNavigate();
     const handleSearch = (event) => {
         event.preventDefault();
-        setDestInput(destInput ? destInput.trim() : '');
-        if (!destInput || destInput.trim() === '') {
+        setDestInput(destInput !== null ? destInput.trim() : '');
+        if (destInput === null || destInput.trim() === '') {
             setErrorMessage('Vui lòng nhập điểm đến để bắt đầu tìm kiếm.');
         } else {
             setErrorMessage('');
@@ -68,7 +68,7 @@ const Header = ({ showTitle }) => {
     };
     useEffect(() => {
         if (location.pathname !== '/') {
-            setDestInput(searchParams.get('location'));
+            setDestInput(searchParams.get('location') || '');
             if (searchParams.get('checkIn')) {
                 setDefaultText(false);
                 setDate([{
@@ -84,7 +84,7 @@ const Header = ({ showTitle }) => {
             })
         }
     }, [])
-    
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (buttonClicked && !event.target.closest('.header-btn')) {

@@ -50,8 +50,6 @@ const Pagination = ({ currentPage, totalPages, onPageChange, searchParams }) => 
   };
   return (
     <div >
-
-      {/* Pagination Component */}
       <nav aria-label="Page navigation">
         <ul className="pagination">
           <li className="page-item">

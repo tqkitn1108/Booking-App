@@ -30,7 +30,6 @@ function AuthProvider({ children }) {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       setUser(null);
-      navigate("/");
       window.location.reload();
     }
   }

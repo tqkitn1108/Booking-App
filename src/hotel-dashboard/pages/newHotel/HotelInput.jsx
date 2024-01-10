@@ -15,6 +15,7 @@ const HotelInput = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const [images, setImages] = useState([]);
   const [facilities, setFacilities] = useState([])
@@ -76,6 +77,7 @@ const HotelInput = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const list = await Promise.all(
         images.map(async (image) => {
@@ -106,6 +108,7 @@ const HotelInput = () => {
     } catch (err) {
       setModalMessage(err.response);
     }
+    setLoading(false);
     setShowModal(true);
   };
 

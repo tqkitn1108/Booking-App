@@ -1,4 +1,6 @@
 import "./searchItem.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
 
 export function RatingComponent({ rating }) {
@@ -65,12 +67,16 @@ const SearchItem = ({ hotel, location }) => {
         </span>
         <span className="siFeatures">
         </span>
-        <span className="siCancelOp">
-          {hotel.facilities?.[0]?.label}
-        </span>
-        <span className="siCancelOp">
-          {hotel.facilities?.[1]?.label}
-        </span>
+        {hotel.facilities?.[0]?.label &&
+          <span className="siCancelOp">
+            <FontAwesomeIcon icon={faCheck} style={{ marginRight: '8px', fontSize: '16px' }} />
+            {hotel.facilities?.[0]?.label}
+          </span>}
+        {hotel.facilities?.[1]?.label &&
+          <span className="siCancelOp">
+            <FontAwesomeIcon icon={faCheck} style={{ marginRight: '8px', fontSize: '16px' }} />
+            {hotel.facilities?.[1]?.label}
+          </span>}
         <span className="siCancelOpSubtitle">
           You can cancel later, so lock in this great price today!
         </span>

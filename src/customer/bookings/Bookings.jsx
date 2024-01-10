@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import "./bookings.css";
 import api from "../../api/AxiosConfig";
-import { AuthContext } from '../../context/AuthContext';
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
 import ModalBootstrap from '../../components/modal/ModalBootstrap';
@@ -13,7 +12,7 @@ function Bookings() {
     const [modalMessage, setModalMessage] = useState('');
     const [rating, setRating] = useState(0);
     const [reviewText, setReviewText] = useState("");
-    const { user } = useContext(AuthContext);
+    const user = JSON.parse(localStorage.getItem("user"));
     const [bookingInfo, setBookingInfo] = useState({});
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(true);

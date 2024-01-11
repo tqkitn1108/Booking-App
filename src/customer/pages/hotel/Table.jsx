@@ -4,15 +4,18 @@ import SplitButton from './SplitButton';
 import { differenceInDays } from 'date-fns';
 import SingleBedIcon from '@mui/icons-material/SingleBed';
 import PersonIcon from '@mui/icons-material/Person';
-import { useLocation, useNavigate } from 'react-router-dom';
+import api from "../../../api/AxiosConfig";
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-const Table = ({ roomTypes }) => {
+const Table = () => {
+  const { hotelId } = useParams();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const stayLength = differenceInDays(new Date(searchParams.get('checkOut')), new Date(searchParams.get('checkIn'))) + 1;
   const [selectedRooms, setSelectedRooms] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
   const [showMessage, setShowMessage] = useState(false);
+  const [availRoomTypes, setAvailRoomTypes] = useState([]);
   const navigate = useNavigate();
 
   const handleReservation = () => {
@@ -29,7 +32,23 @@ const Table = ({ roomTypes }) => {
   };
 
   useEffect(() => {
-    setTotalPrice(roomTypes?.reduce((sum, roomType) => {
+    async function loadRooms() {
+      try {
+        setTotalPrice(0);
+        setShowMessage(false);
+        if (searchParams.get('checkIn')) {
+          const response = await api.get(`/hotels/${hotelId}/roomTypes/available?checkIn=${searchParams.get('checkIn')}&checkOut=${searchParams.get('checkOut')}`);
+          setAvailRoomTypes(response.data);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    loadRooms();
+  }, [location.search]);
+
+  useEffect(() => {
+    setTotalPrice(availRoomTypes?.reduce((sum, roomType) => {
       if (selectedRooms[roomType.id] === undefined) selectedRooms[roomType.id] = [];
       return sum + selectedRooms[roomType.id].length * roomType.pricePerNight * stayLength;
     }, 0));
@@ -50,7 +69,7 @@ const Table = ({ roomTypes }) => {
           </tr>
         </thead>
         <tbody>
-          {roomTypes?.map((roomType, index) =>
+          {availRoomTypes?.map((roomType, index) =>
           (<tr key={roomType.id} className='room-row'>
             <div className='Studio'>
               <h1>{roomType.title}</h1>
@@ -59,7 +78,7 @@ const Table = ({ roomTypes }) => {
             <td>
               {new Array(roomType.capacity).fill(1).map((_, i) => <PersonIcon key={i} />)}
             </td>
-            <td>VND {roomType.pricePerNight * stayLength}</td>
+            <td>VND {(roomType.pricePerNight * stayLength).toLocaleString('vi-VN')}</td>
             <td width={'200px'}>Hoàn tiền 100% trong vòng 24h sau đặt cọc</td>
             <td width={'100px'}>
               <SplitButton id={roomType.id} setSelectedRooms={setSelectedRooms} />
@@ -67,8 +86,8 @@ const Table = ({ roomTypes }) => {
             <td style={{ borderBottomColor: 'white', borderRightColor: 'white', textAlign: 'center', width: '256px' }} >
               {index === 0 && (
                 <div className='price'>
-                  {totalPrice > 0 && <span>Tổng giá {stayLength} đêm: VND {totalPrice}</span>}
-                  {(showMessage && !totalPrice) && <span style={{color: "red"}}>Vui lòng chọn ít nhất một phòng!</span>}
+                  {totalPrice > 0 && <span>Tổng giá {stayLength} đêm: VND {totalPrice.toLocaleString('vi-VN')}</span>}
+                  {(showMessage && !totalPrice) && <span style={{ color: "red" }}>Vui lòng chọn ít nhất một phòng!</span>}
                   <button onClick={handleReservation}>Đặt ngay</button>
                 </div>
               )}

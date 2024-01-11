@@ -59,7 +59,7 @@ const SearchItem = ({ hotel, location }) => {
           </div>
         </div>
         <div className="siDistance">
-          <a id="diachi" href={mapSearchString(hotel.address)} target="_blank" rel="noopener noreferrer">{hotel.address}</a>
+          <a id="address" href={mapSearchString(hotel.address)} target="_blank" rel="noopener noreferrer">{hotel.address}</a>
           <a href={mapSearchString(hotel.address)} target="_blank" rel="noopener noreferrer">Xem trên bản đồ</a>
         </div>
         <span className="siSubtitle">

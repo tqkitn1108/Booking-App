@@ -12,6 +12,7 @@ import cvcCodeImage from './cvcCodeImage.png';
 import { AuthContext } from '../../../context/AuthContext';
 import api from '../../../api/AxiosConfig';
 import Navbar from '../../navbar/Navbar';
+import LoadingSpinner from '../../../components/loading-spinner/LoadingSpinner';
 
 const GoodToKnow = () => {
     return (
@@ -28,6 +29,7 @@ const GoodToKnow = () => {
 
 const SecurePage = ({ hotelId, location }) => {
     const { user } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
 
     const formik = useFormikContext();
     const navigate = useNavigate();
@@ -46,15 +48,15 @@ const SecurePage = ({ hotelId, location }) => {
             checkInDate: searchParams.get('checkIn'),
             checkOutDate: searchParams.get('checkOut')
         };
-
+        setLoading(true);
         try {
             await api.post(`/bookings/hotels/${hotelId}`, requestData);
+            setLoading(false);
             alert("Thông tin đặt phòng đã được gửi đi. Mọi thông tin về thông tin đặt phòng sẽ được gửi về email ngay khi khách sạn xác nhận. Vui lòng thường xuyên kiểm tra email của bạn!");
             navigate("/");
         } catch (err) {
             console.log(err);
         }
-
     };
     const initialValues = {
         firstname: '',
@@ -92,6 +94,7 @@ const SecurePage = ({ hotelId, location }) => {
 
     return (
         <div>
+            {loading && <LoadingSpinner />}
             <div className='dad'>
                 <div className='Login template'>
                     <div className='form_container p-9 rounded bg-white'>

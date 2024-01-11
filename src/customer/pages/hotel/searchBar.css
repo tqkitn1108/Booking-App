@@ -1,0 +1,16 @@
+.hotel-search-bar .header-search {
+  position: relative;
+  max-width: 800px;
+}
+
+.hotel-search-bar .date {
+  position: absolute;
+  top: 58px;
+  left: 5px;
+  z-index: 6;
+}
+
+.hotel-search-bar .options {
+  top: 58px;
+  right: 110px;
+}

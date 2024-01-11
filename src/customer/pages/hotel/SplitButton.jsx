@@ -24,6 +24,7 @@ export default function SplitButton({ id, setSelectedRooms }) {
     async function loadOptions() {
       try {
         const response = await api.get(`/hotels/roomTypes/${id}/availableRooms?checkIn=${searchParams.get('checkIn')}&checkOut=${searchParams.get('checkOut')}`);
+        setSelectedIndex(0);
         setAvailRooms(response.data);
         setOptions(Array.from({ length: response.data.length + 1 }, (_, i) => i));
       } catch (err) {
@@ -31,7 +32,7 @@ export default function SplitButton({ id, setSelectedRooms }) {
       }
     }
     loadOptions();
-  }, []);
+  }, [location.search]);
 
   const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);

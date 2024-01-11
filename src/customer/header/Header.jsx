@@ -104,17 +104,22 @@ const Header = ({ showTitle }) => {
         setButtonClicked(false);
     };
 
+    const componentRef = useRef(null);
+    const componentRef2 = useRef(null);
     const componentRef3 = useRef(null);
-
     useEffect(() => {
         const handleOutsideClick = (event) => {
+            if (componentRef.current && !componentRef.current.contains(event.target)) {
+                setOpenDate(false);
+            }
+            if (componentRef2.current && !componentRef2.current.contains(event.target)) {
+                setOpenOptions(false);
+            }
             if (componentRef3.current && !componentRef3.current.contains(event.target)) {
                 setErrorMessage(false);
             }
         };
-
         document.addEventListener('mousedown', handleOutsideClick);
-
         return () => {
             document.removeEventListener('mousedown', handleOutsideClick);
         };
@@ -141,22 +146,6 @@ const Header = ({ showTitle }) => {
         setDate([item.selection]);
         setDefaultText(false);
     };
-    const componentRef = useRef(null);
-
-    useEffect(() => {
-        const handleOutsideClick = (event) => {
-            if (componentRef.current && !componentRef.current.contains(event.target)) {
-                setOpenDate(false);
-            }
-        };
-
-        document.addEventListener('mousedown', handleOutsideClick);
-
-        return () => {
-            document.removeEventListener('mousedown', handleOutsideClick);
-        };
-    }, []);
-
 
     const [openOptions, setOpenOptions] = useState(false);
     const [options, setOptions] = useState({
@@ -164,21 +153,7 @@ const Header = ({ showTitle }) => {
         children: 0,
         room: 1,
     });
-    const componentRef2 = useRef(null);
 
-    useEffect(() => {
-        const handleOutsideClick = (event) => {
-            if (componentRef2.current && !componentRef2.current.contains(event.target)) {
-                setOpenOptions(false);
-            }
-        };
-
-        document.addEventListener('mousedown', handleOutsideClick);
-
-        return () => {
-            document.removeEventListener('mousedown', handleOutsideClick);
-        };
-    }, []);
     const handleOption = (event, name, operation) => {
         event.preventDefault();
         setOptions((prev) => {

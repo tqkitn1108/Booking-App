@@ -17,13 +17,13 @@ import { useState } from "react";
 import Table from "./Table";
 import CardSlick from "./CardSlick";
 import { useLocation, useParams } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const Hotel = () => {
   const { hotelId } = useParams();
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [hotel, setHotel] = useState({});
-  const [availRoomTypes, setAvailRoomTypes] = useState([]);
   const [showRooms, setShowRooms] = useState(true);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -31,12 +31,9 @@ const Hotel = () => {
   useEffect(() => {
     async function loadHotelData() {
       try {
-        const hotelResponse = await api.get(`/business/hotels/${hotelId}`);
-        if (searchParams.get('checkIn')) {
-          const roomTypeResponse = await api.get(`/hotels/${hotelId}/roomTypes/available?checkIn=${searchParams.get('checkIn')}&checkOut=${searchParams.get('checkOut')}`);
-          setAvailRoomTypes(roomTypeResponse.data);
-        } else setShowRooms(false);
-        setHotel(hotelResponse.data);
+        if (!searchParams.get('checkIn')) setShowRooms(false);
+        const response = await api.get(`/business/hotels/${hotelId}`);
+        setHotel(response.data);
       } catch (err) {
         console.log(err);
       }
@@ -72,7 +69,6 @@ const Hotel = () => {
     }
     setSlideNumber(newSlideNumber)
   };
-
 
   return (
 
@@ -134,33 +130,39 @@ const Hotel = () => {
                 {hotel.description}
               </p>
             </div>
-            <div className="hotelDetailsPrice">
-              <h1>Điểm nổi bật của chỗ nghỉ</h1>
-              <span>
-                Nằm ở {hotel.dest}, {hotel.type?.label} này có vị trí tuyệt vời
-              </span>
-              <h1>Thông tin về bữa sáng</h1>
-              <div className="hotelAddress1">
-                <FontAwesomeIcon icon={faLocationDot} />
-                <span>Tự chọn, bữa sáng mang đi</span>
+            <div>
+              <div className="hotelDetailsPrice">
+                <h1>Điểm nổi bật của chỗ nghỉ</h1>
+                <span>
+                  Nằm ở {hotel.dest}, {hotel.type?.label} này có vị trí tuyệt vời
+                </span>
+                <h1>Thông tin về bữa sáng</h1>
+                <div className="hotelAddress1">
+                  <FontAwesomeIcon icon={faLocationDot} />
+                  <span>Tự chọn, bữa sáng mang đi</span>
+                </div>
+                <button>Đặt ngay</button>
               </div>
-              <button>Đặt ngay</button>
             </div>
           </div>
         </div>
-        {showRooms ?
-          <div className="hotel-rooms">
-            <h3 className="hotelTitle">Phòng trống</h3>
-            <Table roomTypes={availRoomTypes} />
-          </div> :
-          <h3 className="mt-5">Vui lòng chọn ngày để đặt phòng</h3>
-        }
-        <div className="review-section">
-          <h3 className="hotelTitle">Đánh giá của khách</h3>
-          <div className="slick">
-            <CardSlick reviews={hotel.reviews} />
-          </div>
+        <div className="hotel-search-bar">
+          <SearchBar setShowRooms={setShowRooms} />
+          {showRooms ?
+            <div className="hotel-rooms">
+              <h3 className="hotelTitle mt-5">Phòng trống</h3>
+              <Table />
+            </div> :
+            <h3 className="mt-5 text-center">Vui lòng chọn ngày để đặt phòng</h3>
+          }
         </div>
+        {hotel.reviews?.length > 0 &&
+          <div className="review-section">
+            <h3 className="hotelTitle">Đánh giá của khách</h3>
+            <div className="slick">
+              <CardSlick reviews={hotel.reviews} />
+            </div>
+          </div>}
       </div>
       <Email />
       <Footer />

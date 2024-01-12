@@ -44,10 +44,15 @@
           font-size: 20px;
         }
 
-        .avatar {
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
+        .nav-user-button {
+          margin: 0;
+        }
+
+        .nav-user-button:hover {
+          cursor: pointer;
+          background-color: #0c50b0;
+          border-radius: 4px;
+          color: #fff;
         }
 
         .counter {

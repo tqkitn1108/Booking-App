@@ -29,7 +29,7 @@ const Navbar = () => {
   const avatarBackgroundColor = getRandomColor();
 
   const renderAvatar = (name, backgroundColor) => (
-    <div className="nav-user-img" style={{ backgroundColor }}>
+    <div className="nav-user-img" style={{ backgroundColor, color: "#fff" }}>
       {getInitials(name)}
     </div>
   );

@@ -265,12 +265,12 @@
 
 .search-result {
     position: absolute;
-    width: 430px;
+    width: 360px;
     background-color: white;
     box-shadow: 0 2px 16px 0 rgba(26, 26, 26, 0.24);
     border-radius: 10px;
     top: -6px;
-    right: -262px;
+    right: -192px;
     max-height: 297px;
     overflow: hidden;
 }
@@ -289,6 +289,7 @@
     display: flex;
     gap: 10px;
     border-bottom: 1px solid #5a55552e;
+    cursor: pointer;
 }
 
 .search-result-place:last-child {

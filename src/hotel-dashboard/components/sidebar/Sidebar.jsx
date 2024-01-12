@@ -22,11 +22,9 @@ const Sidebar = ({ hideSideBar }) => {
   const { hotelId } = useParams();
   const [hotelImg, setHotelImg] = useState("");
   const [hotelName, setHotelName] = useState("");
-  const navigate = useNavigate();
   const authContext = useAuth();
 
   const handleLogoutClick = () => {
-    navigate("/");
     authContext.handleLogout();
   };
 

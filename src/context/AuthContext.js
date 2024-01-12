@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/ApiAuthService";
-import api from "../api/AxiosConfig";
 import React, { createContext, useState, useContext, useEffect } from "react"
 
 export const AuthContext = createContext();
@@ -17,7 +16,6 @@ function AuthProvider({ children }) {
       const response = await loginUser(credentials);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.userInfo));
-      // Adding the authorization header automatically
       setUser(user);
       return true;
     } catch (error) {
@@ -30,6 +28,7 @@ function AuthProvider({ children }) {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       setUser(null);
+      navigate("/");
       window.location.reload();
     }
   }

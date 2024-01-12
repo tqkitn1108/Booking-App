@@ -9,7 +9,6 @@ import { format } from 'date-fns';
 import { vi } from 'date-fns/locale';
 import * as Yup from 'yup';
 import cvcCodeImage from './cvcCodeImage.png';
-import { AuthContext } from '../../../context/AuthContext';
 import api from '../../../api/AxiosConfig';
 import Navbar from '../../navbar/Navbar';
 import LoadingSpinner from '../../../components/loading-spinner/LoadingSpinner';
@@ -28,7 +27,7 @@ const GoodToKnow = () => {
 };
 
 const SecurePage = ({ hotelId, location }) => {
-    const { user } = useContext(AuthContext);
+    const user = JSON.parse(localStorage.getItem("user"));
     const [loading, setLoading] = useState(false);
 
     const formik = useFormikContext();

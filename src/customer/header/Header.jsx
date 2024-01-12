@@ -22,19 +22,15 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css'; // optional
 import { destinations } from '../../data/destinationData';
 import { useLocation, useNavigate } from "react-router-dom";
+import Fuse from "fuse.js";
 
 const Header = ({ showTitle }) => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const [defaultText, setDefaultText] = useState(true);
     const [searchSuggestions, setsearchSuggestions] = useState([]);
-    const [showResult, setShowResult] = useState(true);
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         setsearchSuggestions([1, 2, 3]);
-    //     }, 0);
-    // }, []);
     const [destInput, setDestInput] = useState('');
+    const [showResult, setShowResult] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
     const [buttonClicked, setButtonClicked] = useState(false);
     const headerBtnRef = useRef(null);
@@ -59,7 +55,7 @@ const Header = ({ showTitle }) => {
                 setButtonClicked(true); // Đánh dấu rằng người dùng đã nhấn nút
             } else {
                 // Xử lý tìm kiếm khi có đủ điều kiện
-                const location = destInput.replaceAll(' ', '%20');
+                const location = searchSuggestions?.[0] ? searchSuggestions[0].replaceAll(' ', '%20') : destInput.replaceAll(' ', '%20');
                 const checkIn = format(date[0].startDate, 'yyyy-MM-dd');
                 const checkOut = format(date[0].endDate, 'yyyy-MM-dd');
                 navigate(`/hotels/search?location=${location}&page=0&size=3&checkIn=${checkIn}&checkOut=${checkOut}&adults=${options.adult}&children=${options.children}&noRooms=${options.room}`);
@@ -142,6 +138,25 @@ const Header = ({ showTitle }) => {
             }
         ]
     );
+
+    const FUSE_OPTIONS = {
+        includeScore: true,
+        shouldSort: true,
+        threshold: 0.5,
+        isCaseSensitive: false,
+    };
+
+    const fuse = new Fuse(destinations.map(destination => destination.dest), FUSE_OPTIONS);
+
+    const handleInputChange = (event) => {
+        const keyword = event.target.value;
+        setDestInput(keyword);
+
+        const results = fuse.search(keyword);
+        const suggested = results.map(result => result.item);
+        setsearchSuggestions(suggested);
+    };
+
     const handleDateChange = (item) => {
         setDate([item.selection]);
         setDefaultText(false);
@@ -163,6 +178,12 @@ const Header = ({ showTitle }) => {
             };
         });
     };
+
+    const handleClickSuggestion = (dest) => {
+        setDestInput(dest);
+        setShowResult(false);
+    }
+
     return (
         <div className="header">
             <div className="header-container">
@@ -209,13 +230,13 @@ const Header = ({ showTitle }) => {
                             render={attrs => (
                                 <div className="search-result" tabIndex="-1" {...attrs}>
                                     <div className="search-result-text">Điểm đến được ưa thích gần đây</div>
-                                    {destinations.map((destination, index) => {
+                                    {searchSuggestions.map((searchSuggestion, index) => {
                                         return (
-                                            <div key={index} className="search-result-place">
+                                            <div key={index} className="search-result-place" onClick={() => handleClickSuggestion(searchSuggestion)}>
                                                 <div className="search-result-icon">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 8.25a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm1.5 0a4.5 4.5 0 1 0-9 0 4.5 4.5 0 0 0 9 0zM12 1.5a6.75 6.75 0 0 1 6.75 6.75c0 2.537-3.537 9.406-6.75 14.25-3.214-4.844-6.75-11.713-6.75-14.25A6.75 6.75 0 0 1 12 1.5zM12 0a8.25 8.25 0 0 0-8.25 8.25c0 2.965 3.594 9.945 7 15.08a1.5 1.5 0 0 0 2.5 0c3.406-5.135 7-12.115 7-15.08A8.25 8.25 0 0 0 12 0z"></path></svg>
                                                 </div>
-                                                <div className="search-result-title">{destination.dest}</div>
+                                                <div className="search-result-title">{searchSuggestion}</div>
                                             </div>
                                         )
                                     })}
@@ -235,7 +256,7 @@ const Header = ({ showTitle }) => {
                                             type="text"
                                             placeholder="Bạn muốn đến đâu?"
                                             spellCheck={false}
-                                            onChange={(event) => setDestInput(event.target.value)}
+                                            onChange={handleInputChange}
                                             onFocus={() => setShowResult(true)}
                                             className="header-search-input"
                                         />
@@ -244,7 +265,7 @@ const Header = ({ showTitle }) => {
                                     {!!destInput && (
                                         <FontAwesomeIcon
                                             icon={faXmark}
-                                            onClick={() => handleClear()}
+                                            onClick={handleClear}
                                             className="header-icon-close"
                                         />
                                     )}

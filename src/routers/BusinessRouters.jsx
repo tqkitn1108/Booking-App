@@ -21,7 +21,7 @@ function BusinessRouters() {
   const ProtectedRoute = ({ children }) => {
     const { user } = useContext(AuthContext);
 
-    if (user.userRole.name !== "HOTEL") {
+    if (user?.userRole.name !== "HOTEL") {
       return <Navigate to="/login" />;
     }
 

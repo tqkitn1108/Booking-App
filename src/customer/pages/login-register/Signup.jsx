@@ -16,7 +16,7 @@ const validationSchema = Yup.object().shape({
         .required('Name is required'),
     email: Yup.string().email('Invalid email address').required('Email is required'),
     password: Yup.string()
-        .min(6, 'Password must be at least 6 characters')
+        .min(10, 'Password must be at least 10 characters')
         .test('no-full-spaces', 'Password must not contain only spaces', value => value.trim() !== '')
         .required('Password is required'),
     confirmPassword: Yup.string()

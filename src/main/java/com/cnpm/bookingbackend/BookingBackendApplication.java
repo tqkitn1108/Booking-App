@@ -19,7 +19,7 @@ public class BookingBackendApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000", "https://booking-app-sigma-six.vercel.app")
+                        .allowedOrigins("http://localhost:3000", "https://booking-app-black.vercel.app")
                         .allowedMethods("*");
             }
         };

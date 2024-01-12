@@ -11,7 +11,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, searchParams }) => 
   }, [currentPage]);
   const scrollToTop = () => {
     window.scrollTo({
-      top: 300,
+      top: 150,
       behavior: 'smooth'
     });
   };
@@ -26,13 +26,18 @@ const Pagination = ({ currentPage, totalPages, onPageChange, searchParams }) => 
     handlePageChange(i);
     scrollToTop();
   };
+
   const renderPagination = () => {
     const pages = [];
     for (let i = 1; i <= totalPages; i++) {
       pages.push(
-        <li key={i} className="page-item">
-          <button className="page-link" onClick={() => handleClick(i)}>{i}</button>
-        </li>
+        <li className="page-item }"  ><button
+          key={i}
+          onClick={() => handleClick(i)
+          }
+          className={`page-link ${currentPage == i ? 'active' : ''}`}
+        >{i}
+        </button></li>
       );
     }
     return pages;

@@ -9,6 +9,7 @@ import api from "../../../api/AxiosConfig";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import LoadingSpinner from "../../../components/loading-spinner/LoadingSpinner";
 
 
 const HotelInput = () => {
@@ -133,6 +134,7 @@ const HotelInput = () => {
     <div className="new">
       <ModalBootstrap body={modalMessage} showModal={showModal} handleCloseModal={handleCloseModal} />
       <Sidebar hideSideBar={true} />
+      {loading && <LoadingSpinner />}
       <div className="newContainer">
         <Navbar />
         <div className="top">

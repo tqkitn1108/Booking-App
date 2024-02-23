@@ -97,7 +97,7 @@ const Hotel = () => {
         <div className="hotelWrapper">
           <div className="siRating rating">
             <span className="cmt"><RatingComponent rating={hotel.rating}></RatingComponent></span>
-            <button>{hotel.rating}</button>
+            <button>{hotel.rating?.toFixed(1)}</button>
           </div>
           <h1 className="hotelTitle">{hotel.name} {rStars(hotel.star)}</h1>
           <div className="hotelAddress">

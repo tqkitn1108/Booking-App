@@ -37,25 +37,23 @@ const Header = ({ showTitle }) => {
     const navigate = useNavigate();
     const handleSearch = (event) => {
         event.preventDefault();
-        setDestInput(destInput !== null ? destInput.trim() : '');
         if (destInput === null || destInput.trim() === '') {
             setErrorMessage('Vui lòng nhập điểm đến để bắt đầu tìm kiếm.');
         } else {
             setErrorMessage('');
         }
-        if (defaultText) {
-            // Nếu chưa chọn ngày
+        if (destInput.trim() === '') {
+            // Nếu chưa nhập địa chỉ
+            setErrorMessage('Vui lòng nhập điểm đến để bắt đầu tìm kiếm.');
             setButtonClicked(true); // Đánh dấu rằng người dùng đã nhấn nút
-            setOpenDate(true); // Hiển thị DateRanger
         } else {
-            // Nếu đã chọn ngày
-            if (destInput.trim() === '') {
-                // Nếu chưa nhập địa chỉ
-                setErrorMessage('Vui lòng nhập điểm đến để bắt đầu tìm kiếm.');
-                setButtonClicked(true); // Đánh dấu rằng người dùng đã nhấn nút
+            // Xử lý tìm kiếm khi có đủ điều kiện
+            const location = searchSuggestions?.[0] ? encodeURIComponent(searchSuggestions[0]) : encodeURIComponent(destInput);
+            setDestInput(decodeURIComponent(location));
+            setsearchSuggestions([]);
+            if (defaultText) {
+                navigate(`/hotels/search?location=${location}&page=0&size=3&adults=${options.adult}&children=${options.children}&noRooms=${options.room}`);
             } else {
-                // Xử lý tìm kiếm khi có đủ điều kiện
-                const location = searchSuggestions?.[0] ? searchSuggestions[0].replaceAll(' ', '%20') : destInput.replaceAll(' ', '%20');
                 const checkIn = format(date[0].startDate, 'yyyy-MM-dd');
                 const checkOut = format(date[0].endDate, 'yyyy-MM-dd');
                 navigate(`/hotels/search?location=${location}&page=0&size=3&checkIn=${checkIn}&checkOut=${checkOut}&adults=${options.adult}&children=${options.children}&noRooms=${options.room}`);
@@ -181,6 +179,7 @@ const Header = ({ showTitle }) => {
 
     const handleClickSuggestion = (dest) => {
         setDestInput(dest);
+        setsearchSuggestions([])
         setShowResult(false);
     }
 
@@ -287,8 +286,7 @@ const Header = ({ showTitle }) => {
                                         ranges={date}
                                         className="date"
                                         minDate={new Date()}
-                                    />
-                                    }
+                                    />}
                                 </div>
                             </div>
                         </div>

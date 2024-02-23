@@ -8,6 +8,19 @@
     position: relative;
 }
 
+.CardSlick .swiper-slide {
+    border: 1px solid #e7e7e7;
+}
+
+.CardSlick .swiper-button-prev,
+.CardSlick .swiper-button-next {
+    transform: none;
+}
+
+.CardSlick .card-content {
+    padding: 0 16px 16px 16px;
+}
+
 .CardSlick .CardSlick-item {
     flex: 1;
     overflow: hidden;
@@ -30,4 +43,19 @@
     font-weight: 400;
     margin-top: 4px;
     font-size: 14px;
+    letter-spacing: 0.3px;
+}
+
+.CardSlick .card-rating {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: #003B95;
+    color: #fff;
+    height: 32px;
+    width: 32px;
+    text-align: center;
+    line-height: 32px;
+    font-weight: 700;
+    border-radius: 8px 8px 8px 0;
 }

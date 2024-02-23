@@ -84,7 +84,7 @@ const SearchItem = ({ hotel, location }) => {
       <div className="siDetails">
         <div className="siRating">
           <span className="cmt"><RatingComponent rating={hotel.rating}></RatingComponent></span>
-          <button>{hotel.rating}</button>
+          <button>{hotel.rating.toFixed(1)}</button>
         </div>
         <div className="siDetailTexts">
           <span className="siPrice">Giá 1 đêm</span>

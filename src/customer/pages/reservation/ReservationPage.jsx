@@ -234,7 +234,7 @@ const ReservationPage = () => {
                                 <p className=''>Địa chỉ: {hotel.address}</p>
                                 <div className='d-flex'  > Rating:
                                     <div className="siRating">
-                                        <button>{hotel.rating}</button>
+                                        <button>{hotel.rating?.toFixed(1)}</button>
                                     </div>
                                 </div>
                                 <div className="amenities">

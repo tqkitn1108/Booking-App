@@ -12,6 +12,10 @@
   
 }
 
+.containerT .room-list {
+  width: 100%;
+}
+
 .containerT table {
   border: 2px solid #4b76b2;
   align-items: center;

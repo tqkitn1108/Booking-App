@@ -19,9 +19,6 @@
     .date {
         left: 135px;
     }
-    .header-option-text {
-        max-width: 100px;
-    }
 }
 @media (max-width: 46.1875em) {
     .header {

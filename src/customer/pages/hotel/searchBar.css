@@ -1,16 +1,26 @@
 .hotel-search-bar .header-search {
   position: relative;
-  max-width: 800px;
+  max-width: fit-content;
+  height: 49px;
+}
+
+.hotel-search-bar .header-search-item-box {
+  padding: 10px;
+  width: 300px;
+}
+
+.hotel-search-bar .header-btn {
+  padding: 0 6px;
 }
 
 .hotel-search-bar .date {
   position: absolute;
-  top: 58px;
-  left: 5px;
+  top: 50px;
+  left: 0;
   z-index: 6;
 }
 
 .hotel-search-bar .options {
-  top: 58px;
-  right: 110px;
+  top: 50px;
+  right: 60px;
 }

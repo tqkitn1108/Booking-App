@@ -11,7 +11,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
-import * as Yup from 'yup'; // Import Yup for validation
+import * as Yup from 'yup';
 import { useAuth } from '../../../context/AuthContext';
 import LoadingSpinner from '../../../components/loading-spinner/LoadingSpinner';
 import Navbar from '../../navbar/Navbar';
@@ -55,7 +55,7 @@ function Login() {
   const navigate = useNavigate();
   let redirectUrl = location.state?.path || "/";
 
-  async function handleSubmit(values) {
+  const handleSubmit = async (values) => {
     setLoading(true);
     if (await authContext.handleLogin(values)) {
       setErrorMessage("");
@@ -69,8 +69,10 @@ function Login() {
   }
 
   return (
-    <>
+    <div>
       {loading && <LoadingSpinner />}
+      <div className='fixed-navbar'><Navbar /></div>
+      <div className="bg-white " style={{ height: '50px' }}></div>
       <Formik
         initialValues={{
           email: '',
@@ -80,8 +82,6 @@ function Login() {
         onSubmit={handleSubmit}
       >
         <Form>
-          <div className='fixed-navbar'><Navbar /></div>
-          <div className="bg-white " style={{ height: '50px' }}></div>
           <MDBContainer fluid>
             <MDBRow className='d-flex justify-content-center align-items-center h-100'>
               <MDBCol col='12'>
@@ -93,7 +93,6 @@ function Login() {
                         Email address <span className="required text-danger">*</span>{' '}
                       </label>
                       <Field
-                        wrapperClass='mb-4 w-100'
                         id='email'
                         type='email'
                         name='email'
@@ -108,7 +107,6 @@ function Login() {
                         Password <span className="required text-danger">*</span>{' '}
                       </label>
                       <Field
-                        wrapperClass='mb-4 w-100'
                         id='password'
                         type='password'
                         name='password'
@@ -127,7 +125,7 @@ function Login() {
                     />
                     <div className="d-flex justify-content-center">
                       <button
-                        type="submit" // Đổi từ "button" sang "submit"
+                        type="submit"
                         className="btn btn-primary btn-block btn-lg gradient-custom-4 w-100 text-white"
                         style={customStyle.button}
                       >
@@ -169,7 +167,7 @@ function Login() {
           </MDBContainer>
         </ Form>
       </ Formik>
-    </>
+    </div>
   );
 }
 export default Login;

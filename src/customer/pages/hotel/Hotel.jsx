@@ -149,12 +149,7 @@ const Hotel = () => {
         <div className="hotel-search-bar">
           <SearchBar setShowRooms={setShowRooms} />
           {showRooms ?
-            <div className="hotel-rooms">
-              <h3 className="hotelTitle mt-5">Phòng trống</h3>
-              <Table />
-            </div> :
-            <h3 className="mt-5 text-center">Vui lòng chọn ngày để đặt phòng</h3>
-          }
+            <div className="hotel-rooms"><Table /></div> : <h3 className="mt-5 text-center">Vui lòng chọn ngày để đặt phòng</h3>}
         </div>
         {hotel.reviews?.length > 0 &&
           <div className="review-section">

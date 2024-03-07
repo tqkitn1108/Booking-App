@@ -14,11 +14,13 @@ public class UserInfoResponse {
     private String userEmail;
     private String userFullName;
     private Role userRole;
+    private String userImage;
 
     public UserInfoResponse(User user) {
         this.userId = user.getId();
         this.userEmail = user.getEmail();
         this.userFullName = user.getFullName();
         this.userRole = user.getRole();
+        this.userImage = user.getImageUrl();
     }
 }

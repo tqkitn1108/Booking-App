@@ -20,7 +20,8 @@ public class BookingBackendApplication {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins("http://localhost:3000", "https://booking-app-black.vercel.app")
-                        .allowedMethods("*");
+                        .allowedMethods("*")
+                        .maxAge(3600);
             }
         };
     }

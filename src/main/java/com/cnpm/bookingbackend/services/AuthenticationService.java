@@ -2,6 +2,7 @@ package com.cnpm.bookingbackend.services;
 
 import com.cnpm.bookingbackend.dtos.request.LoginUserDto;
 import com.cnpm.bookingbackend.dtos.request.RegisterUserDto;
+import com.cnpm.bookingbackend.models.AuthProvider;
 import com.cnpm.bookingbackend.models.ERole;
 import com.cnpm.bookingbackend.models.Role;
 import com.cnpm.bookingbackend.models.User;
@@ -35,7 +36,7 @@ public class AuthenticationService {
 
     public User signup(RegisterUserDto input) throws Exception {
         String email = input.getEmail().toLowerCase();
-        if (userRepository.findByEmail(email).isPresent()) {
+        if (userRepository.existsByEmail(email)) {
             throw new Exception("User with email " + input.getEmail() + " already exists");
         }
         Optional<Role> optionalRole = roleRepository.findByName(input.getRole() == null ? ERole.USER : input.getRole());
@@ -43,6 +44,7 @@ public class AuthenticationService {
 
         User user = new User(input.getFullName(), email, passwordEncoder.encode(input.getPassword()));
         user.setRole(optionalRole.get());
+        user.setProvider(AuthProvider.local);
         return userRepository.save(user);
     }
 

@@ -15,6 +15,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static com.cnpm.bookingbackend.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
@@ -49,7 +51,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         Optional<String> redirectUri = CookieUtils.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
                 .map(Cookie::getValue);
 
-        if(redirectUri.isPresent() && !isAuthorizedRedirectUri(redirectUri.get())) {
+        if (redirectUri.isPresent() && !isAuthorizedRedirectUri(redirectUri.get())) {
             throw new BadRequestException("Sorry! We've got an Unauthorized Redirect URI and can't proceed with the authentication");
         }
 
@@ -69,24 +71,17 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
     private boolean isAuthorizedRedirectUri(String uri) {
         URI clientRedirectUri = URI.create(uri);
-        String authorizedRedirectUri = "http://localhost:3000/oauth2/redirect";
-        URI authorizedURI = URI.create(authorizedRedirectUri);
-        if(authorizedURI.getHost().equalsIgnoreCase(clientRedirectUri.getHost())
-                && authorizedURI.getPort() == clientRedirectUri.getPort()) {
-            return true;
-        }
-        return false;
+        List<String> authorizedRedirectUris = Arrays.asList("http://localhost:3000/oauth2/redirect",
+                "https://booking-app-black.vercel.app/oauth2/redirect");
 
-//        return appProperties.getOauth2().getAuthorizedRedirectUris()
-//                .stream()
-//                .anyMatch(authorizedRedirectUri -> {
-//                    // Only validate host and port. Let the clients use different paths if they want to
-//                    URI authorizedURI = URI.create(authorizedRedirectUri);
-//                    if(authorizedURI.getHost().equalsIgnoreCase(clientRedirectUri.getHost())
-//                            && authorizedURI.getPort() == clientRedirectUri.getPort()) {
-//                        return true;
-//                    }
-//                    return false;
-//                });
+        return authorizedRedirectUris.stream().anyMatch(authorizedRedirectUri -> {
+            // Only validate host and port. Let the clients use different paths if they want to
+            URI authorizedURI = URI.create(authorizedRedirectUri);
+            if (authorizedURI.getHost().equalsIgnoreCase(clientRedirectUri.getHost())
+                    && authorizedURI.getPort() == clientRedirectUri.getPort()) {
+                return true;
+            }
+            return false;
+        });
     }
 }

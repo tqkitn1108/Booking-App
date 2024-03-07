@@ -38,7 +38,7 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**", "/api/v1/hotels/**", "/api/v1/business/**", "/api/v1/upload", "/api/v1/bookings/**").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
-                        .requestMatchers("/oauth2/**").permitAll()
+                        .requestMatchers("/oauth2/**", "/error").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Permit Preflight Request
                         .anyRequest().authenticated())
                 .oauth2Login(oauth -> oauth

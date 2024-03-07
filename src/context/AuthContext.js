@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../api/ApiAuthService";
+import { getUserProfile, loginUser } from "../api/ApiAuthService";
 import React, { createContext, useState, useContext, useEffect } from "react"
+import { ACCESS_TOKEN } from "../api/UrlConstant";
 
 export const AuthContext = createContext();
 
@@ -23,6 +24,17 @@ function AuthProvider({ children }) {
     }
   }
 
+  async function handleOAuth2Login(token) {
+    try {
+      const response = await getUserProfile(token);
+      localStorage.setItem(ACCESS_TOKEN, token);
+      localStorage.setItem("user", JSON.stringify({ userId: response.data.id, userEmail: response.data.email, userFullName: response.data.fullName, userImage: response.data.imageUrl, userRole: response.data.role }));
+      setUser(user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function handleLogout() {
     if (window.confirm('Bạn có chắc chắn muốn đăng xuất?')) {
       localStorage.removeItem("token");
@@ -34,7 +46,7 @@ function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, handleLogin, handleLogout }}>
+    <AuthContext.Provider value={{ user, handleLogin, handleOAuth2Login, handleLogout }}>
       {children}
     </AuthContext.Provider>
   )

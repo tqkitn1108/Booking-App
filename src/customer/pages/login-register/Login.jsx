@@ -15,6 +15,9 @@ import * as Yup from 'yup';
 import { useAuth } from '../../../context/AuthContext';
 import LoadingSpinner from '../../../components/loading-spinner/LoadingSpinner';
 import Navbar from '../../navbar/Navbar';
+import { GOOGLE_AUTH_URL } from '../../../api/UrlConstant';
+
+import axios from 'axios';
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address').required('Email is required'),
   password: Yup.string().required('Password is required'),
@@ -136,13 +139,15 @@ function Login() {
                     <hr className="my-4" />
 
                     <div className="d-flex justify-content-center">
-                      <button
+                      <a
                         type="button"
                         className="btn btn-danger btn-block btn-lg gradient-custom-4 w-100 text-white"
                         style={{ ...customStyle.button, ...customStyle.socialButton }}
+                        alt='Google'
+                        href={GOOGLE_AUTH_URL}
                       >
                         <FontAwesomeIcon icon={faGoogle} className="me-2" /> Sign in with Google
-                      </button>
+                      </a>
                     </div>
 
                     <div className="d-flex justify-content-center" style={{ marginTop: '10px' }}>

@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthContext, useAuth } from "../context/AuthContext";
 import AuthProvider from "../context/AuthContext";
 import { useContext } from "react";
+import OAuth2RedirectHandler from "../customer/oauth2/OAuth2RedirectHandler";
 
 
 function AuthenticatedRoute({ children }) {
@@ -41,6 +42,7 @@ function CustomerRouters() {
             <Route path="/hotels/:hotelId/reservation" element={<ReservationPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
           </Routes>
           {/* </BrowserRouter> */}
         </ProtectedRoute>

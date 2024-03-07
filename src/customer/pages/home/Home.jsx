@@ -16,7 +16,7 @@ const Home = () => {
     return (
         <div>
             <Navbar />
-            <Header showTitle={true}/>
+            <Header showTitle={true} />
             <div className="home">
                 <div className="home-container">
                     <h1 className="home-title">Tìm theo loại chỗ nghỉ ở Hà Nội</h1>

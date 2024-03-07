@@ -11,11 +11,10 @@ export function loginUser(credentials) {
 }
 
 /*  This is function to get the user profile */
-export async function getUserProfile() {
-  try {
-    const response = await api.get('/users/me')
-    return response.data;
-  } catch (error) {
-    throw new Error(`${error.message}`)
-  }
+export async function getUserProfile(token) {
+  return await api.get('/users/me', {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
 }

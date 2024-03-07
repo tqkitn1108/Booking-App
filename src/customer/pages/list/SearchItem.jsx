@@ -25,9 +25,9 @@ const SearchItem = ({ hotel, location }) => {
   const renderStars = (value) => {
     const stars = [];
     if (value > 0) {
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < value; i++) {
         stars.push(
-          <span key={i} style={{ color: i < value ? '#FFD700' : '#C0C0C0' }}>
+          <span key={i} style={{ color: '#FFD700' }}>
             &#9733;
           </span>
         );

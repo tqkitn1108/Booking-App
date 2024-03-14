@@ -36,7 +36,6 @@ D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\s
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\repo\BookingRepository.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\controllers\ImageController.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\exceptions\GlobalExceptionHandler.java
-D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\models\hotelattributemodels\Bed.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\repo\VerificationTokenRepository.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\bootstrap\AdminSeeder.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\repo\RoleRepository.java
@@ -50,6 +49,7 @@ D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\m
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\services\ReviewService.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\models\AuthProvider.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\BookingBackendApplication.java
+D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\dtos\response\SearchSuggestion.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\models\Room.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\models\BookingStatus.java
 D:\WORK_SPACE\BookingApp\booking-backend\src\main\java\com\cnpm\bookingbackend\services\BookingService.java

@@ -3,7 +3,6 @@ com\cnpm\bookingbackend\services\ReviewService.class
 com\cnpm\bookingbackend\controllers\UserController.class
 com\cnpm\bookingbackend\bootstrap\AdminSeeder.class
 com\cnpm\bookingbackend\models\Booking.class
-com\cnpm\bookingbackend\models\hotelattributemodels\Bed.class
 com\cnpm\bookingbackend\models\BookingStatus.class
 com\cnpm\bookingbackend\models\Role.class
 com\cnpm\bookingbackend\models\ERole.class

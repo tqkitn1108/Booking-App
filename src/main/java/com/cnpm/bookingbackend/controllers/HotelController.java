@@ -3,6 +3,7 @@ package com.cnpm.bookingbackend.controllers;
 import com.cnpm.bookingbackend.dtos.request.FilterHotelDto;
 import com.cnpm.bookingbackend.dtos.request.HotelDto;
 import com.cnpm.bookingbackend.dtos.request.SearchHotelDto;
+import com.cnpm.bookingbackend.dtos.response.SearchSuggestion;
 import com.cnpm.bookingbackend.models.Hotel;
 import com.cnpm.bookingbackend.services.HotelService;
 import jakarta.validation.Valid;
@@ -42,12 +43,17 @@ public class HotelController {
         return ResponseEntity.ok(hotelService.searchHotels(page, size, searchHotelDto, filter));
     }
 
-    @GetMapping("/countByDest")
+    @GetMapping("/search-by-name")
+    public ResponseEntity<List<SearchSuggestion>> searchHotelsByName(@RequestParam String name) {
+        return ResponseEntity.ok(hotelService.searchHotelsByName(name));
+    }
+
+    @GetMapping("/count-by-dest")
     public ResponseEntity<Map<String, Integer>> countByDest(@RequestParam List<String> destinations) {
         return new ResponseEntity<>(hotelService.countByDest(destinations), HttpStatus.OK);
     }
 
-    @GetMapping("/countByType")
+    @GetMapping("/count-by-type")
     public ResponseEntity<Map<String, Integer>> countByType(@RequestParam List<String> types) {
         return new ResponseEntity<>(hotelService.countByType(types), HttpStatus.OK);
     }

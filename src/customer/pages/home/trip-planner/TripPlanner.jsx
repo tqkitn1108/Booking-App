@@ -75,7 +75,7 @@ const TripPlanner = () => {
                                     <div className="trip-planner-item">
                                         <img src={destination.image} alt="" className="trip-planner-img" />
                                         <div>
-                                            <h5 className="trip-planner-titles">{destination.dest}</h5>
+                                            <h5 className="trip-planner-titles">{destination.name}</h5>
                                             <h5 className="trip-planner-desrcibe">Cách đây 88km</h5>
                                         </div>
                                     </div>
@@ -95,7 +95,7 @@ const TripPlanner = () => {
                                     <div className="trip-planner-item">
                                         <img src={destination.image} alt="" className="trip-planner-img" />
                                         <div>
-                                            <h5 className="trip-planner-titles">{destination.dest}</h5>
+                                            <h5 className="trip-planner-titles">{destination.name}</h5>
                                             <h5 className="trip-planner-desrcibe">Cách đây 88km</h5>
                                         </div>
                                     </div>
@@ -115,7 +115,7 @@ const TripPlanner = () => {
                                     <div className="trip-planner-item">
                                         <img src={destination.image} alt="" className="trip-planner-img" />
                                         <div>
-                                            <h5 className="trip-planner-titles">{destination.dest}</h5>
+                                            <h5 className="trip-planner-titles">{destination.name}</h5>
                                             <h5 className="trip-planner-desrcibe">Cách đây 88km</h5>
                                         </div>
                                     </div>

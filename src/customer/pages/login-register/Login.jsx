@@ -15,9 +15,8 @@ import * as Yup from 'yup';
 import { useAuth } from '../../../context/AuthContext';
 import LoadingSpinner from '../../../components/loading-spinner/LoadingSpinner';
 import Navbar from '../../navbar/Navbar';
-import { GOOGLE_AUTH_URL } from '../../../api/UrlConstant';
+import { FACEBOOK_AUTH_URL, GOOGLE_AUTH_URL } from '../../../api/UrlConstant';
 
-import axios from 'axios';
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address').required('Email is required'),
   password: Yup.string().required('Password is required'),
@@ -151,13 +150,15 @@ function Login() {
                     </div>
 
                     <div className="d-flex justify-content-center" style={{ marginTop: '10px' }}>
-                      <button
+                      <a
                         type="button"
                         className="btn btn-primary btn-block btn-lg gradient-custom-4 w-100 text-white"
                         style={{ ...customStyle.button, ...customStyle.socialButton }}
+                        alt='Facebook'
+                        href={FACEBOOK_AUTH_URL}
                       >
                         <FontAwesomeIcon icon={faFacebook} className="me-2" /> Sign in with Facebook
-                      </button>
+                      </a>
                     </div>
                     <p className="text-center text-muted mt-5 mb-0">
                       Don't have an account?{' '}

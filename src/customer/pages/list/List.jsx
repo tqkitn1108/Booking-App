@@ -56,11 +56,11 @@ const List = () => {
     }
     const startDateString = searchParams.get('start_date');
     const endDateString = searchParams.get('end_date');
-    
+
     // Chuyển đổi chuỗi ngày thành đối tượng Date hoặc Moment (nếu sử dụng thư viện moment.js)
     const startDate = new Date(startDateString);
     const endDate = new Date(endDateString);
-    
+
     // Tính số ngày bằng cách lấy hiệu của ngày kết thúc và ngày bắt đầu
     const numberOfDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24))
 
@@ -105,6 +105,7 @@ const List = () => {
                                         {filter.options.map(option => (
                                             <div key={option.value} className="form-check">
                                                 <input className="form-check-input" type="checkbox"
+                                                    checked={!!searchParams.get(filter.id)?.split(",").includes(option.value)}
                                                     value={option.value} id={option.value}
                                                     onChange={() => handleFilter(option.value, filter.id)} />
                                                 <label className="form-check-label" htmlFor={option.value}>
@@ -120,34 +121,34 @@ const List = () => {
                     <div className="rightP">
                         {isItemsEmpty ? (
                             <div className="notFoundPage">
-                                <div> 
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="50"
-                                    height="50"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="1"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    className="notFoundIcon"
-                                >
-                                    <circle cx="11" cy="11" r="8" />
-                                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                                </svg>
-                                <p className="notFound1">Không tìm thấy kết quả</p>
-                                <p className="notFound2">Không có kết quả phù hợp với tìm kiếm của bạn. Hãy thử lại.</p>
+                                <div>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="50"
+                                        height="50"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="1"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        className="notFoundIcon"
+                                    >
+                                        <circle cx="11" cy="11" r="8" />
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                                    </svg>
+                                    <p className="notFound1">Không tìm thấy kết quả</p>
+                                    <p className="notFound2">Không có kết quả phù hợp với tìm kiếm của bạn. Hãy thử lại.</p>
                                 </div>
                             </div>
-                            
+
                         ) : (
                             <div className="sitem">
                                 {hotels.map(hotel =>
                                 (
                                     <SearchItem key={hotel.id}
-                                        hotel = {hotel}
-                                        location = {location}
+                                        hotel={hotel}
+                                        location={location}
                                     />
                                 )
                                 )}

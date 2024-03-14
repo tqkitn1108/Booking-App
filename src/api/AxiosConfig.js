@@ -1,8 +1,8 @@
 import axios from "axios";
+import { API_BASE_URL } from "./UrlConstant";
 
 export default axios.create({
-	// baseURL: 'http://localhost:8080/api/v1'
-	baseURL: 'https://booking-server-gl3a.onrender.com/api/v1'
+	baseURL: `${API_BASE_URL}/api/v1`
 })
 
 export const getHeader = () => {

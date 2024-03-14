@@ -30,7 +30,7 @@ const Explore = () => {
     }, []);
     useEffect(() => {
         async function countExploreProperties() {
-            const destParams = destinations.reduce((list, destination) => list + `,${destination.dest}`, "");
+            const destParams = destinations.reduce((list, destination) => list + `,${destination.name}`, "");
             try {
                 const response = await countByDest(destParams.slice(1).replaceAll(" ", "%20"));
                 setNumProperties(response.data)
@@ -52,11 +52,11 @@ const Explore = () => {
                 <Swiper navigation={true} modules={[Navigation]} slidesPerView={slidesPerView} spaceBetween={16}>
                     {destinations.map((destination, i) => {
                         return (<SwiperSlide key={i}>
-                            <div className="explore-item" onClick={() => handleSearch(destination.dest)}>
+                            <div className="explore-item" onClick={() => handleSearch(destination.name)}>
                                 <img src={destination.image} alt="" className="explore-img" />
                                 <div>
-                                    <h5 className="explore-titles">{destination.dest}</h5>
-                                    <h5 className="explore-desrcibe">{numProperties[destination.dest]} chỗ nghỉ</h5>
+                                    <h5 className="explore-titles">{destination.name}</h5>
+                                    <h5 className="explore-desrcibe">{numProperties[destination.name]} chỗ nghỉ</h5>
                                 </div>
                             </div>
                         </SwiperSlide>)

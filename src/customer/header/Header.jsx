@@ -23,18 +23,20 @@ import 'tippy.js/dist/tippy.css'; // optional
 import { destinations } from '../../data/destinationData';
 import { useLocation, useNavigate } from "react-router-dom";
 import Fuse from "fuse.js";
+import SuggestItem from "./SuggestItem";
+import api from "../../api/AxiosConfig";
 
 const Header = ({ showTitle }) => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const [defaultText, setDefaultText] = useState(true);
-    const [searchSuggestions, setsearchSuggestions] = useState([]);
     const [destInput, setDestInput] = useState('');
-    const [showResult, setShowResult] = useState(true);
+    const [defaultText, setDefaultText] = useState(true);
+    const [searchSuggestions, setSearchSuggestions] = useState([]);
+    const [showResult, setShowResult] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [buttonClicked, setButtonClicked] = useState(false);
-    const headerBtnRef = useRef(null);
     const navigate = useNavigate();
+
     const handleSearch = (event) => {
         event.preventDefault();
         if (destInput === null || destInput.trim() === '') {
@@ -48,9 +50,10 @@ const Header = ({ showTitle }) => {
             setButtonClicked(true); // Đánh dấu rằng người dùng đã nhấn nút
         } else {
             // Xử lý tìm kiếm khi có đủ điều kiện
-            const location = searchSuggestions?.[0] ? encodeURIComponent(searchSuggestions[0]) : encodeURIComponent(destInput);
+            const location = searchSuggestions?.[0] ? encodeURIComponent(searchSuggestions[0].name) : encodeURIComponent(destInput);
             setDestInput(decodeURIComponent(location));
-            setsearchSuggestions([]);
+            setShowResult(false);
+            inputRef.current.blur();
             if (defaultText) {
                 navigate(`/hotels/search?location=${location}&page=0&size=3&adults=${options.adult}&children=${options.children}&noRooms=${options.room}`);
             } else {
@@ -77,7 +80,36 @@ const Header = ({ showTitle }) => {
                 room: parseInt(searchParams.get('noRooms')) || 1,
             })
         }
-    }, [])
+    }, []);
+
+    const FUSE_OPTIONS = {
+        // includeScore: true,
+        shouldSort: true,
+        threshold: 0.5,
+        isCaseSensitive: false,
+        keys: ['name']
+    };
+
+    useEffect(() => {
+        if (!destInput.trim()) {
+            setSearchSuggestions([]);
+            return;
+        }
+        const timeoutId = setTimeout(() => {
+            api.get(`/hotels/search-by-name?name=${encodeURIComponent(destInput)}`)
+                .then(response => {
+                    const fuse = new Fuse([...destinations, ...response.data], FUSE_OPTIONS);
+
+                    const results = fuse.search(destInput);
+                    const suggested = results.map(result => result.item);
+                    setSearchSuggestions(suggested);
+                });
+        }, 500);
+
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, [destInput]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -119,10 +151,10 @@ const Header = ({ showTitle }) => {
         };
     }, []);
 
-    const inputRef = useRef()
+    const inputRef = useRef();
     const handleClear = () => {
         setDestInput('');
-        setsearchSuggestions([]);
+        setSearchSuggestions([]);
         inputRef.current.focus();
     }
 
@@ -136,24 +168,6 @@ const Header = ({ showTitle }) => {
             }
         ]
     );
-
-    const FUSE_OPTIONS = {
-        includeScore: true,
-        shouldSort: true,
-        threshold: 0.5,
-        isCaseSensitive: false,
-    };
-
-    const fuse = new Fuse(destinations.map(destination => destination.dest), FUSE_OPTIONS);
-
-    const handleInputChange = (event) => {
-        const keyword = event.target.value;
-        setDestInput(keyword);
-
-        const results = fuse.search(keyword);
-        const suggested = results.map(result => result.item);
-        setsearchSuggestions(suggested);
-    };
 
     const handleDateChange = (item) => {
         setDate([item.selection]);
@@ -177,9 +191,12 @@ const Header = ({ showTitle }) => {
         });
     };
 
-    const handleClickSuggestion = (dest) => {
+    const handleClickSuggestion = (dest, id) => {
+        if (!!id) {
+            navigate(`/hotels/${id}`);
+        }
         setDestInput(dest);
-        setsearchSuggestions([])
+        setSearchSuggestions([])
         setShowResult(false);
     }
 
@@ -229,16 +246,9 @@ const Header = ({ showTitle }) => {
                             render={attrs => (
                                 <div className="search-result" tabIndex="-1" {...attrs}>
                                     <div className="search-result-text">Điểm đến được ưa thích gần đây</div>
-                                    {searchSuggestions.map((searchSuggestion, index) => {
-                                        return (
-                                            <div key={index} className="search-result-place" onClick={() => handleClickSuggestion(searchSuggestion)}>
-                                                <div className="search-result-icon">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 8.25a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm1.5 0a4.5 4.5 0 1 0-9 0 4.5 4.5 0 0 0 9 0zM12 1.5a6.75 6.75 0 0 1 6.75 6.75c0 2.537-3.537 9.406-6.75 14.25-3.214-4.844-6.75-11.713-6.75-14.25A6.75 6.75 0 0 1 12 1.5zM12 0a8.25 8.25 0 0 0-8.25 8.25c0 2.965 3.594 9.945 7 15.08a1.5 1.5 0 0 0 2.5 0c3.406-5.135 7-12.115 7-15.08A8.25 8.25 0 0 0 12 0z"></path></svg>
-                                                </div>
-                                                <div className="search-result-title">{searchSuggestion}</div>
-                                            </div>
-                                        )
-                                    })}
+                                    {searchSuggestions.map((searchSuggestion, index) => (
+                                        <SuggestItem key={index} handleClickSuggestion={handleClickSuggestion} searchSuggestion={searchSuggestion} />
+                                    ))}
                                 </div>
                             )}
                             onClickOutside={handleHideResult}
@@ -247,7 +257,7 @@ const Header = ({ showTitle }) => {
                                 <div className="header-search-item">
                                     <div className="header-search-text">
                                         <span className="header-icon">
-                                            <svg onChange={(event) => setDestInput(event.target.value)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.75 12h18.5c.69 0 1.25.56 1.25 1.25V18l.75-.75H.75l.75.75v-4.75c0-.69.56-1.25 1.25-1.25zm0-1.5A2.75 2.75 0 0 0 0 13.25V18c0 .414.336.75.75.75h22.5A.75.75 0 0 0 24 18v-4.75a2.75 2.75 0 0 0-2.75-2.75H2.75zM0 18v3a.75.75 0 0 0 1.5 0v-3A.75.75 0 0 0 0 18zm22.5 0v3a.75.75 0 0 0 1.5 0v-3a.75.75 0 0 0-1.5 0zm-.75-6.75V4.5a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 2.25 4.5v6.75a.75.75 0 0 0 1.5 0V4.5a.75.75 0 0 1 .75-.75h15a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 0 1.5 0zm-13.25-3h7a.25.25 0 0 1 .25.25v2.75l.75-.75h-9l.75.75V8.5a.25.25 0 0 1 .25-.25zm0-1.5A1.75 1.75 0 0 0 6.75 8.5v2.75c0 .414.336.75.75.75h9a.75.75 0 0 0 .75-.75V8.5a1.75 1.75 0 0 0-1.75-1.75h-7z"></path></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.75 12h18.5c.69 0 1.25.56 1.25 1.25V18l.75-.75H.75l.75.75v-4.75c0-.69.56-1.25 1.25-1.25zm0-1.5A2.75 2.75 0 0 0 0 13.25V18c0 .414.336.75.75.75h22.5A.75.75 0 0 0 24 18v-4.75a2.75 2.75 0 0 0-2.75-2.75H2.75zM0 18v3a.75.75 0 0 0 1.5 0v-3A.75.75 0 0 0 0 18zm22.5 0v3a.75.75 0 0 0 1.5 0v-3a.75.75 0 0 0-1.5 0zm-.75-6.75V4.5a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 2.25 4.5v6.75a.75.75 0 0 0 1.5 0V4.5a.75.75 0 0 1 .75-.75h15a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 0 1.5 0zm-13.25-3h7a.25.25 0 0 1 .25.25v2.75l.75-.75h-9l.75.75V8.5a.25.25 0 0 1 .25-.25zm0-1.5A1.75 1.75 0 0 0 6.75 8.5v2.75c0 .414.336.75.75.75h9a.75.75 0 0 0 .75-.75V8.5a1.75 1.75 0 0 0-1.75-1.75h-7z"></path></svg>
                                         </span>
                                         <input
                                             ref={inputRef}
@@ -255,7 +265,7 @@ const Header = ({ showTitle }) => {
                                             type="text"
                                             placeholder="Bạn muốn đến đâu?"
                                             spellCheck={false}
-                                            onChange={handleInputChange}
+                                            onChange={(event) => setDestInput(event.target.value)}
                                             onFocus={() => setShowResult(true)}
                                             className="header-search-input"
                                         />
@@ -329,7 +339,7 @@ const Header = ({ showTitle }) => {
                                 <button className="option-end" onClick={() => setOpenOptions(!openOptions)}>Xong</button>
                             </div>}
                         </div>
-                        <button className="header-btn" ref={headerBtnRef} onClick={handleSearch}>Tìm kiếm</button>
+                        <button className="header-btn" type="submit">Tìm kiếm</button>
                     </form>
                 </div>
             </div>
